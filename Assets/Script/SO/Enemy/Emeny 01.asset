@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHP: 100
   speed: 100
-  damage: 100
+  damage: 1
   weaknesses: 00000000
   maxToughness: 100

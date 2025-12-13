@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerUnit : MonoBehaviour
 {
@@ -6,12 +6,12 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private Equipment weapon;
     [SerializeField] private Equipment armor;
 
+    [Header("Runtime")]
     [SerializeField] private int currentHP;
-    [SerializeField] private float actionGauge;
+    [SerializeField] private EnemyUnit currentTarget;
+    [SerializeField] private TurnManager turnManager;
 
     public PlayerStats Stats => stats;
-    public int CurrentHP => currentHP;
-    public float ActionGauge => actionGauge;
 
     public ElementType CurrentElement =>
         weapon != null ? weapon.Element : ElementType.Physical;
@@ -19,7 +19,14 @@ public class PlayerUnit : MonoBehaviour
     private void Start()
     {
         UpdateStats();
+
+        if (turnManager == null)
+            turnManager = FindFirstObjectByType<TurnManager>();
     }
+
+    // ======================
+    // STATS
+    // ======================
 
     public void UpdateStats()
     {
@@ -27,13 +34,26 @@ public class PlayerUnit : MonoBehaviour
         currentHP = stats.FinalHP;
     }
 
-    public void BasicAttack(EnemyUnit target, TurnManager turnManager)
+    // ======================
+    // PLAYER ACTION
+    // ======================
+
+    public void BasicAttack()
     {
-        target.TakeDamage(stats.FinalATK, CurrentElement);
-        turnManager.EndPlayerTurn();
+        if (currentTarget == null) return;
+
+        currentTarget.TakeDamage(stats.FinalATK, CurrentElement);
+
+        turnManager.NotifyPlayerActionComplete();
     }
 
-    public void TakeDamage(int dmg) => currentHP -= dmg;
-    public void AddGauge(float value) => actionGauge += value;
-    public void ResetGauge() => actionGauge = 0;
-}   
+    public void SetTarget(EnemyUnit target)
+    {
+        currentTarget = target;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHP -= damage;
+    }
+}

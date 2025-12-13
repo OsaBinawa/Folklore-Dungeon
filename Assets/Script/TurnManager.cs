@@ -4,112 +4,171 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
+    public const float TURN_THRESHOLD = 10000f;
+
     [SerializeField] private PlayerUnit player;
-    [SerializeField] private float gaugeMax = 1000f;
+    [SerializeField] private List<EnemyUnit> enemies = new();
 
-    [SerializeField] private List<EnemyUnit> enemies = new List<EnemyUnit>();
+    // 🔥 AV lives ONLY here
+    private Dictionary<object, float> avMap = new();
 
-    private bool isPlayerTurn;
+    private void Start()
+    {
+        avMap[player] = 0f;
+        StartCoroutine(TimelineLoop());
+    }
+
+    // =========================
+    // REGISTRATION
+    // =========================
 
     public void RegisterEnemy(EnemyUnit enemy)
     {
         if (!enemies.Contains(enemy))
+        {
             enemies.Add(enemy);
+            avMap[enemy] = 0f;
+        }
     }
 
     public void UnregisterEnemy(EnemyUnit enemy)
     {
         enemies.Remove(enemy);
+        avMap.Remove(enemy);
     }
-    private void Start()
+
+    // =========================
+    // PLAYER CALLBACK
+    // =========================
+
+    public void NotifyPlayerActionComplete()
     {
-        LogPredictedTurnOrder();
+        StartCoroutine(TimelineLoop());
     }
-    private void Update()
+
+    // =========================
+    // TIMELINE LOOP
+    // =========================
+
+    private IEnumerator TimelineLoop()
     {
-        if (isPlayerTurn) return;
-
-        // Player gauge
-        player.AddGauge(player.Stats.FinalSpeed * Time.deltaTime);
-
-        if (player.ActionGauge >= gaugeMax)
+        while (true)
         {
-            Debug.Log($"[TURN] Player acts (Speed: {player.Stats.FinalSpeed})");
-            player.ResetGauge();
-            isPlayerTurn = true;
-            return;
-        }
+            TickAV();
+            LogAVs();
 
-        // Enemy gauges
-        foreach (EnemyUnit enemy in enemies)
-        {
-            if (enemy.CurrentHP <= 0) continue;
-
-            enemy.AddGauge(enemy.Speed * Time.deltaTime);
-
-            if (enemy.ActionGauge >= gaugeMax)
+            object next = GetHighestReadyUnit();
+            if (next != null)
             {
-                Debug.Log($"[TURN] Enemy acts: {enemy.data.name} (Speed: {enemy.Speed})");
-                StartCoroutine(EnemyTurn(enemy));
-                return;
+                avMap[next] -= TURN_THRESHOLD;
+
+                if (ReferenceEquals(next, player))
+                {
+                    Debug.Log(">>> PLAYER TURN <<<");
+                    yield break; // wait for UI input
+                }
+                else
+                {
+                    EnemyUnit enemy = next as EnemyUnit;
+                    Debug.Log($">>> ENEMY TURN: {enemy.EnemyData.name} <<<");
+
+                    yield return StartCoroutine(EnemyTurn(enemy));
+                    continue;
+                }
             }
+
+            yield return null;
         }
     }
 
+    // =========================
+    // ENEMY TURN
+    // =========================
 
-    public void EndPlayerTurn()
-    {
-        isPlayerTurn = false;
-    }
-
-    // ✅ THIS WAS MISSING
     private IEnumerator EnemyTurn(EnemyUnit enemy)
     {
-        enemy.ResetGauge();
+        yield return null;
 
-        // Optional: skip turn if broken
-        if (enemy.IsBroken)
-        {
-            enemy.RecoverFromBreak();
-            yield break;
-        }
-
-        yield return new WaitForSeconds(0.5f);
-
-        // Enemy attacks player
         player.TakeDamage(enemy.Damage);
+        Debug.Log($"{enemy.EnemyData.name} attacks player");
 
         yield return new WaitForSeconds(0.2f);
     }
 
-    private void LogPredictedTurnOrder()
+    // =========================
+    // AV CORE
+    // =========================
+
+    private void TickAV()
     {
-        Debug.Log("=== TURN ORDER (PREDICTED) ===");
+        float tick = 1f;
 
-        List<(string name, float timeToTurn)> order = new List<(string, float)>();
+        avMap[player] += player.Stats.FinalSpeed * tick;
 
-        // Player
-        float playerTime =
-            (gaugeMax - player.ActionGauge) / player.Stats.FinalSpeed;
-
-        order.Add(("Player", playerTime));
-
-        // Enemies
         foreach (EnemyUnit enemy in enemies)
-        {
-            float enemyTime =
-                (gaugeMax - enemy.ActionGauge) / enemy.Speed;
-
-            order.Add(($"Enemy: {enemy.data.name}", enemyTime));
-        }
-
-        // Sort by soonest turn
-        order.Sort((a, b) => a.timeToTurn.CompareTo(b.timeToTurn));
-
-        for (int i = 0; i < order.Count; i++)
-        {
-            Debug.Log($"{i + 1}. {order[i].name}");
-        }
+            avMap[enemy] += enemy.Speed * tick;
     }
 
+    public void DelayUnit(object unit, float amount)
+    {
+        if (avMap.ContainsKey(unit))
+            avMap[unit] -= amount;
+    }
+
+    // =========================
+    // HSR-STYLE READY SELECTION
+    // =========================
+
+    private object GetHighestReadyUnit()
+    {
+        List<(object unit, float av, int speed)> ready = new();
+
+        if (avMap[player] >= TURN_THRESHOLD)
+        {
+            ready.Add((
+                player,
+                avMap[player],
+                player.Stats.FinalSpeed
+            ));
+        }
+
+        foreach (EnemyUnit enemy in enemies)
+        {
+            if (avMap[enemy] >= TURN_THRESHOLD)
+            {
+                ready.Add((
+                    enemy,
+                    avMap[enemy],
+                    enemy.Speed
+                ));
+            }
+        }
+
+        if (ready.Count == 0)
+            return null;
+
+        ready.Sort((a, b) =>
+        {
+            if (!Mathf.Approximately(a.av, b.av))
+                return b.av.CompareTo(a.av);   // higher AV first
+
+            return b.speed.CompareTo(a.speed); // tie → higher speed
+        });
+
+        return ready[0].unit;
+    }
+
+    // =========================
+    // DEBUG
+    // =========================
+
+    private void LogAVs()
+    {
+        string log = $"[AV] Player: {avMap[player]:F0}";
+
+        foreach (EnemyUnit enemy in enemies)
+            log += $" | {enemy.EnemyData.name}: {avMap[enemy]:F0}";
+
+        Debug.Log(log);
+    }
 }

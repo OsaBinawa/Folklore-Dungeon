@@ -1,36 +1,34 @@
-using System.Linq;
 using UnityEngine;
+using System.Linq;
 
 public class EnemyUnit : MonoBehaviour
 {
-    public EnemyData data;
+    [SerializeField] private EnemyData data;
 
+    [Header("Runtime")]
     [SerializeField] private int currentHP;
     [SerializeField] private int currentToughness;
-    [SerializeField] private float actionGauge;
     [SerializeField] private bool isBroken;
 
-    public int CurrentHP => currentHP;
     public int Speed => data.Speed;
     public int Damage => data.Damage;
-    public float ActionGauge => actionGauge;
-    public bool IsBroken => isBroken;
+    public EnemyData EnemyData => data;
 
-    private void Awake()
-    {
-        currentHP = data.MaxHP;
-        currentToughness = data.MaxToughness;
-    }
     private void Start()
     {
         currentHP = data.MaxHP;
         currentToughness = data.MaxToughness;
 
-        FindFirstObjectByType<TurnManager>().RegisterEnemy(this);
+        FindFirstObjectByType<TurnManager>()?.RegisterEnemy(this);
     }
-    public void TakeDamage(int dmg, ElementType element)
+
+    // ======================
+    // COMBAT
+    // ======================
+
+    public void TakeDamage(int damage, ElementType element)
     {
-        currentHP -= dmg;
+        currentHP -= damage;
 
         if (!isBroken && data.Weaknesses.Contains(element))
         {
@@ -43,20 +41,17 @@ public class EnemyUnit : MonoBehaviour
     private void TriggerBreak()
     {
         isBroken = true;
-        currentHP -= 100;
-        actionGauge -= 300f;
-    }
+        currentToughness = 0;
 
-    public void RecoverFromBreak()
-    {
-        isBroken = false;
-        currentToughness = data.MaxToughness;
+        // Break delay (HSR style)
+        FindFirstObjectByType<TurnManager>()
+            ?.DelayUnit(this, 3000f);
+
+        Debug.Log($"{data.name} is Broken (AV delayed)");
     }
 
     private void OnDestroy()
     {
         FindFirstObjectByType<TurnManager>()?.UnregisterEnemy(this);
     }
-    public void AddGauge(float value) => actionGauge += value;
-    public void ResetGauge() => actionGauge = 0;
 }
