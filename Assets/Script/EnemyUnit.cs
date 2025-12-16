@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Linq;
 
 public class EnemyUnit : MonoBehaviour
@@ -14,17 +14,31 @@ public class EnemyUnit : MonoBehaviour
     public int Damage => data.Damage;
     public EnemyData EnemyData => data;
 
+    private TurnManager turnManager;
+
     private void Start()
     {
         currentHP = data.MaxHP;
         currentToughness = data.MaxToughness;
 
-        FindFirstObjectByType<TurnManager>()?.RegisterEnemy(this);
+        turnManager = FindFirstObjectByType<TurnManager>();
+        turnManager?.RegisterEnemy(this);
     }
 
-    // ======================
-    // COMBAT
-    // ======================
+    private void OnDestroy()
+    {
+        turnManager?.UnregisterEnemy(this);
+    }
+
+    // ================= ENEMY TURN =================
+
+    public void Act(PlayerUnit player)
+    {
+        Debug.Log($"{data.name} attacks player");
+        player.TakeDamage(data.Damage);
+    }
+
+    // ================= DAMAGE & BREAK =================
 
     public void TakeDamage(int damage, ElementType element)
     {
@@ -36,6 +50,9 @@ public class EnemyUnit : MonoBehaviour
             if (currentToughness <= 0)
                 TriggerBreak();
         }
+
+        if (currentHP <= 0)
+            Die();
     }
 
     private void TriggerBreak()
@@ -43,15 +60,15 @@ public class EnemyUnit : MonoBehaviour
         isBroken = true;
         currentToughness = 0;
 
-        // Break delay (HSR style)
-        FindFirstObjectByType<TurnManager>()
-            ?.DelayUnit(this, 3000f);
-
-        Debug.Log($"{data.name} is Broken (AV delayed)");
+        
+        //turnManager?.DelayUnit(this, 3000f);
+        turnManager?.ModifyAV(this, 3000f);
+        Debug.Log($"{data.name} is Broken → delayed");
     }
 
-    private void OnDestroy()
+    private void Die()
     {
-        FindFirstObjectByType<TurnManager>()?.UnregisterEnemy(this);
+        Debug.Log($"{data.name} defeated");
+        Destroy(gameObject);
     }
 }

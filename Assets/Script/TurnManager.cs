@@ -1,174 +1,170 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    public const float TURN_THRESHOLD = 10000f;
+    public const float BASE_AV_SCALE = 10000f;
+    public const float DISPLAY_AV_SCALE = 1000f;
 
     [SerializeField] private PlayerUnit player;
     [SerializeField] private List<EnemyUnit> enemies = new();
-
-    // 🔥 AV lives ONLY here
+    public ActionUI UI;
     private Dictionary<object, float> avMap = new();
+    public IReadOnlyDictionary<object, float> AVMap => avMap;
+
+    public Action OnTimelineUpdated;
+
+    private enum TurnState
+    {
+        Timeline,
+        PlayerTurn,
+        EnemyTurn
+    }
+
+    private TurnState state = TurnState.Timeline;
 
     private void Start()
     {
-        avMap[player] = 0f;
+        RegisterPlayer();
         StartCoroutine(TimelineLoop());
+        OnTimelineUpdated?.Invoke();
     }
 
-    // =========================
-    // REGISTRATION
-    // =========================
+    // ---------------- REGISTRATION ----------------
+
+    private void RegisterPlayer()
+    {
+        avMap[player] = GetBaseAV(player);
+    }
 
     public void RegisterEnemy(EnemyUnit enemy)
     {
-        if (!enemies.Contains(enemy))
-        {
-            enemies.Add(enemy);
-            avMap[enemy] = 0f;
-        }
+        if (enemies.Contains(enemy)) return;
+
+        enemies.Add(enemy);
+        avMap[enemy] = GetBaseAV(enemy);
+        OnTimelineUpdated?.Invoke();
     }
 
     public void UnregisterEnemy(EnemyUnit enemy)
     {
         enemies.Remove(enemy);
         avMap.Remove(enemy);
+        OnTimelineUpdated?.Invoke();
     }
 
-    // =========================
-    // PLAYER CALLBACK
-    // =========================
+    // ---------------- AV CORE ----------------
+
+    private float GetBaseAV(object unit)
+    {
+        if (unit is PlayerUnit p)
+            return BASE_AV_SCALE / p.Stats.FinalSpeed;
+
+        if (unit is EnemyUnit e)
+            return BASE_AV_SCALE / e.Speed;
+
+        return BASE_AV_SCALE;
+    }
+
+    public void ModifyAV(object unit, float amount)
+    {
+        if (!avMap.ContainsKey(unit)) return;
+
+        avMap[unit] += amount;
+        OnTimelineUpdated?.Invoke();
+    }
+
+    // ---------------- FLOW ----------------
 
     public void NotifyPlayerActionComplete()
     {
+        state = TurnState.Timeline;
+        OnTimelineUpdated?.Invoke();
         StartCoroutine(TimelineLoop());
     }
 
-    // =========================
-    // TIMELINE LOOP
-    // =========================
-
     private IEnumerator TimelineLoop()
     {
-        while (true)
+        while (state == TurnState.Timeline)
         {
             TickAV();
-            LogAVs();
 
-            object next = GetHighestReadyUnit();
+            object next = GetNextReadyUnit();
             if (next != null)
             {
-                avMap[next] -= TURN_THRESHOLD;
+                avMap[next] += GetBaseAV(next); // reset after turn
 
                 if (ReferenceEquals(next, player))
                 {
-                    Debug.Log(">>> PLAYER TURN <<<");
-                    yield break; // wait for UI input
+                    state = TurnState.PlayerTurn;
+                    UI.Show();
+                    yield break;
                 }
                 else
                 {
                     EnemyUnit enemy = next as EnemyUnit;
-                    Debug.Log($">>> ENEMY TURN: {enemy.EnemyData.name} <<<");
-
+                    state = TurnState.EnemyTurn;
+                    UI.Hide();
                     yield return StartCoroutine(EnemyTurn(enemy));
-                    continue;
+                    state = TurnState.Timeline;
                 }
+
+                OnTimelineUpdated?.Invoke();
             }
 
             yield return null;
         }
     }
 
-    // =========================
-    // ENEMY TURN
-    // =========================
-
     private IEnumerator EnemyTurn(EnemyUnit enemy)
     {
         yield return null;
-
-        player.TakeDamage(enemy.Damage);
-        Debug.Log($"{enemy.EnemyData.name} attacks player");
-
+        enemy.Act(player);
         yield return new WaitForSeconds(0.2f);
     }
 
-    // =========================
-    // AV CORE
-    // =========================
+    // ---------------- TICK ----------------
 
     private void TickAV()
     {
-        float tick = 1f;
+        float tick = Time.deltaTime * 1000f;
 
-        avMap[player] += player.Stats.FinalSpeed * tick;
-
-        foreach (EnemyUnit enemy in enemies)
-            avMap[enemy] += enemy.Speed * tick;
-    }
-
-    public void DelayUnit(object unit, float amount)
-    {
-        if (avMap.ContainsKey(unit))
-            avMap[unit] -= amount;
-    }
-
-    // =========================
-    // HSR-STYLE READY SELECTION
-    // =========================
-
-    private object GetHighestReadyUnit()
-    {
-        List<(object unit, float av, int speed)> ready = new();
-
-        if (avMap[player] >= TURN_THRESHOLD)
-        {
-            ready.Add((
-                player,
-                avMap[player],
-                player.Stats.FinalSpeed
-            ));
-        }
+        avMap[player] -= tick;
 
         foreach (EnemyUnit enemy in enemies)
+            avMap[enemy] -= tick;
+    }
+
+    // ---------------- SELECTION ----------------
+
+    private object GetNextReadyUnit()
+    {
+        object best = null;
+        float lowestAV = float.MaxValue;
+
+        foreach (var pair in avMap)
         {
-            if (avMap[enemy] >= TURN_THRESHOLD)
+            if (pair.Value <= 0 && pair.Value < lowestAV)
             {
-                ready.Add((
-                    enemy,
-                    avMap[enemy],
-                    enemy.Speed
-                ));
+                lowestAV = pair.Value;
+                best = pair.Key;
             }
         }
 
-        if (ready.Count == 0)
-            return null;
-
-        ready.Sort((a, b) =>
-        {
-            if (!Mathf.Approximately(a.av, b.av))
-                return b.av.CompareTo(a.av);   // higher AV first
-
-            return b.speed.CompareTo(a.speed); // tie → higher speed
-        });
-
-        return ready[0].unit;
+        return best;
     }
 
-    // =========================
-    // DEBUG
-    // =========================
+    // ---------------- DEBUG DISPLAY ----------------
 
-    private void LogAVs()
+    public int GetDisplayAV(object unit)
     {
-        string log = $"[AV] Player: {avMap[player]:F0}";
+        if (!avMap.ContainsKey(unit)) return 0;
 
-        foreach (EnemyUnit enemy in enemies)
-            log += $" | {enemy.EnemyData.name}: {avMap[enemy]:F0}";
+        float normalized = avMap[unit] / BASE_AV_SCALE;
+        int display = Mathf.CeilToInt(normalized * DISPLAY_AV_SCALE);
 
-        Debug.Log(log);
+        return Mathf.Clamp(display, 0, (int)DISPLAY_AV_SCALE);
     }
 }

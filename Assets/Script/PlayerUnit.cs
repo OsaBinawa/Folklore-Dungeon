@@ -24,9 +24,6 @@ public class PlayerUnit : MonoBehaviour
             turnManager = FindFirstObjectByType<TurnManager>();
     }
 
-    // ======================
-    // STATS
-    // ======================
 
     public void UpdateStats()
     {
@@ -34,26 +31,33 @@ public class PlayerUnit : MonoBehaviour
         currentHP = stats.FinalHP;
     }
 
-    // ======================
-    // PLAYER ACTION
-    // ======================
-
     public void BasicAttack()
     {
-        if (currentTarget == null) return;
+        if (currentTarget == null)
+        {
+            Debug.LogWarning("No target");
+            return;
+        }
 
         currentTarget.TakeDamage(stats.FinalATK, CurrentElement);
-
+        Debug.Log("Player uses Basic Attack");
         turnManager.NotifyPlayerActionComplete();
     }
+
+    public void TakeDamage(int amount)
+    {
+        currentHP -= amount;
+        Debug.Log($"Player takes {amount} damage → HP: {currentHP}");
+
+        //if (currentHP <= 0)
+            //Die();
+    }
+
+    // ================= TARGET =================
 
     public void SetTarget(EnemyUnit target)
     {
         currentTarget = target;
     }
 
-    public void TakeDamage(int damage)
-    {
-        currentHP -= damage;
-    }
 }
