@@ -12,8 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131f084013bdf664c85f8f6fa7ae2748, type: 3}
   m_Name: Emeny 01
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  isUnique: 1
   maxHP: 100
   speed: 100
-  damage: 1
+  baseDamage: 0
   weaknesses: 00000000
   maxToughness: 100
+  attacks:
+  - Name: BasicAttack
+    Chance: 1
+    Cooldown: 0
+    Element: 0
+    AnimationTrigger: 
+    Effects:
+    - Type: 0
+      Value: 10
+    UsesEnergy: 0
+    EnergyCost: 100

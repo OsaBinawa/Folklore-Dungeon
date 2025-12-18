@@ -71,7 +71,7 @@ public class ActionUI : MonoBehaviour
             return "Player";
 
         if (unit is EnemyUnit enemy)
-            return enemy.EnemyData.name;
+            return enemy.Data.name;
 
         return "Unknown";
     }

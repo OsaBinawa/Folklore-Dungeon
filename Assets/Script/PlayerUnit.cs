@@ -44,14 +44,16 @@ public class PlayerUnit : MonoBehaviour
         turnManager.NotifyPlayerActionComplete();
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, ElementType element)
     {
         currentHP -= amount;
-        Debug.Log($"Player takes {amount} damage → HP: {currentHP}");
 
-        //if (currentHP <= 0)
-            //Die();
+        Debug.Log($"Player takes {amount} {element} damage. HP: {currentHP}");
+
+        /*if (currentHP <= 0)
+            Die();*/
     }
+
 
     // ================= TARGET =================
 
