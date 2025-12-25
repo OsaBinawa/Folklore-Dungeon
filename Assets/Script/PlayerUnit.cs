@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerUnit : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private int currentHP;
     [SerializeField] private EnemyUnit currentTarget;
     [SerializeField] private TurnManager turnManager;
+    [SerializeField] private SpriteRenderer sr;
 
     public PlayerStats Stats => stats;
 
@@ -19,7 +21,7 @@ public class PlayerUnit : MonoBehaviour
     private void Start()
     {
         UpdateStats();
-
+        sr = GetComponent<SpriteRenderer>();
         if (turnManager == null)
             turnManager = FindFirstObjectByType<TurnManager>();
     }
@@ -47,13 +49,19 @@ public class PlayerUnit : MonoBehaviour
     public void TakeDamage(int amount, ElementType element)
     {
         currentHP -= amount;
-
+        StartCoroutine(TakingDamageSpriteChange());
         Debug.Log($"Player takes {amount} {element} damage. HP: {currentHP}");
 
         /*if (currentHP <= 0)
             Die();*/
     }
 
+    public IEnumerator TakingDamageSpriteChange()
+    {
+        sr.color = Color.red;
+        yield return new WaitForSeconds(.1f);
+        sr.color = Color.white;
+    }
 
     // ================= TARGET =================
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using System.Collections;
 
 public class EnemyUnit : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class EnemyUnit : MonoBehaviour
     [SerializeField] protected int maxEnergy = 100;
     [SerializeField] protected int currentEnergy;
     [SerializeField] protected int energyRegenPerTurn = 10;
+    [SerializeField] private SpriteRenderer sr;
 
     protected TurnManager turnManager;
     protected EnemyAttack currentAttack;
@@ -26,6 +28,7 @@ public class EnemyUnit : MonoBehaviour
     protected virtual void Start()
     {
         Setup();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     public virtual void Initialize(EnemyData enemyData)
@@ -163,7 +166,7 @@ public class EnemyUnit : MonoBehaviour
             if (currentToughness <= 0)
                 TriggerBreak();
         }
-
+        StartCoroutine(TakingDamageSpriteChange());
         if (currentHP <= 0)
             Die();
     }
@@ -184,5 +187,12 @@ public class EnemyUnit : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(attack.AnimationTrigger))
             GetComponent<Animator>()?.SetTrigger(attack.AnimationTrigger);
+    }
+
+    public IEnumerator TakingDamageSpriteChange()
+    {
+        sr.color = Color.red;
+        yield return new WaitForSeconds(.1f);
+        sr.color = Color.white;
     }
 }
