@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapNode
 {
@@ -7,6 +8,8 @@ public class MapNode
     public NodeType NodeType;
     public List<MapNode> NextNodes;
     public bool Completed;
+    public Button Button;
+
 
     public MapNode(int depth, NodeType type)
     {
@@ -14,6 +17,7 @@ public class MapNode
         NodeType = type;
         NextNodes = new List<MapNode>();
         Completed = false;
+
     }
 
     public void Enter()

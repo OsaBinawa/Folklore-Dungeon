@@ -7,98 +7,160 @@ using UnityEngine.UI;
 public class MapManager : MonoBehaviour
 {
     public Transform MapContainer;
-    public GameObject NodeButtonPrefabs;
+    public Transform NodeViewContainer;
+    [SerializeField] private GameObject NodeButtonPrefabs;
     [SerializeField] private MapRun currentRun;
-
     [SerializeField] private MapNode currentNode;
+    [SerializeField] private GameObject CombatPrefab;
+    [SerializeField] private GameObject EventPrefab;
+    [SerializeField] private GameObject RestPrefab;
+    [SerializeField] private GameObject BossPrefab;
+    private int currentUnlockedDepth = 1;
+
+    private GameObject GetPrefabForNode(NodeType type)
+    {
+        return type switch
+        {
+            NodeType.Combat => CombatPrefab,
+            NodeType.Event => EventPrefab,
+            NodeType.Rest => RestPrefab,
+            NodeType.Boss => BossPrefab,
+            _ => CombatPrefab
+        };
+    }
 
     private void Start()
     {
         currentRun = new MapRun();
         currentRun.Generate();
         DisplayAllDepths();
+        AutoCompleteStartNode();
         //DisplayDepth(0);
     }
-
-    private void DisplayDepth(int depth)
-    {
-        foreach (Transform t in MapContainer) Destroy(t.gameObject);
-
-        List<MapNode> nodes = currentRun.DeptNodes[depth];
-
-        float spacingX = 200f; // horizontal distance between nodes
-        float startX = -((nodes.Count - 1) * spacingX) / 2; // center nodes horizontally
-        float y = -depth * 150f; // vertical spacing between depths
-
-        for (int i = 0; i < nodes.Count; i++)
-        {
-            MapNode localNode = nodes[i];
-            GameObject btnObj = Instantiate(NodeButtonPrefabs, MapContainer);
-
-            // Set anchored position
-            RectTransform rt = btnObj.GetComponent<RectTransform>();
-            rt.anchoredPosition = new Vector2(startX + i * spacingX, y);
-
-            // Add button listener
-            Button btn = btnObj.GetComponent<Button>();
-            btn.onClick.AddListener(() => EnterNode(localNode));
-        }
-    }
-
     private void DisplayAllDepths()
     {
-        foreach (Transform t in MapContainer) Destroy(t.gameObject);
+        foreach (Transform t in MapContainer)
+            Destroy(t.gameObject);
 
         for (int depth = 0; depth < currentRun.DeptNodes.Count; depth++)
         {
             List<MapNode> nodes = currentRun.DeptNodes[depth];
 
             float spacingX = 200f;
-            float startX = -((nodes.Count - 1) * spacingX) / 2;
-            float y = -depth * 150f; // vertical spacing per depth
+            float startX = -((nodes.Count - 1) * spacingX) / 2f;
+            float y = -depth * 150f;
 
             for (int i = 0; i < nodes.Count; i++)
             {
                 MapNode localNode = nodes[i];
+
                 GameObject btnObj = Instantiate(NodeButtonPrefabs, MapContainer);
 
                 RectTransform rt = btnObj.GetComponent<RectTransform>();
                 rt.anchoredPosition = new Vector2(startX + i * spacingX, y);
 
                 Button btn = btnObj.GetComponent<Button>();
+                localNode.Button = btn;
+
                 btn.onClick.AddListener(() => EnterNode(localNode));
 
-                // Optionally: disable buttons that are not yet unlocked
-                btn.interactable = (depth == 0); // only depth 0 interactable
+                
+                btn.interactable = false;
+
+                TMP_Text txt = btnObj.GetComponentInChildren<TMP_Text>();
+                if (txt != null)
+                    txt.text = localNode.NodeType.ToString();
             }
         }
     }
 
 
+    private void AutoCompleteStartNode()
+    {
+        var startNodes = currentRun.DeptNodes[0];
+
+        foreach (var node in startNodes)
+        {
+            node.Completed = true;
+
+            if (node.Button != null)
+                node.Button.interactable = false;
+        }
+
+        if (currentRun.DeptNodes.Count > 1)
+        {
+            foreach (var node in currentRun.DeptNodes[1])
+                node.Button.interactable = true;
+        }
+        currentUnlockedDepth = 1;
+    }
+
     public void EnterNode(MapNode node)
     {
         currentNode = node;
         node.Enter();
-        MapContainer.gameObject.SetActive(false);
 
-        Debug.Log($"Simulate resolving {node.NodeType}");
-        ResolveNode();
+        MapContainer.gameObject.SetActive(false);
+        NodeViewContainer.gameObject.SetActive(true);
+
+        GameObject prefab = GetPrefabForNode(node.NodeType);
+        GameObject viewObj = Instantiate(prefab, NodeViewContainer);
+
+        NodeView view = viewObj.GetComponent<NodeView>();
+        view.Initialize(node, OnNodeFinished);
     }
 
+    private void OnNodeFinished(MapNode node)
+    {
+        //node.Resolve();
+        foreach (var n in currentRun.DeptNodes[node.Depth])
+        {
+            n.Completed = true;
+        }
+        if (node.Depth + 1 > currentUnlockedDepth)
+            currentUnlockedDepth = node.Depth + 1;
+
+        NodeViewContainer.gameObject.SetActive(false);
+        MapContainer.gameObject.SetActive(true);
+        UpdateButtonLocks();
+        if (node.NodeType == NodeType.Boss)
+            Debug.Log("Run complete!");
+    }
+
+    private void UpdateButtonLocks()
+    {
+        for (int depth = 0; depth < currentRun.DeptNodes.Count; depth++)
+        {
+            foreach (var node in currentRun.DeptNodes[depth])
+            {
+                if (node.Button == null)
+                    continue;
+
+                bool clickable =
+                    depth == currentUnlockedDepth &&
+                    !node.Completed;
+
+                node.Button.interactable = clickable;
+            }
+        }
+    }
     private void ResolveNode()
     {
         currentNode.Resolve();
+        currentNode.Button.interactable = false;
 
         if (currentNode.NodeType == NodeType.Boss)
         {
             Debug.Log("Boss defeated! Run complete.");
+            return;
         }
-        else
+
+        int nextDepth = currentNode.Depth + 1;
+
+        foreach (var node in currentRun.DeptNodes[nextDepth])
         {
-            // Show next depth
-            int nextDepth = currentNode.Depth + 1;
-            MapContainer.gameObject.SetActive(true);
-            DisplayDepth(nextDepth);
+            node.Button.interactable = true;
         }
     }
+
 }
