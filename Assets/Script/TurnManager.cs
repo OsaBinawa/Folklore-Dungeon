@@ -13,9 +13,9 @@ public class TurnManager : MonoBehaviour
     public ActionUI UI;
     private Dictionary<object, float> avMap = new();
     public IReadOnlyDictionary<object, float> AVMap => avMap;
-
     public Action OnTimelineUpdated;
 
+    public float turnTime = 5f;
     private enum TurnState
     {
         Timeline,
@@ -32,7 +32,7 @@ public class TurnManager : MonoBehaviour
         OnTimelineUpdated?.Invoke();
     }
 
-    // ---------------- REGISTRATION ----------------
+    
 
     private void RegisterPlayer()
     {
@@ -55,7 +55,7 @@ public class TurnManager : MonoBehaviour
         OnTimelineUpdated?.Invoke();
     }
 
-    // ---------------- AV CORE ----------------
+   
 
     private float GetBaseAV(object unit)
     {
@@ -76,10 +76,11 @@ public class TurnManager : MonoBehaviour
         OnTimelineUpdated?.Invoke();
     }
 
-    // ---------------- FLOW ----------------
+   
 
     public void NotifyPlayerActionComplete()
     {
+       
         state = TurnState.Timeline;
         OnTimelineUpdated?.Invoke();
         StartCoroutine(TimelineLoop());
@@ -100,6 +101,7 @@ public class TurnManager : MonoBehaviour
                 {
                     state = TurnState.PlayerTurn;
                     UI.Show();
+                    StartCoroutine(PlayerTurnCounter());
                     yield break;
                 }
                 else
@@ -125,7 +127,21 @@ public class TurnManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
     }
 
-    // ---------------- TICK ----------------
+   private IEnumerator PlayerTurnCounter()
+    {
+
+        float timeleft = turnTime;
+        UI.SetMaxTime(turnTime);
+
+        while (timeleft>0f)
+        {
+            timeleft -= Time.deltaTime;
+            UI.UpdateTime(timeleft);
+            yield return null;
+        }
+        Debug.Log("Your Time Expired");
+        NotifyPlayerActionComplete();
+    }
 
     private void TickAV()
     {
@@ -137,7 +153,7 @@ public class TurnManager : MonoBehaviour
             avMap[enemy] -= tick;
     }
 
-    // ---------------- SELECTION ----------------
+  
 
     private object GetNextReadyUnit()
     {
@@ -156,7 +172,7 @@ public class TurnManager : MonoBehaviour
         return best;
     }
 
-    // ---------------- DEBUG DISPLAY ----------------
+    
 
     public int GetDisplayAV(object unit)
     {

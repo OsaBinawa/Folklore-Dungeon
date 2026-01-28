@@ -2,12 +2,14 @@
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ActionUI : MonoBehaviour
 {
     [SerializeField] private GameObject root;
     [SerializeField] private TurnManager turnManager;
     [SerializeField] private TMP_Text turnOrderText;
+    [SerializeField] private Slider playerTimer;
 
 
     private void Start()
@@ -20,7 +22,7 @@ public class ActionUI : MonoBehaviour
 
         turnManager.OnTimelineUpdated += Refresh;
 
-        Refresh(); // initial draw
+        Refresh(); 
     }
 
     private void OnEnable()
@@ -74,5 +76,21 @@ public class ActionUI : MonoBehaviour
             return enemy.Data.name;
 
         return "Unknown";
+    }
+
+    public void SetMaxTime(float time)
+    {
+        playerTimer.maxValue = time;
+        playerTimer.value = time;
+    }
+
+    public void UpdateTime(float timeLeft)
+    {
+        playerTimer.value = timeLeft;
+    }
+
+    public void ResetTimer()
+    {
+        playerTimer.value = playerTimer.maxValue;
     }
 }
