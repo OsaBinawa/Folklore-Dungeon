@@ -23,10 +23,14 @@ public class PlayerUnit : MonoBehaviour
     {
         if (stats == null)
             stats = GetComponent<PlayerStats>();
-
-        // AUTO initialize from RunManager
         if (RunManager.Instance != null)
+        {
             Initialize(RunManager.Instance.Player);
+        }
+        else
+        {
+            Debug.LogError("RunManager.Instance is NULL in PlayerUnit.Awake()");
+        }
     }
 
     private void Start()
@@ -41,6 +45,7 @@ public class PlayerUnit : MonoBehaviour
     public void Initialize(PlayerRunData runData)
     {
         stats.Initialize(runData);
+        Debug.Log("PlayerUnit initialized");
     }
 
     /*public void UpdateStats()

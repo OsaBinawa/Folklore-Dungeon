@@ -2,8 +2,9 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.EventSystems;
 
-public class EnemyUnit : MonoBehaviour
+public class EnemyUnit : MonoBehaviour, IPointerClickHandler
 {
     [Header("Data")]
     [SerializeField] protected EnemyData data;
@@ -194,5 +195,13 @@ public class EnemyUnit : MonoBehaviour
         sr.color = Color.red;
         yield return new WaitForSeconds(.1f);
         sr.color = Color.white;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        PlayerUnit player = FindFirstObjectByType<PlayerUnit>();
+
+        if (player != null)
+            player.SetTarget(this);
     }
 }

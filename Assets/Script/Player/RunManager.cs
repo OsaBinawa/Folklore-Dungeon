@@ -33,5 +33,6 @@ public class RunManager : MonoBehaviour
             foreach (var eq in startingStats.startingEquipment)
                 Player.EquippedItems.Add(eq);
         }
+        Debug.Log("StartingStats = " + startingStats);
     }
 }

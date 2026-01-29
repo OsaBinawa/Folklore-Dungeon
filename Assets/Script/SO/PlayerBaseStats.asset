@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBaseStats
   maxHP: 80
   baseAttack: 6
-  baseSpeed: 70
+  baseSpeed: 120
   startingEquipment: []
