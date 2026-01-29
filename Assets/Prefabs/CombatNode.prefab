@@ -1019,7 +1019,7 @@ MonoBehaviour:
   currentHP: 0
   currentTarget: {fileID: 0}
   turnManager: {fileID: 4979452946627682446}
-  sr: {fileID: 0}
+  sr: {fileID: 5972838564755651856}
 --- !u!114 &8564633334046716996
 MonoBehaviour:
   m_ObjectHideFlags: 0

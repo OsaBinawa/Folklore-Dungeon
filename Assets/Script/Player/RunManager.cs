@@ -8,6 +8,7 @@ public class RunManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("RUNMANAGER AWAKE");
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

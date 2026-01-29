@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerRunData
 {
+    public event Action<int, int> OnHPChanged;
     public int CurrentHP { get; private set; }
     public int MaxHP { get; private set; }
 
@@ -26,11 +29,13 @@ public class PlayerRunData
         CurrentHP -= amount;
         if (CurrentHP < 0)
             CurrentHP = 0;
+        OnHPChanged?.Invoke(CurrentHP, MaxHP);
     }
 
     public void Heal(int amount)
     {
         CurrentHP = System.Math.Min(MaxHP, CurrentHP + amount);
+        OnHPChanged?.Invoke(CurrentHP, MaxHP);
     }
 
     public void RecalculateMaxHP()
@@ -44,5 +49,6 @@ public class PlayerRunData
 
         if (CurrentHP > MaxHP)
             CurrentHP = MaxHP;
+        OnHPChanged?.Invoke(CurrentHP, MaxHP);
     }
 }

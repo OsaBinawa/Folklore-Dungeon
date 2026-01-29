@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUnit : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private int currentHP;
     [SerializeField] private EnemyUnit currentTarget;
     [SerializeField] private TurnManager turnManager;
-    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private Image sr;
 
     public PlayerStats Stats => stats;
     public int MaxHP => stats.MaxHP;
@@ -93,8 +94,6 @@ public class PlayerUnit : MonoBehaviour
     {
         return stats.MaxHP;
     }
-
-    
 
     public void SetTarget(EnemyUnit target)
     {
