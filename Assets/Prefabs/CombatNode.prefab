@@ -1370,7 +1370,7 @@ MonoBehaviour:
   player: {fileID: 19510278876226992}
   enemies: []
   UI: {fileID: 8529759504667406154}
-  turnTime: 120
+  turnTime: 10
 --- !u!1 &9110279509030576440
 GameObject:
   m_ObjectHideFlags: 0
