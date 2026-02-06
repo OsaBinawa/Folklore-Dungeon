@@ -12,6 +12,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private List<EnemyUnit> enemies = new();
     public ActionUI UI;
     private Dictionary<object, float> avMap = new();
+    private Coroutine playerTurnRoutine;
     public IReadOnlyDictionary<object, float> AVMap => avMap;
     public Action OnTimelineUpdated;
 
@@ -101,7 +102,7 @@ public class TurnManager : MonoBehaviour
                 {
                     state = TurnState.PlayerTurn;
                     UI.Show();
-                    StartCoroutine(PlayerTurnCounter());
+                    StartPlayerTurnTimer();
                     yield break;
                 }
                 else
@@ -125,22 +126,6 @@ public class TurnManager : MonoBehaviour
         yield return null;
         enemy.Act(player);
         yield return new WaitForSeconds(0.2f);
-    }
-
-   private IEnumerator PlayerTurnCounter()
-    {
-
-        float timeleft = turnTime;
-        UI.SetMaxTime(turnTime);
-
-        while (timeleft>0f)
-        {
-            timeleft -= Time.deltaTime;
-            UI.UpdateTime(timeleft);
-            yield return null;
-        }
-        Debug.Log("Your Time Expired");
-        NotifyPlayerActionComplete();
     }
 
     private void TickAV()
@@ -172,7 +157,46 @@ public class TurnManager : MonoBehaviour
         return best;
     }
 
-    
+    private void StartPlayerTurnTimer()
+    {
+        // Kill any old timer just in case
+        if (playerTurnRoutine != null)
+        {
+            StopCoroutine(playerTurnRoutine);
+            playerTurnRoutine = null;
+        }
+
+        playerTurnRoutine = StartCoroutine(PlayerTurnCounter());
+    }
+
+    private IEnumerator PlayerTurnCounter()
+    {
+        float timeleft = turnTime;
+        UI.SetMaxTime(turnTime);
+
+        while (timeleft > 0f && state == TurnState.PlayerTurn)
+        {
+            timeleft -= Time.deltaTime;
+            UI.UpdateTime(timeleft);
+            yield return null;
+        }
+
+        if (state == TurnState.PlayerTurn)
+        {
+            Debug.Log("Your Time Expired");
+            NotifyPlayerActionComplete();
+        }
+
+        playerTurnRoutine = null;
+    }
+
+    public void RegisterEnemies(List<EnemyUnit> enemies)
+    {
+        foreach (var enemy in enemies)
+        {
+            RegisterEnemy(enemy);
+        }
+    }
 
     public int GetDisplayAV(object unit)
     {
