@@ -35,6 +35,7 @@ public class MapManager : MonoBehaviour
         currentRun.Generate();
         DisplayAllDepths();
         AutoCompleteStartNode();
+        //InitializeMap();
         //DisplayDepth(0);
     }
     private void DisplayAllDepths()
@@ -77,23 +78,25 @@ public class MapManager : MonoBehaviour
 
     private void AutoCompleteStartNode()
     {
-        var startNodes = currentRun.DeptNodes[0];
+        var startNode = currentRun.DeptNodes[0][0];
 
-        foreach (var node in startNodes)
-        {
-            node.Completed = true;
+        startNode.Completed = true;
 
-            if (node.Button != null)
-                node.Button.interactable = false;
-        }
+        if (startNode.Button != null)
+            startNode.Button.interactable = false;
 
+        
         if (currentRun.DeptNodes.Count > 1)
         {
             foreach (var node in currentRun.DeptNodes[1])
-                node.Button.interactable = true;
+            {
+                if (node.Button != null)
+                    node.Button.interactable = true;
+            }
         }
-        currentUnlockedDepth = 1;
     }
+
+
 
     public void EnterNode(MapNode node)
     {
@@ -112,20 +115,33 @@ public class MapManager : MonoBehaviour
 
     private void OnNodeFinished(MapNode node)
     {
-        //node.Resolve();
-        foreach (var n in currentRun.DeptNodes[node.Depth])
-        {
-            n.Completed = true;
-        }
-        if (node.Depth + 1 > currentUnlockedDepth)
-            currentUnlockedDepth = node.Depth + 1;
+        node.Resolve();
+        node.Completed = true;
 
         NodeViewContainer.gameObject.SetActive(false);
         MapContainer.gameObject.SetActive(true);
-        UpdateButtonLocks();
+
+        // Disable all buttons first
+        foreach (var depth in currentRun.DeptNodes)
+        {
+            foreach (var n in depth)
+            {
+                if (n.Button != null)
+                    n.Button.interactable = false;
+            }
+        }
+
+        // Enable only reachable next nodes
+        foreach (var next in node.NextNodes)
+        {
+            if (next.Button != null && !next.Completed)
+                next.Button.interactable = true;
+        }
+
         if (node.NodeType == NodeType.Boss)
             Debug.Log("Run complete!");
     }
+
 
     private void UpdateButtonLocks()
     {
@@ -144,6 +160,41 @@ public class MapManager : MonoBehaviour
             }
         }
     }
+    public void UpdateNodeInteractivity(MapNode currentNode)
+    {
+        // 1. Disable ALL nodes first
+        foreach (var depth in currentRun.DeptNodes)
+        {
+            foreach (var node in depth)
+            {
+                if (node.Button != null)
+                    node.Button.interactable = false;
+            }
+        }
+
+        // 2. Enable only reachable next nodes
+        foreach (var next in currentNode.NextNodes)
+        {
+            if (next.Button != null)
+                next.Button.interactable = true;
+        }
+    }
+
+    public void InitializeMap()
+    {
+        foreach (var depth in currentRun.DeptNodes)
+        {
+            foreach (var node in depth)
+            {
+                node.Button.interactable = false;
+            }
+        }
+
+        var startNode = currentRun.DeptNodes[0][0];
+        startNode.Button.interactable = true;
+    }
+
+
     private void ResolveNode()
     {
         currentNode.Resolve();

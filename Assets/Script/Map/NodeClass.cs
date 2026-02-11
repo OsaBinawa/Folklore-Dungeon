@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class MapNode
 {
     public int Depth;
+    public int index;
     public NodeType NodeType;
     public List<MapNode> NextNodes;
     public bool Completed;
