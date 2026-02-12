@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MapManager : MonoBehaviour
 {
     public Transform MapContainer;
+    public Transform ContentRoot;
     public Transform NodeViewContainer;
     [SerializeField] private GameObject NodeButtonPrefabs;
     [SerializeField] private MapRun currentRun;
@@ -15,6 +16,9 @@ public class MapManager : MonoBehaviour
     [SerializeField] private GameObject EventPrefab;
     [SerializeField] private GameObject RestPrefab;
     [SerializeField] private GameObject BossPrefab;
+    [SerializeField] private LineDrawer lineDrawer;
+    [SerializeField] private Scrollbar scroll;
+
     private int currentUnlockedDepth = 1;
 
     private GameObject GetPrefabForNode(NodeType type)
@@ -37,6 +41,7 @@ public class MapManager : MonoBehaviour
         AutoCompleteStartNode();
         //InitializeMap();
         //DisplayDepth(0);
+
     }
     private void DisplayAllDepths()
     {
@@ -73,6 +78,8 @@ public class MapManager : MonoBehaviour
                     txt.text = localNode.NodeType.ToString();
             }
         }
+        lineDrawer.Draw(currentRun);
+        AdjustContentHeight();
     }
 
 
@@ -133,7 +140,7 @@ public class MapManager : MonoBehaviour
 
         // Enable only reachable next nodes
         foreach (var next in node.NextNodes)
-        {
+        {   
             if (next.Button != null && !next.Completed)
                 next.Button.interactable = true;
         }
@@ -192,6 +199,23 @@ public class MapManager : MonoBehaviour
 
         var startNode = currentRun.DeptNodes[0][0];
         startNode.Button.interactable = true;
+    }
+
+    private void AdjustContentHeight()
+    {
+        RectTransform content = ContentRoot.GetComponent<RectTransform>();
+        RectTransform viewport = content.parent.GetComponent<RectTransform>();
+        //content.anchoredPosition -= new Vector2(0, 5000f);
+        float depthSpacing = 150f;
+        float totalHeight = currentRun.DeptNodes.Count * depthSpacing;
+
+        float minHeight = viewport.rect.height + -10f;
+
+        float finalHeight = Mathf.Max(totalHeight + 500f, minHeight);
+
+        content.sizeDelta = new Vector2(content.sizeDelta.x, finalHeight);
+
+        //scroll.size = .5f;
     }
 
 
