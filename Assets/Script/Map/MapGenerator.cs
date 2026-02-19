@@ -9,16 +9,13 @@ public class MapRun
 
     // NEW configurable settings
     public int RestInterval = 4;
-    public int MinWidth = 3;
-    public int MaxWidth = 5;
+    public int MinWidth = 2;
+    public int MaxWidth = 4;
 
     public void Generate()
     {
         DeptNodes.Clear();
 
-        // ============================
-        // STEP 1: CREATE ROWS
-        // ============================
         for (int depth = 0; depth <= MaxDepth; depth++)
         {
             List<MapNode> nodesAtDepth = new List<MapNode>();
@@ -51,9 +48,7 @@ public class MapRun
             DeptNodes.Add(nodesAtDepth);
         }
 
-        // ============================
-        // STEP 2: CONNECT ROWS (CZN STYLE)
-        // ============================
+        
         for (int d = 0; d < DeptNodes.Count - 1; d++)
         {
             ConnectRows(DeptNodes[d], DeptNodes[d + 1]);
@@ -62,9 +57,7 @@ public class MapRun
         Debug.Log("Map Generated");
     }
 
-    // =====================================
-    // ROW TYPE (Boss priority safe)
-    // =====================================
+  
     private NodeType DetermineRowType(int depth)
     {
         if (depth == 0)
@@ -79,9 +72,7 @@ public class MapRun
         return NodeType.Combat;
     }
 
-    // =====================================
-    // WIDTH RULES
-    // =====================================
+    
     private int GetRowWidth(NodeType type)
     {
         if (type == NodeType.Start ||
@@ -92,9 +83,6 @@ public class MapRun
         return Random.Range(MinWidth, MaxWidth + 1);
     }
 
-    // =====================================
-    // CZN ADJACENT CONNECTION LOGIC
-    // =====================================
     private void ConnectRows(List<MapNode> currentRow, List<MapNode> nextRow)
     {
         int currentWidth = currentRow.Count;
@@ -106,7 +94,6 @@ public class MapRun
 
             List<int> validTargets = new List<int>();
 
-            // Full tunnel if next row has only 1 node
             if (nextWidth == 1)
             {
                 validTargets.Add(0);
@@ -119,38 +106,69 @@ public class MapRun
 
                 int mappedIndex = Mathf.RoundToInt(normalizedIndex * (nextWidth - 1));
 
-                // Adjacent only
                 for (int offset = -1; offset <= 1; offset++)
                 {
                     int target = mappedIndex + offset;
-
                     if (target >= 0 && target < nextWidth)
                         validTargets.Add(target);
                 }
             }
 
-            // 1–2 connections
-            int connectionCount = Random.Range(1, Mathf.Min(3, validTargets.Count + 1));
+            if (validTargets.Count == 0)
+                continue;
 
-            for (int i = 0; i < connectionCount; i++)
+            int primaryIndex = validTargets[Random.Range(0, validTargets.Count)];
+            MapNode primaryTarget = nextRow[primaryIndex];
+            node.NextNodes.Add(primaryTarget);
+
+            if (validTargets.Count > 1 && Random.value < 0.25f)
             {
-                int randomTargetIndex = validTargets[Random.Range(0, validTargets.Count)];
-                MapNode targetNode = nextRow[randomTargetIndex];
+                int secondaryIndex;
 
-                if (!node.NextNodes.Contains(targetNode))
+                do
                 {
-                    node.NextNodes.Add(targetNode);
+                    secondaryIndex = validTargets[Random.Range(0, validTargets.Count)];
+                }
+                while (secondaryIndex == primaryIndex);
+
+                node.NextNodes.Add(nextRow[secondaryIndex]);
+            }
+        }
+
+        foreach (var nextNode in nextRow)
+        {
+            bool hasParent = false;
+
+            foreach (var currentNode in currentRow)
+            {
+                if (currentNode.NextNodes.Contains(nextNode))
+                {
+                    hasParent = true;
+                    break;
                 }
             }
 
-            // Safety guarantee (at least 1 connection)
-            if (node.NextNodes.Count == 0 && validTargets.Count > 0)
+            if (!hasParent)
             {
-                int fallbackIndex = validTargets[Random.Range(0, validTargets.Count)];
-                node.NextNodes.Add(nextRow[fallbackIndex]);
+                MapNode closestNode = currentRow[0];
+                float closestDistance = Mathf.Abs(currentRow[0].index - nextNode.index);
+
+                foreach (var currentNode in currentRow)
+                {
+                    float distance = Mathf.Abs(currentNode.index - nextNode.index);
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestNode = currentNode;
+                    }
+                }
+
+                closestNode.NextNodes.Add(nextNode);
             }
         }
     }
+
+
 
     private NodeType PickRandomNode()
     {

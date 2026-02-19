@@ -528,8 +528,8 @@ Canvas:
   m_GameObject: {fileID: 1740651745}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 220634839}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -667,62 +667,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4659122305608246306, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 383.6054
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659122305608246306, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 179.9387
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659122305608246306, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 682.0648
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659122305608246306, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -150.42632
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294704766454875646, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.59175014
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294704766454875646, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294704766454875646, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.59175014
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294704766454875646, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 819.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294704766454875646, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 1505.2435
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294704766454875646, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 305.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294704766454875646, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -219
-      objectReference: {fileID: 0}
     - target: {fileID: 7299103530633939367, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8384508667220453736, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8384508667220453736, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -4395264432604678779, guid: f97c4093e19843b429e3eedaa2ee3f95, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

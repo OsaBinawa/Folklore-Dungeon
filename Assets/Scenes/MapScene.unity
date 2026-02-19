@@ -1470,6 +1470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapManager
   MapContainer: {fileID: 368528832}
   ContentRoot: {fileID: 1450023144}
+  Root: {fileID: 2024605533}
   NodeViewContainer: {fileID: 1463919540}
   NodeButtonPrefabs: {fileID: 1290269454667322646, guid: ffd10732bebf7174badcdc0ec7150f2e, type: 3}
   CombatPrefab: {fileID: 945770643077263496, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}

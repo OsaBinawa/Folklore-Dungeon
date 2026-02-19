@@ -8,6 +8,7 @@ public class MapManager : MonoBehaviour
 {
     public Transform MapContainer;
     public Transform ContentRoot;
+    public Transform Root;
     public Transform NodeViewContainer;
     [SerializeField] private GameObject NodeButtonPrefabs;
     [SerializeField] private MapRun currentRun;
@@ -111,6 +112,7 @@ public class MapManager : MonoBehaviour
         node.Enter();
 
         MapContainer.gameObject.SetActive(false);
+        Root.gameObject.SetActive(false);
         NodeViewContainer.gameObject.SetActive(true);
 
         GameObject prefab = GetPrefabForNode(node.NodeType);
@@ -127,6 +129,7 @@ public class MapManager : MonoBehaviour
 
         NodeViewContainer.gameObject.SetActive(false);
         MapContainer.gameObject.SetActive(true);
+        Root.gameObject.SetActive(true);
 
         // Disable all buttons first
         foreach (var depth in currentRun.DeptNodes)
