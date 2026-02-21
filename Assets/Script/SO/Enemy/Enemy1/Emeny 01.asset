@@ -20,12 +20,8 @@ MonoBehaviour:
   maxToughness: 100
   attacks:
   - Name: BasicAttack
+    AnimationString: Attack1
     Chance: 1
-    Cooldown: 0
-    Element: 0
-    AnimationTrigger: 
-    Effects:
-    - Type: 0
-      Value: 10
-    UsesEnergy: 0
-    EnergyCost: 100
+  ultimate:
+    AnimationString: 
+    EnergyRequired: 1000000

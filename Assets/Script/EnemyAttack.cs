@@ -6,8 +6,10 @@ using UnityEngine;
 public class EnemyAttack
 {
     public string Name;
-
-    [Header("Selection")]
+    public string AnimationString;
+    
+    public float Chance = 1f;
+    /*[Header("Selection")]
     [Range(0f, 1f)]
     public float Chance = 1f;
 
@@ -25,6 +27,5 @@ public class EnemyAttack
 
     [Header("Energy")]
     public bool UsesEnergy;
-    public int EnergyCost;
-
+    public int EnergyCost;*/
 }

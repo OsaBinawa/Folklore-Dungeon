@@ -1542,7 +1542,7 @@ MonoBehaviour:
   maxEnemies: 5
   enemyContainer: {fileID: 1729019562268867681}
   enemyPrefabs:
-  - {fileID: 4682230525358156219, guid: ed1c63a1e5fa7e042958b6faddd97ac3, type: 3}
+  - {fileID: 8822706715593164513, guid: ed1c63a1e5fa7e042958b6faddd97ac3, type: 3}
 --- !u!1 &9110279509030576440
 GameObject:
   m_ObjectHideFlags: 0

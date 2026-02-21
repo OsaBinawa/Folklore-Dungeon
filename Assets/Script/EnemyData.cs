@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +19,11 @@ public class EnemyData : ScriptableObject
     [SerializeField] private int maxToughness;
 
     [Header("Attacks")]
+    //[SerializeField] private List<EnemyAttack> attacks;
     [SerializeField] private List<EnemyAttack> attacks;
+    [SerializeField] private EnemyUltimate ultimate;
+    public EnemyUltimate Ultimate => ultimate;
+    public IReadOnlyList<EnemyAttack> Actions => attacks;
     public bool IsUnique => isUnique;
     public int MaxHP => maxHP;
     public int Speed => speed;
@@ -26,5 +31,11 @@ public class EnemyData : ScriptableObject
     public int MaxToughness => maxToughness;
 
     public IReadOnlyList<ElementType> Weaknesses => weaknesses;
-    public IReadOnlyList<EnemyAttack> Attacks => attacks;
+    //public IReadOnlyList<EnemyAttack> Attacks => attacks;
+}
+[Serializable]
+public class EnemyUltimate
+{
+    public string AnimationString;
+    public int EnergyRequired;
 }

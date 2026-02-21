@@ -123,9 +123,11 @@ public class TurnManager : MonoBehaviour
 
     private IEnumerator EnemyTurn(EnemyUnit enemy)
     {
-        yield return null;
+        /*yield return null;
         enemy.Act(player);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.2f);*/
+        enemy.Act(player);
+        yield break;
     }
 
     private void TickAV()
@@ -156,7 +158,12 @@ public class TurnManager : MonoBehaviour
 
         return best;
     }
-
+    public void NotifyEnemyActionComplete()
+    {
+        state = TurnState.Timeline;
+        OnTimelineUpdated?.Invoke();
+        StartCoroutine(TimelineLoop());
+    }
     private void StartPlayerTurnTimer()
     {
         // Kill any old timer just in case

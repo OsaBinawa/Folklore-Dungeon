@@ -18,7 +18,8 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     [SerializeField] protected int currentEnergy;
     [SerializeField] protected int energyRegenPerTurn = 10;
     [SerializeField] private Image sr;
-
+    [SerializeField] private Animator anim;
+    private bool ultimateQueued;
     protected TurnManager turnManager;
     protected EnemyAttack currentAttack;
 
@@ -46,9 +47,9 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         currentEnergy = maxEnergy;
         isBroken = false;
 
-        cooldowns.Clear();
+       /* cooldowns.Clear();
         foreach (var atk in data.Attacks)
-            cooldowns[atk] = 0;
+            cooldowns[atk] = 0;*/
 
         turnManager = FindFirstObjectByType<TurnManager>();
         turnManager?.RegisterEnemy(this);
@@ -61,7 +62,28 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
 
     public void Act(PlayerUnit player)
     {
-        OnTurnStart();
+
+        // 1️⃣ Check if ultimate can be queued
+        if (!ultimateQueued && data.Ultimate != null)
+        {
+            if (currentEnergy >= data.Ultimate.EnergyRequired)
+                ultimateQueued = true;
+        }
+
+        // 2️⃣ Execute ultimate if queued
+        if (ultimateQueued)
+        {
+            anim.SetTrigger(data.Ultimate.AnimationString);
+            currentEnergy = 0;
+            ultimateQueued = false;
+            return;
+        }
+
+        // 3️⃣ Otherwise normal attack
+        var action = ChooseAttack();
+        Debug.Log("Animation String = [" + action.AnimationString + "]");
+        anim.SetTrigger(action.AnimationString);
+        /*OnTurnStart();
 
         currentAttack = ChooseAttack();
         if (currentAttack == null) return;
@@ -84,12 +106,12 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         }
 
         RegenerateEnergy();
-        OnTurnEnd();
+        OnTurnEnd();*/
     }
 
     protected virtual EnemyAttack ChooseAttack()
     {
-        List<EnemyAttack> pool = data.Attacks
+        /*List<EnemyAttack> pool = data.Attacks
             .Where(CanUseAttack)
             .ToList();
 
@@ -110,16 +132,26 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
             if (Random.value <= atk.Chance)
                 return atk;
 
+        return pool[Random.Range(0, pool.Count)];*/
+
+        var pool = data.Actions;
+
+        foreach (var action in pool)
+        {
+            if (Random.value <= action.Chance)
+                return action;
+        }
+
         return pool[Random.Range(0, pool.Count)];
     }
 
-    protected bool CanUseAttack(EnemyAttack atk)
+    /*protected bool CanUseAttack(EnemyAttack atk)
     {
         if (atk.UsesEnergy && currentEnergy < atk.EnergyCost)
             return false;
 
         return true;
-    }
+    }*/
 
     protected void TickCooldowns()
     {
@@ -136,7 +168,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         );
     }
 
-    protected virtual void ExecuteEffect(AttackEffect effect, PlayerUnit player)
+    /*protected virtual void ExecuteEffect(AttackEffect effect, PlayerUnit player)
     {
         switch (effect.Type)
         {
@@ -150,8 +182,40 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
                 turnManager.ModifyAV(player, effect.Value);
                 break;
         }
-    }
+    }*/
 
+    protected void ExecuteAttack(AttackBase attack, PlayerUnit target)
+    {
+        if (attack == null || target == null)
+            return;
+
+        for (int i = 0; i < attack.HitCount; i++)
+        {
+            target.TakeDamage(attack.BaseDamage, attack.Element);
+
+            foreach (var effect in attack.Effects)
+            {
+                switch (effect.Type)
+                {
+                    case EffectType.Damage:
+                        target.TakeDamage(effect.Value, attack.Element);
+                        break;
+
+                    case EffectType.DelayAV:
+                        turnManager?.ModifyAV(target, effect.Value);
+                        break;
+
+                    case EffectType.Slow:
+                        // implement later
+                        break;
+                }
+            }
+        }
+    }
+    public void OnActionFinished()
+    {
+        turnManager.NotifyEnemyActionComplete();
+    }
     protected virtual void OnTurnStart() { }
     protected virtual void OnTurnEnd() { }
     protected virtual void OnAttackChosen(EnemyAttack attack) { }
@@ -185,10 +249,10 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         Destroy(gameObject);
     }
 
-    protected void PlayAnimation(EnemyAttack attack)
+    protected void PlayAnimation(string trigger)
     {
-        if (!string.IsNullOrEmpty(attack.AnimationTrigger))
-            GetComponent<Animator>()?.SetTrigger(attack.AnimationTrigger);
+        if (!string.IsNullOrEmpty(trigger))
+            GetComponent<Animator>()?.SetTrigger(trigger);
     }
 
     public IEnumerator TakingDamageSpriteChange()
