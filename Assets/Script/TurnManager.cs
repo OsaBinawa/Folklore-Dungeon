@@ -7,7 +7,7 @@ public class TurnManager : MonoBehaviour
 {
     public const float BASE_AV_SCALE = 10000f;
     public const float DISPLAY_AV_SCALE = 1000f;
-
+    private bool enemyActionFinished;
     [SerializeField] private PlayerUnit player;
     [SerializeField] private List<EnemyUnit> enemies = new();
     public ActionUI UI;
@@ -126,8 +126,11 @@ public class TurnManager : MonoBehaviour
         /*yield return null;
         enemy.Act(player);
         yield return new WaitForSeconds(0.2f);*/
+        enemyActionFinished = false;
+
         enemy.Act(player);
-        yield break;
+
+        yield return new WaitUntil(() => enemyActionFinished);
     }
 
     private void TickAV()
@@ -160,9 +163,10 @@ public class TurnManager : MonoBehaviour
     }
     public void NotifyEnemyActionComplete()
     {
-        state = TurnState.Timeline;
+        /*state = TurnState.Timeline;
         OnTimelineUpdated?.Invoke();
-        StartCoroutine(TimelineLoop());
+        StartCoroutine(TimelineLoop());*/
+        enemyActionFinished = true;
     }
     private void StartPlayerTurnTimer()
     {
