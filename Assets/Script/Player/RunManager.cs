@@ -5,7 +5,6 @@ public class RunManager : MonoBehaviour
     public static RunManager Instance { get; private set; }
     [SerializeField] private PlayerBaseStats startingStats;
     public PlayerRunData Player { get; private set; }
-
     private void Awake()
     {
         Debug.Log("RUNMANAGER AWAKE");

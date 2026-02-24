@@ -740,6 +740,7 @@ GameObject:
   - component: {fileID: 1249741748}
   - component: {fileID: 1249741747}
   - component: {fileID: 1249741749}
+  - component: {fileID: 1249741750}
   m_Layer: 0
   m_Name: RunManager
   m_TagString: Untagged
@@ -788,6 +789,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHUD
   hpBar: {fileID: 1389213466}
+--- !u!114 &1249741750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249741746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5abfe7bc6657d54f8843b8c5fee8160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Slots
+  equippedWeapon: {fileID: 11400000, guid: f3e281b026466ca48a7d5b7eae44e1e8, type: 2}
 --- !u!1 &1343533141
 GameObject:
   m_ObjectHideFlags: 0

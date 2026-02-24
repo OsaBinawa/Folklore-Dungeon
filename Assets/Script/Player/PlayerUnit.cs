@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class PlayerUnit : MonoBehaviour
 {
     [SerializeField] private PlayerStats stats;
-    [SerializeField] private Equipment weapon;
+    [SerializeField] public WeaponSO EquippedWeapon;
+    //[SerializeField] private Equipment weapon;
     [SerializeField] private Equipment armor;
 
     [Header("Runtime")]
@@ -13,12 +14,13 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private EnemyUnit currentTarget;
     [SerializeField] private TurnManager turnManager;
     [SerializeField] private Image sr;
+    [SerializeField] private Slots weaponSlot;
 
+    //private WeaponSO CurrentWeapon => weaponSlot.EquippedWeapon;
     public PlayerStats Stats => stats;
     public int MaxHP => stats.MaxHP;
-
     public ElementType CurrentElement =>
-        weapon != null ? weapon.Element : ElementType.Physical;
+        EquippedWeapon != null ? EquippedWeapon.Element : ElementType.Physical;
 
     private void Awake()
     {
@@ -32,6 +34,13 @@ public class PlayerUnit : MonoBehaviour
         {
             Debug.LogError("RunManager.Instance is NULL in PlayerUnit.Awake()");
         }
+        
+
+        /*if (runManager == null)
+        {
+            runManager = FindAnyObjectByType<RunManager>();
+        }
+        */
     }
 
     private void Start()
@@ -40,9 +49,21 @@ public class PlayerUnit : MonoBehaviour
         //sr = GetComponent<SpriteRenderer>();
        
         if (turnManager == null)
-            turnManager = FindFirstObjectByType<TurnManager>();
+            turnManager = FindFirstObjectByType<TurnManager>(); 
+        if (weaponSlot == null)
+            weaponSlot = FindFirstObjectByType<Slots>();
+        
+        SyncWeaponFromSlot();
     }
-
+    private void Update()
+    {
+       
+    }
+    private void SyncWeaponFromSlot()
+    {
+        if (weaponSlot != null)
+            EquippedWeapon = weaponSlot.EquippedWeapon;
+    }
     public void Initialize(PlayerRunData runData)
     {
         stats.Initialize(runData);
@@ -77,6 +98,58 @@ public class PlayerUnit : MonoBehaviour
         /*if (currentHP <= 0)
             Die();*/
     }
+
+    public void PerformWeaponAttack()
+    {
+        if (!weaponSlot.HasWeapon || currentTarget == null)
+            return;
+
+        // Optional: play animation
+        if (EquippedWeapon.AttackAnimation != null)
+        {
+            // Your animator logic here
+            // animator.Play(...)
+        }
+
+        foreach (var effect in EquippedWeapon.Effects)
+        {
+            ResolveEffect(effect);
+        }
+
+        turnManager.NotifyPlayerActionComplete();
+    }
+
+    private void ResolveEffect(AttackEffect effect)
+    {
+        switch (effect.Type)
+        {
+            case EffectType.Damage:
+                ApplyDamage(effect.Value);
+                break;
+
+            case EffectType.DelayAV:
+                ApplyDelay(effect.Value);
+                break;
+        }
+    }
+
+    private void ApplyDamage(int baseValue)
+    {
+        int totalAttack = stats.FinalAttack;
+
+        if (EquippedWeapon != null)
+            totalAttack += EquippedWeapon.AttackBonus;
+
+        int damage = totalAttack + baseValue;
+
+        currentTarget.TakeDamage(damage, CurrentElement);
+    }
+
+    private void ApplyDelay(int amount)
+    {
+        turnManager.ModifyAV(currentTarget, amount);
+    }
+
 
     public IEnumerator TakingDamageSpriteChange()
     {
