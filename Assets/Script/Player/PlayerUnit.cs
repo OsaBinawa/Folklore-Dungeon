@@ -15,6 +15,7 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private TurnManager turnManager;
     [SerializeField] private Image sr;
     [SerializeField] private Slots weaponSlot;
+    [SerializeField] private Animator anim;
 
     //private WeaponSO CurrentWeapon => weaponSlot.EquippedWeapon;
     public PlayerStats Stats => stats;
@@ -108,15 +109,16 @@ public class PlayerUnit : MonoBehaviour
         if (EquippedWeapon.AttackAnimation != null)
         {
             // Your animator logic here
-            // animator.Play(...)
+            anim.SetTrigger("PenAttack");
         }
-
+        Debug.Log($"[Attack] Using Weapon: {EquippedWeapon.WeaponName}");
+        Debug.Log($"[Attack] Target: {currentTarget.name}");
         foreach (var effect in EquippedWeapon.Effects)
         {
             ResolveEffect(effect);
         }
 
-        turnManager.NotifyPlayerActionComplete();
+        //turnManager.NotifyPlayerActionComplete();
     }
 
     private void ResolveEffect(AttackEffect effect)
@@ -141,6 +143,12 @@ public class PlayerUnit : MonoBehaviour
             totalAttack += EquippedWeapon.AttackBonus;
 
         int damage = totalAttack + baseValue;
+
+        Debug.Log(
+       $"[Damage] BaseAttack: {stats.FinalAttack} | " +
+       $"WeaponBonus: {EquippedWeapon.AttackBonus} | " +
+       $"FinalDamage: {damage}"
+   );
 
         currentTarget.TakeDamage(damage, CurrentElement);
     }
@@ -171,6 +179,11 @@ public class PlayerUnit : MonoBehaviour
     public void SetTarget(EnemyUnit target)
     {
         currentTarget = target;
+    }
+
+    public void NotifyTurnEnd()
+    {
+        turnManager.NotifyPlayerActionComplete();
     }
 
 }

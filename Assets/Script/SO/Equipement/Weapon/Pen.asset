@@ -16,5 +16,7 @@ MonoBehaviour:
   AttackBonus: 12
   skillCost: 0
   Element: 0
-  AttackAnimation: {fileID: 0}
-  Effects: []
+  AttackAnimation: {fileID: 7400000, guid: 4005a598c75f0b645957e9c2567ac3d4, type: 2}
+  Effects:
+  - Type: 0
+    Value: 12

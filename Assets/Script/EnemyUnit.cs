@@ -19,6 +19,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     [SerializeField] protected int energyRegenPerTurn = 10;
     [SerializeField] private Image sr;
     [SerializeField] private Animator anim;
+    [SerializeField] private Slider HPbar;
     private bool ultimateQueued;
     protected TurnManager turnManager;
     protected EnemyAttack currentAttack;
@@ -32,6 +33,8 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     {
         Setup();
         sr = GetComponent<Image>();
+        HPbar.maxValue = data.MaxHP;
+        HPbar.value = data.MaxHP;
     }
 
     public virtual void Initialize(EnemyData enemyData)
@@ -212,6 +215,15 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
             }
         }
     }
+
+    public void HpBarUpdate()
+    {
+        if(HPbar != null)
+        {
+            HPbar.value = currentHP;
+        }
+    }
+
     public void OnActionFinished()
     {
         turnManager.NotifyEnemyActionComplete();
@@ -235,6 +247,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         StartCoroutine(TakingDamageSpriteChange());
         if (currentHP <= 0)
             Die();
+        HpBarUpdate();
     }
 
     protected virtual void TriggerBreak()
