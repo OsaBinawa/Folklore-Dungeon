@@ -16,6 +16,8 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private Image sr;
     [SerializeField] private Slots weaponSlot;
     [SerializeField] private Animator anim;
+    [SerializeField] private int currentSkillPoint;
+    [SerializeField] private int MaxSkillPoint = 5;
 
     //private WeaponSO CurrentWeapon => weaponSlot.EquippedWeapon;
     public PlayerStats Stats => stats;
@@ -35,7 +37,8 @@ public class PlayerUnit : MonoBehaviour
         {
             Debug.LogError("RunManager.Instance is NULL in PlayerUnit.Awake()");
         }
-        
+
+        currentSkillPoint = 5;
 
         /*if (runManager == null)
         {
@@ -86,6 +89,14 @@ public class PlayerUnit : MonoBehaviour
         }
 
         currentTarget.TakeDamage(stats.FinalAttack, CurrentElement);
+        if (currentSkillPoint < MaxSkillPoint)
+        {
+            currentSkillPoint++;
+        }
+        else
+        {
+            Debug.Log("Skill Point reach max");
+        }
         Debug.Log("Player uses Basic Attack");
         turnManager.NotifyPlayerActionComplete();
     }
@@ -104,19 +115,23 @@ public class PlayerUnit : MonoBehaviour
     {
         if (!weaponSlot.HasWeapon || currentTarget == null)
             return;
-
-        // Optional: play animation
-        if (EquippedWeapon.AttackAnimation != null)
+        if (currentSkillPoint >= EquippedWeapon.skillCost)
         {
-            // Your animator logic here
-            anim.SetTrigger("PenAttack");
+            // Optional: play animation
+            if (EquippedWeapon.AttackAnimation != null)
+            {
+                // Your animator logic here
+                anim.SetTrigger("PenAttack");
+            }
+            Debug.Log($"[Attack] Using Weapon: {EquippedWeapon.WeaponName}");
+            Debug.Log($"[Attack] Target: {currentTarget.name}");
+            foreach (var effect in EquippedWeapon.Effects)
+            {
+                ResolveEffect(effect);
+            }
+            currentSkillPoint -= EquippedWeapon.skillCost;
         }
-        Debug.Log($"[Attack] Using Weapon: {EquippedWeapon.WeaponName}");
-        Debug.Log($"[Attack] Target: {currentTarget.name}");
-        foreach (var effect in EquippedWeapon.Effects)
-        {
-            ResolveEffect(effect);
-        }
+        
 
         //turnManager.NotifyPlayerActionComplete();
     }

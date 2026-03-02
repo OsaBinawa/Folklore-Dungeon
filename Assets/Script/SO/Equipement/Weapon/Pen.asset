@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSO
   WeaponName: Pen
   AttackBonus: 12
-  skillCost: 0
+  skillCost: 2
   Element: 0
   AttackAnimation: {fileID: 7400000, guid: 4005a598c75f0b645957e9c2567ac3d4, type: 2}
   Effects:
