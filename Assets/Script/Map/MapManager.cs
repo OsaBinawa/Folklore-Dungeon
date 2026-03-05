@@ -10,6 +10,7 @@ public class MapManager : MonoBehaviour
     public Transform ContentRoot;
     public Transform Root;
     public Transform NodeViewContainer;
+    [SerializeField] private List<NodeSpriteEntry> NodeSprites;
     [SerializeField] private GameObject NodeButtonPrefabs;
     [SerializeField] private MapRun currentRun;
     [SerializeField] private MapNode currentNode;
@@ -17,6 +18,8 @@ public class MapManager : MonoBehaviour
     [SerializeField] private GameObject EventPrefab;
     [SerializeField] private GameObject RestPrefab;
     [SerializeField] private GameObject BossPrefab;
+    [SerializeField] private GameObject ReadPrefab;
+    [SerializeField] private GameObject ShopPrefab;
     [SerializeField] private LineDrawer lineDrawer;
     [SerializeField] private Scrollbar scroll;
 
@@ -30,6 +33,8 @@ public class MapManager : MonoBehaviour
             NodeType.Event => EventPrefab,
             NodeType.Rest => RestPrefab,
             NodeType.Boss => BossPrefab,
+            NodeType.Shop => ShopPrefab,
+            NodeType.Reading => ReadPrefab,
             _ => CombatPrefab
         };
     }
@@ -77,6 +82,10 @@ public class MapManager : MonoBehaviour
                 TMP_Text txt = btnObj.GetComponentInChildren<TMP_Text>();
                 if (txt != null)
                     txt.text = localNode.NodeType.ToString();
+                Image img = btnObj.GetComponent<Image>();
+                if (img != null)
+                    img.sprite = GetSpriteForNode(localNode.NodeType);
+
             }
         }
         lineDrawer.Draw(currentRun);
@@ -240,5 +249,22 @@ public class MapManager : MonoBehaviour
             node.Button.interactable = true;
         }
     }
+    private Sprite GetSpriteForNode(NodeType type)
+{
+    foreach (var entry in NodeSprites)
+    {
+        if (entry.Type == type)
+            return entry.Sprite;
+    }
+
+    return null;
+}
 
 }
+[System.Serializable]
+public class NodeSpriteEntry
+{
+    public NodeType Type;
+    public Sprite Sprite;
+}
+

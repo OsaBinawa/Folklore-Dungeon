@@ -13,7 +13,7 @@ public class NodeView : MonoBehaviour
         this.node = node;
         this.onFinished = onFinished;
     }
-    public void ResolveNode()
+    public void ResolveNode()   
     {
         onFinished?.Invoke(node);
         Destroy(gameObject);
