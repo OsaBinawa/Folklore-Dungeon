@@ -12,7 +12,6 @@ public class Inventory : MonoBehaviour
     [Header("Runtime")]
     [SerializeField] private Slots weaponSlot;
     [SerializeField] private List<WeaponSO> ownedWeapons = new();
-
     public IReadOnlyList<WeaponSO> OwnedWeapons => ownedWeapons;
 
     private void Start()
@@ -63,4 +62,5 @@ public class Inventory : MonoBehaviour
             });
         }
     }
+    
 }

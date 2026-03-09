@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,10 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private int currentSkillPoint;
     [SerializeField] private int MaxSkillPoint = 5;
+    [Header("Skill Point UI")]
+    [SerializeField] private Image[] skillPointIcons;
+    [SerializeField] private Sprite fullSkillPointSprite;
+    [SerializeField] private Sprite emptySkillPointSprite;
 
     //private WeaponSO CurrentWeapon => weaponSlot.EquippedWeapon;
     public PlayerStats Stats => stats;
@@ -39,7 +44,7 @@ public class PlayerUnit : MonoBehaviour
         }
 
         currentSkillPoint = 5;
-
+        UpdateSkillPointUI();
         /*if (runManager == null)
         {
             runManager = FindAnyObjectByType<RunManager>();
@@ -89,14 +94,28 @@ public class PlayerUnit : MonoBehaviour
         }
 
         currentTarget.TakeDamage(stats.FinalAttack, CurrentElement);
+        ApplyAdjacentHit();
         if (currentSkillPoint < MaxSkillPoint)
         {
             currentSkillPoint++;
+            UpdateSkillPointUI();
         }
         else
         {
             Debug.Log("Skill Point reach max");
         }
+
+        foreach (var buff in weaponSlot.OwnedBuffs)
+        {
+            if (buff.slowChance)
+            {
+                if (Random.value < 0.3f)
+                {
+                    turnManager.ModifyAV(currentTarget, 10);
+                }
+            }
+        }
+
         Debug.Log("Player uses Basic Attack");
         turnManager.NotifyPlayerActionComplete();
     }
@@ -106,6 +125,14 @@ public class PlayerUnit : MonoBehaviour
         stats.TakesDamage(amount);
         StartCoroutine(TakingDamageSpriteChange());
         Debug.Log("Player HP now: " + stats.CurrentHP);
+
+        foreach (var buff in weaponSlot.OwnedBuffs)
+        {
+            if (buff.counter && currentTarget != null)
+            {
+                currentTarget.TakeDamage(stats.FinalAttack, CurrentElement);
+            }
+        }
 
         /*if (currentHP <= 0)
             Die();*/
@@ -129,7 +156,20 @@ public class PlayerUnit : MonoBehaviour
             {
                 ResolveEffect(effect);
             }
+            ApplyAdjacentHit();
+            foreach (var buff in weaponSlot.OwnedBuffs)
+            {
+                if (buff.slowChance)
+                {
+                    if (Random.value < 0.3f)
+                    {
+                        turnManager.ModifyAV(currentTarget, 10);
+                    }
+                }
+            }
+
             currentSkillPoint -= EquippedWeapon.skillCost;
+            UpdateSkillPointUI();
         }
         
 
@@ -199,6 +239,50 @@ public class PlayerUnit : MonoBehaviour
     public void NotifyTurnEnd()
     {
         turnManager.NotifyPlayerActionComplete();
+    }
+
+    private void UpdateSkillPointUI()
+    {
+        for (int i = 0; i < skillPointIcons.Length; i++)
+        {
+            if (i < currentSkillPoint)
+                skillPointIcons[i].sprite = fullSkillPointSprite;
+            else
+                skillPointIcons[i].sprite = emptySkillPointSprite;
+        }
+    }
+    private void ApplyAdjacentHit()
+    {
+        foreach (var buff in weaponSlot.OwnedBuffs)
+        {
+            if (!buff.adjacentHit)
+                continue;
+
+            List<EnemyUnit> enemies = GetEnemyList();
+            int index = enemies.IndexOf(currentTarget);
+
+            if (index == -1)
+                return;
+
+            if (index > 0)
+            {
+                enemies[index - 1].TakeDamage(stats.FinalAttack, CurrentElement);
+            }
+
+            if (index < enemies.Count - 1)
+            {
+                enemies[index + 1].TakeDamage(stats.FinalAttack, CurrentElement);
+            }
+        }
+    }
+
+    private List<EnemyUnit> GetEnemyList()
+    {
+        var field = typeof(TurnManager).GetField("enemies",
+            System.Reflection.BindingFlags.NonPublic |
+            System.Reflection.BindingFlags.Instance);
+
+        return field.GetValue(turnManager) as List<EnemyUnit>;
     }
 
 }

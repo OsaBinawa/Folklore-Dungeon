@@ -678,6 +678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slots
   equippedWeapon: {fileID: 11400000, guid: f3e281b026466ca48a7d5b7eae44e1e8, type: 2}
+  ownedBuffs: []
 --- !u!114 &1249741751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1235,13 +1236,19 @@ MonoBehaviour:
   NodeViewContainer: {fileID: 1463919540}
   NodeSprites:
   - Type: 1
-    Sprite: {fileID: 5781926932207268377, guid: 98cb4223171f2814f81c66011aa115eb, type: 3}
+    Sprite: {fileID: 1760424476953454677, guid: fecf1b3d3e7c90542b4b31b3e21a148b, type: 3}
   - Type: 6
-    Sprite: {fileID: 8032770724096391424, guid: 98cb4223171f2814f81c66011aa115eb, type: 3}
+    Sprite: {fileID: -5778310454449929940, guid: fecf1b3d3e7c90542b4b31b3e21a148b, type: 3}
   - Type: 4
-    Sprite: {fileID: 6673843339060539423, guid: 98cb4223171f2814f81c66011aa115eb, type: 3}
+    Sprite: {fileID: -371853025161872110, guid: fecf1b3d3e7c90542b4b31b3e21a148b, type: 3}
   - Type: 5
-    Sprite: {fileID: -3371023758920969962, guid: 98cb4223171f2814f81c66011aa115eb, type: 3}
+    Sprite: {fileID: 6554625270777839928, guid: fecf1b3d3e7c90542b4b31b3e21a148b, type: 3}
+  - Type: 3
+    Sprite: {fileID: 5982075853946594887, guid: fecf1b3d3e7c90542b4b31b3e21a148b, type: 3}
+  - Type: 2
+    Sprite: {fileID: 6751285937039200869, guid: fecf1b3d3e7c90542b4b31b3e21a148b, type: 3}
+  - Type: 7
+    Sprite: {fileID: 6829188266449301803, guid: fecf1b3d3e7c90542b4b31b3e21a148b, type: 3}
   NodeButtonPrefabs: {fileID: 1290269454667322646, guid: ffd10732bebf7174badcdc0ec7150f2e, type: 3}
   CombatPrefab: {fileID: 945770643077263496, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
   EventPrefab: {fileID: 3770747648595979175, guid: 12a984449187ba4448302efdb0547263, type: 3}

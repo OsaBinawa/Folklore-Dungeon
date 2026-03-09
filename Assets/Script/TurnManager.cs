@@ -218,4 +218,5 @@ public class TurnManager : MonoBehaviour
 
         return Mathf.Clamp(display, 0, (int)DISPLAY_AV_SCALE);
     }
+
 }
