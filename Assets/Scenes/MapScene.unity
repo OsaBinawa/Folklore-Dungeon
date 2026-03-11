@@ -678,7 +678,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slots
   equippedWeapon: {fileID: 11400000, guid: f3e281b026466ca48a7d5b7eae44e1e8, type: 2}
-  ownedBuffs: []
+  ownedBuffs:
+  - {fileID: 11400000, guid: 55f19f00c1b1f4d4da9dcecdcf363abe, type: 2}
 --- !u!114 &1249741751
 MonoBehaviour:
   m_ObjectHideFlags: 0

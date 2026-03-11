@@ -42,7 +42,7 @@ public class MapRun
                 node.index = i;
 
                 nodesAtDepth.Add(node);
-                Debug.Log($"Depth {depth}, Node {i}, Type {type}");
+                //Debug.Log($"Depth {depth}, Node {i}, Type {type}");
             }
 
             DeptNodes.Add(nodesAtDepth);

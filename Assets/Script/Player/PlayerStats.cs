@@ -28,6 +28,35 @@ public class PlayerStats : MonoBehaviour
             FinalSpeed += eq.SpeedBonus;
         }
     }
+    public void RecalculateStatBuffs(Slots slots)
+    {
+        if (slots == null)
+        {
+            Debug.LogError("Slots is NULL");
+            return;
+        }
+
+        if (slots.OwnedBuffs == null)
+        {
+            Debug.LogError("OwnedBuffs list is NULL");
+            return;
+        }
+
+        float atkPercent = 0f;
+        float spdPercent = 0f;
+
+        foreach (var buff in slots.OwnedBuffs)
+        {
+            if (buff == null)
+                continue;
+
+            atkPercent += buff.atkPercent;
+            spdPercent += buff.spdPercent;
+        }
+
+        FinalAttack = Mathf.RoundToInt(FinalAttack * (1 + atkPercent));
+        FinalSpeed = Mathf.RoundToInt(FinalSpeed * (1 + spdPercent));
+    }
 
     public void TakesDamage(int amount)
     {

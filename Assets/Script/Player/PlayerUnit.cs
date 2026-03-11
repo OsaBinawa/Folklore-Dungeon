@@ -34,13 +34,13 @@ public class PlayerUnit : MonoBehaviour
     {
         if (stats == null)
             stats = GetComponent<PlayerStats>();
+
+        if (weaponSlot == null)
+            weaponSlot = FindFirstObjectByType<Slots>();
+
         if (RunManager.Instance != null)
         {
             Initialize(RunManager.Instance.Player);
-        }
-        else
-        {
-            Debug.LogError("RunManager.Instance is NULL in PlayerUnit.Awake()");
         }
 
         currentSkillPoint = 5;
@@ -51,18 +51,20 @@ public class PlayerUnit : MonoBehaviour
         }
         */
     }
+    public void Initialize(PlayerRunData runData)
+    {
+        stats.Initialize(runData);
+        //stats.RecalculateStats();
+        stats.RecalculateStatBuffs(weaponSlot);
+        Debug.Log("PlayerUnit initialized");
+    }
 
     private void Start()
     {
         //UpdateStats();
         //sr = GetComponent<SpriteRenderer>();
        
-        if (turnManager == null)
-            turnManager = FindFirstObjectByType<TurnManager>(); 
-        if (weaponSlot == null)
-            weaponSlot = FindFirstObjectByType<Slots>();
         
-        SyncWeaponFromSlot();
     }
     private void Update()
     {
@@ -73,12 +75,7 @@ public class PlayerUnit : MonoBehaviour
         if (weaponSlot != null)
             EquippedWeapon = weaponSlot.EquippedWeapon;
     }
-    public void Initialize(PlayerRunData runData)
-    {
-        stats.Initialize(runData);
-        Debug.Log("PlayerUnit initialized");
-    }
-
+    
     /*public void UpdateStats()
     {
         stats.Recalculate(weapon, armor);
