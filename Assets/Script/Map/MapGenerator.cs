@@ -174,8 +174,9 @@ public class MapRun
     {
         float roll = Random.value;
 
-        if (roll < 0.6f) return NodeType.Combat;
-        if (roll < 0.8f) return NodeType.Event;
+        if (roll < 0.4f) return NodeType.Combat;
+        if (roll < 0.6f) return NodeType.Event;
+        if (roll < 0.8f) return NodeType.Reading;
         return NodeType.Elite;
     }
 }

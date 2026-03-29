@@ -15,6 +15,9 @@ public class Slots : MonoBehaviour
     }
     public void AddBuff(BuffSO buff)
     {
+        if (!buff.stackable && ownedBuffs.Contains(buff))
+            return;
+
         ownedBuffs.Add(buff);
     }
     /*public void Clear()

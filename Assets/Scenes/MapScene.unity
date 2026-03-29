@@ -1255,7 +1255,7 @@ MonoBehaviour:
   EventPrefab: {fileID: 3770747648595979175, guid: 12a984449187ba4448302efdb0547263, type: 3}
   RestPrefab: {fileID: 0}
   BossPrefab: {fileID: 0}
-  ReadPrefab: {fileID: 0}
+  ReadPrefab: {fileID: 3770747648595979175, guid: 521a4a968a886f142a886cbe39ac4d77, type: 3}
   ShopPrefab: {fileID: 0}
   lineDrawer: {fileID: 2136833167}
   scroll: {fileID: 0}

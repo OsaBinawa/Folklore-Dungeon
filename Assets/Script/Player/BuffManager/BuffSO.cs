@@ -16,4 +16,6 @@ public class BuffSO : ScriptableObject
 
     [Header("Stacking")]
     public bool stackable = true;
+
+    public int rarity;
 }
