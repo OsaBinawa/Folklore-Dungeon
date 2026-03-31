@@ -48,6 +48,7 @@ public class MapManager : MonoBehaviour
         //InitializeMap();
         //DisplayDepth(0);
 
+
     }
     private void DisplayAllDepths()
     {
@@ -71,7 +72,7 @@ public class MapManager : MonoBehaviour
                 RectTransform rt = btnObj.GetComponent<RectTransform>();
                 rt.anchoredPosition = new Vector2(startX + i * spacingX, y);
 
-                Button btn = btnObj.GetComponent<Button>();
+                Button btn = btnObj.GetComponentInChildren<Button>();
                 localNode.Button = btn;
 
                 btn.onClick.AddListener(() => EnterNode(localNode));
@@ -79,10 +80,15 @@ public class MapManager : MonoBehaviour
                 
                 btn.interactable = false;
 
-                TMP_Text txt = btnObj.GetComponentInChildren<TMP_Text>();
+                /*TMP_Text txt = btnObj.GetComponentInChildren<TMP_Text>();
                 if (txt != null)
-                    txt.text = localNode.NodeType.ToString();
-                Image img = btnObj.GetComponent<Image>();
+                    txt.text = localNode.NodeType.ToString();*/
+                Image img = btn.targetGraphic as Image;
+                //Image img = btnObj.GetComponent<Image>();
+                if (img == null)
+                {
+                    Debug.LogError("IMAGE NOT FOUND ON BUTTON OBJECT");
+                }
                 if (img != null)
                     img.sprite = GetSpriteForNode(localNode.NodeType);
 

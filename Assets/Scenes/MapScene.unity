@@ -1250,7 +1250,7 @@ MonoBehaviour:
     Sprite: {fileID: 6751285937039200869, guid: fecf1b3d3e7c90542b4b31b3e21a148b, type: 3}
   - Type: 7
     Sprite: {fileID: 6829188266449301803, guid: fecf1b3d3e7c90542b4b31b3e21a148b, type: 3}
-  NodeButtonPrefabs: {fileID: 1290269454667322646, guid: ffd10732bebf7174badcdc0ec7150f2e, type: 3}
+  NodeButtonPrefabs: {fileID: 450729833068546012, guid: e1193a6a35eed6a4282d4381728da236, type: 3}
   CombatPrefab: {fileID: 945770643077263496, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
   EventPrefab: {fileID: 3770747648595979175, guid: 12a984449187ba4448302efdb0547263, type: 3}
   RestPrefab: {fileID: 0}
