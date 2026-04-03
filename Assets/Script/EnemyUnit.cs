@@ -18,8 +18,9 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     [SerializeField] protected int currentEnergy;
     [SerializeField] protected int energyRegenPerTurn = 10;
     [SerializeField] private Image sr;
-    [SerializeField] private Animator anim;
+    [SerializeField] public Animator anim;
     [SerializeField] private Slider HPbar;
+    protected List<ElementType> runtimeWeaknesses = new();
     private bool ultimateQueued;
     protected TurnManager turnManager;
     protected EnemyAttack currentAttack;
@@ -50,9 +51,10 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         currentEnergy = maxEnergy;
         isBroken = false;
 
-       /* cooldowns.Clear();
-        foreach (var atk in data.Attacks)
-            cooldowns[atk] = 0;*/
+        /* cooldowns.Clear();
+         foreach (var atk in data.Attacks)
+             cooldowns[atk] = 0;*/
+        runtimeWeaknesses = new List<ElementType>(data.Weaknesses);
 
         turnManager = FindFirstObjectByType<TurnManager>();
         turnManager?.RegisterEnemy(this);
@@ -63,7 +65,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         turnManager?.UnregisterEnemy(this);
     }
 
-    public void Act(PlayerUnit player)
+    public virtual void Act(PlayerUnit player)
     {
 
         // 1️⃣ Check if ultimate can be queued
@@ -238,7 +240,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     {
         currentHP -= damage;
 
-        if (!isBroken && data.Weaknesses.Contains(element))
+        if (!isBroken && runtimeWeaknesses.Contains(element))
         {
             currentToughness--;
             if (currentToughness <= 0)

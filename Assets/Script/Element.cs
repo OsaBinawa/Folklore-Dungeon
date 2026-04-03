@@ -6,5 +6,8 @@ public enum ElementType
     Lightning,
     Wind,
     Quantum,
-    Imaginary
+    Imaginary,
+    Miss,
+    Typo,
+    Broken,
 }
