@@ -618,7 +618,6 @@ GameObject:
   - component: {fileID: 1249741749}
   - component: {fileID: 1249741750}
   - component: {fileID: 1249741751}
-  - component: {fileID: 1249741752}
   m_Layer: 0
   m_Name: RunManager
   m_TagString: Untagged
@@ -698,14 +697,31 @@ MonoBehaviour:
   buttonPrefab: {fileID: 8501040538520535015, guid: f11c0e10f212aba4682c5268cb279f26, type: 3}
   weaponSlot: {fileID: 1249741750}
   ownedWeapons: []
-  money: 0
---- !u!114 &1249741752
+  money: 100
+--- !u!1 &1303106053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1303106055}
+  - component: {fileID: 1303106054}
+  m_Layer: 0
+  m_Name: WeaponSelect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1303106054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1249741746}
+  m_GameObject: {fileID: 1303106053}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7c023cdfe0b1c0438b6abb6ad99efee, type: 3}
@@ -717,7 +733,22 @@ MonoBehaviour:
   choicePrefab: {fileID: 5439978095071364703, guid: edbd9ea49c093ae4b8d76e04dfafe348, type: 3}
   parentContainer: {fileID: 1815622904}
   Container: {fileID: 1815622903}
-  playerInventory: {fileID: 0}
+  playerInventory: {fileID: 1249741751}
+--- !u!4 &1303106055
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303106053}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.16169, y: 2.87775, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1343533141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1742,3 +1773,4 @@ SceneRoots:
   - {fileID: 1729609377}
   - {fileID: 1249741748}
   - {fileID: 483478798}
+  - {fileID: 1303106055}

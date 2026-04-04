@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
     [Header("Runtime")]
     [SerializeField] private Slots weaponSlot;
     [SerializeField] private List<WeaponSO> ownedWeapons = new();
-    [SerializeField] int money;
+    public int money;
     public IReadOnlyList<WeaponSO> OwnedWeapons => ownedWeapons;
 
     private void Start()

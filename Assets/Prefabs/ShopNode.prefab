@@ -245,6 +245,8 @@ MonoBehaviour:
   buffs:
   - buff: {fileID: 11400000, guid: 55f19f00c1b1f4d4da9dcecdcf363abe, type: 2}
     price: 100
+    stackable: 1
+  totalDisplayCount: 3
 --- !u!1 &5907232145309775888
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +439,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 150
+  m_Spacing: 120
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0

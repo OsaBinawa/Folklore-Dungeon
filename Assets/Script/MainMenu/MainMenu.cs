@@ -1,18 +1,29 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public List<GameObject> panels = new();
+    public void ShowPanel(GameObject panelToShow)
     {
-        
+        foreach (var panel in panels)
+            panel.SetActive(panel == panelToShow);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        Time.timeScale = 1.0f;
+    }
+
+    public void OnApplicationQuit()
+    {
+        Application.Quit();
+    }
+
+    public void GoToScene(string Scenes)
+    {
+        SceneManager.LoadScene(Scenes);
     }
 
     public void GoToLevelMalin()

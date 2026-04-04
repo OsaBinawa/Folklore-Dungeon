@@ -15,7 +15,7 @@ public class RunManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         StartNewRun();
     }
