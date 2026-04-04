@@ -8,6 +8,8 @@ public class BuffSelectionUI : MonoBehaviour
     [Header("References")]
     [SerializeField] private BuffRandomise randomizer;
     [SerializeField] private Slots playerSlots;
+    [SerializeField] private NodeView nodeView;
+    
 
     [Header("UI")]
     [SerializeField] private GameObject choicePrefab;
@@ -17,12 +19,14 @@ public class BuffSelectionUI : MonoBehaviour
     [SerializeField] private int numberOfChoices = 3;
     [SerializeField] private int minRarity = 1;
     [SerializeField] private int maxRarity = 3;
+    [SerializeField] private int picksRemaining;
 
     private List<GameObject> activeChoices = new();
 
     private void Awake()
     {
         playerSlots = FindFirstObjectByType<Slots>();
+        //mapManager = FindFirstObjectByType<MapManager>();
         Show();
     }
     public void Show()
@@ -30,40 +34,45 @@ public class BuffSelectionUI : MonoBehaviour
         Debug.Log("Show called");
         Clear();
 
+        picksRemaining = playerSlots.ApplyQuickread();
+
         List<BuffSO> buffs = randomizer.GetChoices(numberOfChoices, minRarity, maxRarity);
 
         foreach (var buff in buffs)
         {
             GameObject obj = Instantiate(choicePrefab, container);
-            Debug.Log("Instantiated: " + obj.name);
 
             Button btn = obj.GetComponentInChildren<Button>();
             TextMeshProUGUI text = obj.GetComponentInChildren<TextMeshProUGUI>();
 
-            if (btn == null)
-                Debug.LogError("Button not found in prefab!");
-
-            if (text == null)
-                Debug.LogError("TMP text not found in prefab!");
-
             text.text = buff.name;
 
             btn.onClick.RemoveAllListeners();
-            btn.onClick.AddListener(() => Select(buff));
+            btn.onClick.AddListener(() => Select(buff, obj));
 
             activeChoices.Add(obj);
         }
 
-
         gameObject.SetActive(true);
     }
 
-    void Select(BuffSO buff)
+    void Select(BuffSO buff, GameObject obj)
     {
         playerSlots.AddBuff(buff);
-        Clear();
-        gameObject.SetActive(false);
+
+        activeChoices.Remove(obj);
+        Destroy(obj);
+
+        picksRemaining--;
+
+        if (picksRemaining <= 0)
+        {
+            Clear();
+            gameObject.SetActive(false);
+            nodeView.ResolveNode();
+        }
     }
+
 
     void Clear()
     {

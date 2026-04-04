@@ -272,7 +272,7 @@ public class PlayerUnit : MonoBehaviour
             }
         }
     }
-
+   
     private List<EnemyUnit> GetEnemyList()
     {
         var field = typeof(TurnManager).GetField("enemies",

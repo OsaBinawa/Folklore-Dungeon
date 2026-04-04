@@ -4,11 +4,12 @@ using UnityEngine.UI;
 public class WeaponSelect : MonoBehaviour
 {
     [Header("Data")]
-    public WeaponSO[] choices; // your ScriptableObjects
+    public WeaponSO[] choices;
 
     [Header("UI")]
-    public GameObject choicePrefab;   // prefab (Button + Text + Image)
-    public Transform parentContainer; // parent GameObject
+    public GameObject choicePrefab;   
+    public Transform parentContainer; 
+    public GameObject Container; 
 
     private WeaponSO selectedChoice;
     [SerializeField] private Inventory playerInventory;
@@ -53,5 +54,6 @@ public class WeaponSelect : MonoBehaviour
     {
         playerInventory.AddWeapon(choice);
         Debug.Log("Selected: " + choice.WeaponName);
+        Destroy(Container);
     }
 }

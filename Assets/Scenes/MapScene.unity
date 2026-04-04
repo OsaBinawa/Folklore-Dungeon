@@ -698,6 +698,7 @@ MonoBehaviour:
   buttonPrefab: {fileID: 8501040538520535015, guid: f11c0e10f212aba4682c5268cb279f26, type: 3}
   weaponSlot: {fileID: 1249741750}
   ownedWeapons: []
+  money: 0
 --- !u!114 &1249741752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,6 +716,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ee9b714f3872e3945984d28b2e29f9d5, type: 2}
   choicePrefab: {fileID: 5439978095071364703, guid: edbd9ea49c093ae4b8d76e04dfafe348, type: 3}
   parentContainer: {fileID: 1815622904}
+  Container: {fileID: 1815622903}
   playerInventory: {fileID: 0}
 --- !u!1 &1343533141
 GameObject:
@@ -1274,7 +1276,7 @@ MonoBehaviour:
   RestPrefab: {fileID: 0}
   BossPrefab: {fileID: 0}
   ReadPrefab: {fileID: 3770747648595979175, guid: 521a4a968a886f142a886cbe39ac4d77, type: 3}
-  ShopPrefab: {fileID: 0}
+  ShopPrefab: {fileID: 3770747648595979175, guid: 2b17e28e5236243428772159a7780848, type: 3}
   lineDrawer: {fileID: 2136833167}
   scroll: {fileID: 0}
 --- !u!4 &1729609377

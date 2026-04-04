@@ -20,6 +20,16 @@ public class Slots : MonoBehaviour
 
         ownedBuffs.Add(buff);
     }
+    public  int ApplyQuickread()
+    {
+        foreach (var buff in OwnedBuffs)
+        {
+            if (buff.quickRead)
+                return 2;
+        }
+
+        return 1;
+    }
     /*public void Clear()
     {
         equippedWeapon = null;

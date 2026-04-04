@@ -145,10 +145,9 @@ GameObject:
   - component: {fileID: 4773946166811673474}
   - component: {fileID: 206338662291614975}
   - component: {fileID: 5541202622317870496}
-  - component: {fileID: 525149763608266513}
-  - component: {fileID: 2451221799976829238}
+  - component: {fileID: 8098661190129083514}
   m_Layer: 5
-  m_Name: ReadNode
+  m_Name: ShopNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eaf5b9c2e0a8da45abd08f968d3789f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NodeView
---- !u!114 &525149763608266513
+--- !u!114 &8098661190129083514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -234,35 +233,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3770747648595979175}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32778f9de8d3a9941983920950ddafeb, type: 3}
+  m_Script: {fileID: 11500000, guid: f0db533dcee02de4b88c3a20ec2b81bf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BuffRandomise
-  allBuffs:
-  - {fileID: 11400000, guid: 55f19f00c1b1f4d4da9dcecdcf363abe, type: 2}
-  - {fileID: 11400000, guid: 77d205a0b0d620a43afcdc7732910733, type: 2}
-  - {fileID: 11400000, guid: 8089e6224f3d8de429b7fc135df5553b, type: 2}
-  playerSlots: {fileID: 0}
---- !u!114 &2451221799976829238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3770747648595979175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee2ab33d58370d745b564efd41043475, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BuffSelectionUI
-  randomizer: {fileID: 525149763608266513}
-  playerSlots: {fileID: 0}
-  nodeView: {fileID: 5541202622317870496}
-  choicePrefab: {fileID: 5439978095071364703, guid: edbd9ea49c093ae4b8d76e04dfafe348, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::ShopManager
+  itemPrefab: {fileID: 6859168730938894958, guid: 912ecc2722bf84b469efaa912d81c474, type: 3}
   container: {fileID: 8811648842704128624}
-  numberOfChoices: 3
-  minRarity: 1
-  maxRarity: 3
-  picksRemaining: 1
+  weapons:
+  - weapon: {fileID: 11400000, guid: f3e281b026466ca48a7d5b7eae44e1e8, type: 2}
+    price: 100
+    stackable: 0
+  buffs:
+  - buff: {fileID: 11400000, guid: 55f19f00c1b1f4d4da9dcecdcf363abe, type: 2}
+    price: 100
 --- !u!1 &5907232145309775888
 GameObject:
   m_ObjectHideFlags: 0

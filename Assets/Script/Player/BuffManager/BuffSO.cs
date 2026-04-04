@@ -13,6 +13,7 @@ public class BuffSO : ScriptableObject
     public bool slowChance;
     public bool adjacentHit;
     public bool extraTurnOnKill;
+    public bool quickRead;
 
     [Header("Stacking")]
     public bool stackable = true;
