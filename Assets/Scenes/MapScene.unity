@@ -678,9 +678,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5abfe7bc6657d54f8843b8c5fee8160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slots
-  equippedWeapon: {fileID: 11400000, guid: f3e281b026466ca48a7d5b7eae44e1e8, type: 2}
-  ownedBuffs:
-  - {fileID: 11400000, guid: 55f19f00c1b1f4d4da9dcecdcf363abe, type: 2}
+  equippedWeapon: {fileID: 0}
+  ownedBuffs: []
 --- !u!114 &1249741751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,6 +696,9 @@ MonoBehaviour:
   buttonPrefab: {fileID: 8501040538520535015, guid: f11c0e10f212aba4682c5268cb279f26, type: 3}
   weaponSlot: {fileID: 1249741750}
   ownedWeapons: []
+  HeldConsumableBuffs: []
+  consumables:
+  - {fileID: 11400000, guid: 823284307c1ac4e499e3c0b78c0bdcbc, type: 2}
   money: 100
 --- !u!1 &1303106053
 GameObject:

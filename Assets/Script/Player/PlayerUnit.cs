@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,7 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private Image[] skillPointIcons;
     [SerializeField] private Sprite fullSkillPointSprite;
     [SerializeField] private Sprite emptySkillPointSprite;
+    [SerializeField] private TMP_Text debugText;
 
     //private WeaponSO CurrentWeapon => weaponSlot.EquippedWeapon;
     public PlayerStats Stats => stats;
@@ -149,6 +151,7 @@ public class PlayerUnit : MonoBehaviour
             }
             Debug.Log($"[Attack] Using Weapon: {EquippedWeapon.WeaponName}");
             Debug.Log($"[Attack] Target: {currentTarget.name}");
+            debugText.text = "[Attack] Using Weapon: " + EquippedWeapon.WeaponName;
             foreach (var effect in EquippedWeapon.Effects)
             {
                 ResolveEffect(effect);
