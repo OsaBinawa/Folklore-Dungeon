@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using NUnit;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,9 +18,12 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private TurnManager turnManager;
     [SerializeField] private Image sr;
     [SerializeField] private Slots weaponSlot;
+    [SerializeField] private Inventory inventory;
     [SerializeField] private Animator anim;
     [SerializeField] private int currentSkillPoint;
     [SerializeField] private int MaxSkillPoint = 5;
+    private List<ActiveConsumable> activeConsumables = new();
+    private List<ItemSO> processedHeld = new();
     [Header("Skill Point UI")]
     [SerializeField] private Image[] skillPointIcons;
     [SerializeField] private Sprite fullSkillPointSprite;
@@ -39,12 +43,14 @@ public class PlayerUnit : MonoBehaviour
 
         if (weaponSlot == null)
             weaponSlot = FindFirstObjectByType<Slots>();
+        if (inventory == null)
+            inventory = FindFirstObjectByType<Inventory>();
 
         if (RunManager.Instance != null)
         {
             Initialize(RunManager.Instance.Player);
         }
-
+        
         currentSkillPoint = 5;
         UpdateSkillPointUI();
         /*if (runManager == null)
@@ -58,6 +64,12 @@ public class PlayerUnit : MonoBehaviour
         stats.Initialize(runData);
         //stats.RecalculateStats();
         stats.RecalculateStatBuffs(weaponSlot);
+        foreach (var item in inventory.HeldConsumables)
+        {
+            UseConsumable(item);
+            processedHeld.Add(item);
+        }
+        inventory.ClearHeldConsumables();
         Debug.Log("PlayerUnit initialized");
     }
 
@@ -70,8 +82,44 @@ public class PlayerUnit : MonoBehaviour
     }
     private void Update()
     {
-       
+        CheckHeldConsumables();
     }
+    private void CheckHeldConsumables()
+    {
+        if (inventory == null) return;
+
+        List<ItemSO> toRemove = new();
+
+        foreach (var item in inventory.HeldConsumables)
+        {
+            if (!processedHeld.Contains(item))
+            {
+                UseConsumable(item);
+                processedHeld.Add(item);
+
+                toRemove.Add(item); // mark for removal
+            }
+        }
+
+        // remove after loop (important)
+        foreach (var item in toRemove)
+        {
+            inventory.RemoveHeld(item);
+        }
+    }
+
+    private void ApplyBuff()
+    {
+        if (inventory != null)
+        {
+            foreach (var item in inventory.HeldConsumables)
+            {
+                UseConsumable(item); // apply immediately
+            }
+        }
+
+    }
+  
     private void SyncWeaponFromSlot()
     {
         if (weaponSlot != null)
@@ -238,6 +286,7 @@ public class PlayerUnit : MonoBehaviour
 
     public void NotifyTurnEnd()
     {
+        TickConsumables();
         turnManager.NotifyPlayerActionComplete();
     }
 
@@ -275,7 +324,64 @@ public class PlayerUnit : MonoBehaviour
             }
         }
     }
-   
+
+    public void UseConsumable(ItemSO item)
+    {
+        // Instant heal
+        if (item.Heal > 0)
+        {
+            stats.Heal(item.Heal);
+        }
+
+        // Check if already active → refresh duration
+        ActiveConsumable existing = activeConsumables
+            .Find(c => c.source == item);
+
+        if (existing != null)
+        {
+            existing.remainingTurns = item.duration;
+        }
+        else
+        {
+            activeConsumables.Add(new ActiveConsumable(item));
+        }
+
+        RecalculateConsumableStats();
+    }
+
+    private void RecalculateConsumableStats()
+    {
+        int bonusAtk = 0;
+        int bonusSpd = 0;
+
+        foreach (var c in activeConsumables)
+        {
+            bonusAtk += c.atkMod;
+            bonusSpd += c.spdMod;
+        }
+
+        stats.RecalculateStats();
+        stats.RecalculateStatBuffs(weaponSlot);
+
+        // Apply consumable bonus AFTER everything
+        stats.SetConsumableBonus(bonusAtk, bonusSpd);
+    }
+
+    public void TickConsumables()
+    {
+        for (int i = activeConsumables.Count - 1; i >= 0; i--)
+        {
+            activeConsumables[i].remainingTurns--;
+
+            if (activeConsumables[i].remainingTurns <= 0)
+            {
+                activeConsumables.RemoveAt(i);
+            }
+        }
+
+        RecalculateConsumableStats();
+    }
+
     private List<EnemyUnit> GetEnemyList()
     {
         var field = typeof(TurnManager).GetField("enemies",

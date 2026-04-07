@@ -9,6 +9,16 @@ public class PlayerStats : MonoBehaviour
 
     public int CurrentHP => runData.CurrentHP;
     public int MaxHP => runData.MaxHP;
+    private int consumableAtkBonus;
+    private int consumableSpdBonus;
+
+    public void SetConsumableBonus(int atk, int spd)
+    {
+        consumableAtkBonus = atk;
+        consumableSpdBonus = spd;
+
+        RecalculateStats();
+    }
 
     public void Initialize(PlayerRunData data)
     {
@@ -27,6 +37,8 @@ public class PlayerStats : MonoBehaviour
             FinalAttack += eq.ATKBonus;
             FinalSpeed += eq.SpeedBonus;
         }
+        FinalAttack += consumableAtkBonus;
+        FinalSpeed += consumableSpdBonus;
     }
     public void RecalculateStatBuffs(Slots slots)
     {
