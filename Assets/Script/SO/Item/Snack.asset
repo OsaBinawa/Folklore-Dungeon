@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Snack
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   Name: asd
-  Heal: 10
-  AtkMod: 0
+  Heal: 0
+  AtkMod: 1000000000
   SPDMod: 0
   HPMod: 0
-  duration: 0
+  duration: 3

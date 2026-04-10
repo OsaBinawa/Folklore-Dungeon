@@ -17,3 +17,6 @@ MonoBehaviour:
   Dialogue:
   - Someone give you the book quickread
   - And you accepted it
+  Choices:
+  - text: Choice 1
+    buff: {fileID: 11400000, guid: 55f19f00c1b1f4d4da9dcecdcf363abe, type: 2}

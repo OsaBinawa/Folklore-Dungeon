@@ -17,3 +17,7 @@ MonoBehaviour:
   Dialogue:
   - Someone give you a cookies.
   - Will you take it?
+  Choices:
+  - text: Owned Buff
+    buff: {fileID: 0}
+    effect: 1

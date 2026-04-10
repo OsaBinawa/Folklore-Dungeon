@@ -7,4 +7,13 @@ public class EventData : ScriptableObject
     public EventType Type;
     public string[] Dialogue;
     public EventEffect Effect;
+    public EventChoice[] Choices;
+}
+
+[System.Serializable]
+public class EventChoice
+{
+    public string text;
+    public BuffSO buff;
+    public EventEffectType effect;
 }

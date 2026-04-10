@@ -19,5 +19,6 @@ MonoBehaviour:
   slowChance: 0
   adjacentHit: 0
   extraTurnOnKill: 0
-  stackable: 1
+  quickRead: 0
+  stackable: 0
   rarity: 1
