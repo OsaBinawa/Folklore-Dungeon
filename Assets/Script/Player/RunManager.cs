@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RunManager : MonoBehaviour
 {
     public static RunManager Instance { get; private set; }
     [SerializeField] private PlayerBaseStats startingStats;
+    [SerializeField] private List<BuffSO> AllAvailableBuff =  new List<BuffSO>();
     public PlayerRunData Player { get; private set; }
     private void Awake()
     {

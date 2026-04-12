@@ -2,7 +2,8 @@ using System;
 public enum EventEffectType
 {
     None,
-    GainOwnedBuffChoice
+    GainOwnedBuffChoice,
+    GiveAmountOffMoney
 }
 
 public class EventEffect 

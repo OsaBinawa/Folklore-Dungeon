@@ -716,6 +716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RunManager
   startingStats: {fileID: 11400000, guid: 774fb8bf80946974c88e7861b8857279, type: 2}
+  AllAvailableBuff: []
 --- !u!4 &1249741748
 Transform:
   m_ObjectHideFlags: 0

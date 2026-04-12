@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
@@ -17,8 +17,12 @@ public class EventManager : MonoBehaviour
     [SerializeField] private GameObject choiceButtonPrefab;
 
     [Header("References")]
-    [SerializeField] private Slots inventory;
-    //[SerializeField] private Slots playerSlots;
+    [SerializeField] private Slots slots;
+    [SerializeField] private Inventory inventory;
+
+    private bool usingChoiceDialogue = false;
+    private string[] currentChoiceDialogue;
+    private int choiceDialogueIndex = 0;
 
     private Event eventInstance;
     private int dialogueIndex = 0;
@@ -27,7 +31,8 @@ public class EventManager : MonoBehaviour
 
     private void Awake()
     {
-        inventory = FindFirstObjectByType<Slots>();
+        slots = FindFirstObjectByType<Slots>();
+        inventory = FindFirstObjectByType<Inventory>();
     }
     private void Start()
     {
@@ -54,21 +59,90 @@ public class EventManager : MonoBehaviour
 
     private void ShowDialogue()
     {
-        if (dialogueIndex < eventInstance.dialogue.Length)
+        
+        if (usingChoiceDialogue)
         {
-            dialogueText.text = eventInstance.dialogue[dialogueIndex];
+            if (choiceDialogueIndex >= currentChoiceDialogue.Length)
+            {
+                usingChoiceDialogue = false;
+                EndEvent();
+                return;
+            }
+
+            dialogueText.text = currentChoiceDialogue[choiceDialogueIndex];
+            nextButton.gameObject.SetActive(true);
+            return;
         }
-        else
+
+       
+        if (dialogueIndex >= eventInstance.dialogue.Length)
         {
-            ShowChoices();
+            EndEvent();
+            return;
+        }
+
+        ClearChoices();
+
+        dialogueText.text = eventInstance.dialogue[dialogueIndex];
+
+        bool hasChoice = false;
+
+        foreach (var choice in eventInstance.choices)
+        {
+            if (choice.triggerIndex == dialogueIndex)
+            {
+                hasChoice = true;
+                break;
+            }
+        }
+
+        if (hasChoice)
+        {
+            ShowChoicesAtIndex(dialogueIndex);
+            return;
+        }
+
+        nextButton.gameObject.SetActive(true);
+    }
+
+
+
+    private void ShowChoicesAtIndex(int index)
+    {
+        nextButton.gameObject.SetActive(false);
+
+        foreach (Transform child in choicesContainer)
+            Destroy(child.gameObject);
+
+        foreach (var choice in eventInstance.choices)
+        {
+            if (choice.triggerIndex != index)
+                continue;
+
+            GameObject btn = Instantiate(choiceButtonPrefab, choicesContainer);
+
+            TMP_Text txt = btn.GetComponentInChildren<TMP_Text>();
+            if (txt != null)
+                txt.text = choice.text;
+
+            Button button = btn.GetComponent<Button>();
+            button.onClick.AddListener(() => SelectChoice(choice));
         }
     }
 
     private void NextDialogue()
     {
+        if (usingChoiceDialogue)
+        {
+            choiceDialogueIndex++;
+            ShowDialogue();
+            return;
+        }
+
         dialogueIndex++;
         ShowDialogue();
     }
+
 
     private void ShowChoices()
     {
@@ -92,46 +166,61 @@ public class EventManager : MonoBehaviour
 
     private void SelectChoice(EventChoice choice)
     {
-        // Buff path
+        ClearChoices();
+
+        // Buff
         if (choice.buff != null)
         {
-            inventory.AddBuff(choice.buff);
-            EndEvent();
-            return;
+            slots.AddBuff(choice.buff);
         }
 
-        // Effect path
+        // Effect
         switch (choice.effect)
         {
             case EventEffectType.GainOwnedBuffChoice:
                 ShowOwnedBuffChoices();
                 return;
+
+            case EventEffectType.GiveAmountOffMoney:
+                GainMoney(choice);
+                return;
+        }
+
+        // Use choice dialogue if exists
+        if (choice.resultDialogue != null && choice.resultDialogue.Length > 0)
+        {
+            usingChoiceDialogue = true;
+            currentChoiceDialogue = choice.resultDialogue;
+            choiceDialogueIndex = 0;
+
+            ShowDialogue();
+            return;
         }
 
         EndEvent();
     }
 
-    // ===== SPECIAL EFFECT =====
+
 
     public void ShowOwnedBuffChoices()
     {
         nextButton.gameObject.SetActive(false);
 
-        // Clear old buttons
+      
         foreach (Transform child in choicesContainer)
             Destroy(child.gameObject);
 
-        if (inventory.OwnedBuffs.Count == 0)
+        if (slots.OwnedBuffs.Count == 0)
         {
             Debug.Log("No buffs owned");
             EndEvent();
             return;
         }
 
-        // Check if there is at least one stackable buff
+     
         bool hasStackable = false;
 
-        foreach (var buff in inventory.OwnedBuffs)
+        foreach (var buff in slots.OwnedBuffs)
         {
             if (buff.stackable)
             {
@@ -147,8 +236,8 @@ public class EventManager : MonoBehaviour
             return;
         }
 
-        // Spawn only stackable buffs
-        foreach (var buff in inventory.OwnedBuffs)
+        
+        foreach (var buff in slots.OwnedBuffs)
         {
             if (!buff.stackable)
                 continue;
@@ -164,11 +253,58 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    private void GainMoney(EventChoice choice)
+    {
+        bool win = Random.value > 0.5f;
+
+        int baseMoney = Mathf.Max(inventory.money, 1);
+        float percent = Random.Range(0.5f, 1f);
+        int amount = Mathf.RoundToInt(baseMoney * percent);
+
+        if (win)
+        {
+            inventory.money += amount;
+            Debug.Log("WIN");
+
+            // ✅ Continue normal dialogue
+            dialogueIndex++;
+            ShowDialogue();
+        }
+        else
+        {
+            inventory.money -= amount;
+            if (inventory.money < 0)
+                inventory.money = 0;
+
+            Debug.Log("LOSE");
+
+            // ❗ Use choice-specific dialogue
+            if (choice.resultDialogue != null && choice.resultDialogue.Length > 0)
+            {
+                usingChoiceDialogue = true;
+                currentChoiceDialogue = choice.resultDialogue;
+                choiceDialogueIndex = 0;
+
+                ShowDialogue();
+            }
+            else
+            {
+                EndEvent();
+            }
+        }
+    }
+    private void ClearChoices()
+    {
+        foreach (Transform child in choicesContainer)
+            Destroy(child.gameObject);
+    }
 
     private void SelectOwnedBuff(BuffSO buff)
     {
-        inventory.AddBuff(buff);
-        EndEvent();
+        slots.AddBuff(buff);
+        dialogueIndex++;
+        nextButton.gameObject.SetActive(true);
+        ShowDialogue();
     }
 
     private void EndEvent()

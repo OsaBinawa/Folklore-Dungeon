@@ -18,3 +18,13 @@ MonoBehaviour:
   - When you are working
   - You seem to be way too focused and ended up giving your tool too much pressure
   - and now it's broken
+  - Congrats
+  - Here your money
+  Choices:
+  - text: Here Your Shit
+    buff: {fileID: 0}
+    effect: 2
+    triggerIndex: 2
+    resultDialogue:
+    - You Lose Money
+    - Good Luck Next Time

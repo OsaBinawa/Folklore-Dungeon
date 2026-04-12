@@ -16,4 +16,7 @@ public class EventChoice
     public string text;
     public BuffSO buff;
     public EventEffectType effect;
+    public int triggerIndex;
+    public string[] resultDialogue;
+    
 }
