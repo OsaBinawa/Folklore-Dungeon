@@ -362,6 +362,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 31be9bd2c5f0569b495f619b5d7e18f1, type: 2}
   - {fileID: 11400000, guid: 7f1f82141e8eb13109d8b12429561179, type: 2}
   - {fileID: 11400000, guid: 2e7d2ee48226f40b28c2c34ece458927, type: 2}
+  - {fileID: 11400000, guid: d2045b31439027848a1ff83e6574c836, type: 2}
   panel: {fileID: 5984168191773681741}
   dialogueText: {fileID: 3269298798470804217}
   nextButton: {fileID: 4062593142242016847}
@@ -370,7 +371,7 @@ MonoBehaviour:
   slots: {fileID: 0}
   inventory: {fileID: 0}
   useRandom: 0
-  eventIndex: 2
+  eventIndex: 3
 --- !u!1 &4717808203216240172
 GameObject:
   m_ObjectHideFlags: 0

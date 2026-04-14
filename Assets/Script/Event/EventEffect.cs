@@ -3,10 +3,9 @@ public enum EventEffectType
 {
     None,
     GainOwnedBuffChoice,
-    GiveAmountOffMoney
+    GiveAmountOffMoney,
+    RerollAllBuffs,
+    GainAllBuffs,
 }
 
-public class EventEffect 
-{
-    //public BuffSO buff
-}
+

@@ -6,7 +6,6 @@ public class EventData : ScriptableObject
     public string Name;
     public EventType Type;
     public string[] Dialogue;
-    public EventEffect Effect;
     public EventChoice[] Choices;
 }
 

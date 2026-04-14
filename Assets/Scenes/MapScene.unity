@@ -384,7 +384,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7623333, y: 0.05225926}
   m_AnchorMax: {x: 0.851, y: 0.079222225}
-  m_AnchoredPosition: {x: 0.5, y: -0.49993896}
+  m_AnchoredPosition: {x: 0.5, y: -0.5}
   m_SizeDelta: {x: -11, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &320756080
@@ -850,7 +850,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RunManager
   startingStats: {fileID: 11400000, guid: 774fb8bf80946974c88e7861b8857279, type: 2}
-  AllAvailableBuff: []
+  AllAvailableBuff:
+  - {fileID: 11400000, guid: 55f19f00c1b1f4d4da9dcecdcf363abe, type: 2}
+  - {fileID: 11400000, guid: 77d205a0b0d620a43afcdc7732910733, type: 2}
+  - {fileID: 11400000, guid: 8089e6224f3d8de429b7fc135df5553b, type: 2}
+  - {fileID: 11400000, guid: b05d9038f3811184a81697a94982e4a5, type: 2}
+  - {fileID: 11400000, guid: 8e6fc81957a25ce43b847871484e28ec, type: 2}
+  - {fileID: 11400000, guid: 01d0bfb863705d34e8f6a35463530d71, type: 2}
+  - {fileID: 11400000, guid: c72eca83d49504948af6f6d120a8bf6a, type: 2}
 --- !u!4 &1249741748
 Transform:
   m_ObjectHideFlags: 0
@@ -894,7 +901,8 @@ MonoBehaviour:
   equippedWeapon: {fileID: 0}
   ownedBuffs:
   - {fileID: 11400000, guid: 55f19f00c1b1f4d4da9dcecdcf363abe, type: 2}
-  - {fileID: 11400000, guid: 8089e6224f3d8de429b7fc135df5553b, type: 2}
+  - {fileID: 11400000, guid: 77d205a0b0d620a43afcdc7732910733, type: 2}
+  - {fileID: 11400000, guid: b05d9038f3811184a81697a94982e4a5, type: 2}
 --- !u!114 &1249741751
 MonoBehaviour:
   m_ObjectHideFlags: 0

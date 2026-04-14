@@ -8,7 +8,7 @@ public class Event
     public string eventName;
     public EventType type;
     public string[] dialogue;
-    public EventEffect effect;
+    
 
     public EventChoice[] choices;
     public Event(EventData data)
@@ -17,7 +17,7 @@ public class Event
         eventName = eventData.Name;
         type = eventData.Type;
         dialogue = eventData.Dialogue;
-        effect = eventData.Effect;
+        
         choices = eventData.Choices;
     }
     

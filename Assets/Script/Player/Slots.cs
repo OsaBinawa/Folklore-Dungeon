@@ -30,6 +30,10 @@ public class Slots : MonoBehaviour
 
         return 1;
     }
+    public void ClearBuffs()
+    {
+        ownedBuffs.Clear();
+    }
     /*public void Clear()
     {
         equippedWeapon = null;

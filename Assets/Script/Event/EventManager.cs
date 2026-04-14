@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class EventManager : MonoBehaviour
 {
@@ -182,9 +183,18 @@ public class EventManager : MonoBehaviour
             case EventEffectType.GiveAmountOffMoney:
                 GainMoney(choice);
                 return;
+
+            case EventEffectType.RerollAllBuffs:
+                RerollAllBuffs();
+                return;
+
+            case EventEffectType.GainAllBuffs:
+                GainAllBuffs();
+                return;
+
         }
 
-      
+
         if (choice.resultDialogue != null && choice.resultDialogue.Length > 0)
         {
             usingChoiceDialogue = true;
@@ -198,7 +208,72 @@ public class EventManager : MonoBehaviour
         EndEvent();
     }
 
+    private void GainAllBuffs()
+    {
+        var allBuffs = RunManager.Instance.AllAvailableBuff;
 
+        if (allBuffs == null || allBuffs.Count == 0)
+        {
+            Debug.Log("No buffs available.");
+            EndEvent();
+            return;
+        }
+
+        foreach (var buff in allBuffs)
+        {
+            slots.AddBuff(buff);
+        }
+
+        Debug.Log("Gained all available buffs!");
+
+        EndEvent();
+    }
+
+    private void RerollAllBuffs()
+    {
+        var allBuffs = RunManager.Instance.AllAvailableBuff;
+
+        if (allBuffs == null || allBuffs.Count == 0)
+        {
+            Debug.Log("No available buffs to roll.");
+            EndEvent();
+            return;
+        }
+
+        var currentBuffs = slots.OwnedBuffs;
+
+        if (currentBuffs.Count == 0)
+        {
+            Debug.Log("Player has no buffs.");
+            EndEvent();
+            return;
+        }
+
+        
+        List<BuffSO> newBuffs = new List<BuffSO>();
+
+        foreach (var buff in currentBuffs)
+        {
+            BuffSO randomBuff = allBuffs[Random.Range(0, allBuffs.Count)];
+            newBuffs.Add(randomBuff);
+        }
+
+        
+        ClearAllBuffs();
+
+        foreach (var buff in newBuffs)
+        {
+            slots.AddBuff(buff);
+        }
+
+        Debug.Log("Buffs rerolled!");
+
+        EndEvent();
+    }
+    private void ClearAllBuffs()
+    {
+        slots.ClearBuffs();
+    }
 
     public void ShowOwnedBuffChoices()
     {
