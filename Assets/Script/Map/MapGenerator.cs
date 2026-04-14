@@ -7,7 +7,7 @@ public class MapRun
 
     public int MaxDepth = 10;
 
-    // NEW configurable settings
+    
     public int RestInterval = 4;
     public int MinWidth = 2;
     public int MaxWidth = 4;
@@ -29,12 +29,12 @@ public class MapRun
 
                 if (rowType == NodeType.Combat)
                 {
-                    // Normal row → random per node
+                    
                     type = PickRandomNode();
                 }
                 else
                 {
-                    // Start / Rest / Boss → fixed type
+                    
                     type = rowType;
                 }
 
@@ -174,10 +174,10 @@ public class MapRun
     {
         float roll = Random.value;
 
-        if (roll < 0.4f) return NodeType.Combat;     // 40%
-        else if (roll < 0.6f) return NodeType.Event; // 20%
-        else if (roll < 0.8f) return NodeType.Reading; // 20%
-        else if (roll < 0.9f) return NodeType.Shop;  // 10%
-        else return NodeType.Elite;                  // 10%
+        if (roll < 0.4f) return NodeType.Combat;     
+        else if (roll < 0.6f) return NodeType.Event; 
+        else if (roll < 0.8f) return NodeType.Reading; 
+        else if (roll < 0.9f) return NodeType.Shop;  
+        else return NodeType.Elite;                  
     }
 }

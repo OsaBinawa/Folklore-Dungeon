@@ -8,8 +8,8 @@ public class LineDrawer : MonoBehaviour
     [SerializeField] private float lineThickness = 5f;
 
     [SerializeField] private bool useCurve = false;
-    [SerializeField] private float curveOffset = 100f; // controls how strong the bend is
-    [SerializeField] private int curveResolution = 20; // smoothness
+    [SerializeField] private float curveOffset = 100f; 
+    [SerializeField] private int curveResolution = 20; 
 
     public void Draw(MapRun run)
     {
@@ -24,7 +24,7 @@ public class LineDrawer : MonoBehaviour
                 if (node.Button == null)
                     continue;
 
-                // SPECIAL RULE: Start depth draws to ALL nodes in depth 1
+          
                 if (node.Depth == 0 && run.DeptNodes.Count > 1)
                 {
                     foreach (var next in run.DeptNodes[1])
@@ -38,10 +38,9 @@ public class LineDrawer : MonoBehaviour
                         );
                     }
 
-                    continue; // Skip normal NextNodes logic
+                    continue; 
                 }
 
-                // Normal connection drawing
                 foreach (var next in node.NextNodes)
                 {
                     if (next.Button == null)
@@ -115,7 +114,7 @@ public class LineDrawer : MonoBehaviour
         Vector2 start = lineContainer.InverseTransformPoint(worldStart);
         Vector2 end = lineContainer.InverseTransformPoint(worldEnd);
 
-        // Create control points (this makes the S shape)
+        
         Vector2 mid = (start + end) / 2f;
 
         Vector2 control1 = new Vector2(mid.x, start.y + curveOffset);
@@ -167,44 +166,4 @@ public class LineDrawer : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         rt.rotation = Quaternion.Euler(0, 0, angle);
     }
-
-    /*private void DrawLine(RectTransform from, RectTransform to)
-    {
-        GameObject lineObj = new GameObject("Line", typeof(Image));
-        lineObj.transform.SetParent(lineContainer, false);
-
-        Image img = lineObj.GetComponent<Image>();
-        img.color = lineColor;
-
-        // IMPORTANT: give the image a visible sprite
-        img.sprite = Sprite.Create(
-            Texture2D.whiteTexture,
-            new Rect(0, 0, 1, 1),
-            new Vector2(0.5f, 0.5f)
-        );
-
-        RectTransform rt = lineObj.GetComponent<RectTransform>();
-
-        // Convert positions to SAME SPACE
-        Vector3 worldStart = from.TransformPoint(from.rect.center);
-        Vector3 worldEnd = to.TransformPoint(to.rect.center);
-
-        Vector2 start = lineContainer.InverseTransformPoint(worldStart);
-        Vector2 end = lineContainer.InverseTransformPoint(worldEnd);
-
-        Vector2 direction = end - start;
-        float distance = direction.magnitude;
-
-        if (distance < 0.1f) return;
-
-        rt.sizeDelta = new Vector2(distance, lineThickness);
-        rt.pivot = new Vector2(0, 0.5f);
-        rt.anchoredPosition = start;
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        rt.rotation = Quaternion.Euler(0, 0, angle);
-
-        // Optional: ensure visibility order
-        rt.SetAsFirstSibling(); // or SetAsLastSibling()
-    }*/
 }

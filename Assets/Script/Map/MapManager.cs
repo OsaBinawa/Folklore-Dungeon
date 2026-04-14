@@ -146,7 +146,7 @@ public class MapManager : MonoBehaviour
         MapContainer.gameObject.SetActive(true);
         Root.gameObject.SetActive(true);
 
-        // Disable all buttons first
+        
         foreach (var depth in currentRun.DeptNodes)
         {
             foreach (var n in depth)
@@ -156,7 +156,7 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        // Enable only reachable next nodes
+        
         foreach (var next in node.NextNodes)
         {   
             if (next.Button != null && !next.Completed)
@@ -187,7 +187,7 @@ public class MapManager : MonoBehaviour
     }
     public void UpdateNodeInteractivity(MapNode currentNode)
     {
-        // 1. Disable ALL nodes first
+        
         foreach (var depth in currentRun.DeptNodes)
         {
             foreach (var node in depth)
@@ -197,7 +197,7 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        // 2. Enable only reachable next nodes
+        
         foreach (var next in currentNode.NextNodes)
         {
             if (next.Button != null)

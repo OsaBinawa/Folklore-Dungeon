@@ -41,12 +41,12 @@ public class Inventory : MonoBehaviour
         if (!ownedConsumables.Contains(item))
             return;
 
-        ownedConsumables.Remove(item); // remove ONE
+        ownedConsumables.Remove(item); 
 
         if (!heldConsumables.Contains(item))
             heldConsumables.Add(item);
 
-        BuildConsumableUI(); // refresh UI
+        BuildConsumableUI(); 
     }
 
 
@@ -89,7 +89,7 @@ public class Inventory : MonoBehaviour
             button.onClick.AddListener(() =>
             {
                 UseConsumableOutsideCombat(item);
-                BuildConsumableUI(); // refresh
+                BuildConsumableUI(); 
             });
 
             if (heldConsumables.Contains(item))

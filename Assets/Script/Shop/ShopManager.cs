@@ -61,7 +61,7 @@ public class ShopManager : MonoBehaviour
         Debug.Log("Shop Show");
         Clear();
 
-        // 🔹 Build combined pool
+       
         List<ShopItem> pool = new List<ShopItem>();
 
         foreach (var weapon in weapons)
@@ -94,10 +94,9 @@ public class ShopManager : MonoBehaviour
         }
 
 
-        // 🔹 Get random items
         var randomItems = GetRandomItems(pool, totalDisplayCount);
 
-        // 🔹 Spawn UI
+        
         foreach (var item in randomItems)
         {
             GameObject obj = Instantiate(itemPrefab, container);
@@ -137,12 +136,12 @@ public class ShopManager : MonoBehaviour
             {
                 if (IsStackable(item))
                 {
-                    // stackable → always allowed
+                    
                     validPool.Add(item);
                 }
                 else
                 {
-                    // non-stackable → only if not picked yet
+                    
                     if (!pickedNonStackable.Contains(item))
                         validPool.Add(item);
                 }

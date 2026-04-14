@@ -68,14 +68,14 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     public virtual void Act(PlayerUnit player)
     {
 
-        // 1️⃣ Check if ultimate can be queued
+        
         if (!ultimateQueued && data.Ultimate != null)
         {
             if (currentEnergy >= data.Ultimate.EnergyRequired)
                 ultimateQueued = true;
         }
 
-        // 2️⃣ Execute ultimate if queued
+        
         if (ultimateQueued)
         {
             anim.SetTrigger(data.Ultimate.AnimationString);
@@ -84,7 +84,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
             return;
         }
 
-        // 3️⃣ Otherwise normal attack
+        
         var action = ChooseAttack();
         Debug.Log("Animation String = [" + action.AnimationString + "]");
         anim.SetTrigger(action.AnimationString);
@@ -211,7 +211,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
                         break;
 
                     case EffectType.Slow:
-                        // implement later
+                        
                         break;
                 }
             }

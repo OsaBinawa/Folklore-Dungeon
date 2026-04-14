@@ -33,19 +33,16 @@ public class WeaponSelect : MonoBehaviour
             Debug.Log("Spawning: " + choice.WeaponName);
             GameObject obj = Instantiate(choicePrefab, parentContainer);
             
-            // Get UI components directly
             Text text = obj.GetComponentInChildren<Text>();
             Image image = obj.GetComponentInChildren<Image>();
             Button button = obj.GetComponentInChildren<Button>();
 
-            // Set data
             if (text != null)
                 text.text = choice.WeaponName;
 
             if (image != null && choice.icon != null)
                 image = choice.icon;
 
-            // Button click
             button.onClick.AddListener(() => SelectChoice(choice));
         }
     }

@@ -105,8 +105,6 @@ public class EventManager : MonoBehaviour
         nextButton.gameObject.SetActive(true);
     }
 
-
-
     private void ShowChoicesAtIndex(int index)
     {
         nextButton.gameObject.SetActive(false);
@@ -168,13 +166,13 @@ public class EventManager : MonoBehaviour
     {
         ClearChoices();
 
-        // Buff
+    
         if (choice.buff != null)
         {
             slots.AddBuff(choice.buff);
         }
 
-        // Effect
+     
         switch (choice.effect)
         {
             case EventEffectType.GainOwnedBuffChoice:
@@ -186,7 +184,7 @@ public class EventManager : MonoBehaviour
                 return;
         }
 
-        // Use choice dialogue if exists
+      
         if (choice.resultDialogue != null && choice.resultDialogue.Length > 0)
         {
             usingChoiceDialogue = true;
@@ -266,7 +264,7 @@ public class EventManager : MonoBehaviour
             inventory.money += amount;
             Debug.Log("WIN");
 
-            // ✅ Continue normal dialogue
+            
             dialogueIndex++;
             ShowDialogue();
         }
@@ -278,7 +276,7 @@ public class EventManager : MonoBehaviour
 
             Debug.Log("LOSE");
 
-            // ❗ Use choice-specific dialogue
+            
             if (choice.resultDialogue != null && choice.resultDialogue.Length > 0)
             {
                 usingChoiceDialogue = true;
