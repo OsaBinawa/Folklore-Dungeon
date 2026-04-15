@@ -34,6 +34,12 @@ public class Slots : MonoBehaviour
     {
         ownedBuffs.Clear();
     }
+    public void RemoveBuff(BuffSO buff)
+    {
+        if (ownedBuffs.Contains(buff))
+            ownedBuffs.Remove(buff);
+    }
+
     /*public void Clear()
     {
         equippedWeapon = null;

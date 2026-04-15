@@ -198,12 +198,23 @@ public class ShopManager : MonoBehaviour
 
     private void BuyBuff(Buff buff, GameObject obj)
     {
-        if (inventory.money >= buff.price)
+        bool useFree = inventory.freeShopItemCount > 0;
+
+        if (useFree || inventory.money >= buff.price)
         {
-            inventory.money -= buff.price;
+            if (useFree)
+            {
+                inventory.freeShopItemCount--;
+                Debug.Log("Used FREE coupon!");
+            }
+            else
+            {
+                inventory.money -= buff.price;
+            }
+
             inventorySlots.AddBuff(buff.buff);
 
-            Debug.Log("Bought Weapon: " + buff.buff.name);
+            Debug.Log("Bought Buff: " + buff.buff.name);
 
             Destroy(obj);
         }
@@ -212,4 +223,5 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Not enough money!");
         }
     }
+
 }

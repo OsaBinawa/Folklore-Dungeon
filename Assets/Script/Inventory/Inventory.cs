@@ -18,6 +18,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private List<WeaponSO> ownedWeapons = new();
     [SerializeField] private List<ItemSO> ownedConsumables = new();
     [SerializeField] private List<ItemSO> heldConsumables = new();
+    public int freeShopItemCount = 0;
     public IReadOnlyList<ItemSO> HeldConsumables => heldConsumables;
     public IReadOnlyList<ItemSO> OwnedConsumables => ownedConsumables;
     public int money;

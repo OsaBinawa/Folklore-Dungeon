@@ -2161,6 +2161,7 @@ MonoBehaviour:
   turnManager: {fileID: 4979452946627682446}
   sr: {fileID: 5972838564755651856}
   weaponSlot: {fileID: 0}
+  inventory: {fileID: 0}
   anim: {fileID: 3639576310943887221}
   currentSkillPoint: 5
   MaxSkillPoint: 5

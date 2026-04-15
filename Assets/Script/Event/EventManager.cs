@@ -21,6 +21,10 @@ public class EventManager : MonoBehaviour
     [SerializeField] private Slots slots;
     [SerializeField] private Inventory inventory;
 
+    [Header("Runtime")]
+    [SerializeField] private int IncreaseHp;
+    [SerializeField] private int IncreaseAtk;
+    [SerializeField] private int IncreaseSpd;
     private bool usingChoiceDialogue = false;
     private string[] currentChoiceDialogue;
     private int choiceDialogueIndex = 0;
@@ -191,6 +195,13 @@ public class EventManager : MonoBehaviour
             case EventEffectType.GainAllBuffs:
                 GainAllBuffs();
                 return;
+            case EventEffectType.FreeShopItem:
+                GiveFreeShopItem();
+                return;
+            case EventEffectType.TheFortuneCookies:
+                TheFortuneCookies(choice);
+                return;
+
 
         }
 
@@ -204,6 +215,81 @@ public class EventManager : MonoBehaviour
             ShowDialogue();
             return;
         }
+
+        EndEvent();
+    }
+
+    private void TheFortuneCookies(EventChoice choice)
+    {
+        bool win = Random.value > 0.5f;
+
+        var player = RunManager.Instance.Player;
+
+        if (win)
+        {
+            
+            int statIndex = Random.Range(0, 3);
+
+            switch (statIndex)
+            {
+                case 0:
+                    player.IncreaseMaxHP(IncreaseHp); 
+                    Debug.Log("WIN: +HP");
+                    break;
+
+                case 1:
+                    player.IncreaseAttack(IncreaseAtk);
+                    Debug.Log("WIN: +ATK");
+                    break;
+
+                case 2:
+                    player.IncreaseSpeed(IncreaseSpd);
+                    Debug.Log("WIN: +SPD");
+                    break;
+            }
+
+            
+            dialogueIndex++;
+            ShowDialogue();
+        }
+        else
+        {
+            
+            if (slots.OwnedBuffs.Count > 0)
+            {
+                int index = Random.Range(0, slots.OwnedBuffs.Count);
+                BuffSO removedBuff = slots.OwnedBuffs[index];
+
+                slots.RemoveBuff(removedBuff);
+
+                Debug.Log("LOSE: Removed " + removedBuff.name);
+            }
+            else
+            {
+                Debug.Log("LOSE: No buffs to remove");
+            }
+
+            
+            if (choice.resultDialogue != null && choice.resultDialogue.Length > 0)
+            {
+                usingChoiceDialogue = true;
+                currentChoiceDialogue = choice.resultDialogue;
+                choiceDialogueIndex = 0;
+
+                ShowDialogue();
+            }
+            else
+            {
+                EndEvent();
+            }
+        }
+    }
+
+    private void GiveFreeShopItem()
+    {
+        inventory.freeShopItemCount++;
+
+        Debug.Log("Gained 1 free shop item!");
 
         EndEvent();
     }

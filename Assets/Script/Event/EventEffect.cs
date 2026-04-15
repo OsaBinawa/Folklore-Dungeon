@@ -6,6 +6,9 @@ public enum EventEffectType
     GiveAmountOffMoney,
     RerollAllBuffs,
     GainAllBuffs,
+    FreeShopItem,
+    TheFortuneCookies,
+
 }
 
 

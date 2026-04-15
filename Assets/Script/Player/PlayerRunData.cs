@@ -51,4 +51,22 @@ public class PlayerRunData
             CurrentHP = MaxHP;
         OnHPChanged?.Invoke(CurrentHP, MaxHP);
     }
+    public void IncreaseMaxHP(int amount)
+    {
+        MaxHP += amount;
+        //CurrentHP += amount;
+
+        OnHPChanged?.Invoke(CurrentHP, MaxHP);
+    }
+    public void IncreaseAttack(int amount)
+    {
+        BaseAttack += amount;
+    }
+
+    public void IncreaseSpeed(int amount)
+    {
+        BaseSpeed += amount;
+    }
+
+
 }
