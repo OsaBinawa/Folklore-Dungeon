@@ -77,12 +77,11 @@ public class PlayerUnit : MonoBehaviour
     {
         //UpdateStats();
         //sr = GetComponent<SpriteRenderer>();
-       
-        
     }
     private void Update()
     {
         CheckHeldConsumables();
+        SyncWeaponFromSlot();
     }
     private void CheckHeldConsumables()
     {
@@ -191,10 +190,8 @@ public class PlayerUnit : MonoBehaviour
             return;
         if (currentSkillPoint >= EquippedWeapon.skillCost)
         {
-            // Optional: play animation
             if (EquippedWeapon.AttackAnimation != null)
             {
-                // Your animator logic here
                 anim.SetTrigger("PenAttack");
             }
             Debug.Log($"[Attack] Using Weapon: {EquippedWeapon.WeaponName}");
@@ -219,8 +216,6 @@ public class PlayerUnit : MonoBehaviour
             currentSkillPoint -= EquippedWeapon.skillCost;
             UpdateSkillPointUI();
         }
-        
-
         //turnManager.NotifyPlayerActionComplete();
     }
 
