@@ -66,8 +66,8 @@ public class PlayerStats : MonoBehaviour
             spdPercent += buff.spdPercent;
         }
 
-        FinalAttack = Mathf.RoundToInt(FinalAttack * (1 + atkPercent));
-        FinalSpeed = Mathf.RoundToInt(FinalSpeed * (1 + spdPercent));
+        FinalAttack = Mathf.RoundToInt(FinalAttack * (1 + atkPercent / 100f));
+        FinalSpeed = Mathf.RoundToInt(FinalSpeed * (1 + spdPercent / 100f));
     }
 
     public void TakesDamage(int amount)

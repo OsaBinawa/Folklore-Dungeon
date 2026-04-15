@@ -321,41 +321,46 @@ public class EventManager : MonoBehaviour
 
         if (allBuffs == null || allBuffs.Count == 0)
         {
-            Debug.Log("No available buffs to roll.");
+            Debug.Log("No available buffs.");
             EndEvent();
             return;
         }
 
-        var currentBuffs = slots.OwnedBuffs;
-
-        if (currentBuffs.Count == 0)
+        if (slots.OwnedBuffs.Count == 0)
         {
-            Debug.Log("Player has no buffs.");
+            Debug.Log("No buffs to reroll.");
             EndEvent();
             return;
         }
 
-        
         List<BuffSO> newBuffs = new List<BuffSO>();
 
-        foreach (var buff in currentBuffs)
+        foreach (var buff in slots.OwnedBuffs)
         {
+            if (!buff.removeAble)
+            {
+               
+                newBuffs.Add(buff);
+                continue;
+            }
+
+            
             BuffSO randomBuff = allBuffs[Random.Range(0, allBuffs.Count)];
             newBuffs.Add(randomBuff);
         }
 
-        
-        ClearAllBuffs();
+        slots.ClearBuffs();
 
         foreach (var buff in newBuffs)
         {
             slots.AddBuff(buff);
         }
 
-        Debug.Log("Buffs rerolled!");
+        Debug.Log("Rerolled removable buffs only.");
 
         EndEvent();
     }
+
     private void ClearAllBuffs()
     {
         slots.ClearBuffs();

@@ -15,8 +15,9 @@ public class BuffSO : ScriptableObject
     public bool extraTurnOnKill;
     public bool quickRead;
 
-    [Header("Stacking")]
+    [Header("Condition")]
     public bool stackable = true;
+    public bool removeAble = true;
 
     public int rarity;
 }
