@@ -7,6 +7,8 @@ public class BuffSO : ScriptableObject
     public float hpPercent;
     public float atkPercent;
     public float spdPercent;
+    public float damageTakenPercent;
+    public float atkBonusVsNonWeakPercent;
 
     [Header("Special Effects")]
     public bool counter;
@@ -14,6 +16,7 @@ public class BuffSO : ScriptableObject
     public bool adjacentHit;
     public bool extraTurnOnKill;
     public bool quickRead;
+    public bool bonusVsNonWeak;
 
     [Header("Condition")]
     public bool stackable = true;

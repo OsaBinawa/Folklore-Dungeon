@@ -168,7 +168,8 @@ public class PlayerUnit : MonoBehaviour
 
     public void TakeDamage(int amount, ElementType element)
     {
-        stats.TakesDamage(amount);
+        stats.TakesDamage(amount, weaponSlot);
+
         StartCoroutine(TakingDamageSpriteChange());
         Debug.Log("Player HP now: " + stats.CurrentHP);
 
@@ -179,9 +180,6 @@ public class PlayerUnit : MonoBehaviour
                 currentTarget.TakeDamage(stats.FinalAttack, CurrentElement);
             }
         }
-
-        /*if (currentHP <= 0)
-            Die();*/
     }
 
     public void PerformWeaponAttack()
@@ -237,19 +235,35 @@ public class PlayerUnit : MonoBehaviour
     {
         int totalAttack = stats.FinalAttack;
 
+        float bonusPercent = 0f;
+
+        foreach (var buff in weaponSlot.OwnedBuffs)
+        {
+            if (!buff.bonusVsNonWeak)
+                continue;
+
+            if (!currentTarget.IsWeakTo(CurrentElement))
+            {
+                bonusPercent += buff.atkBonusVsNonWeakPercent;
+            }
+        }
+
+        totalAttack = Mathf.RoundToInt(totalAttack * (1 + bonusPercent / 100f));
+
         if (EquippedWeapon != null)
             totalAttack += EquippedWeapon.AttackBonus;
 
         int damage = totalAttack + baseValue;
 
         Debug.Log(
-       $"[Damage] BaseAttack: {stats.FinalAttack} | " +
-       $"WeaponBonus: {EquippedWeapon.AttackBonus} | " +
-       $"FinalDamage: {damage}"
-   );
+            $"[Damage] BaseAttack: {stats.FinalAttack} | " +
+            $"Bonus%: {bonusPercent} | " +
+            $"FinalDamage: {damage}"
+        );
 
         currentTarget.TakeDamage(damage, CurrentElement);
     }
+
 
     private void ApplyDelay(int amount)
     {

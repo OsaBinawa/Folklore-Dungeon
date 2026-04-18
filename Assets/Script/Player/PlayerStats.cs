@@ -70,10 +70,21 @@ public class PlayerStats : MonoBehaviour
         FinalSpeed = Mathf.RoundToInt(FinalSpeed * (1 + spdPercent / 100f));
     }
 
-    public void TakesDamage(int amount)
+    public void TakesDamage(int amount, Slots slots)
     {
-        runData.TakesDamage(amount);
+        float reduction = 0f;
+
+        foreach (var buff in slots.OwnedBuffs)
+        {
+            reduction += buff.damageTakenPercent;
+        }
+
+        float finalMultiplier = 1 + reduction / 100f;
+        int finalDamage = Mathf.RoundToInt(amount * finalMultiplier);
+
+        runData.TakesDamage(finalDamage);
     }
+
 
     public void Heal(int amount)
     {

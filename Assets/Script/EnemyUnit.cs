@@ -276,7 +276,10 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         yield return new WaitForSeconds(.1f);
         sr.color = Color.white;
     }
-
+    public bool IsWeakTo(ElementType element)
+    {
+        return runtimeWeaknesses.Contains(element);
+    }
     public void OnPointerClick(PointerEventData eventData)
     {
         PlayerUnit player = FindFirstObjectByType<PlayerUnit>();
