@@ -8,7 +8,8 @@ public class Event
     public string eventName;
     public EventType type;
     public string[] dialogue;
-    
+    public bool randomizeChoices;
+
 
     public EventChoice[] choices;
     public Event(EventData data)
@@ -17,7 +18,7 @@ public class Event
         eventName = eventData.Name;
         type = eventData.Type;
         dialogue = eventData.Dialogue;
-        
+        randomizeChoices = data.randomizeChoices;
         choices = eventData.Choices;
     }
     

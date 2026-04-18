@@ -117,11 +117,29 @@ public class EventManager : MonoBehaviour
         foreach (Transform child in choicesContainer)
             Destroy(child.gameObject);
 
+        List<EventChoice> validChoices = new List<EventChoice>();
+
         foreach (var choice in eventInstance.choices)
         {
-            if (choice.triggerIndex != index)
-                continue;
+            if (choice.triggerIndex == index)
+                validChoices.Add(choice);
+        }
 
+        
+        if (eventInstance.randomizeChoices)
+        {
+            for (int i = 0; i < validChoices.Count; i++)
+            {
+                int rand = Random.Range(i, validChoices.Count);
+                (validChoices[i], validChoices[rand]) = (validChoices[rand], validChoices[i]);
+            }
+
+            validChoices = validChoices.GetRange(0, Mathf.Min(2, validChoices.Count));
+        }
+
+        
+        foreach (var choice in validChoices)
+        {
             GameObject btn = Instantiate(choiceButtonPrefab, choicesContainer);
 
             TMP_Text txt = btn.GetComponentInChildren<TMP_Text>();

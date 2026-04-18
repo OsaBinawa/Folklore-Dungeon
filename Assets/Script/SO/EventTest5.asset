@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c811f8a6a2ef36f5cac238e800a08cce, type: 3}
+  m_Name: EventTest5
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  Name: Too much pressure
+  Type: 1
+  Dialogue:
+  - Someone in the library would like to exchange your chosen reading books with
+    theirs. Will you do it?
+  - 
+  Choices:
+  - text: 1
+    buff: {fileID: 0}
+    effect: 0
+    triggerIndex: 1
+    resultDialogue:
+    - Nice Choiche
+  - text: 2
+    buff: {fileID: 0}
+    effect: 0
+    triggerIndex: 1
+    resultDialogue:
+    - Your Lose
+  - text: 3
+    buff: {fileID: 0}
+    effect: 0
+    triggerIndex: 1
+    resultDialogue:
+    - Your Lose
+  - text: 4
+    buff: {fileID: 0}
+    effect: 0
+    triggerIndex: 1
+    resultDialogue:
+    - Your Lose
+  randomizeChoices: 1

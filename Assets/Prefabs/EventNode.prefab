@@ -363,6 +363,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7f1f82141e8eb13109d8b12429561179, type: 2}
   - {fileID: 11400000, guid: 2e7d2ee48226f40b28c2c34ece458927, type: 2}
   - {fileID: 11400000, guid: d2045b31439027848a1ff83e6574c836, type: 2}
+  - {fileID: 11400000, guid: c99a29da8cc94214ba5614cd0e4be8f6, type: 2}
   panel: {fileID: 5984168191773681741}
   dialogueText: {fileID: 3269298798470804217}
   nextButton: {fileID: 4062593142242016847}
@@ -370,8 +371,11 @@ MonoBehaviour:
   choiceButtonPrefab: {fileID: 3988050826284907010, guid: bdb49811c38e54c49868e7bbd851190c, type: 3}
   slots: {fileID: 0}
   inventory: {fileID: 0}
+  IncreaseHp: 0
+  IncreaseAtk: 0
+  IncreaseSpd: 0
   useRandom: 0
-  eventIndex: 3
+  eventIndex: 4
 --- !u!1 &4717808203216240172
 GameObject:
   m_ObjectHideFlags: 0

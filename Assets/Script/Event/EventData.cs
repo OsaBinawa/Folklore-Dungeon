@@ -7,6 +7,8 @@ public class EventData : ScriptableObject
     public EventType Type;
     public string[] Dialogue;
     public EventChoice[] Choices;
+    public bool randomizeChoices;
+    
 }
 
 [System.Serializable]
