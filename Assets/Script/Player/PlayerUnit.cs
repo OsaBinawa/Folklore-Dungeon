@@ -17,6 +17,7 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private EnemyUnit currentTarget;
     [SerializeField] private TurnManager turnManager;
     [SerializeField] private Image sr;
+    [SerializeField] private Color handColor;
     [SerializeField] private Slots weaponSlot;
     [SerializeField] private Inventory inventory;
     [SerializeField] private Animator anim;
@@ -275,7 +276,7 @@ public class PlayerUnit : MonoBehaviour
     {
         sr.color = Color.red;
         yield return new WaitForSeconds(.1f);
-        sr.color = Color.white;
+        sr.color = handColor;
     }
 
     public int GetCurrentHP()
