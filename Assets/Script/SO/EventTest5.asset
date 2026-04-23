@@ -17,7 +17,7 @@ MonoBehaviour:
   Dialogue:
   - Someone in the library would like to exchange your chosen reading books with
     theirs. Will you do it?
-  - 
+  - OK...
   Choices:
   - text: 1
     buff: {fileID: 0}
