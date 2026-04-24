@@ -33,7 +33,7 @@ public class PlayerUnit : MonoBehaviour
 
     //private WeaponSO CurrentWeapon => weaponSlot.EquippedWeapon;
     public PlayerStats Stats => stats;
-    public int MaxHP => stats.MaxHP;
+    public float MaxHP => stats.MaxHP;
     public ElementType CurrentElement =>
         EquippedWeapon != null ? EquippedWeapon.Element : ElementType.Physical;
 

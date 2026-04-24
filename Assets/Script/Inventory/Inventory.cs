@@ -102,7 +102,10 @@ public class Inventory : MonoBehaviour
     {
         ownedConsumables.Add(Item);
     }
-
+    public void AddHeld(ItemSO Item)
+    {
+        heldConsumables.Add(Item);
+    }
     public void ClearHeldConsumables()
     {
         heldConsumables.Clear();
