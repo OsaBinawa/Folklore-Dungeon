@@ -1,13 +1,10 @@
 public enum ElementType
 {
-    Physical,
-    Fire,
-    Ice,
-    Lightning,
-    Wind,
-    Quantum,
-    Imaginary,
-    Miss,
+    None,
+    Write,
+    Erase,
+    Fix,
     Typo,
-    Broken,
+    Missing,
+    Shred,
 }

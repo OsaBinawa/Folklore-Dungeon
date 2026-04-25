@@ -83,7 +83,7 @@ public class MainBody : EnemyUnit
         PlayerUnit player = FindFirstObjectByType<PlayerUnit>();
 
         if (player != null)
-            player.TakeDamage(9999, ElementType.Physical);
+            player.TakeDamage(9999, ElementType.Fix);
 
         OnActionFinished();
     }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Slots : MonoBehaviour
@@ -39,7 +40,10 @@ public class Slots : MonoBehaviour
         if (ownedBuffs.Contains(buff))
             ownedBuffs.Remove(buff);
     }
-
+    public void autoEquip(WeaponSO weap)
+    {
+        equippedWeapon = weap;
+    }
     /*public void Clear()
     {
         equippedWeapon = null;

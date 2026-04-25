@@ -30,7 +30,7 @@ public class MalinController : MonoBehaviour
         if (hand is RightHand)
         {
             rightDead = true;
-            body.SetWeakness(ElementType.Miss);
+            body.SetWeakness(ElementType.Fix);
         }
 
         stunTurns = 3;

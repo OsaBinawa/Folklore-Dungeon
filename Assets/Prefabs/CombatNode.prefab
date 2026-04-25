@@ -1577,7 +1577,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 19510278876226992}
         m_TargetAssemblyTypeName: PlayerUnit, Assembly-CSharp
-        m_MethodName: PerformWeaponAttack
+        m_MethodName: PerformSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2084,12 +2084,15 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   turnManager: {fileID: 4979452946627682446}
   sr: {fileID: 5972838564755651856}
+  weaponSprite: {fileID: 5972838564755651856}
   handColor: {r: 0.85882354, g: 0.69803923, b: 0.5137255, a: 1}
   weaponSlot: {fileID: 0}
   inventory: {fileID: 0}
   anim: {fileID: 3639576310943887221}
   currentSkillPoint: 5
   MaxSkillPoint: 5
+  currentEnergy: 0
+  maxEnergy: 100
   skillPointIcons:
   - {fileID: 706183869611989808}
   - {fileID: 3195595613985792022}
@@ -2498,6 +2501,7 @@ GameObject:
   - component: {fileID: 890252492249430775}
   - component: {fileID: 4979452946627682446}
   - component: {fileID: 6772721197835116512}
+  - component: {fileID: 1433572671359310071}
   m_Layer: 5
   m_Name: CombatManager
   m_TagString: Untagged
@@ -2557,6 +2561,18 @@ MonoBehaviour:
   enemyContainer: {fileID: 1729019562268867681}
   enemyPrefabs:
   - {fileID: 8822706715593164513, guid: ed1c63a1e5fa7e042958b6faddd97ac3, type: 3}
+--- !u!114 &1433572671359310071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8736570894323756290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c81ab47d7f90a45941a243ee58d57c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleTargeting
 --- !u!1 &8807473626246323523
 GameObject:
   m_ObjectHideFlags: 0

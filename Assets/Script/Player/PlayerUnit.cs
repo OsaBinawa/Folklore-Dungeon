@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NUnit;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private PlayerStats stats;
     [SerializeField] public WeaponSO EquippedWeapon;
     //[SerializeField] private Equipment weapon;
+    private BattleTargeting targeting;
     [SerializeField] private Equipment armor;
 
     [Header("Runtime")]
@@ -17,12 +19,15 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private EnemyUnit currentTarget;
     [SerializeField] private TurnManager turnManager;
     [SerializeField] private Image sr;
+    [SerializeField] private Image weaponSprite;
     [SerializeField] private Color handColor;
     [SerializeField] private Slots weaponSlot;
     [SerializeField] private Inventory inventory;
     [SerializeField] private Animator anim;
     [SerializeField] private int currentSkillPoint;
     [SerializeField] private int MaxSkillPoint = 5;
+    [SerializeField] private int currentEnergy = 0;
+    [SerializeField] private int maxEnergy = 100;
     private List<ActiveConsumable> activeConsumables = new();
     private List<ItemSO> processedHeld = new();
     [Header("Skill Point UI")]
@@ -35,7 +40,7 @@ public class PlayerUnit : MonoBehaviour
     public PlayerStats Stats => stats;
     public float MaxHP => stats.MaxHP;
     public ElementType CurrentElement =>
-        EquippedWeapon != null ? EquippedWeapon.Element : ElementType.Physical;
+        EquippedWeapon != null ? EquippedWeapon.Element : ElementType.None;
 
     private void Awake()
     {
@@ -46,12 +51,12 @@ public class PlayerUnit : MonoBehaviour
             weaponSlot = FindFirstObjectByType<Slots>();
         if (inventory == null)
             inventory = FindFirstObjectByType<Inventory>();
-
+        targeting = FindFirstObjectByType<BattleTargeting>();
         if (RunManager.Instance != null)
         {
             Initialize(RunManager.Instance.Player);
         }
-        
+        EquipWeapon(weaponSlot.EquippedWeapon);
         currentSkillPoint = 5;
         UpdateSkillPointUI();
         /*if (runManager == null)
@@ -124,6 +129,7 @@ public class PlayerUnit : MonoBehaviour
     {
         if (weaponSlot != null)
             EquippedWeapon = weaponSlot.EquippedWeapon;
+        EquipWeapon(weaponSlot.EquippedWeapon);
     }
     
     /*public void UpdateStats()
@@ -182,54 +188,73 @@ public class PlayerUnit : MonoBehaviour
             }
         }
     }
-
-    public void PerformWeaponAttack()
+    public void EquipWeapon(WeaponSO newWeapon)
     {
-        if (!weaponSlot.HasWeapon || currentTarget == null)
-            return;
-        if (currentSkillPoint >= EquippedWeapon.skillCost)
-        {
-            if (EquippedWeapon.AttackAnimation != null)
-            {
-                anim.SetTrigger("PenAttack");
-            }
-            Debug.Log($"[Attack] Using Weapon: {EquippedWeapon.WeaponName}");
-            Debug.Log($"[Attack] Target: {currentTarget.name}");
-            debugText.text = "[Attack] Using Weapon: " + EquippedWeapon.WeaponName;
-            foreach (var effect in EquippedWeapon.Effects)
-            {
-                ResolveEffect(effect);
-            }
-            ApplyAdjacentHit();
-            foreach (var buff in weaponSlot.OwnedBuffs)
-            {
-                if (buff.slowChance)
-                {
-                    if (Random.value < 0.3f)
-                    {
-                        turnManager.ModifyAV(currentTarget, 10);
-                    }
-                }
-            }
+        EquippedWeapon = newWeapon;
 
-            currentSkillPoint -= EquippedWeapon.skillCost;
-            UpdateSkillPointUI();
+        // Update UI
+        if (weaponSprite != null && newWeapon != null)
+        {
+            weaponSprite.sprite = newWeapon._WeaponSprite;
         }
-        //turnManager.NotifyPlayerActionComplete();
     }
 
-    private void ResolveEffect(AttackEffect effect)
+    public void PerformSkill()
     {
-        switch (effect.Type)
-        {
-            case EffectType.Damage:
-                ApplyDamage(effect.Value);
-                break;
+        if (currentTarget == null || EquippedWeapon == null)
+            return;
 
-            case EffectType.DelayAV:
-                ApplyDelay(effect.Value);
-                break;
+        StartCoroutine(AttackRoutine(
+            EquippedWeapon.SkillAnimation,
+            EquippedWeapon.SkillTargetType,
+            EquippedWeapon.SkillEffects
+        ));
+    }
+
+    public void PerformUltimate()
+    {
+        if (currentTarget == null || EquippedWeapon == null)
+            return;
+
+        if (currentEnergy < EquippedWeapon.UltimateEnergyCost)
+        {
+            Debug.Log("Not enough energy!");
+            return;
         }
+
+        currentEnergy -= EquippedWeapon.UltimateEnergyCost;
+
+        StartCoroutine(AttackRoutine(
+            EquippedWeapon.UltimateAnimation,
+            EquippedWeapon.UltimateTargetType,
+            EquippedWeapon.UltimateEffects
+        ));
+    }
+    private IEnumerator AttackRoutine(
+        AnimationClip animClip,
+        TargetType targetType,
+        WeaponEffect[] effects)
+       {
+        // Play animation
+        anim.SetTrigger(animClip.name);
+
+        // Get targets
+        EnemyUnit[] targets = targeting.GetTargets(targetType, currentTarget);
+
+        // Wait for hit timing
+        yield return new WaitForSeconds(0.5f);
+
+        // Apply effects
+        foreach (var effect in effects)
+        {
+            effect.Apply(this, targets);
+        }
+
+        // Gain energy (optional)
+        currentEnergy = Mathf.Min(currentEnergy + 20, maxEnergy);
+
+        // End turn
+        FindFirstObjectByType<TurnManager>().NotifyPlayerActionComplete();
     }
 
     private void ApplyDamage(int baseValue)
@@ -251,8 +276,8 @@ public class PlayerUnit : MonoBehaviour
 
         totalAttack = Mathf.RoundToInt(totalAttack * (1 + bonusPercent / 100f));
 
-        if (EquippedWeapon != null)
-            totalAttack += EquippedWeapon.AttackBonus;
+        /*if (EquippedWeapon != null)
+            totalAttack += EquippedWeapon.AttackBonus;*/
 
         int damage = totalAttack + baseValue;
 

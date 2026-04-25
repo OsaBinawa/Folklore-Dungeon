@@ -10858,10 +10858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slots
   equippedWeapon: {fileID: 0}
-  ownedBuffs:
-  - {fileID: 11400000, guid: 55f19f00c1b1f4d4da9dcecdcf363abe, type: 2}
-  - {fileID: 11400000, guid: 77d205a0b0d620a43afcdc7732910733, type: 2}
-  - {fileID: 11400000, guid: b05d9038f3811184a81697a94982e4a5, type: 2}
+  ownedBuffs: []
 --- !u!114 &1249741751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10922,6 +10919,7 @@ MonoBehaviour:
   Container: {fileID: 1815622903}
   Root: {fileID: 215286481}
   playerInventory: {fileID: 1249741751}
+  slots: {fileID: 0}
 --- !u!4 &1303106055
 Transform:
   m_ObjectHideFlags: 0
@@ -16580,11 +16578,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 838458214636829286, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000061035156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 838458214636829286, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000061035156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 838458214636829286, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

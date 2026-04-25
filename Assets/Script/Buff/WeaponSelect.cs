@@ -14,10 +14,12 @@ public class WeaponSelect : MonoBehaviour
 
     private WeaponSO selectedChoice;
     [SerializeField] private Inventory playerInventory;
+    [SerializeField] private Slots slots;
 
     private void Awake()
     {
         playerInventory = FindFirstObjectByType<Inventory>();
+        slots = FindFirstObjectByType<Slots>();
         
     }
 
@@ -35,14 +37,14 @@ public class WeaponSelect : MonoBehaviour
             GameObject obj = Instantiate(choicePrefab, parentContainer);
             
             Text text = obj.GetComponentInChildren<Text>();
-            Image image = obj.GetComponentInChildren<Image>();
             Button button = obj.GetComponentInChildren<Button>();
+            Image image = button.GetComponentInChildren<Image>();
 
             if (text != null)
                 text.text = choice.WeaponName;
 
             if (image != null && choice.icon != null)
-                image = choice.icon;
+                image.sprite = choice.icon;
 
             button.onClick.AddListener(() => SelectChoice(choice));
         }
@@ -51,6 +53,7 @@ public class WeaponSelect : MonoBehaviour
     void SelectChoice(WeaponSO choice)
     {
         playerInventory.AddWeapon(choice);
+        slots.autoEquip(choice);
         Debug.Log("Selected: " + choice.WeaponName);
         Destroy(Root);
     }
