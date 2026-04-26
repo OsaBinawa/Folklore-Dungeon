@@ -11,9 +11,11 @@ public class ActionUI : MonoBehaviour
     [SerializeField] private TMP_Text turnOrderText;
     [SerializeField] private Slider playerTimer;
 
-
+    [SerializeField] private MainUIManager mainUIManager;
     private void Start()
     {
+        mainUIManager = FindFirstObjectByType<MainUIManager>();
+        mainUIManager.HideButton();
         Debug.Log("ActionUI Start()");
         turnOrderText.text = "TMP TEXT IS WORKING";
         Hide();
@@ -88,7 +90,11 @@ public class ActionUI : MonoBehaviour
     {
         playerTimer.value = timeLeft;
     }
-
+    public void OpenInventory()
+    {
+        mainUIManager.openInv();
+    }
+    
     public void ResetTimer()
     {
         playerTimer.value = playerTimer.maxValue;

@@ -6,8 +6,12 @@ public class NodeView : MonoBehaviour
 {
     protected MapNode node;
     private Action<MapNode> onFinished;
-    
-
+    [SerializeField]private MainUIManager mainUIManager;
+    private void Awake()
+    {
+        mainUIManager = FindFirstObjectByType<MainUIManager>();
+        mainUIManager.HideButton();
+    }
     public void Initialize(MapNode node, Action<MapNode> onFinished)
     {
         this.node = node;
@@ -16,6 +20,8 @@ public class NodeView : MonoBehaviour
     public void ResolveNode()   
     {
         onFinished?.Invoke(node);
+        mainUIManager.ShowButton();
         Destroy(gameObject);
+
     }
 }

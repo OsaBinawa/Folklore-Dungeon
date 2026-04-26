@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using NUnit;
+//using NUnit;
 using TMPro;
-using Unity.VisualScripting;
+//using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class PlayerUnit : MonoBehaviour
 {
     [SerializeField] private PlayerStats stats;
     [SerializeField] public WeaponSO EquippedWeapon;
+    public static event Action OnPlayerDied;
     //[SerializeField] private Equipment weapon;
     private BattleTargeting targeting;
     [SerializeField] private Equipment armor;
@@ -162,7 +164,7 @@ public class PlayerUnit : MonoBehaviour
         {
             if (buff.slowChance)
             {
-                if (Random.value < 0.3f)
+                if (UnityEngine.Random.value < 0.3f)
                 {
                     turnManager.ModifyAV(currentTarget, 10);
                 }
@@ -187,7 +189,18 @@ public class PlayerUnit : MonoBehaviour
                 currentTarget.TakeDamage(stats.FinalAttack, CurrentElement);
             }
         }
+
+        if (Stats.CurrentHP <= 0)
+        {
+            Died();
+        }
     }
+
+    private void Died()
+    {
+        OnPlayerDied?.Invoke();
+    }
+
     public void EquipWeapon(WeaponSO newWeapon)
     {
         EquippedWeapon = newWeapon;

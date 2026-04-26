@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 public class EnemyUnit : MonoBehaviour, IPointerClickHandler
 {
     [Header("Data")]
     [SerializeField] protected EnemyData data;
+    public static event Action OnEnemyDied;
 
     [Header("Runtime")]
     [SerializeField] protected int currentHP;
@@ -143,11 +145,11 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
 
         foreach (var action in pool)
         {
-            if (Random.value <= action.Chance)
+            if (UnityEngine.Random.value <= action.Chance)
                 return action;
         }
 
-        return pool[Random.Range(0, pool.Count)];
+        return pool[UnityEngine.Random.Range(0, pool.Count)];
     }
 
     /*protected bool CanUseAttack(EnemyAttack atk)
@@ -248,7 +250,11 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         }
         StartCoroutine(TakingDamageSpriteChange());
         if (currentHP <= 0)
+        {
+            
             Die();
+        }
+            
         HpBarUpdate();
     }
 
@@ -261,6 +267,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
 
     protected virtual void Die()
     {
+        OnEnemyDied?.Invoke();
         Destroy(gameObject);
     }
 
