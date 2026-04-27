@@ -7,25 +7,27 @@ public class RestNodes : MonoBehaviour
 {
     [SerializeField] private PlayerStats player;
     [SerializeField] private Inventory inventory;
-    [SerializeField] private List<ItemSO> items;
+    [SerializeField] private GameObject Root;
+    //[SerializeField] private List<ItemSO> items;
 
-    [Header("UI")]
-    [SerializeField] private Transform contentParent;
-    [SerializeField] private GameObject buttonPrefab;
+    //[Header("UI")]
+    /*[SerializeField] private Transform contentParent;
+    [SerializeField] private GameObject buttonPrefab;*/
 
     private void Start()
     {
         player = FindFirstObjectByType<PlayerStats>();
         inventory = FindFirstObjectByType<Inventory>();
-        BuildUI();
+        //BuildUI();
     }
 
     public void Heal(int healAmt)
     {
         player.Heal(healAmt);
+        Root.SetActive(false);
     }
 
-    public void BuildUI()
+    /*public void BuildUI()
     {
         // Clear old buttons
         foreach (Transform child in contentParent)
@@ -47,12 +49,12 @@ public class RestNodes : MonoBehaviour
                 UseItem(localItem);
             });
         }
-    }
+    }*/
 
-    private void UseItem(ItemSO item)
+    public void UseItem(ItemSO item)
     {
         inventory.AddHeld(item);
-
+        Root.SetActive(false);
         Debug.Log($"Used {item.Name} at Rest Node");
     }
 }

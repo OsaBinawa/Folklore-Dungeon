@@ -39,7 +39,8 @@ public class ShopManager : MonoBehaviour
     public GameObject itemPrefab;
     public Transform container;
 
-
+    public ShopUICard slot1;
+    public ShopUICard slot2;
     [SerializeField] private Inventory inventory;
     [SerializeField] private Slots inventorySlots;
     public List<Weapon> weapons;
@@ -59,9 +60,7 @@ public class ShopManager : MonoBehaviour
     public void Show()
     {
         Debug.Log("Shop Show");
-        Clear();
 
-       
         List<ShopItem> pool = new List<ShopItem>();
 
         foreach (var weapon in weapons)
@@ -78,7 +77,6 @@ public class ShopManager : MonoBehaviour
             }
         }
 
-
         foreach (var buff in buffs)
         {
             int count = buff.stackable ? UnityEngine.Random.Range(1, 4) : 1;
@@ -93,35 +91,34 @@ public class ShopManager : MonoBehaviour
             }
         }
 
+        var randomItems = GetRandomItems(pool, 2); // only 2 now
 
-        var randomItems = GetRandomItems(pool, totalDisplayCount);
+        // SLOT 1
+        SetupSlot(slot1, randomItems[0]);
 
-        
-        foreach (var item in randomItems)
-        {
-            GameObject obj = Instantiate(itemPrefab, container);
-
-            Button btn = obj.GetComponentInChildren<Button>();
-            TextMeshProUGUI text = obj.GetComponentInChildren<TextMeshProUGUI>();
-
-            btn.onClick.RemoveAllListeners();
-
-            if (item.type == ShopItemType.Weapon)
-            {
-                text.text = item.weaponData.weapon.name + " - " + item.weaponData.price;
-                btn.onClick.AddListener(() => BuyWeapon(item.weaponData, obj));
-            }
-            else
-            {
-                text.text = item.buffData.buff.name + " - " + item.buffData.price;
-                btn.onClick.AddListener(() => BuyBuff(item.buffData, obj));
-            }
-
-            activeItems.Add(obj);
-        }
-
-        gameObject.SetActive(true);
+        // SLOT 2
+        if (randomItems.Count > 1)
+            SetupSlot(slot2, randomItems[1]);
     }
+
+    void SetupSlot(ShopUICard slot, ShopItem item)
+    {
+        if (item.type == ShopItemType.Weapon)
+        {
+            slot.SetupWeapon(item.weaponData, () =>
+            {
+                BuyWeapon(item.weaponData, slot.gameObject);
+            });
+        }
+        else
+        {
+            slot.SetupBuff(item.buffData, () =>
+            {
+                BuyBuff(item.buffData, slot.gameObject);
+            });
+        }
+    }
+
 
     private List<ShopItem> GetRandomItems(List<ShopItem> pool, int count)
     {
