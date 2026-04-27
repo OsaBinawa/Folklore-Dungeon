@@ -12,6 +12,17 @@ public class PlayerStats : MonoBehaviour
     private int consumableAtkBonus;
     private int consumableSpdBonus;
 
+    private void Start()
+    {
+        if (RunManager.Instance == null)
+        {
+            Debug.LogError("RunManager not found!");
+            return;
+        }
+
+        Initialize(RunManager.Instance.Player);
+    }
+
     public void SetConsumableBonus(int atk, int spd)
     {
         consumableAtkBonus = atk;
@@ -19,7 +30,7 @@ public class PlayerStats : MonoBehaviour
 
         RecalculateStats();
     }
-
+    
     public void Initialize(PlayerRunData data)
     {
         Debug.Log("PlayerStats initialized with runData: " + data);
@@ -88,6 +99,13 @@ public class PlayerStats : MonoBehaviour
 
     public void Heal(int amount)
     {
+        if (runData == null)
+        {
+            Debug.LogError("runData is NULL in Heal()");
+            return;
+        }
+
         runData.Heal(amount);
     }
+
 }

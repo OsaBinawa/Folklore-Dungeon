@@ -11208,6 +11208,7 @@ GameObject:
   - component: {fileID: 1249741749}
   - component: {fileID: 1249741750}
   - component: {fileID: 1249741751}
+  - component: {fileID: 1249741752}
   m_Layer: 0
   m_Name: RunManager
   m_TagString: Untagged
@@ -11308,6 +11309,18 @@ MonoBehaviour:
   heldConsumables: []
   freeShopItemCount: 0
   money: 100
+--- !u!114 &1249741752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249741746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332d6d9044ff0174d9d9e645fdee1383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
 --- !u!1 &1303106053
 GameObject:
   m_ObjectHideFlags: 0
@@ -17119,7 +17132,7 @@ MonoBehaviour:
   NodeButtonPrefabs: {fileID: 450729833068546012, guid: e1193a6a35eed6a4282d4381728da236, type: 3}
   CombatPrefab: {fileID: 945770643077263496, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
   EventPrefab: {fileID: 3770747648595979175, guid: 12a984449187ba4448302efdb0547263, type: 3}
-  RestPrefab: {fileID: 0}
+  RestPrefab: {fileID: 519380458256889883, guid: 3273fc235b0e9874b9d477fb2596160b, type: 3}
   BossPrefab: {fileID: 0}
   ReadPrefab: {fileID: 3770747648595979175, guid: 521a4a968a886f142a886cbe39ac4d77, type: 3}
   ShopPrefab: {fileID: 3770747648595979175, guid: 2b17e28e5236243428772159a7780848, type: 3}

@@ -47,7 +47,7 @@ public class PlayerUnit : MonoBehaviour
     private void Awake()
     {
         if (stats == null)
-            stats = GetComponent<PlayerStats>();
+            stats = FindFirstObjectByType<PlayerStats>();
 
         if (weaponSlot == null)
             weaponSlot = FindFirstObjectByType<Slots>();
