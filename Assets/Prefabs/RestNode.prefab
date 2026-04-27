@@ -154,8 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RestNodes
   player: {fileID: 0}
   inventory: {fileID: 0}
-  contentParent: {fileID: 1539248761981451516}
-  buttonPrefab: {fileID: 6859168730938894958, guid: 912ecc2722bf84b469efaa912d81c474, type: 3}
+  Root: {fileID: 1557333246178467507}
 --- !u!1 &853871336151115023
 GameObject:
   m_ObjectHideFlags: 0
