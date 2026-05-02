@@ -44,8 +44,10 @@ public class BuffSelectionUI : MonoBehaviour
 
             Button btn = obj.GetComponentInChildren<Button>();
             TextMeshProUGUI text = obj.GetComponentInChildren<TextMeshProUGUI>();
+            //TextMeshProUGUI textDesc = obj.GetComponent<TextMeshProUGUI>();
+            
 
-            //text.text = buff.name;
+            text.text = buff.Description;
 
             btn.onClick.RemoveAllListeners();
             btn.onClick.AddListener(() => Select(buff, obj));

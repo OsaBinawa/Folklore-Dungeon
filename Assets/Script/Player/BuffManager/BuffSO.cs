@@ -23,4 +23,6 @@ public class BuffSO : ScriptableObject
     public bool removeAble = true;
 
     public int rarity;
+    [TextArea(5,10)]
+    public string Description;
 }

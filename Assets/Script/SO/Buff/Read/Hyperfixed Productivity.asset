@@ -15,11 +15,15 @@ MonoBehaviour:
   hpPercent: -4
   atkPercent: 12
   spdPercent: 0
+  damageTakenPercent: 0
+  atkBonusVsNonWeakPercent: 0
   counter: 0
   slowChance: 0
   adjacentHit: 0
   extraTurnOnKill: 0
   quickRead: 0
+  bonusVsNonWeak: 0
   stackable: 1
   removeAble: 0
   rarity: 1
+  Description: ATK +12% but HP -4%
