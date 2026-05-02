@@ -49,7 +49,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     protected void Setup()
     {
         currentHP = data.MaxHP;
-        currentToughness = data.MaxToughness;
+        //currentToughness = data.MaxToughness;
         currentEnergy = maxEnergy;
         isBroken = false;
 
@@ -240,23 +240,25 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
 
     public virtual void TakeDamage(int damage, ElementType element)
     {
-        currentHP -= damage;
+        bool isWeak = runtimeWeaknesses.Contains(element);
+        float multiplier = isWeak ? 1.5f : 1f;
 
-        if (!isBroken && runtimeWeaknesses.Contains(element))
-        {
-            currentToughness--;
-            if (currentToughness <= 0)
-                TriggerBreak();
-        }
+        int finalDamage = Mathf.RoundToInt(damage * multiplier);
+
+        currentHP -= finalDamage;
+
         StartCoroutine(TakingDamageSpriteChange());
+
         if (currentHP <= 0)
         {
-            
             Die();
         }
-            
+
         HpBarUpdate();
+
+        Debug.Log($"Damage: {damage} → {finalDamage} (x{multiplier})");
     }
+
 
     protected virtual void TriggerBreak()
     {

@@ -16,8 +16,7 @@ MonoBehaviour:
   maxHP: 100
   speed: 100
   baseDamage: 0
-  weaknesses: 00000000
-  maxToughness: 100
+  weaknesses: 01000000
   attacks:
   - Name: BasicAttack
     AnimationString: Attack1

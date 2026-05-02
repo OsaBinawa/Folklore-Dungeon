@@ -10,11 +10,11 @@ public class ShopUICard : MonoBehaviour
 
     private Weapon weapon;
     private Buff buff;
-    private ShopItemType type;
+    //private ShopItemType type;
 
     public void SetupWeapon(Weapon w, System.Action onBuy)
     {
-        type = ShopItemType.Weapon;
+        //type = ShopItemType.Weapon;
         weapon = w;
 
         nameText.text = w.weapon.name;
@@ -26,7 +26,7 @@ public class ShopUICard : MonoBehaviour
 
     public void SetupBuff(Buff b, System.Action onBuy)
     {
-        type = ShopItemType.Buff;
+        //type = ShopItemType.Buff;
         buff = b;
 
         nameText.text = b.buff.name;
