@@ -12,14 +12,11 @@ public class EnemyData : ScriptableObject
     [SerializeField] private int maxHP;
     [SerializeField] private int speed;
     [SerializeField] private int baseDamage;
-    
 
     [Header("Break")]
     [SerializeField] private List<ElementType> weaknesses;
-    //[SerializeField] private int maxToughness;
 
     [Header("Attacks")]
-    //[SerializeField] private List<EnemyAttack> attacks;
     [SerializeField] private List<EnemyAttack> attacks;
     [SerializeField] private EnemyUltimate ultimate;
     public EnemyUltimate Ultimate => ultimate;
@@ -28,10 +25,10 @@ public class EnemyData : ScriptableObject
     public int MaxHP => maxHP;
     public int Speed => speed;
     public int BaseDamage => baseDamage;
-    //public int MaxToughness => maxToughness;
+    
 
     public IReadOnlyList<ElementType> Weaknesses => weaknesses;
-    //public IReadOnlyList<EnemyAttack> Attacks => attacks;
+    
 }
 [Serializable]
 public class EnemyUltimate
