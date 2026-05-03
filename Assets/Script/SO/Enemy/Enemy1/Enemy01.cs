@@ -13,7 +13,7 @@ public class Enemy01 : EnemyUnit
         player = FindFirstObjectByType<PlayerUnit>();
     }
 
-    // Called from Animation Event
+    
     public void Basic()
     {
         if (attacks == null || attacks.Count == 0)

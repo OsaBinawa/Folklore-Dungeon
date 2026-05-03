@@ -5,7 +5,8 @@ public enum EffectType
 {
     Damage,
     DelayAV,
-    Slow
+    Slow,
+    Shield,
  
 }
 

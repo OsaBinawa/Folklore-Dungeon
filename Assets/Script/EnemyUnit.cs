@@ -19,19 +19,24 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     [SerializeField] protected int maxEnergy = 100;
     [SerializeField] protected int currentEnergy;
     [SerializeField] protected int energyRegenPerTurn = 10;
-    [SerializeField] private Image sr;
+    [SerializeField] public Image sr;
     [SerializeField] public Animator anim;
     [SerializeField] private Slider HPbar;
     protected List<ElementType> runtimeWeaknesses = new();
     private bool ultimateQueued;
     protected TurnManager turnManager;
     protected EnemyAttack currentAttack;
-
+    [Header("Attacks")]
+    [SerializeField] private List<AttackBase> attacks;
     protected Dictionary<EnemyAttack, int> cooldowns = new();
+    private PlayerUnit player;
 
     public int Speed => data.Speed;
     public EnemyData Data => data;
-
+    private void Awake()
+    {
+        player = FindFirstObjectByType<PlayerUnit>();
+    }
     protected virtual void Start()
     {
         Setup();
@@ -66,7 +71,14 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     {
         turnManager?.UnregisterEnemy(this);
     }
+    public void Basic(int atkIndex)
+    {
+        if (attacks == null || attacks.Count == 0)
+            return;
 
+        ExecuteAttack(attacks[atkIndex], player);
+        Debug.Log("test");
+    }
     public virtual void Act(PlayerUnit player)
     {
 
@@ -90,6 +102,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         var action = ChooseAttack();
         Debug.Log("Animation String = [" + action.AnimationString + "]");
         anim.SetTrigger(action.AnimationString);
+        OnActionFinished();
         /*OnTurnStart();
 
         currentAttack = ChooseAttack();
