@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b303573c0c6c2964a815cadf542033bb, type: 3}
-  m_Name: Hyperfixed Productivity
+  m_Name: Art of Acceptance
   m_EditorClassIdentifier: Assembly-CSharp::BuffSO
-  hpPercent: -4
-  atkPercent: 12
+  hpPercent: 0
+  atkPercent: 0
   spdPercent: 0
-  damageTakenPercent: 0
+  damageTakenPercent: -10
   atkBonusVsNonWeakPercent: 0
   counter: 0
   slowChance: 0
@@ -23,7 +23,7 @@ MonoBehaviour:
   extraTurnOnKill: 0
   quickRead: 0
   bonusVsNonWeak: 0
-  stackable: 1
+  stackable: 0
   removeAble: 1
-  rarity: 1
-  Description: ATK +12% & HP -4%.
+  rarity: 0
+  Description: Mengurangi damage diterima sebanyak 10%.
