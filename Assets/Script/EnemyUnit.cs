@@ -22,6 +22,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     [SerializeField] public Image sr;
     [SerializeField] public Animator anim;
     [SerializeField] private Slider HPbar;
+    
     protected List<ElementType> runtimeWeaknesses = new();
     private bool ultimateQueued;
     protected TurnManager turnManager;
@@ -40,7 +41,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     protected virtual void Start()
     {
         Setup();
-        sr = GetComponent<Image>();
+        //sr = GetComponent<Image>();
         HPbar.maxValue = data.MaxHP;
         HPbar.value = data.MaxHP;
     }
@@ -54,13 +55,8 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     protected void Setup()
     {
         currentHP = data.MaxHP;
-        //currentToughness = data.MaxToughness;
-        currentEnergy = maxEnergy;
         isBroken = false;
 
-        /* cooldowns.Clear();
-         foreach (var atk in data.Attacks)
-             cooldowns[atk] = 0;*/
         runtimeWeaknesses = new List<ElementType>(data.Weaknesses);
 
         turnManager = FindFirstObjectByType<TurnManager>();
@@ -81,79 +77,27 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     }
     public virtual void Act(PlayerUnit player)
     {
-
-        
         if (!ultimateQueued && data.Ultimate != null)
         {
             if (currentEnergy >= data.Ultimate.EnergyRequired)
                 ultimateQueued = true;
         }
-
-        
         if (ultimateQueued)
         {
             anim.SetTrigger(data.Ultimate.AnimationString);
             currentEnergy = 0;
             ultimateQueued = false;
+            Debug.Log("Ulti");
             return;
         }
-
-        
         var action = ChooseAttack();
         Debug.Log("Animation String = [" + action.AnimationString + "]");
+        Debug.Log(name + " chose: " + action.AnimationString);
         anim.SetTrigger(action.AnimationString);
-        OnActionFinished();
-        /*OnTurnStart();
-
-        currentAttack = ChooseAttack();
-        if (currentAttack == null) return;
-
-        if (currentAttack.UsesEnergy)
-            currentEnergy -= currentAttack.EnergyCost;
-
-        OnAttackChosen(currentAttack);
-        PlayAnimation(currentAttack);
-
-        foreach (var effect in currentAttack.Effects)
-            ExecuteEffect(effect, player);
-
-        OnAttackExecuted(currentAttack);
-
-        if (data.IsUnique)
-        {
-            cooldowns[currentAttack] = currentAttack.Cooldown;
-            TickCooldowns();
-        }
-
-        RegenerateEnergy();
-        OnTurnEnd();*/
     }
 
     protected virtual EnemyAttack ChooseAttack()
     {
-        /*List<EnemyAttack> pool = data.Attacks
-            .Where(CanUseAttack)
-            .ToList();
-
-        if (pool.Count == 0)
-            pool = data.Attacks.ToList();
-
-        if (data.IsUnique)
-        {
-            pool = pool
-                .Where(a => cooldowns[a] <= 0)
-                .ToList();
-
-            if (pool.Count == 0)
-                pool = data.Attacks.ToList();
-        }
-
-        foreach (var atk in pool)
-            if (Random.value <= atk.Chance)
-                return atk;
-
-        return pool[Random.Range(0, pool.Count)];*/
-
         var pool = data.Actions;
 
         foreach (var action in pool)
@@ -165,14 +109,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         return pool[UnityEngine.Random.Range(0, pool.Count)];
     }
 
-    /*protected bool CanUseAttack(EnemyAttack atk)
-    {
-        if (atk.UsesEnergy && currentEnergy < atk.EnergyCost)
-            return false;
-
-        return true;
-    }*/
-
+ 
     protected void TickCooldowns()
     {
         foreach (var key in cooldowns.Keys.ToList())
@@ -188,21 +125,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         );
     }
 
-    /*protected virtual void ExecuteEffect(AttackEffect effect, PlayerUnit player)
-    {
-        switch (effect.Type)
-        {
-            case EffectType.Damage:
-                int dmg = data.BaseDamage + effect.Value;
-                ModifyDamage(ref dmg);
-                player.TakeDamage(dmg, currentAttack.Element);
-                break;
-
-            case EffectType.DelayAV:
-                turnManager.ModifyAV(player, effect.Value);
-                break;
-        }
-    }*/
+   
 
     protected void ExecuteAttack(AttackBase attack, PlayerUnit target)
     {
@@ -243,6 +166,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
 
     public void OnActionFinished()
     {
+        
         turnManager.NotifyEnemyActionComplete();
     }
     protected virtual void OnTurnStart() { }

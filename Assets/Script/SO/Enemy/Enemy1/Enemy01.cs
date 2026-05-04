@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+/*using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy01 : EnemyUnit
@@ -23,3 +23,4 @@ public class Enemy01 : EnemyUnit
         Debug.Log("test");
     }
 }
+*/

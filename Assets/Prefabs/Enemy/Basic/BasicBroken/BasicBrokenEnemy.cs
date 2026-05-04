@@ -1,24 +1,36 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BasicBrokenEnemy : EnemyUnit
 {
-    [Header("Broken Enemy Settings")]
-    [SerializeField] private int turnsBeforeExplosion = 3;
+    [Header("Broken Enemy")]
     [SerializeField] private int explosionDamage = 20;
-    [SerializeField] private Sprite[] stages; 
+    [SerializeField] private Sprite[] stages;
+    private bool progressedThisTurn = false;
+    [SerializeField]private int turnCounter = -1;
 
-    private int turnCounter = 0;
-    protected override void OnTurnEnd()
+    public override void Act(PlayerUnit player)
+    {     
+        progressedThisTurn = false;
+        base.Act(player);
+
+    }
+
+    public void ProgressState()
     {
-        base.OnTurnEnd();
+        if (progressedThisTurn) return;
+
+        progressedThisTurn = true;
 
         turnCounter++;
 
         UpdateVisual();
 
-        if (turnCounter >= turnsBeforeExplosion)
+        Debug.Log($"{name} stage: {turnCounter}");
+
+        if (stages != null && turnCounter >= stages.Length - 1)
         {
             Explode();
+            return;
         }
     }
 
@@ -36,10 +48,12 @@ public class BasicBrokenEnemy : EnemyUnit
 
         if (player != null)
         {
-            Debug.Log($"{name} explodes for {explosionDamage} damage");
+            Debug.Log($"{name} explodes for {explosionDamage}");
             player.TakeDamage(explosionDamage, ElementType.None);
         }
 
         Die();
+
+        OnActionFinished();
     }
 }

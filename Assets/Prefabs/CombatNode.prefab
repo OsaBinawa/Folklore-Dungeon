@@ -1305,7 +1305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7550876891366295908
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1949,6 +1949,7 @@ MonoBehaviour:
   sr: {fileID: 0}
   anim: {fileID: 0}
   HPbar: {fileID: 0}
+  attacks: []
 --- !u!1 &4941937934100112828
 GameObject:
   m_ObjectHideFlags: 0
@@ -3825,7 +3826,7 @@ MonoBehaviour:
   maxEnemies: 5
   enemyContainer: {fileID: 1729019562268867681}
   enemyPrefabs:
-  - {fileID: 4365528110497258432, guid: e880b0442b7527640b709988755d27a0, type: 3}
+  - {fileID: 2562358020629667031, guid: 896d003e62c3a364daeb25a53b7fd4dc, type: 3}
 --- !u!114 &1433572671359310071
 MonoBehaviour:
   m_ObjectHideFlags: 0
