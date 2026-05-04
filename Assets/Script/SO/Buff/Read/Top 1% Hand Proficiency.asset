@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b303573c0c6c2964a815cadf542033bb, type: 3}
-  m_Name: Hyperfixed Productivity
+  m_Name: Top 1% Hand Proficiency
   m_EditorClassIdentifier: Assembly-CSharp::BuffSO
-  hpPercent: -4
-  atkPercent: 12
+  hpPercent: 0
+  atkPercent: 10
   spdPercent: 0
   damageTakenPercent: 0
-  atkBonusVsNonWeakPercent: 0
+  atkBonusVsNonWeakPercent: 25
   counter: 0
   slowChance: 0
   adjacentHit: 0
   extraTurnOnKill: 0
   quickRead: 0
-  bonusVsNonWeak: 0
-  stackable: 1
+  bonusVsNonWeak: 1
+  stackable: 0
   removeAble: 1
-  rarity: 1
-  Description: ATK +12% & HP -4%.
+  rarity: 0
+  Description: 'Meningkatkan damage pada target yang elemennya tidak sesuai dengan
+    senjata. ATK +10%. '

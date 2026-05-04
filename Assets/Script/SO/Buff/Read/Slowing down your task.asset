@@ -15,11 +15,15 @@ MonoBehaviour:
   hpPercent: 0
   atkPercent: 0
   spdPercent: 0
+  damageTakenPercent: 0
+  atkBonusVsNonWeakPercent: 0
   counter: 0
   slowChance: 1
   adjacentHit: 0
   extraTurnOnKill: 0
   quickRead: 0
+  bonusVsNonWeak: 0
   stackable: 0
-  removeAble: 0
+  removeAble: 1
   rarity: 2
+  Description: Serangan memiliki kesempatan untuk mengakibatkan slow pada target.

@@ -15,11 +15,15 @@ MonoBehaviour:
   hpPercent: 0
   atkPercent: 0
   spdPercent: 10
+  damageTakenPercent: 0
+  atkBonusVsNonWeakPercent: 0
   counter: 0
   slowChance: 0
   adjacentHit: 0
   extraTurnOnKill: 1
   quickRead: 0
+  bonusVsNonWeak: 0
   stackable: 0
-  removeAble: 0
+  removeAble: 1
   rarity: 3
+  Description: Mendapat 1 giliran ekstra setelah mengalahkan target. SPD +10%.
