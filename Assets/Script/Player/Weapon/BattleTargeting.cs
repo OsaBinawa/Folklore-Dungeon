@@ -18,7 +18,8 @@ public class BattleTargeting : MonoBehaviour
             .Keys
             .OfType<EnemyUnit>()
             .ToList();
-
+        foreach (var e in enemies)
+            e.SetTargeted(false);
         switch (type)
         {
             case TargetType.Single:
@@ -52,5 +53,6 @@ public class BattleTargeting : MonoBehaviour
             result.Add(enemies[index + 1]);
 
         return result.ToArray();
+
     }
 }

@@ -200,6 +200,7 @@ MonoBehaviour:
   sr: {fileID: 3030445925336144592}
   anim: {fileID: 5048148330327182955}
   HPbar: {fileID: 1739744042050353781}
+  targetIndicator: {fileID: 7120803311380298212}
   attacks:
   - Name: Basic
     BaseDamage: 20

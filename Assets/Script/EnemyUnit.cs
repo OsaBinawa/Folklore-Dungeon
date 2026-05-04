@@ -22,7 +22,8 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     [SerializeField] public Image sr;
     [SerializeField] public Animator anim;
     [SerializeField] private Slider HPbar;
-    
+
+    [SerializeField] private GameObject targetIndicator;
     protected List<ElementType> runtimeWeaknesses = new();
     private bool ultimateQueued;
     protected TurnManager turnManager;
@@ -42,10 +43,16 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     {
         Setup();
         //sr = GetComponent<Image>();
+        if (targetIndicator != null)
+            targetIndicator.SetActive(false);
         HPbar.maxValue = data.MaxHP;
         HPbar.value = data.MaxHP;
     }
-
+    public void SetTargeted(bool value)
+    {
+        if (targetIndicator != null)
+            targetIndicator.SetActive(value);
+    }
     public virtual void Initialize(EnemyData enemyData)
     {
         data = enemyData;
@@ -229,7 +236,9 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         PlayerUnit player = FindFirstObjectByType<PlayerUnit>();
-
+        SetTargeted(false);
+        if (this is EliteTypoEnemy typo && !typo.CanBeTargeted())
+            return;
         if (player != null)
             player.SetTarget(this);
     }

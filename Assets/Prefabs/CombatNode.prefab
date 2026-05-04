@@ -1949,6 +1949,7 @@ MonoBehaviour:
   sr: {fileID: 0}
   anim: {fileID: 0}
   HPbar: {fileID: 0}
+  targetIndicator: {fileID: 0}
   attacks: []
 --- !u!1 &4941937934100112828
 GameObject:
@@ -3826,7 +3827,7 @@ MonoBehaviour:
   maxEnemies: 5
   enemyContainer: {fileID: 1729019562268867681}
   enemyPrefabs:
-  - {fileID: 2562358020629667031, guid: 896d003e62c3a364daeb25a53b7fd4dc, type: 3}
+  - {fileID: 7809462455800196690, guid: af4f6bb772e1bb543be1f114b83d2a75, type: 3}
 --- !u!114 &1433572671359310071
 MonoBehaviour:
   m_ObjectHideFlags: 0

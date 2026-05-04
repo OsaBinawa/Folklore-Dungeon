@@ -6,6 +6,7 @@ using TMPro;
 //using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerUnit : MonoBehaviour
 {
@@ -329,7 +330,13 @@ public class PlayerUnit : MonoBehaviour
 
     public void SetTarget(EnemyUnit target)
     {
+        if (currentTarget != null)
+            currentTarget.SetTargeted(false);
+
         currentTarget = target;
+
+        if (currentTarget != null)
+            currentTarget.SetTargeted(true);
     }
 
     public void NotifyTurnEnd()
