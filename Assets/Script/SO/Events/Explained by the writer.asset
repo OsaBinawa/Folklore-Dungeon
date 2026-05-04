@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c811f8a6a2ef36f5cac238e800a08cce, type: 3}
+  m_Name: Explained by the writer
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  Name: Explained by the writer
+  Type: 0
+  Dialogue:
+  - Seorang penulis datang ke perpustakaan.
+  - Ia adalah penulis dari buku yang pernah kamu baca.
+  - Kamu berencana menanyakan sesuatu mengenai salah satu bukunya.
+  - Buku manakah yang ingin kamu tanyakan?
+  Choices:
+  - text: Pilih Buku
+    buff: {fileID: 0}
+    effect: 1
+    triggerIndex: 3
+    resultDialogue: []
+  - text: Berubah pikiran
+    buff: {fileID: 0}
+    effect: 0
+    triggerIndex: 3
+    resultDialogue:
+    - Kamu berubah pikiran dan tidak jadi menanyakannya.
+  randomizeChoices: 0

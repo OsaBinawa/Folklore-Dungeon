@@ -245,28 +245,8 @@ public class EventManager : MonoBehaviour
 
         if (win)
         {
-            
-            int statIndex = Random.Range(0, 3);
+            player.IncreaseAttack(IncreaseAtk);
 
-            switch (statIndex)
-            {
-                case 0:
-                    player.IncreaseMaxHP(IncreaseHp); 
-                    Debug.Log("WIN: +HP");
-                    break;
-
-                case 1:
-                    player.IncreaseAttack(IncreaseAtk);
-                    Debug.Log("WIN: +ATK");
-                    break;
-
-                case 2:
-                    player.IncreaseSpeed(IncreaseSpd);
-                    Debug.Log("WIN: +SPD");
-                    break;
-            }
-
-            
             dialogueIndex++;
             ShowDialogue();
         }
