@@ -147,8 +147,8 @@ TextureImporter:
       name: malin_1
       rect:
         serializedVersion: 2
-        x: 583
-        y: 158
+        x: 572
+        y: 159
         width: 781
         height: 897
       alignment: 0
@@ -191,9 +191,9 @@ TextureImporter:
       name: malin_3
       rect:
         serializedVersion: 2
-        x: 1357
+        x: 1349
         y: 213
-        width: 548
+        width: 556
         height: 670
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

@@ -59,7 +59,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         Setup();
     }
 
-    protected void Setup()
+    protected virtual void Setup()
     {
         currentHP = data.MaxHP;
         isBroken = false;

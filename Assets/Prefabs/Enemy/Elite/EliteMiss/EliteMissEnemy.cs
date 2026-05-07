@@ -8,6 +8,7 @@ public class EliteMissEnemy : EnemyUnit
     public override void Act(PlayerUnit player)
     {
         base.Act(player);
+        TryApplyDelay();
     }
     public void TryApplyDelay()
     {

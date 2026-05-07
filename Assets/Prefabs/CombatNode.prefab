@@ -3824,10 +3824,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   minEnemies: 2
-  maxEnemies: 5
+  maxEnemies: 3
   enemyContainer: {fileID: 1729019562268867681}
   enemyPrefabs:
-  - {fileID: 7809462455800196690, guid: af4f6bb772e1bb543be1f114b83d2a75, type: 3}
+  - {fileID: 2562358020629667031, guid: 896d003e62c3a364daeb25a53b7fd4dc, type: 3}
+  - {fileID: 4365528110497258432, guid: e880b0442b7527640b709988755d27a0, type: 3}
+  - {fileID: 549938180214361854, guid: a45bc1e648da10b4485f86fea1369010, type: 3}
 --- !u!114 &1433572671359310071
 MonoBehaviour:
   m_ObjectHideFlags: 0
