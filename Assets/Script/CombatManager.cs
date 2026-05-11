@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CombatManager : MonoBehaviour
 {
+    [SerializeField] private NodeView nodeView;
     [SerializeField] private TurnManager turnManager;
     [SerializeField] private PlayerUnit playerUnit;
     [SerializeField] private Inventory inventory;
@@ -12,6 +13,8 @@ public class CombatManager : MonoBehaviour
 
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
+
+    [SerializeField] private AudioClip CombatBGM;
 
     private bool gameEnd = false;
 
@@ -32,6 +35,7 @@ public class CombatManager : MonoBehaviour
         turnManager = FindFirstObjectByType<TurnManager>();
         playerUnit = FindFirstObjectByType<PlayerUnit>();
         inventory = FindFirstObjectByType<Inventory>();
+        SoundManager.Instance.PlayBGM(CombatBGM);
     }
 
     
@@ -73,7 +77,6 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-
     private void CheckLose()
     {
         if (gameEnd) return;
@@ -82,6 +85,13 @@ public class CombatManager : MonoBehaviour
         losePanel.SetActive(true);
         Debug.Log("YOU LOSE");
     }
+
+    public void ResolveCombat()
+    {
+        nodeView.ResolveNode();
+        RunManager.Instance.PlayGameBGM();
+    }
+
     public void GoToScene(string Scene)
     {
         SceneManager.LoadScene(Scene);

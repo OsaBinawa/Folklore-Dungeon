@@ -3142,6 +3142,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 15d11e91ce4e26b439f87f8d65202586, type: 2}
   - {fileID: 11400000, guid: 5fbdf12fc44466d4e8b4c64c7c3392e2, type: 2}
   - {fileID: 11400000, guid: 264f51c62d31b6f47beb596fc50bbb74, type: 2}
+  inGameBGM: {fileID: 8300000, guid: d64b35ef23e05f7ec939706e5f48797a, type: 3}
 --- !u!4 &1249741748
 Transform:
   m_ObjectHideFlags: 0
