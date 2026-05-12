@@ -2280,9 +2280,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1283737296526423730}
-        m_TargetAssemblyTypeName: NodeView, Assembly-CSharp
-        m_MethodName: ResolveNode
+      - m_Target: {fileID: 4727184262529060250}
+        m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
+        m_MethodName: ResolveCombat
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3854,12 +3854,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32239dc712ed7fd4291d27943b6b72fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatManager
+  nodeView: {fileID: 1283737296526423730}
   turnManager: {fileID: 0}
   playerUnit: {fileID: 19510278876226992}
   inventory: {fileID: 0}
   text1: {fileID: 8059170313268324604}
   winPanel: {fileID: 5812058978194221869}
   losePanel: {fileID: 2315240349525901673}
+  CombatBGM: {fileID: 8300000, guid: 29faa05ad788d97cb9e0124279fb5dfe, type: 3}
 --- !u!1 &8807473626246323523
 GameObject:
   m_ObjectHideFlags: 0

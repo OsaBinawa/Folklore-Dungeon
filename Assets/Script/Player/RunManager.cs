@@ -7,6 +7,7 @@ public class RunManager : MonoBehaviour
     [SerializeField] private PlayerBaseStats startingStats;
     [SerializeField] public List<BuffSO> AllAvailableBuff =  new List<BuffSO>();
     public PlayerRunData Player { get; private set; }
+    [SerializeField] private AudioClip inGameBGM;
     private void Awake()
     {
         Debug.Log("RUNMANAGER AWAKE");
@@ -15,6 +16,8 @@ public class RunManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        PlayGameBGM();
 
         Instance = this;
         //DontDestroyOnLoad(gameObject);
@@ -36,5 +39,10 @@ public class RunManager : MonoBehaviour
                 Player.EquippedItems.Add(eq);
         }
         Debug.Log("StartingStats = " + startingStats);
+    }
+
+    public void PlayGameBGM()
+    {
+        SoundManager.Instance.PlayBGM(inGameBGM);
     }
 }

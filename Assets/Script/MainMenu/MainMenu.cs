@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] private AudioClip mainMenuBGM;
     public List<GameObject> panels = new();
     public void ShowPanel(GameObject panelToShow)
     {
@@ -14,6 +15,11 @@ public class MainMenu : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1.0f;
+    }
+
+    private void Start()
+    {
+        SoundManager.Instance.PlayBGM(mainMenuBGM);
     }
 
     public void OnApplicationQuit()
