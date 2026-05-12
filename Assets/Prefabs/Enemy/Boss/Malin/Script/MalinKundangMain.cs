@@ -86,7 +86,7 @@ public class MalinKundangMain : EnemyUnit
         }
     }
 
-    public bool CanBeTargeted()
+    public bool _CanBeTargeted()
     {
         if (permanentTargetable)
             return true;

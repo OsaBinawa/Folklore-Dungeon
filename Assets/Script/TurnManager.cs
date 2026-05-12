@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class TurnManager : MonoBehaviour
 {
     public const float BASE_AV_SCALE = 10000f;
@@ -23,23 +22,17 @@ public class TurnManager : MonoBehaviour
         PlayerTurn,
         EnemyTurn
     }
-
     private TurnState state = TurnState.Timeline;
-
     private void Start()
     {
         RegisterPlayer();
         StartCoroutine(TimelineLoop());
         OnTimelineUpdated?.Invoke();
     }
-
-    
-
     private void RegisterPlayer()
     {
         avMap[player] = GetBaseAV(player);
     }
-
     public void RegisterEnemy(EnemyUnit enemy)
     {
         if (enemies.Contains(enemy)) return;
@@ -48,16 +41,12 @@ public class TurnManager : MonoBehaviour
         avMap[enemy] = GetBaseAV(enemy);
         OnTimelineUpdated?.Invoke();
     }
-
     public void UnregisterEnemy(EnemyUnit enemy)
     {
         enemies.Remove(enemy);
         avMap.Remove(enemy);
         OnTimelineUpdated?.Invoke();
     }
-
-   
-
     private float GetBaseAV(object unit)
     {
         if (unit is PlayerUnit p)
@@ -68,7 +57,6 @@ public class TurnManager : MonoBehaviour
 
         return BASE_AV_SCALE;
     }
-
     public void ModifyAV(object unit, float amount)
     {
         if (!avMap.ContainsKey(unit)) return;
@@ -76,9 +64,6 @@ public class TurnManager : MonoBehaviour
         avMap[unit] += amount;
         OnTimelineUpdated?.Invoke();
     }
-
-   
-
     public void NotifyPlayerActionComplete()
     {
        
@@ -120,7 +105,6 @@ public class TurnManager : MonoBehaviour
             yield return null;
         }
     }
-
     private IEnumerator EnemyTurn(EnemyUnit enemy)
     {
         /*yield return null;
@@ -142,9 +126,6 @@ public class TurnManager : MonoBehaviour
         foreach (EnemyUnit enemy in enemies)
             avMap[enemy] -= tick;
     }
-
-  
-
     private object GetNextReadyUnit()
     {
         object best = null;
@@ -179,7 +160,6 @@ public class TurnManager : MonoBehaviour
 
         playerTurnRoutine = StartCoroutine(PlayerTurnCounter());
     }
-
     private IEnumerator PlayerTurnCounter()
     {
         float timeleft = turnTime;
@@ -200,7 +180,6 @@ public class TurnManager : MonoBehaviour
 
         playerTurnRoutine = null;
     }
-
     public void RegisterEnemies(List<EnemyUnit> enemies)
     {
         foreach (var enemy in enemies)
@@ -208,7 +187,6 @@ public class TurnManager : MonoBehaviour
             RegisterEnemy(enemy);
         }
     }
-
     public int GetDisplayAV(object unit)
     {
         if (!avMap.ContainsKey(unit)) return 0;
@@ -218,5 +196,4 @@ public class TurnManager : MonoBehaviour
 
         return Mathf.Clamp(display, 0, (int)DISPLAY_AV_SCALE);
     }
-
 }

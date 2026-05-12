@@ -17,6 +17,7 @@ public class BattleTargeting : MonoBehaviour
             .AVMap
             .Keys
             .OfType<EnemyUnit>()
+            .Where(e => e.CanBeTargeted())
             .ToList();
         foreach (var e in enemies)
             e.SetTargeted(false);

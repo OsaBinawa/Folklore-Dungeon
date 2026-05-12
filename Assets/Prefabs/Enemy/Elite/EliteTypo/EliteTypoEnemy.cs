@@ -77,7 +77,7 @@ public class EliteTypoEnemy : EnemyUnit
         }
     }
 
-    public bool CanBeTargeted()
+    public bool _CanBeTargeted()
     {
         return !isUntargetable;
     }

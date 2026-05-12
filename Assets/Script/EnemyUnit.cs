@@ -222,7 +222,10 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         if (!string.IsNullOrEmpty(trigger))
             GetComponent<Animator>()?.SetTrigger(trigger);
     }
-
+    public virtual bool CanBeTargeted()
+    {
+        return true;
+    }
     public IEnumerator TakingDamageSpriteChange()
     {
         sr.color = Color.red;
