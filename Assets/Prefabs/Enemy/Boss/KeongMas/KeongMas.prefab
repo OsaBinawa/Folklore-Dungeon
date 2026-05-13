@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.000038147, y: -0.000015259}
-  m_SizeDelta: {x: 1905, y: 1200}
+  m_SizeDelta: {x: 755, y: 897}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5477222711024140340
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: efdabb71d5542a64992f4b2372ef138d, type: 3}
+  m_Sprite: {fileID: 7542919677613953682, guid: 08f0516df32162748a2c4109e9748a4f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -166,7 +166,7 @@ Animator:
   m_GameObject: {fileID: 1780442981076582795}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 02fccf4561f926942ac5164703c9b582, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7d7546cbc3a7e194e9ed620ae5814977, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd6d3520869f194ca0468ad1f1ca84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KeongMasEnemy
-  data: {fileID: 11400000, guid: 9571f515c0873d742a6fabc31f004ad9, type: 2}
+  data: {fileID: 11400000, guid: 9baee20302219db4f8eb32d07770594f, type: 2}
   currentHP: 0
   currentToughness: 0
   isBroken: 0
@@ -202,11 +202,14 @@ MonoBehaviour:
   HPbar: {fileID: 1739744042050353781}
   targetIndicator: {fileID: 6368121916532404933}
   attacks: []
-  maxShieldHP: 300
-  shieldVisual: {fileID: 0}
+  summonPool:
+  - {fileID: 2562358020629667031, guid: 896d003e62c3a364daeb25a53b7fd4dc, type: 3}
+  summonParent: {fileID: 0}
+  summonCount: 3
+  shieldWeaknesses: 03000000
+  exposedWeaknesses: 02000000
+  shieldActive: 0
   stunDuration: 3
-  summonEnemies: []
-  summonSlots: []
 --- !u!1 &3321028183754936657
 GameObject:
   m_ObjectHideFlags: 0

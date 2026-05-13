@@ -3,169 +3,159 @@ using UnityEngine;
 
 public class KeongMasEnemy : EnemyUnit
 {
+    [Header("Summon Settings")]
+    [SerializeField] private List<EnemyUnit> summonPool;
+    [SerializeField] private GameObject summonParent;
+    [SerializeField] private int summonCount = 3;
+
+    [Header("Weakness States")]
+    [SerializeField] private List<ElementType> shieldWeaknesses;
+    [SerializeField] private List<ElementType> exposedWeaknesses;
+
     [Header("Shield")]
-    [SerializeField] private int maxShieldHP = 300;
-    [SerializeField] private GameObject shieldVisual;
-    private int currentShieldHP;
-    private bool shieldActive = true;
+    [SerializeField] private bool shieldActive;
+
     [Header("Stun")]
     [SerializeField] private int stunDuration = 3;
-    private int stunnedTurns;
-    [Header("Summon")]
-    [SerializeField] private List<EnemyUnit> summonEnemies;
-    [SerializeField] private GameObject[] summonSlots;
 
     private List<EnemyUnit> activeSummons = new();
 
-    protected override void Start()
-    {
-        base.Start();
+    private bool stunned;
+    private int stunTurnsRemaining;
 
-        ActivateShield();
-        SummonEnemies();
+    protected override void Setup()
+    {
+        base.Setup();
+
+        shieldActive = false;
+        stunned = false;
     }
 
     public override void Act(PlayerUnit player)
     {
-        activeSummons.RemoveAll(x => x == null);
+        CleanupSummons();
 
-        // While summons alive, Keong cannot act
-        if (activeSummons.Count > 0)
+        if (stunned)
         {
-            Debug.Log(name + " is protected by summons");
+            stunTurnsRemaining--;
 
-            OnActionFinished();
-            return;
-        }
+            Debug.Log(name + " stunned. Remaining turns: " + stunTurnsRemaining);
 
-        // Stunned phase
-        if (!shieldActive)
-        {
-            stunnedTurns--;
-
-            Debug.Log(name + " stunned turns: " + stunnedTurns);
-
-            if (stunnedTurns <= 0)
+            if (stunTurnsRemaining <= 0)
             {
-                ActivateShield();
-                SummonEnemies();
+                stunned = false;
             }
 
             OnActionFinished();
             return;
         }
 
-        // Normal behavior
+        if (shieldActive && activeSummons.Count <= 0)
+        {
+            BreakShield();
+
+            OnActionFinished();
+            return;
+        }
+
+        if (shieldActive)
+        {
+            OnActionFinished();
+            return;
+        }
+
         base.Act(player);
+    }
+
+    public void AnimationEvent_ActivateShield()
+    {
+        ActivateShield();
+    }
+
+    public void AnimationEvent_SummonEnemies()
+    {
+        SummonEnemies();
+    }
+
+    private void SummonEnemies()
+    {
+        if (summonPool == null || summonPool.Count == 0)
+        {
+            Debug.LogWarning("Summon pool empty on " + name);
+            return;
+        }
+
+        activeSummons.Clear();
+
+        for (int i = 0; i < summonCount; i++)
+        {
+            EnemyUnit randomEnemy =
+                summonPool[Random.Range(0, summonPool.Count)];
+
+            if (randomEnemy == null)
+                continue;
+
+            Vector3 spawnPosition =
+                summonParent != null
+                ? summonParent.transform.position
+                : transform.position;
+
+            EnemyUnit summonedEnemy = Instantiate(
+                randomEnemy,
+                spawnPosition,
+                Quaternion.identity,
+                summonParent != null
+                    ? summonParent.transform
+                    : null
+            );
+
+            activeSummons.Add(summonedEnemy);
+        }
+
+        Debug.Log(name + " summoned " + activeSummons.Count + " enemies.");
+    }
+
+    private void ActivateShield()
+    {
+        shieldActive = true;
+
+        runtimeWeaknesses =
+            new List<ElementType>(shieldWeaknesses);
+
+        Debug.Log(name + " activated shield.");
+    }
+
+    private void BreakShield()
+    {
+        shieldActive = false;
+
+        runtimeWeaknesses =
+            new List<ElementType>(exposedWeaknesses);
+
+        stunned = true;
+        stunTurnsRemaining = stunDuration;
+
+        Debug.Log(name + " shield broken and stunned.");
     }
 
     public override void TakeDamage(int damage, ElementType element)
     {
-        activeSummons.RemoveAll(x => x == null);
-
-        // Cannot be damaged while summons alive
-        if (activeSummons.Count > 0)
-        {
-            Debug.Log(name + " is protected by summons");
-            return;
-        }
-
-        // Shield phase
         if (shieldActive)
         {
-            // Only weak to Miss while shield active
-            if (element != ElementType.Fix)
-            {
-                Debug.Log(name + " resisted damage");
-                return;
-            }
-
-            currentShieldHP -= damage;
-
-            Debug.Log(name + " shield HP: " + currentShieldHP);
-
-            StartCoroutine(TakingDamageSpriteChange());
-
-            if (currentShieldHP <= 0)
-            {
-                BreakShield();
-            }
-
-            return;
-        }
-
-        // Vulnerable phase
-        // Only weak to Typo while shield broken
-        if (element != ElementType.Typo)
-        {
-            Debug.Log(name + " resisted damage");
+            Debug.Log(name + " blocked damage because shield is active.");
             return;
         }
 
         base.TakeDamage(damage, element);
     }
 
+    private void CleanupSummons()
+    {
+        activeSummons.RemoveAll(enemy => enemy == null);
+    }
+
     public override bool CanBeTargeted()
     {
-        activeSummons.RemoveAll(x => x == null);
-
-        return activeSummons.Count == 0;
-    }
-
-    private void ActivateShield()
-    {
-        shieldActive = true;
-        currentShieldHP = maxShieldHP;
-
-        runtimeWeaknesses.Clear();
-        runtimeWeaknesses.Add(ElementType.Fix);
-
-        Debug.Log(name + " restored shield");
-
-        if (shieldVisual != null)
-            shieldVisual.SetActive(true);
-    }
-
-    private void BreakShield()
-    {
-        shieldActive = false;
-        stunnedTurns = stunDuration;
-
-        runtimeWeaknesses.Clear();
-        runtimeWeaknesses.Add(ElementType.Typo);
-
-        Debug.Log(name + " shield broken!");
-
-        if (shieldVisual != null)
-            shieldVisual.SetActive(false);
-    }
-
-    private void SummonEnemies()
-    {
-        activeSummons.RemoveAll(x => x == null);
-
-        
-        if (activeSummons.Count > 0)
-            return;
-
-        for (int i = 0; i < summonSlots.Length; i++)
-        {
-            EnemyUnit randomEnemy =
-                summonEnemies[Random.Range(0, summonEnemies.Count)];
-
-            EnemyUnit spawned = Instantiate(
-                randomEnemy,
-                summonSlots[i].transform
-            );
-
-            // Reset UI transform
-            spawned.transform.localPosition = Vector3.zero;
-            spawned.transform.localRotation = Quaternion.identity;
-            spawned.transform.localScale = Vector3.one;
-
-            activeSummons.Add(spawned);
-        }
-
-        Debug.Log(name + " summoned enemies");
+        return true;
     }
 }
