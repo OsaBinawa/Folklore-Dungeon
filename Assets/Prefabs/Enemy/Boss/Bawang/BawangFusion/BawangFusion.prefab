@@ -28,7 +28,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1435552250017967159}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -105,7 +105,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5050100346116870342}
   - {fileID: 3255002416884758349}
@@ -166,7 +166,7 @@ Animator:
   m_GameObject: {fileID: 1780442981076582795}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 02fccf4561f926942ac5164703c9b582, type: 2}
+  m_Controller: {fileID: 9100000, guid: e34fa6d06737ca44b80914a088f41170, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -202,6 +202,10 @@ MonoBehaviour:
   HPbar: {fileID: 1739744042050353781}
   targetIndicator: {fileID: 6368121916532404933}
   attacks: []
+  atkBuffPercent: 0.1
+  atkBuffDuration: 3
+  spdBuffPercent: 0.1
+  spdBuffDuration: 1
 --- !u!1 &3321028183754936657
 GameObject:
   m_ObjectHideFlags: 0

@@ -1205,8 +1205,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3180538902773966518}
   - {fileID: 4347768280186420654}
+  - {fileID: 3180538902773966518}
   m_Father: {fileID: 838458214636829286}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.31124985, y: 0.5083333}
@@ -1232,7 +1232,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 200
+  m_Spacing: 120
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -3854,12 +3854,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32239dc712ed7fd4291d27943b6b72fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatManager
+  nodeView: {fileID: 0}
   turnManager: {fileID: 0}
   playerUnit: {fileID: 19510278876226992}
   inventory: {fileID: 0}
   text1: {fileID: 8059170313268324604}
   winPanel: {fileID: 5812058978194221869}
   losePanel: {fileID: 2315240349525901673}
+  CombatBGM: {fileID: 0}
 --- !u!1 &8807473626246323523
 GameObject:
   m_ObjectHideFlags: 0

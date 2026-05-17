@@ -23,6 +23,10 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     [SerializeField] public Animator anim;
     [SerializeField] private Slider HPbar;
 
+    [Header("Runtime Buffs")]
+    protected float attackMultiplier = 1f;
+    protected float speedMultiplier = 1f;
+
     [SerializeField] private GameObject targetIndicator;
     protected List<ElementType> runtimeWeaknesses = new();
     private bool ultimateQueued;
@@ -33,7 +37,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     protected Dictionary<EnemyAttack, int> cooldowns = new();
     private PlayerUnit player;
 
-    public int Speed => data.Speed;
+    public int Speed => Mathf.RoundToInt(data.Speed * speedMultiplier);
     public EnemyData Data => data;
     private void Awake()
     {
@@ -141,7 +145,11 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
 
         for (int i = 0; i < attack.HitCount; i++)
         {
-            target.TakeDamage(attack.BaseDamage, attack.Element);
+            int finalDamage = Mathf.RoundToInt(
+                attack.BaseDamage * attackMultiplier
+            );
+
+            target.TakeDamage(finalDamage, attack.Element);
 
             foreach (var effect in attack.Effects)
             {
