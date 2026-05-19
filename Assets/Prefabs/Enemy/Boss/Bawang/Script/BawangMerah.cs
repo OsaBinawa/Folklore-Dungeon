@@ -4,11 +4,22 @@ public class BawangMerah : BawangBase
 {
     [Header("Merah")]
     [SerializeField] private int rageDamage = 50;
+    [Range(0.0f, 1f)]
+    [SerializeField] private float atkBuffPercent = 0.25f;
+    [SerializeField] private int atkBuffDuration = 3;
 
+    [Range(0.0f, 1f)]
+    [SerializeField] private float spdBuffPercent = 0.25f;
+    [SerializeField] private int spdBuffDuration = 3;
+
+    [SerializeField] private int healAmount = 50;
+    private int currentAtkTurns;
+    private int currentSpdTurns;
     private int turnCounter;
 
     public override void Act(PlayerUnit player)
     {
+        UpdateBuffs();
         if (defeated)
         {
             OnActionFinished();
@@ -47,16 +58,74 @@ public class BawangMerah : BawangBase
     // Optional support skills
     public void BuffATK()
     {
-        Debug.Log(name + " buffs ATK");
+        if (sibling == null)
+            return;
+
+        if (sibling.IsDefeated)
+            return;
+
+        sibling.ApplyAttackBuff(
+            atkBuffPercent,
+            atkBuffDuration
+        );
+
+        Debug.Log(name + " buffs sibling ATK");
     }
 
+    // Animation Event
     public void BuffSPD()
     {
-        Debug.Log(name + " buffs SPD");
+        if (sibling == null)
+            return;
+
+        if (sibling.IsDefeated)
+            return;
+
+        sibling.ApplySpeedBuff(
+            spdBuffPercent,
+            spdBuffDuration
+        );
+
+        Debug.Log(name + " buffs sibling SPD");
+    }
+
+    private void UpdateBuffs()
+    {
+        if (currentAtkTurns > 0)
+        {
+            currentAtkTurns--;
+
+            if (currentAtkTurns <= 0)
+            {
+                attackMultiplier = 1f;
+
+                Debug.Log(name + " ATK buff expired");
+            }
+        }
+
+        if (currentSpdTurns > 0)
+        {
+            currentSpdTurns--;
+
+            if (currentSpdTurns <= 0)
+            {
+                speedMultiplier = 1f;
+
+                Debug.Log(name + " SPD buff expired");
+            }
+        }
     }
 
     public void Heal()
     {
-        Debug.Log(name + " heals");
+        if (sibling == null)
+            return;
+
+        if (sibling.IsDefeated)
+            return;
+
+        sibling.Heal(healAmount);
+
+        Debug.Log(name + " heals " + sibling.name);
     }
 }

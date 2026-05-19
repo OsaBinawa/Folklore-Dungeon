@@ -9,6 +9,9 @@ public class BawangBase : EnemyUnit
     protected bool defeated;
     protected bool fusionTriggered;
 
+    private int attackBuffTurns;
+    private int speedBuffTurns;
+
     public bool IsDefeated => defeated;
 
     public override bool CanBeTargeted()
@@ -80,6 +83,8 @@ public class BawangBase : EnemyUnit
 
     public override void Act(PlayerUnit player)
     {
+        UpdateBuffs();
+
         if (defeated)
         {
             OnActionFinished();
@@ -87,5 +92,60 @@ public class BawangBase : EnemyUnit
         }
 
         base.Act(player);
+    }
+
+    private void UpdateBuffs()
+    {
+        if (attackBuffTurns > 0)
+        {
+            attackBuffTurns--;
+
+            if (attackBuffTurns <= 0)
+            {
+                attackMultiplier = 1f;
+
+                Debug.Log(name + " ATK buff expired");
+            }
+        }
+
+        if (speedBuffTurns > 0)
+        {
+            speedBuffTurns--;
+
+            if (speedBuffTurns <= 0)
+            {
+                speedMultiplier = 1f;
+
+                Debug.Log(name + " SPD buff expired");
+            }
+        }
+    }
+
+    public virtual void Heal(int amount)
+    {
+        currentHP += amount;
+
+        if (currentHP > data.MaxHP)
+            currentHP = data.MaxHP;
+
+        HpBarUpdate();
+
+        Debug.Log(name + " healed " + amount);
+    }
+
+    public virtual void ApplyAttackBuff(float percent, int duration)
+    {
+        attackMultiplier = 1f + percent;
+        attackBuffTurns = duration;
+
+        Debug.Log(name + " ATK buff applied");
+    }
+
+    public virtual void ApplySpeedBuff(float percent, int duration)
+    {
+        speedMultiplier = 1f + percent;
+        speedBuffTurns = duration;
+
+        Debug.Log(name + " SPD buff applied");
     }
 }

@@ -20,7 +20,8 @@ public class BawangPutih : BawangBase
         {
             Debug.Log(name + " buffs itself");
 
-            currentEnergy += 20;
+            attackMultiplier = 1.5f;
+            speedMultiplier = 1.5f;
         }
 
         base.Act(player);
@@ -46,7 +47,22 @@ public class BawangPutih : BawangBase
 
         Debug.Log(name + " is charging");
     }
+    public void ApplyChargeBonus()
+    {
+        if (!charged)
+            return;
 
+        PlayerUnit player = FindFirstObjectByType<PlayerUnit>();
+
+        if (player == null)
+            return;
+
+        player.TakeDamage(chargeBonus, ElementType.Typo);
+
+        charged = false;
+
+        Debug.Log(name + " triggers charge bonus damage");
+    }
     // Animation Event
     public void HeavyAttack()
     {
@@ -65,4 +81,6 @@ public class BawangPutih : BawangBase
 
         player.TakeDamage(damage, ElementType.Typo);
     }
+    
+
 }
