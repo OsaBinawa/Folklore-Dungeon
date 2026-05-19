@@ -201,7 +201,12 @@ MonoBehaviour:
   anim: {fileID: 5048148330327182955}
   HPbar: {fileID: 1739744042050353781}
   targetIndicator: {fileID: 6368121916532404933}
-  attacks: []
+  attacks:
+  - Name: Apa kek
+    BaseDamage: 100
+    Element: 0
+    HitCount: 1
+    Effects: []
   sibling: {fileID: 0}
   fusionPrefab: {fileID: 0}
   chargeBonus: 30
