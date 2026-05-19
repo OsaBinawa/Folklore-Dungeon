@@ -4,13 +4,18 @@ using UnityEngine;
 public class MapRun
 {
     public List<List<MapNode>> DeptNodes = new List<List<MapNode>>();
-
     public int MaxDepth = 10;
-
-    
     public int RestInterval = 4;
     public int MinWidth = 2;
     public int MaxWidth = 4;
+
+    public MapRun(int maxDepth, int restInterval, int minWidth, int maxWidth)
+    {
+        MaxDepth = maxDepth;
+        RestInterval = restInterval;
+        MinWidth = minWidth;
+        MaxWidth = maxWidth;
+    }
 
     public void Generate()
     {

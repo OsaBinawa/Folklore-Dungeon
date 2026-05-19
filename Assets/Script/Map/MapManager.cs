@@ -10,6 +10,14 @@ public class MapManager : MonoBehaviour
     public Transform ContentRoot;
     public Transform Root;
     public Transform NodeViewContainer;
+
+    [Header("Map Configuration")]
+    [SerializeField] private int maxDepth = 10;
+    [SerializeField] private  int restInterval = 4;
+    [SerializeField] private int minWidth = 2;
+    [SerializeField] private int maxWidth = 4;
+
+    [Header("Visual & Prefabs")]
     [SerializeField] private List<NodeSpriteEntry> NodeSprites;
     [SerializeField] private GameObject NodeButtonPrefabs;
     [SerializeField] private MapRun currentRun;
@@ -41,7 +49,7 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
-        currentRun = new MapRun();
+        currentRun = new MapRun(maxDepth, restInterval, minWidth, maxWidth);
         currentRun.Generate();
         DisplayAllDepths();
         AutoCompleteStartNode();
