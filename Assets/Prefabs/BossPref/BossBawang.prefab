@@ -4163,17 +4163,9 @@ PrefabInstance:
       value: BawangMrh
       objectReference: {fileID: 0}
     - target: {fileID: 1967476374864278651, guid: 7eb0cbb7b0a834c49b3946b86f82f558, type: 3}
-      propertyPath: data
-      value: 
-      objectReference: {fileID: 11400000, guid: 9571f515c0873d742a6fabc31f004ad9, type: 2}
-    - target: {fileID: 1967476374864278651, guid: 7eb0cbb7b0a834c49b3946b86f82f558, type: 3}
       propertyPath: sibling
       value: 
       objectReference: {fileID: 1661087246242515241}
-    - target: {fileID: 1967476374864278651, guid: 7eb0cbb7b0a834c49b3946b86f82f558, type: 3}
-      propertyPath: fusionPrefab
-      value: 
-      objectReference: {fileID: 1780442981076582795, guid: 2ab39fdc04500f04b84d8ce7817b0561, type: 3}
     - target: {fileID: 2632980907228850215, guid: 7eb0cbb7b0a834c49b3946b86f82f558, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4212,17 +4204,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 1729019562268867681}
     m_Modifications:
     - target: {fileID: -6286235213617577048, guid: ac06214ddbfbab14d8ea910f3215de51, type: 3}
-      propertyPath: data
-      value: 
-      objectReference: {fileID: 11400000, guid: 9571f515c0873d742a6fabc31f004ad9, type: 2}
-    - target: {fileID: -6286235213617577048, guid: ac06214ddbfbab14d8ea910f3215de51, type: 3}
       propertyPath: sibling
       value: 
       objectReference: {fileID: 3816688859474798050}
-    - target: {fileID: -6286235213617577048, guid: ac06214ddbfbab14d8ea910f3215de51, type: 3}
-      propertyPath: fusionPrefab
-      value: 
-      objectReference: {fileID: 1780442981076582795, guid: 2ab39fdc04500f04b84d8ce7817b0561, type: 3}
     - target: {fileID: 1435552250017967159, guid: ac06214ddbfbab14d8ea910f3215de51, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
