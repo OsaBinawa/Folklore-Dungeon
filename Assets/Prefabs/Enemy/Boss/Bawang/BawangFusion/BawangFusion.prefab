@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e014deb6bb033c54e9259a2eab363e1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BawangFusion
-  data: {fileID: 11400000, guid: 9571f515c0873d742a6fabc31f004ad9, type: 2}
+  data: {fileID: 11400000, guid: a767dfa83777555458d059fcbde9bd7d, type: 2}
   currentHP: 0
   currentToughness: 0
   isBroken: 0
@@ -201,7 +201,21 @@ MonoBehaviour:
   anim: {fileID: 5048148330327182955}
   HPbar: {fileID: 1739744042050353781}
   targetIndicator: {fileID: 6368121916532404933}
-  attacks: []
+  attacks:
+  - Name: 
+    BaseDamage: 12
+    Element: 0
+    HitCount: 1
+    Effects:
+    - Type: 2
+      Value: 20
+  - Name: 
+    BaseDamage: 20
+    Element: 0
+    HitCount: 1
+    Effects:
+    - Type: 2
+      Value: 20
   atkBuffPercent: 0.1
   atkBuffDuration: 3
   spdBuffPercent: 0.1

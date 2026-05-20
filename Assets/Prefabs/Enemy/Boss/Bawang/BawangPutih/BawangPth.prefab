@@ -203,13 +203,20 @@ MonoBehaviour:
   targetIndicator: {fileID: 6368121916532404933}
   attacks:
   - Name: Apa kek
-    BaseDamage: 100
+    BaseDamage: 10
+    Element: 0
+    HitCount: 1
+    Effects:
+    - Type: 1
+      Value: 20
+  - Name: HeavyAtttack
+    BaseDamage: 30
     Element: 0
     HitCount: 1
     Effects: []
   sibling: {fileID: 0}
   fusionPrefab: {fileID: 1780442981076582795, guid: 2ab39fdc04500f04b84d8ce7817b0561, type: 3}
-  chargeBonus: 30
+  chargeBonus: 10
 --- !u!1 &3321028183754936657
 GameObject:
   m_ObjectHideFlags: 0
