@@ -28,6 +28,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private GameObject BossPrefab;
     [SerializeField] private GameObject ReadPrefab;
     [SerializeField] private GameObject ShopPrefab;
+    [SerializeField] private GameObject ElitePrefabs;
     [SerializeField] private LineDrawer lineDrawer;
     [SerializeField] private Scrollbar scroll;
 
@@ -43,6 +44,7 @@ public class MapManager : MonoBehaviour
             NodeType.Boss => BossPrefab,
             NodeType.Shop => ShopPrefab,
             NodeType.Reading => ReadPrefab,
+            NodeType.Elite => ElitePrefabs,
             _ => CombatPrefab
         };
     }
@@ -84,8 +86,6 @@ public class MapManager : MonoBehaviour
                 localNode.Button = btn;
 
                 btn.onClick.AddListener(() => EnterNode(localNode));
-
-                
                 btn.interactable = false;
 
                 /*TMP_Text txt = btnObj.GetComponentInChildren<TMP_Text>();
@@ -126,9 +126,6 @@ public class MapManager : MonoBehaviour
             }
         }
     }
-
-
-
     public void EnterNode(MapNode node)
     {
         currentNode = node;
