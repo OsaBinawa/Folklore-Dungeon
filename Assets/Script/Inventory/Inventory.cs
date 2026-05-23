@@ -136,9 +136,11 @@ public class Inventory : MonoBehaviour
             Button button = btnObj.GetComponent<Button>();
 
             TMP_Text label = btnObj.GetComponentInChildren<TMP_Text>();
+            Image img = btnObj.GetComponentInChildren<Image>();
             if (label != null)
                 label.text = weapon.WeaponName;
 
+            img.sprite = weapon.icon;
             WeaponSO localWeapon = weapon;
 
             button.onClick.AddListener(() =>
