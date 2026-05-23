@@ -15,6 +15,13 @@ public class MainUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI speedText;
     [SerializeField] private TextMeshProUGUI hpText;
 
+    [SerializeField] private Slots slots;
+
+    [Header("UI")]
+    [SerializeField] private Transform buffContainer;
+    [SerializeField] private BuffCard buffPrefab;
+
+
     private int previousAttack;
     private int previousSpeed;
     private int previousHP;
@@ -30,9 +37,11 @@ public class MainUIManager : MonoBehaviour
             Debug.LogError("PlayerStats not found!");
             return;
         }
+        RefreshBuffUI();
         RefreshStats(true);
         WeaponSelectRoot.SetActive(true);
         InventoryRoot.SetActive(false);
+        slots = FindFirstObjectByType<Slots>();
     }
     public void openInv()
     {
@@ -118,5 +127,23 @@ public class MainUIManager : MonoBehaviour
         }
 
         return $"{currentHP}/{maxHP}{changeText}";
+    }
+
+    public void RefreshBuffUI()
+    {
+        foreach (Transform child in buffContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (var buff in slots.OwnedBuffs)
+        {
+            BuffCard entry = Instantiate(
+                buffPrefab,
+                buffContainer
+            );
+
+            entry.Setup(buff);
+        }
     }
 }
