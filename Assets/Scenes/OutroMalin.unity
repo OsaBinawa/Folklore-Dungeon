@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 3929894}
   - component: {fileID: 3929893}
   m_Layer: 5
-  m_Name: Image
+  m_Name: img_story
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +144,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3929891}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -153,8 +153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -529.9264, y: 11.4083}
-  m_SizeDelta: {x: 530.1472, y: 831.1834}
+  m_AnchoredPosition: {x: -497, y: 71.702}
+  m_SizeDelta: {x: 877.1001, y: 877.134}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3929893
 MonoBehaviour:
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 5d5d5e32485fa37759d733cbb670653c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -273,138 +273,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &333509639
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 333509640}
-  - component: {fileID: 333509643}
-  - component: {fileID: 333509642}
-  - component: {fileID: 333509641}
-  m_Layer: 5
-  m_Name: Panel (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &333509640
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 333509639}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2091768325}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &333509641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 333509639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 333509642}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1108366615}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: GoToScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: MainMenu
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &333509642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 333509639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &333509643
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 333509639}
-  m_CullTransparentMesh: 1
 --- !u!1 &421223618
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,8 +285,9 @@ GameObject:
   - component: {fileID: 421223622}
   - component: {fileID: 421223621}
   - component: {fileID: 421223620}
+  - component: {fileID: 421223623}
   m_Layer: 5
-  m_Name: Lorem Ipsum
+  m_Name: txt_story
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,8 +309,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 505, y: -1671}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 440.41, y: -2052}
+  m_SizeDelta: {x: 997.7117, y: 1299.3508}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &421223620
 Animator:
@@ -485,69 +354,47 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum
-    purus a felis ullamcorper, sed placerat quam mattis. Quisque ultricies aliquam
-    auctor. Phasellus commodo erat nisl, sed gravida dui convallis vel. Donec ut
-    urna mi. In mauris est, ultricies nec augue vel, tempor mollis ligula. Etiam
-    quis est rutrum, pharetra sem a, pretium tortor. Lorem ipsum dolor sit amet,
-    consectetur adipiscing elit. Sed sollicitudin convallis massa, quis egestas justo
-    molestie sit amet. Donec finibus ante vitae diam blandit tincidunt. Maecenas
-    feugiat, tortor ac aliquam congue, leo neque fringilla nibh, at commodo dui nisl
-    nec quam. Aenean a quam facilisis, gravida purus ut, cursus lorem. Aliquam maximus
-    vitae justo nec egestas. Aliquam malesuada mauris sed ligula viverra, venenatis
-    porttitor quam blandit. Nulla sed enim tellus.
-
-
-
-    Praesent eleifend lorem
-    nibh, eu molestie turpis rhoncus sit amet. Nam tellus libero, consectetur ac
-    eros eu, congue iaculis tellus. Aliquam nec nibh eu leo euismod venenatis non
-    vel velit. In elementum malesuada ultricies. Donec dolor nunc, suscipit eu placerat
-    quis, tempor ac lacus. Fusce vitae elementum tellus. Nam eu mauris justo. Sed
-    elementum enim volutpat, pulvinar risus id, auctor tellus. Nam sollicitudin magna
-    suscipit, vulputate tortor non, commodo ipsum.
-
-
-
-    Quisque in libero maximus,
-    vestibulum urna in, aliquet purus. Duis fringilla nisl lobortis convallis tempor.
-    In facilisis lacinia suscipit. Phasellus eget consequat massa. Morbi accumsan,
-    tellus eget luctus pretium, nisl mauris faucibus dolor, eu porttitor nibh urna
-    vitae metus. Nam massa urna, suscipit nec urna nec, facilisis condimentum nisi.
-    Maecenas sapien lorem, tincidunt quis semper a, dapibus a turpis. Etiam condimentum
-    lobortis finibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-    vel ipsum tortor. Donec sit amet malesuada justo. Proin vitae tellus porta, mattis
-    mi id, feugiat erat. In hac habitasse platea dictumst.
-
-
-
-    Aenean ut porttitor
-    arcu, ac ullamcorper sem. Donec at tincidunt justo. Donec tincidunt pharetra
-    nibh, a fringilla neque sagittis at. Etiam aliquet quam quam, eget varius turpis
-    vehicula id. Vestibulum vitae elit nunc. Integer at felis mattis urna iaculis
-    scelerisque convallis in nibh. Proin dictum viverra nunc. Ut egestas ex arcu,
-    quis pharetra mauris luctus sit amet. Morbi faucibus diam in velit venenatis,
-    a congue mauris suscipit. Integer interdum eget tortor nec lacinia. Sed suscipit
-    nisi nec velit rhoncus aliquet. Proin pharetra malesuada nisi, et malesuada turpis
-    interdum dapibus. Duis suscipit at tellus non sollicitudin. Integer vulputate
-    ut tellus eu feugiat.
-
-
-
-    Nulla mattis cursus enim, finibus elementum arcu
-    viverra nec. Etiam diam leo, maximus eget porta et, dignissim vel lorem. Morbi
-    molestie risus mollis venenatis imperdiet. Praesent tempor elit id ex sagittis
-    feugiat. Fusce vestibulum tristique sodales. Ut sollicitudin tristique ante at
-    feugiat. Suspendisse non interdum lacus. Maecenas at ipsum nisl. Proin tempor,
-    tellus at efficitur laoreet, leo nunc porttitor lectus, eget finibus nibh est
-    eget libero. Cras in ligula libero. Etiam condimentum justo a odio fermentum,
-    non pulvinar ligula egestas. Cras in fringilla erat. Vivamus laoreet sapien arcu,
-    id consectetur ipsum pellentesque vitae. Nullam iaculis iaculis leo, et consequat
-    ex ornare dignissim. Maecenas venenatis scelerisque ante, maximus aliquam tellus
-    mattis sit amet. '
+  m_text: "Malin Kundang\n\nAlkisah di Sumatera Barat, hiduplah seorang janda beserta
+    anak laki-lakinya yang bernama Malin Kundang. Meski hidup mereka berkekurangan,
+    sang ibu selalu berusaha keras memberikan kehidupan yang baik bagi Malin. Ketika
+    Malin dewasa, dia pergi merantau bersama seorang saudagar demi mencari kehidupan
+    yang lebih baik. \u201DMalin akan pulang setelah berhasil. Malin akan menjemput
+    Ibu. Doakan Malin, ya.\"\n\nBertahun-tahun kemudian, Malin Kundang menjadi pedagang
+    yang berhasil. Dia berdagang dengan jujur dan menjadi terkenal karenanya. Dia
+    juga sudah menikah dengan putri seorang kepala kampung. Sayangnya, Malin lupa
+    kepada janjinya untuk menjemput ibunya. Malah, dia berbohong kepada istrinya
+    dan mengatakan bahwa ayah ibunya sudah tiada.\n\nSuatu hari, Malin dan istrinya
+    pergi berlayar. Karena cuaca di laut yang amat buruk, nakhkoda memutuskan untuk
+    berhenti di pulau terdekat. Ketika kapal merapat, Malin terhenyak. \u201DBukankah
+    ini kampung halamanku?\u201D bisiknya cemas. Malin ingin memerintahkan nakhoda
+    untuk berbalik arah, tetapi sudah terlambat. \u201DSuamiku... lihat! Kapal nelayan
+    itu sedang membongkar ikan. Aku ingin sekali makan ikan segar. Ayo kita turun
+    dan membeli ikan!\u201D ajak istri Malin. Malin berusaha menolak, tetapi istrinya
+    tak peduli.\n\n\u201CMinggir... minggir... Saudagar Malin hendak lewat,\u201D
+    teriak anak buah Malin. Tak jauh dari situ, ibu Malin yang kebetulan sedang membantu
+    para nelayan terkesiap. \u201DMALIN? Apakah aku tidak salah dengar?\u201D Dia
+    lalu mendekat dan melihat. Benar, itu Malin, anaknya yang telah lama pergi. \u201DMALIN...
+    MALIN KUNDANG anakku!\u201D teriaknya sambil memeluk Malin erat-erat. Malin cepat-cepat
+    melepaskan diri dari pelukan ibunya. \u201DHei, kau wanita tua, siapa kau hingga
+    berani memanggilku sebagai anakmu?\u201D teriak Malin lantang. Ibu Malin terkesiap
+    mendengar ucapan Malin.\n\nIstri Malin berusaha menengahi keadaan. \u201DWahai
+    Ibu, apakah Ibu bisa membuktikan bahwa Malin benar-benar anak Ibu?\u201D tanyanya
+    dengan santun. Ibu Malin lalu berkata bahwa ada bekas luka di tangan Malin. Itu
+    adalah luka yang didapat Malin saat kecil gara-gara dipatuk ayam milik tetangganya.
+    Istri Malin teringat, memang ada bekas luka di tangan suaminya. \u201DSuamiku,
+    mengapa kau mengingkari ibumu sendiri?\u201D tanyanya dengan sedih. Malin tak
+    peduli. Dia tetap tak mengakui ibunya dan mengajak istrinya untuk meninggalkan
+    tempat itu. Ibu Malin terus meratap, dan tepat pada saat itu, hujan turun deras
+    sekali. Petir menggelegar dan angin bertiup kencang. Tiba-tiba, duarrr... petir
+    menyambar tepat di kaki Malin. Kaki Malin mendadak kaku dan keras seperti batu.
+    Malin amat ketakutan. Dia sadar bahwa dia telah berdosa pada ibunya. \u201DIbu,
+    ampuni aku. Tolong selamatkan aku,\u201D teriaknya. Ibu Malin berusaha menolong,
+    tetapi terlambat. Tubuh Malin mengeras menjadi batu. Konon, batu yang menyerupai
+    bentuk Malin Kundang masih dapat ditemui di sebuah pantai bernama Aia Manih,
+    di sebelah selatan Kota Padang, Sumatera Barat.\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3d1ba1170f0207bf987ffaceaa33ae3e, type: 2}
-  m_sharedMaterial: {fileID: 2053381655087393980, guid: 3d1ba1170f0207bf987ffaceaa33ae3e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -571,8 +418,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -610,7 +457,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -536.2239, y: 0, z: -232.83398, w: 0}
+  m_margin: {x: 2.1966553, y: 0, z: -2.9301758, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -624,6 +471,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 421223618}
   m_CullTransparentMesh: 1
+--- !u!114 &421223623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421223618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5154f16a9eb0147978f671dcb0eeb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenu
+  mainMenuBGM: {fileID: 0}
+  panels: []
 --- !u!1 &756467023
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,8 +496,9 @@ GameObject:
   - component: {fileID: 756467024}
   - component: {fileID: 756467026}
   - component: {fileID: 756467025}
+  - component: {fileID: 756467027}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: pnl_background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -699,51 +561,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 756467023}
   m_CullTransparentMesh: 1
---- !u!1 &1108366613
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1108366614}
-  - component: {fileID: 1108366615}
-  m_Layer: 0
-  m_Name: Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1108366614
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108366613}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.81201, y: -1.74397, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1108366615
+--- !u!114 &756467027
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108366613}
+  m_GameObject: {fileID: 756467023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f5154f16a9eb0147978f671dcb0eeb4, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MainMenu
-  panels: []
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 756467025}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 421223623}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: GoToScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainMenu
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1340861558
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,7 +805,6 @@ RectTransform:
   m_Children:
   - {fileID: 756467024}
   - {fileID: 421223619}
-  - {fileID: 333509640}
   - {fileID: 3929892}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -946,6 +818,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1340861561}
-  - {fileID: 1108366614}
   - {fileID: 2091768325}
   - {fileID: 26070167}

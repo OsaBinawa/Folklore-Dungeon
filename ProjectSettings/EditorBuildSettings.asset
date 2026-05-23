@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MapScene/MalinMap.unity
     guid: 0448daf28e78a2d4a80fe6122f4d549b
   - enabled: 1
-    path: Assets/Scenes/Outro.unity
+    path: Assets/Scenes/OutroMalin.unity
     guid: b22ceffe6ad07a144bc89ba44be7ea0b
   - enabled: 1
     path: Assets/Scenes/MapScene/KeongMap.unity
