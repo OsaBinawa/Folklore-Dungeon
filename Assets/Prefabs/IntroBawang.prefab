@@ -1,0 +1,200 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4978687979738711244
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 86543025126655428, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -711
+      objectReference: {fileID: 0}
+    - target: {fileID: 86543025126655428, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 406
+      objectReference: {fileID: 0}
+    - target: {fileID: 931214626253237537, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_Name
+      value: IntroBawang
+      objectReference: {fileID: 0}
+    - target: {fileID: 2450174818727831259, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -684.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 2450174818727831259, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 425.73996
+      objectReference: {fileID: 0}
+    - target: {fileID: 3249484120330865384, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 731.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 3249484120330865384, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 443.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3249484120330865384, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20.134983
+      objectReference: {fileID: 0}
+    - target: {fileID: 3807970644775166295, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3db3f10e17162a185ad8c271d15c604c, type: 3}
+    - target: {fileID: 3992912209056444208, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_text
+      value: "Bawang Mer h pura-pura meng hanyutkan baju nya, lalu mensngis seperti
+        yang dilakuk n Bawang Putih. Ternyta, nenek itu muncu lagi. Nenek itu lalu
+        meng aju kan syart yang sma. Teringt akan cerita Bawang Putih, Bawang Merh
+        pun setju. Namun, berbeda dengn Bawang Putih, Bawang Merah trus mengomel.
+        Sebentr-sebentar dia berhenti dan meng eluh kelelh an. Bahkn, saatperjalnan
+        masih juh, dia sudh tak mau lagi membawkan keranjang nenek itu. \u201CBawa
+        sajasendri, aku mau pulng saja. Tapi, sebelum aku pulng, aku minta labu!\u201D
+        ujar nya ketus. Nenek itu menghela napas dan menge luarkan dua buah labu
+        dari keranjng nya. \u201CIni. Mana yang kau pilih? Yang besar atau yang keci?\u201D
+        Tanpa menjwb, Bawang Merah mere but labu yang besar dan seger berlari pulng.
+        Di rumah, ibu nya menyambut gembi ra. Mereka berdua lalu mem belah labu itu.
+        Namun, labu itu tak mengeluarkan emas dan berlian. Labu itu malah mengeluarkan
+        asap dan mengubah Bawang putih dan Bawang Merah menjadi sepasang penyihir
+        jahat, ibu mereka pun menjadi korban pertama."
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992912209056444208, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_fontSize
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992912209056444208, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_wordSpacing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992912209056444208, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992912209056444208, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383342025517343189, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_text
+      value: Bawang Putih dan bawang Merah
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1875
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1293
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139013362214807194, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 623.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139013362214807194, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 831.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139013362214807194, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -459
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139013362214807194, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -35.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 9079351902377661706, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 651.1788
+      objectReference: {fileID: 0}
+    - target: {fileID: 9079351902377661706, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 145.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9079351902377661706, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 365.0044
+      objectReference: {fileID: 0}
+    - target: {fileID: 9079351902377661706, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 424.49
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
