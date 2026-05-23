@@ -25,5 +25,6 @@ MonoBehaviour:
   bonusVsNonWeak: 0
   stackable: 0
   removeAble: 1
+  Icon: {fileID: -968422980461245070, guid: 82e7298064be05d4ea5c292a0ab8c1a7, type: 3}
   rarity: 3
   Description: Mendapat 1 giliran ekstra setelah mengalahkan target. SPD +10%.

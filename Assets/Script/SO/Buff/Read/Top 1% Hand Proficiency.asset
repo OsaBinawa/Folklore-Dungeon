@@ -25,6 +25,7 @@ MonoBehaviour:
   bonusVsNonWeak: 1
   stackable: 0
   removeAble: 1
+  Icon: {fileID: 3187133528298761731, guid: 82e7298064be05d4ea5c292a0ab8c1a7, type: 3}
   rarity: 0
   Description: 'Meningkatkan damage pada target yang elemennya tidak sesuai dengan
     senjata. ATK +10%. '

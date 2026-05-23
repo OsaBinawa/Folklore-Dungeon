@@ -25,5 +25,6 @@ MonoBehaviour:
   bonusVsNonWeak: 0
   stackable: 1
   removeAble: 1
+  Icon: {fileID: 6277351778460139913, guid: 82e7298064be05d4ea5c292a0ab8c1a7, type: 3}
   rarity: 1
   Description: HP +12% & SPD -4%.
