@@ -975,7 +975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &256589360
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1954,6 +1954,10 @@ MonoBehaviour:
   InventoryRoot: {fileID: 1713637633}
   WeaponSelectRoot: {fileID: 215286481}
   MapInventoryButton: {fileID: 256589359}
+  playerStats: {fileID: 1249741752}
+  attackText: {fileID: 2103554609}
+  speedText: {fileID: 381750739}
+  hpText: {fileID: 2009437966}
 --- !u!1 &590199606
 GameObject:
   m_ObjectHideFlags: 0
@@ -4787,6 +4791,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: IntroBawang
       objectReference: {fileID: 0}
+    - target: {fileID: 5331009142896044525, guid: 3ba3f8ad27c276784a757d40fa995ffe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5703,7 +5711,7 @@ MonoBehaviour:
   BossPrefab: {fileID: 945770643077263496, guid: 6b5ef159785813c42a23ac3cdf556017, type: 3}
   ReadPrefab: {fileID: 3770747648595979175, guid: 521a4a968a886f142a886cbe39ac4d77, type: 3}
   ShopPrefab: {fileID: 3770747648595979175, guid: 2b17e28e5236243428772159a7780848, type: 3}
-  ElitePrefabs: {fileID: 519380458256889883, guid: 1202419230331114c80da18031d88081, type: 3}
+  ElitePrefabs: {fileID: 945770643077263496, guid: 033ab5d3a3b08c84bb47b45bb882371b, type: 3}
   lineDrawer: {fileID: 2136833167}
   scroll: {fileID: 0}
 --- !u!4 &1729609377

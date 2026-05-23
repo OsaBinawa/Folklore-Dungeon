@@ -12,7 +12,7 @@ public class PlayerStats : MonoBehaviour
     private int consumableAtkBonus;
     private int consumableSpdBonus;
 
-    private void Start()
+    private void Awake()
     {
         if (RunManager.Instance == null)
         {
