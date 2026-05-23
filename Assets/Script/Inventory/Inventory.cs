@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class Inventory : MonoBehaviour
 {
@@ -90,8 +91,10 @@ public class Inventory : MonoBehaviour
             Button button = btnObj.GetComponent<Button>();
 
             TMP_Text label = btnObj.GetComponentInChildren<TMP_Text>();
+            Image img = btnObj.GetComponentInChildren<Image>();
             if (label != null)
                 label.text = $"{item.Name} x{count}";
+            img.sprite = item.Sprite;
 
             button.onClick.AddListener(() =>
             {

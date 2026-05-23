@@ -9,5 +9,5 @@ public class ItemSO : ScriptableObject
     public int SPDMod;
     public int HPMod;
     public int duration = 3;
-    public int Sprite;
+    public Sprite Sprite;
 }
