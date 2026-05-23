@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopUICard
   nameText: {fileID: 2353171448879333653}
   priceText: {fileID: 7572936374951151259}
+  img: {fileID: 7662171811835638167}
   buyButton: {fileID: 7801814916695861786}
 --- !u!1 &1260277661579455604
 GameObject:
@@ -1031,7 +1032,7 @@ MonoBehaviour:
     price: 100
     stackable: 0
   buffs:
-  - buff: {fileID: 11400000, guid: 55f19f00c1b1f4d4da9dcecdcf363abe, type: 2}
+  - Item: {fileID: 11400000, guid: bf40a70924299814092aa6b7d8b211c9, type: 2}
     price: 100
     stackable: 1
   totalDisplayCount: 3
@@ -1085,6 +1086,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopUICard
   nameText: {fileID: 1457035973271948898}
   priceText: {fileID: 7826564494880604137}
+  img: {fileID: 1923503101505102293}
   buyButton: {fileID: 4550373966321068108}
 --- !u!1 &4633279236142521061
 GameObject:

@@ -18,3 +18,4 @@ MonoBehaviour:
   SPDMod: 0
   HPMod: 0
   duration: 3
+  Sprite: {fileID: 3187133528298761731, guid: 82e7298064be05d4ea5c292a0ab8c1a7, type: 3}

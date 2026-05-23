@@ -15,7 +15,7 @@ public class Weapon
 [System.Serializable]
 public class Buff
 {
-    public BuffSO buff;
+    public ItemSO Item;
     public int price;
     public bool stackable;
 }
@@ -208,10 +208,8 @@ public class ShopManager : MonoBehaviour
             {
                 inventory.money -= buff.price;
             }
-
-            inventorySlots.AddBuff(buff.buff);
-
-            Debug.Log("Bought Buff: " + buff.buff.name);
+            inventory.AddConsumable(buff.Item);
+            
 
             Destroy(obj);
         }
