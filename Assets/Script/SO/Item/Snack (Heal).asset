@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f353303ac7177140a2662620f054ed4, type: 3}
-  m_Name: Snack
+  m_Name: Snack (Heal)
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   Name: Snack
   Heal: 20

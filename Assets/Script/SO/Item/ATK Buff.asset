@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f353303ac7177140a2662620f054ed4, type: 3}
-  m_Name: SPDDrink
+  m_Name: ATK Buff
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  Name: DrinkBuff SPD
+  Name: DrinkBuff Atk
   Heal: 0
-  AtkMod: 0
-  SPDMod: 5
+  AtkMod: 10
+  SPDMod: 0
   HPMod: 0
   duration: 3
-  Sprite: {fileID: -2149017830086613171, guid: b0a6747dfa852eb449bdbf4c36c2cdca, type: 3}
+  Sprite: {fileID: 1811283247015614009, guid: b0a6747dfa852eb449bdbf4c36c2cdca, type: 3}

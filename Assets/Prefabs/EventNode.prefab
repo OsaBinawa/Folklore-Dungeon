@@ -392,7 +392,7 @@ MonoBehaviour:
   IncreaseHp: 0
   IncreaseAtk: 5
   IncreaseSpd: 0
-  useRandom: 0
+  useRandom: 1
   eventIndex: 8
 --- !u!1 &3818781561207521599
 GameObject:

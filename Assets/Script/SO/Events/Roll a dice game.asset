@@ -15,19 +15,20 @@ MonoBehaviour:
   Name: Roll a dice game
   Type: 3
   Dialogue:
-  - Seorang penjudi mengajakmu memainkan permainan dadu. Apakah kamu menerima ajaknannya?
+  - Seorang pengunjung mengajakmu memainkan permainan dadu, Kamu diminta untuk memilih
+    antara nomor ganjil atau genap?
   - Menang. Kamu mendapatkan sejumlah uang.
   Choices:
-  - text: Terima
+  - text: Ganjil
     buff: {fileID: 0}
     effect: 2
     triggerIndex: 0
     resultDialogue:
     - Kalah. Kamu kehilangan sebagian uangmu.
-  - text: Tolak
+  - text: Genap
     buff: {fileID: 0}
-    effect: 0
+    effect: 2
     triggerIndex: 0
     resultDialogue:
-    - Kamu menolak ajakannya
+    - Kalah. Kamu kehilangan sebagian uangmu.
   randomizeChoices: 0
