@@ -65,6 +65,10 @@ public class ShopManager : MonoBehaviour
 
         foreach (var weapon in weapons)
         {
+            // Skip if player already owns this weapon
+            if (inventory.HasWeapon(weapon.weapon))
+                continue;
+
             int count = weapon.stackable ? UnityEngine.Random.Range(1, 4) : 1;
 
             for (int i = 0; i < count; i++)

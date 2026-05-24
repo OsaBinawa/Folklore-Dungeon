@@ -20,6 +20,7 @@ public class EventManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private Slots slots;
     [SerializeField] private Inventory inventory;
+    [SerializeField] private NodeView Node;
 
     [Header("Runtime")]
     [SerializeField] private int IncreaseHp;
@@ -38,6 +39,7 @@ public class EventManager : MonoBehaviour
     {
         slots = FindFirstObjectByType<Slots>();
         inventory = FindFirstObjectByType<Inventory>();
+        Node = FindAnyObjectByType<NodeView>();
     }
     private void Start()
     {
@@ -472,6 +474,7 @@ public class EventManager : MonoBehaviour
     private void EndEvent()
     {
         panel.SetActive(false);
+        Node.ResolveNode();
         nextButton.gameObject.SetActive(true);
     }
 }

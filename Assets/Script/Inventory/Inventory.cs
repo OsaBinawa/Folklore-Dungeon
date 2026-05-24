@@ -39,6 +39,16 @@ public class Inventory : MonoBehaviour
     {
         moneyUpdateUI();
     }
+    public bool HasWeapon(WeaponSO weapon)
+    {
+        foreach (var w in ownedWeapons)
+        {
+            if (w == weapon)
+                return true;
+        }
+
+        return false;
+    }
     public void AddConsumable(ItemSO item)
     {
         if (!ownedConsumables.Contains(item))
