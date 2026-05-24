@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87d5f809a1451840a2a02c0d8775db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
-  data: {fileID: 11400000, guid: 69e555a14256bda4480abe088cc236f0, type: 2}
+  data: {fileID: 11400000, guid: d379ba46be4b8ec47bbfb41baa4b5e8b, type: 2}
   currentHP: 0
   currentToughness: 0
   isBroken: 0

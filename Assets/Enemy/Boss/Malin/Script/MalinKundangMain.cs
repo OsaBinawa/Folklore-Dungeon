@@ -97,13 +97,13 @@ public class MalinKundangMain : EnemyUnit
     private void SetTypoType()
     {
         runtimeWeaknesses.Clear();
-        runtimeWeaknesses.Add(ElementType.Erase);
+        runtimeWeaknesses.Add(ElementType.Typo);
     }
 
     private void SetMissType()
     {
         runtimeWeaknesses.Clear();
-        runtimeWeaknesses.Add(ElementType.Write);
+        runtimeWeaknesses.Add(ElementType.Missing);
     }
 
     private void SelfDestruct(PlayerUnit player)
