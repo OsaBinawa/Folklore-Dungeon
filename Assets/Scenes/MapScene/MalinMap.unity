@@ -1705,6 +1705,10 @@ PrefabInstance:
       propertyPath: m_Spacing
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 1733263078125080719, guid: ad736b3a7b669c1458ae1da881d2db52, type: 3}
+      propertyPath: m_ReverseArrangement
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3327860570304232326, guid: ad736b3a7b669c1458ae1da881d2db52, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

@@ -218,7 +218,7 @@ public class PlayerUnit : MonoBehaviour
         if (currentTarget == null || EquippedWeapon == null)
             return;
         if (currentSkillPoint >= 1) 
-        { currentSkillPoint--; }
+        { currentSkillPoint -= 2; }
         UpdateSkillPointUI();
         StartCoroutine(AttackRoutine(
             EquippedWeapon.SkillAnimation,
