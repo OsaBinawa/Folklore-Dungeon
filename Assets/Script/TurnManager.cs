@@ -87,7 +87,7 @@ public class TurnManager : MonoBehaviour
                 {
                     state = TurnState.PlayerTurn;
                     UI.Show();
-                    StartPlayerTurnTimer();
+                    //StartPlayerTurnTimer();
                     yield break;
                 }
                 else
@@ -149,7 +149,7 @@ public class TurnManager : MonoBehaviour
         StartCoroutine(TimelineLoop());*/
         enemyActionFinished = true;
     }
-    private void StartPlayerTurnTimer()
+    /*private void StartPlayerTurnTimer()
     {
         // Kill any old timer just in case
         if (playerTurnRoutine != null)
@@ -159,7 +159,7 @@ public class TurnManager : MonoBehaviour
         }
 
         playerTurnRoutine = StartCoroutine(PlayerTurnCounter());
-    }
+    }*/
     private IEnumerator PlayerTurnCounter()
     {
         float timeleft = turnTime;

@@ -20,7 +20,7 @@ MonoBehaviour:
   SkillTargetType: 1
   SkillEffects:
   - {fileID: 11400000, guid: a938a053b9f3869499d4824fc93ac70e, type: 2}
-  UltimateAnimation: {fileID: 0}
+  UltimateAnimation: {fileID: 7400000, guid: d963f3dff1a6ce849bf682c111b165e3, type: 2}
   UltimateTargetType: 2
   UltimateEffects:
   - {fileID: 11400000, guid: a938a053b9f3869499d4824fc93ac70e, type: 2}
