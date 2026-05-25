@@ -1031,9 +1031,24 @@ MonoBehaviour:
   - weapon: {fileID: 11400000, guid: f3e281b026466ca48a7d5b7eae44e1e8, type: 2}
     price: 100
     stackable: 0
+  - weapon: {fileID: 11400000, guid: 52feb2e4b5a876a408ec11590d8920bd, type: 2}
+    price: 100
+    stackable: 0
+  - weapon: {fileID: 11400000, guid: 0ec79b4b153433f4987261d9ee595e45, type: 2}
+    price: 100
+    stackable: 0
   buffs:
   - Item: {fileID: 11400000, guid: bf40a70924299814092aa6b7d8b211c9, type: 2}
-    price: 100
+    price: 70
+    stackable: 1
+  - Item: {fileID: 11400000, guid: c9423889a0295f349b73011c93dba069, type: 2}
+    price: 70
+    stackable: 1
+  - Item: {fileID: 11400000, guid: 281418c4380ca4e45845783cd42cd9de, type: 2}
+    price: 70
+    stackable: 1
+  - Item: {fileID: 11400000, guid: 2aea9f077ddc0b04ba457f0e444911b3, type: 2}
+    price: 50
     stackable: 1
   totalDisplayCount: 3
 --- !u!1 &4470821802070141714
