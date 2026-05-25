@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
-    public const float BASE_AV_SCALE = 10000f;
-    public const float DISPLAY_AV_SCALE = 1000f;
+    public const float BASE_AV_SCALE = 100f;
+    public const float DISPLAY_AV_SCALE = 10f;
     private bool enemyActionFinished;
     [SerializeField] private PlayerUnit player;
     [SerializeField] private List<EnemyUnit> enemies = new();

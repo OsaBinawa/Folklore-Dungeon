@@ -39,6 +39,11 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private Sprite emptySkillPointSprite;
     [SerializeField] private TMP_Text debugText;
 
+    [Header("Ultimate UI")]
+    [SerializeField] private Slider ultimateSlider;
+    [SerializeField] private ParticleSystem ultimateReadyEffect;
+    private bool ultimateReadyTriggered = false;
+
     //private WeaponSO CurrentWeapon => weaponSlot.EquippedWeapon;
     public PlayerStats Stats => stats;
     public float MaxHP => stats.MaxHP;
