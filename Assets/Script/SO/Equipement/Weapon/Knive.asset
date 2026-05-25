@@ -16,7 +16,7 @@ MonoBehaviour:
   Element: 1
   icon: {fileID: -7761791688612911453, guid: cf618ac5b2da88dd4bda89380b81eab4, type: 3}
   _WeaponSprite: {fileID: 21300000, guid: 16e9419f4f6942546bb17fcc9c253608, type: 3}
-  SkillAnimation: {fileID: 0}
+  SkillAnimation: {fileID: 7400000, guid: 173ce4b3bc347a24f8b743d49d894a4a, type: 2}
   SkillTargetType: 1
   SkillEffects:
   - {fileID: 11400000, guid: a938a053b9f3869499d4824fc93ac70e, type: 2}
