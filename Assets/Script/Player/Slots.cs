@@ -5,11 +5,16 @@ using UnityEngine;
 public class Slots : MonoBehaviour
 {
     [SerializeField] private WeaponSO equippedWeapon;
+    [SerializeField] private MainUIManager mainUIManager;
     [SerializeField] private List<BuffSO> ownedBuffs = new();
     public IReadOnlyList<BuffSO> OwnedBuffs => ownedBuffs;
     public WeaponSO EquippedWeapon => equippedWeapon;
     public bool HasWeapon => equippedWeapon != null;
 
+    private void Awake()
+    {
+        mainUIManager = FindFirstObjectByType<MainUIManager>();
+    }
     public void Equip(WeaponSO weapon)
     {
         equippedWeapon = weapon;
@@ -20,6 +25,7 @@ public class Slots : MonoBehaviour
             return;
 
         ownedBuffs.Add(buff);
+        mainUIManager.RefreshBuffUI();
     }
     public  int ApplyQuickread()
     {
