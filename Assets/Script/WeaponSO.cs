@@ -25,5 +25,6 @@ public class WeaponSO : ScriptableObject
     public AnimationClip UltimateAnimation;
     public TargetType UltimateTargetType;
     public WeaponEffect[] UltimateEffects;
+    public Sprite UltIcon;
     public int UltimateEnergyCost;
 }

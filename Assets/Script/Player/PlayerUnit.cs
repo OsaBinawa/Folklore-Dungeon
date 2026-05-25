@@ -23,6 +23,7 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private TurnManager turnManager;
     [SerializeField] private Image sr;
     [SerializeField] private Image weaponSprite;
+    [SerializeField] private Image UltIcon;
     [SerializeField] private Color handColor;
     [SerializeField] private Slots weaponSlot;
     [SerializeField] private Inventory inventory;
@@ -215,6 +216,10 @@ public class PlayerUnit : MonoBehaviour
         if (weaponSprite != null && newWeapon != null)
         {
             weaponSprite.sprite = newWeapon._WeaponSprite;
+        }
+        if (UltIcon != null && newWeapon != null)
+        {
+            UltIcon.sprite = newWeapon.UltIcon;
         }
     }
 
