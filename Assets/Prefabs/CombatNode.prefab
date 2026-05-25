@@ -3843,6 +3843,8 @@ MonoBehaviour:
   fullSkillPointSprite: {fileID: -1031484741671136444, guid: fcbaa668cd65aa94bafa953f3184823d, type: 3}
   emptySkillPointSprite: {fileID: -2758764401731848483, guid: fcbaa668cd65aa94bafa953f3184823d, type: 3}
   debugText: {fileID: 5655972396409485871}
+  ultimateFillImage: {fileID: 5355714914407097971}
+  ultimateReadyEffect: {fileID: 0}
 --- !u!114 &8564633334046716996
 MonoBehaviour:
   m_ObjectHideFlags: 0

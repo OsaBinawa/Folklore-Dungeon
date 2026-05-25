@@ -40,7 +40,7 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private TMP_Text debugText;
 
     [Header("Ultimate UI")]
-    [SerializeField] private Slider ultimateSlider;
+    [SerializeField] private Image ultimateFillImage;
     [SerializeField] private ParticleSystem ultimateReadyEffect;
     private bool ultimateReadyTriggered = false;
 
@@ -250,6 +250,7 @@ public class PlayerUnit : MonoBehaviour
             EquippedWeapon.UltimateTargetType,
             EquippedWeapon.UltimateEffects
         ));
+        UpdateUltimateUI();
     }
     private IEnumerator AttackRoutine(
         AnimationClip animClip,
@@ -273,7 +274,7 @@ public class PlayerUnit : MonoBehaviour
 
         // Gain energy (optional)
         currentEnergy = Mathf.Min(currentEnergy + 20, maxEnergy);
-
+        UpdateUltimateUI();
         // End turn
         FindFirstObjectByType<TurnManager>().NotifyPlayerActionComplete();
     }
@@ -443,7 +444,37 @@ public class PlayerUnit : MonoBehaviour
 
         RecalculateConsumableStats();
     }
+    private void UpdateUltimateUI()
+    {
+        if (ultimateFillImage != null)
+        {
+            // Reverse fill
+            ultimateFillImage.fillAmount =
+                1f - ((float)currentEnergy / maxEnergy);
+        }
 
+        bool isReady =
+            EquippedWeapon != null &&
+            currentEnergy >= EquippedWeapon.UltimateEnergyCost;
+
+        // Play effect once
+        if (isReady && !ultimateReadyTriggered)
+        {
+            ultimateReadyTriggered = true;
+
+            if (ultimateReadyEffect != null)
+                ultimateReadyEffect.Play();
+        }
+
+        // Reset when no longer ready
+        if (!isReady)
+        {
+            ultimateReadyTriggered = false;
+
+            if (ultimateReadyEffect != null)
+                ultimateReadyEffect.Stop();
+        }
+    }
     private List<EnemyUnit> GetEnemyList()
     {
         var field = typeof(TurnManager).GetField("enemies",
