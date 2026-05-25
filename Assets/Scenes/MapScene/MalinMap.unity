@@ -1683,7 +1683,7 @@ MonoBehaviour:
   speedText: {fileID: 381750739}
   hpText: {fileID: 488284710}
   slots: {fileID: 1249741750}
-  buffContainer: {fileID: 1086912418}
+  buffContainer: {fileID: 488284711}
   buffPrefab: {fileID: 8065563782707668575, guid: c36d503adebff6941b7cfd211efe0da0, type: 3}
 --- !u!1001 &488284709
 PrefabInstance:
@@ -1727,7 +1727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6112412302188926656, guid: ad736b3a7b669c1458ae1da881d2db52, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6909398462637919615, guid: ad736b3a7b669c1458ae1da881d2db52, type: 3}
       propertyPath: m_Pivot.x
@@ -1825,6 +1825,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!224 &488284711 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3327860570304232326, guid: ad736b3a7b669c1458ae1da881d2db52, type: 3}
+  m_PrefabInstance: {fileID: 488284709}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &662818523
 PrefabInstance:
   m_ObjectHideFlags: 0

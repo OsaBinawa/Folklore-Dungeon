@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform contentParent;
     [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private TMP_Text MoneyText;
+    
 
     [Header("Consumable UI")]
     [SerializeField] private Transform consumableContentParent;
@@ -31,6 +32,7 @@ public class Inventory : MonoBehaviour
         BuildUI();
         moneyUpdateUI();
         BuildConsumableUI();
+       
         if (ownedWeapons.Count > 0 && !weaponSlot.HasWeapon)
             weaponSlot.Equip(ownedWeapons[0]);
     }
