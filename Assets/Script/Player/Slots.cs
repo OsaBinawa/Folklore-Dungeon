@@ -26,7 +26,7 @@ public class Slots : MonoBehaviour
 
         ownedBuffs.Add(buff);
         mainUIManager.RefreshBuffUI();
-        mainUIManager.RefreshStats(true);
+        mainUIManager.RefreshStats();
     }
     public  int ApplyQuickread()
     {
@@ -46,6 +46,7 @@ public class Slots : MonoBehaviour
     {
         if (ownedBuffs.Contains(buff))
             ownedBuffs.Remove(buff);
+        mainUIManager.RefreshStats();
     }
     public void autoEquip(WeaponSO weap)
     {

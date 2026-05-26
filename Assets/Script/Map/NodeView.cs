@@ -21,7 +21,7 @@ public class NodeView : MonoBehaviour
     {
         onFinished?.Invoke(node);
         mainUIManager.ShowButton();
-        mainUIManager.RefreshStats(true);
+        mainUIManager.RefreshStats();
         Destroy(gameObject);
 
     }
