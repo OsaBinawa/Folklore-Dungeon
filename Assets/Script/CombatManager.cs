@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class CombatManager : MonoBehaviour
 {
+    public static event Action OnResolveNode;
     [SerializeField] private NodeView nodeView;
     [SerializeField] private TurnManager turnManager;
     [SerializeField] private PlayerUnit playerUnit;
@@ -64,7 +66,7 @@ public class CombatManager : MonoBehaviour
             if (winPanel != null)
                 winPanel.SetActive(true);
 
-            int randomAmount = Random.Range(10, 20);
+            int randomAmount = UnityEngine.Random.Range(10, 20);
             inventory.money += randomAmount;
 
             Debug.Log("You Get " + randomAmount + " money");
@@ -90,6 +92,7 @@ public class CombatManager : MonoBehaviour
     {
         nodeView.ResolveNode();
         RunManager.Instance.PlayGameBGM();
+        OnResolveNode?.Invoke();
     }
 
     public void GoToScene(string Scene)

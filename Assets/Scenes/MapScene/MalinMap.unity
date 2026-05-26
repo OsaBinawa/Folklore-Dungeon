@@ -1683,7 +1683,7 @@ MonoBehaviour:
   speedText: {fileID: 381750739}
   hpText: {fileID: 488284710}
   slots: {fileID: 1249741750}
-  buffContainer: {fileID: 488284711}
+  buffContainer: {fileID: 1086912418}
   buffPrefab: {fileID: 8065563782707668575, guid: c36d503adebff6941b7cfd211efe0da0, type: 3}
 --- !u!1001 &488284709
 PrefabInstance:
@@ -1829,6 +1829,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8060655323438317378, guid: ad736b3a7b669c1458ae1da881d2db52, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8364064286447032211, guid: ad736b3a7b669c1458ae1da881d2db52, type: 3}
       propertyPath: m_Spacing
       value: 20
@@ -1854,6 +1858,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3327860570304232326, guid: ad736b3a7b669c1458ae1da881d2db52, type: 3}
   m_PrefabInstance: {fileID: 488284709}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &488284712 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8824333651590606777, guid: ad736b3a7b669c1458ae1da881d2db52, type: 3}
+  m_PrefabInstance: {fileID: 488284709}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &662818523
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2892,6 +2907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slots
   equippedWeapon: {fileID: 0}
+  player: {fileID: 0}
   mainUIManager: {fileID: 0}
   ownedBuffs: []
 --- !u!114 &1249741751
@@ -2910,12 +2926,12 @@ MonoBehaviour:
   buttonPrefab: {fileID: 8501040538520535015, guid: f11c0e10f212aba4682c5268cb279f26, type: 3}
   MoneyText: {fileID: 984524506}
   mainUIManager: {fileID: 0}
-  consumableContentParent: {fileID: 1086912418}
+  equippedWeaponText: {fileID: 488284712}
+  consumableContentParent: {fileID: 488284711}
   consumableButtonPrefab: {fileID: 8501040538520535015, guid: f11c0e10f212aba4682c5268cb279f26, type: 3}
   weaponSlot: {fileID: 1249741750}
   ownedWeapons: []
-  ownedConsumables:
-  - {fileID: 11400000, guid: 2aea9f077ddc0b04ba457f0e444911b3, type: 2}
+  ownedConsumables: []
   heldConsumables: []
   freeShopItemCount: 0
   money: 100

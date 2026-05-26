@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 5048148330327182955}
   - component: {fileID: 989562648222479985}
   m_Layer: 5
-  m_Name: GenericShred
+  m_Name: Easy - Shredded
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,6 +194,8 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 6f96227e6bb38be42b6a03e90580100a, type: 2}
   currentHP: 0
   currentToughness: 0
+  scaledMaxHP: 0
+  damageMultiplier: 1
   isBroken: 0
   maxEnergy: 100
   currentEnergy: 0
@@ -273,7 +275,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 2260d631ee29ced4296a96d84580bbc3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -641,6 +643,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1435552250017967159}
     m_Modifications:
+    - target: {fileID: 566725711724677728, guid: 29955c5c1aa393218b5b70a6fc7f3c7e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 52.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3257447179038036667, guid: 29955c5c1aa393218b5b70a6fc7f3c7e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.2
@@ -680,6 +686,30 @@ PrefabInstance:
     - target: {fileID: 3257447179038036667, guid: 29955c5c1aa393218b5b70a6fc7f3c7e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7547106407290701768, guid: 29955c5c1aa393218b5b70a6fc7f3c7e, type: 3}
+      propertyPath: m_text
+      value: 'Type: '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8134535205329899304, guid: 29955c5c1aa393218b5b70a6fc7f3c7e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 93.3847
+      objectReference: {fileID: 0}
+    - target: {fileID: 8134535205329899304, guid: 29955c5c1aa393218b5b70a6fc7f3c7e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -14.3239
+      objectReference: {fileID: 0}
+    - target: {fileID: 8243866613082763476, guid: 29955c5c1aa393218b5b70a6fc7f3c7e, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8243866613082763476, guid: 29955c5c1aa393218b5b70a6fc7f3c7e, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.13333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8243866613082763476, guid: 29955c5c1aa393218b5b70a6fc7f3c7e, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278255394
       objectReference: {fileID: 0}
     - target: {fileID: 8284833787766454800, guid: 29955c5c1aa393218b5b70a6fc7f3c7e, type: 3}
       propertyPath: m_Name

@@ -25,5 +25,7 @@ MonoBehaviour:
   bonusVsNonWeak: 0
   stackable: 1
   removeAble: 1
+  displayable: 0
+  Icon: {fileID: 0}
   rarity: 0
   Description: 

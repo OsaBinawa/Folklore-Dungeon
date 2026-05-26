@@ -11,6 +11,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private TMP_Text MoneyText;
     [SerializeField] private MainUIManager mainUIManager;
+    public TMP_Text equippedWeaponText;
 
     [Header("Consumable UI")]
     [SerializeField] private Transform consumableContentParent;
@@ -32,9 +33,10 @@ public class Inventory : MonoBehaviour
         BuildUI();
         moneyUpdateUI();
         BuildConsumableUI();
-       mainUIManager = FindAnyObjectByType<MainUIManager>();
+        mainUIManager = FindAnyObjectByType<MainUIManager>();
         if (ownedWeapons.Count > 0 && !weaponSlot.HasWeapon)
             weaponSlot.Equip(ownedWeapons[0]);
+            
     }
 
     private void Update()
@@ -138,6 +140,7 @@ public class Inventory : MonoBehaviour
 
         weaponSlot.Equip(weapon);
         Debug.Log($"[Inventory] Equipped {weapon.WeaponName}");
+        equippedWeaponText.text = "Equipped Weapon: " + weapon.WeaponName + " (" + weapon.Element + ")";
     }
 
     public void BuildUI()

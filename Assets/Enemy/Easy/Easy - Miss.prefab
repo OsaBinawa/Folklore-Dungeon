@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 5048148330327182955}
   - component: {fileID: 1375741737240208879}
   m_Layer: 5
-  m_Name: GenericMiss
+  m_Name: Easy - Miss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,9 +191,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87d5f809a1451840a2a02c0d8775db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
-  data: {fileID: 11400000, guid: d379ba46be4b8ec47bbfb41baa4b5e8b, type: 2}
+  data: {fileID: 11400000, guid: e6b982f7378663041b270aad83725b58, type: 2}
   currentHP: 0
   currentToughness: 0
+  scaledMaxHP: 0
+  damageMultiplier: 1
   isBroken: 0
   maxEnergy: 100
   currentEnergy: 0
@@ -505,14 +507,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 2260d631ee29ced4296a96d84580bbc3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -681,9 +683,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4700860456326079984, guid: df668de7ea47ce9ee8385ed57324ac92, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700860456326079984, guid: df668de7ea47ce9ee8385ed57324ac92, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.1342479
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700860456326079984, guid: df668de7ea47ce9ee8385ed57324ac92, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278255394
+      objectReference: {fileID: 0}
     - target: {fileID: 4732564965876444980, guid: df668de7ea47ce9ee8385ed57324ac92, type: 3}
       propertyPath: m_Name
       value: Type
+      objectReference: {fileID: 0}
+    - target: {fileID: 4879502895317654028, guid: df668de7ea47ce9ee8385ed57324ac92, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -16.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622653095666782956, guid: df668de7ea47ce9ee8385ed57324ac92, type: 3}
+      propertyPath: m_text
+      value: 'Type:'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

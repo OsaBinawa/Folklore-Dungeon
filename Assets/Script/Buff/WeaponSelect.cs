@@ -1,10 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class WeaponSelect : MonoBehaviour
 {
     public GameObject Root; 
-    private WeaponSO selectedChoice;
     [SerializeField] private Inventory playerInventory;
     [SerializeField] private Slots slots;
 
@@ -20,5 +18,6 @@ public class WeaponSelect : MonoBehaviour
         slots.autoEquip(choice);
         Debug.Log("Selected: " + choice.WeaponName);
         Destroy(Root);
+        playerInventory.equippedWeaponText.text = "Equipped Weapon: " + choice.WeaponName + " (" + choice.Element + ")";
     }
 }
