@@ -70,9 +70,9 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            float hpMultiplier = 1f + (difficultyTier * 0.6f);
+            float hpMultiplier = 1f + (difficultyTier * 1f);
 
-            damageMultiplier = 1f + (difficultyTier * 0.35f);
+            damageMultiplier = 1f + (difficultyTier * 1f);
 
             scaledMaxHP = Mathf.RoundToInt(
                 data.MaxHP * hpMultiplier
