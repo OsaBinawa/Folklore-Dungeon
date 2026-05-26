@@ -5,6 +5,7 @@ using UnityEngine;
 public class Slots : MonoBehaviour
 {
     [SerializeField] private WeaponSO equippedWeapon;
+    [SerializeField] private PlayerStats player;
     [SerializeField] private MainUIManager mainUIManager;
     [SerializeField] private List<BuffSO> ownedBuffs = new();
     public IReadOnlyList<BuffSO> OwnedBuffs => ownedBuffs;
@@ -14,6 +15,7 @@ public class Slots : MonoBehaviour
     private void Awake()
     {
         mainUIManager = FindFirstObjectByType<MainUIManager>();
+        player = FindAnyObjectByType<PlayerStats>();
     }
     public void Equip(WeaponSO weapon)
     {
@@ -25,6 +27,8 @@ public class Slots : MonoBehaviour
             return;
 
         ownedBuffs.Add(buff);
+        player.RecalculateStats();
+        player.RecalculateStatBuffs(this);
         mainUIManager.RefreshBuffUI();
         mainUIManager.RefreshStats();
     }

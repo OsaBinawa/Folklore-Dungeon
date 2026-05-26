@@ -65,9 +65,17 @@ public class PlayerStats : MonoBehaviour
             return;
         }
 
+        // Start from already-calculated base stats
+        // (base + equipment + consumables)
+        int baseAttack = FinalAttack;
+        int baseSpeed = FinalSpeed;
+        int baseHP = MaxHP;
+
         float atkPercent = 0f;
         float spdPercent = 0f;
+        float hpPercent = 0f;
 
+        // Apply ALL buffs in the list
         foreach (var buff in slots.OwnedBuffs)
         {
             if (buff == null)
@@ -75,12 +83,26 @@ public class PlayerStats : MonoBehaviour
 
             atkPercent += buff.atkPercent;
             spdPercent += buff.spdPercent;
+            hpPercent += buff.hpPercent;
         }
 
-        FinalAttack = Mathf.RoundToInt(FinalAttack * (1 + atkPercent / 100f));
-        FinalSpeed = Mathf.RoundToInt(FinalSpeed * (1 + spdPercent / 100f));
-    }
+        // Bake buffs directly into final stats
+        FinalAttack = Mathf.RoundToInt(
+            baseAttack * (1 + atkPercent / 100f)
+        );
 
+        FinalSpeed = Mathf.CeilToInt(
+            baseSpeed * (1 + spdPercent / 100f)
+        );
+
+        // Optional HP scaling
+        int boostedHP = Mathf.RoundToInt(
+            baseHP * (1 + hpPercent / 100f)
+        );
+
+        // Update runData max HP safely
+        runData.IncreaseMaxHP(boostedHP - runData.MaxHP);
+    }
     public void TakesDamage(int amount, Slots slots)
     {
         float reduction = 0f;
