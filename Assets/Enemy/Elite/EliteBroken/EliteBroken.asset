@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: EliteBroken
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   isUnique: 0
-  maxHP: 0
-  speed: 0
-  baseDamage: 0
-  weaknesses: 
+  maxHP: 200
+  speed: 15
+  baseDamage: 25
+  weaknesses: 03000000
   attacks: []
   ultimate:
     AnimationString: 
     EnergyRequired: 0
+  IgnoreDifficultyScaling: 0

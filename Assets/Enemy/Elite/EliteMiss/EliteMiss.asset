@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: EliteMiss
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   isUnique: 0
-  maxHP: 400
-  speed: 100
-  baseDamage: 50
-  weaknesses: 01000000
+  maxHP: 200
+  speed: 15
+  baseDamage: 25
+  weaknesses: 02000000
   attacks:
   - Name: Attack1
     AnimationString: Attack1
@@ -24,3 +24,4 @@ MonoBehaviour:
   ultimate:
     AnimationString: 
     EnergyRequired: 99999999
+  IgnoreDifficultyScaling: 0
