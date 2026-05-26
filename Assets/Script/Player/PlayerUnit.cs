@@ -225,16 +225,23 @@ public class PlayerUnit : MonoBehaviour
 
     public void PerformSkill()
     {
-        if (currentTarget == null || EquippedWeapon == null)
-            return;
-        if (currentSkillPoint >= 1) 
-        { currentSkillPoint -= 2; }
-        UpdateSkillPointUI();
-        StartCoroutine(AttackRoutine(
-            EquippedWeapon.SkillAnimation,
-            EquippedWeapon.SkillTargetType,
-            EquippedWeapon.SkillEffects
-        ));
+        if (currentSkillPoint > 0)
+        {
+            if (currentTarget == null || EquippedWeapon == null)
+                return;
+            if (currentSkillPoint >= 1)
+            { currentSkillPoint -= 2; }
+            UpdateSkillPointUI();
+            StartCoroutine(AttackRoutine(
+                EquippedWeapon.SkillAnimation,
+                EquippedWeapon.SkillTargetType,
+                EquippedWeapon.SkillEffects
+            ));
+        }
+        else
+        {
+            Debug.Log("Dont Have Point");
+        }
     }
 
     public void PerformUltimate()

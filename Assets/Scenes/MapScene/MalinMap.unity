@@ -2877,8 +2877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Slots
   equippedWeapon: {fileID: 0}
   mainUIManager: {fileID: 0}
-  ownedBuffs:
-  - {fileID: 11400000, guid: 55f19f00c1b1f4d4da9dcecdcf363abe, type: 2}
+  ownedBuffs: []
 --- !u!114 &1249741751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2894,6 +2893,7 @@ MonoBehaviour:
   contentParent: {fileID: 1901899457}
   buttonPrefab: {fileID: 8501040538520535015, guid: f11c0e10f212aba4682c5268cb279f26, type: 3}
   MoneyText: {fileID: 984524506}
+  mainUIManager: {fileID: 0}
   consumableContentParent: {fileID: 1086912418}
   consumableButtonPrefab: {fileID: 8501040538520535015, guid: f11c0e10f212aba4682c5268cb279f26, type: 3}
   weaponSlot: {fileID: 1249741750}
