@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BasicBroken
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   isUnique: 0
-  maxHP: 200
-  speed: 50
-  baseDamage: 50
+  maxHP: 100
+  speed: 10
+  baseDamage: 15
   weaknesses: 03000000
   attacks:
   - Name: UpdateVisual

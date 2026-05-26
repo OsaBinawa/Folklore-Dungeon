@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   isUnique: 0
   maxHP: 100
-  speed: 20
-  baseDamage: 10
+  speed: 10
+  baseDamage: 15
   weaknesses: 01000000
   attacks:
   - Name: Basic

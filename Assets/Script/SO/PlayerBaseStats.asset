@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3626db9e049e0419617127eedd9d62, type: 3}
   m_Name: PlayerBaseStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBaseStats
-  maxHP: 80
-  baseAttack: 6
-  baseSpeed: 100
+  maxHP: 100
+  baseAttack: 50
+  baseSpeed: 15
   startingEquipment: []
