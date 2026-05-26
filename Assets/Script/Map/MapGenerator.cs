@@ -16,7 +16,11 @@ public class MapRun
         MinWidth = minWidth;
         MaxWidth = maxWidth;
     }
-
+    public int DifficultyTier { get; private set; } = 0;
+    public void IncreaseDifficulty()
+    {
+        DifficultyTier++;
+    }
     public void Generate()
     {
         DeptNodes.Clear();

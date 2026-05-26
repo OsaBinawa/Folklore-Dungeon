@@ -146,6 +146,12 @@ public class MapManager : MonoBehaviour
     {
         node.Resolve();
         node.Completed = true;
+        if (node.NodeType == NodeType.Rest)
+        {
+            currentRun.IncreaseDifficulty();
+
+            Debug.Log("Difficulty Tier Increased: " + currentRun.DifficultyTier);
+        }
 
         NodeViewContainer.gameObject.SetActive(false);
         MapContainer.gameObject.SetActive(true);
@@ -260,6 +266,7 @@ public class MapManager : MonoBehaviour
             node.Button.interactable = true;
         }
     }
+    
     private Sprite GetSpriteForNode(NodeType type)
 {
     foreach (var entry in NodeSprites)

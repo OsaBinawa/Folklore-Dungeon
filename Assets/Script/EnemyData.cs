@@ -25,8 +25,7 @@ public class EnemyData : ScriptableObject
     public int MaxHP => maxHP;
     public int Speed => speed;
     public int BaseDamage => baseDamage;
-    
-
+    public bool IgnoreDifficultyScaling;
     public IReadOnlyList<ElementType> Weaknesses => weaknesses;
     
 }

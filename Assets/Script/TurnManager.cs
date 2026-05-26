@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
-    public const float BASE_AV_SCALE = 100f;
-    public const float DISPLAY_AV_SCALE = 10f;
+    public const float BASE_AV_SCALE = 1000f;
+    public const float DISPLAY_AV_SCALE = 100f;
     private bool enemyActionFinished;
     [SerializeField] private PlayerUnit player;
     [SerializeField] private List<EnemyUnit> enemies = new();
@@ -50,10 +50,10 @@ public class TurnManager : MonoBehaviour
     private float GetBaseAV(object unit)
     {
         if (unit is PlayerUnit p)
-            return BASE_AV_SCALE / p.Stats.FinalSpeed;
+            return BASE_AV_SCALE / Mathf.Max(10f, p.Stats.FinalSpeed);
 
         if (unit is EnemyUnit e)
-            return BASE_AV_SCALE / e.Speed;
+            return BASE_AV_SCALE / Mathf.Max(10f, e.Speed);
 
         return BASE_AV_SCALE;
     }
@@ -123,8 +123,10 @@ public class TurnManager : MonoBehaviour
 
         avMap[player] -= tick;
 
-        foreach (EnemyUnit enemy in enemies)
-            avMap[enemy] -= tick;
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            avMap[enemies[i]] -= tick;
+        }
     }
     private object GetNextReadyUnit()
     {

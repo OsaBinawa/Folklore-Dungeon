@@ -11,10 +11,12 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     [Header("Data")]
     [SerializeField] protected EnemyData data;
     public static event Action OnEnemyDied;
-
+    
     [Header("Runtime")]
     [SerializeField] protected int currentHP;
     [SerializeField] protected int currentToughness;
+    [SerializeField] protected int scaledMaxHP;
+    [SerializeField] protected float damageMultiplier = 1f;
     [SerializeField] protected bool isBroken;
     [SerializeField] protected int maxEnergy = 100;
     [SerializeField] protected int currentEnergy;
@@ -49,23 +51,42 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         //sr = GetComponent<Image>();
         if (targetIndicator != null)
             targetIndicator.SetActive(false);
-        HPbar.maxValue = data.MaxHP;
-        HPbar.value = data.MaxHP;
+        HPbar.maxValue = currentHP;
+        HPbar.value = currentHP;
     }
     public void SetTargeted(bool value)
     {
         if (targetIndicator != null)
             targetIndicator.SetActive(value);
     }
-    public virtual void Initialize(EnemyData enemyData)
+    public virtual void Initialize(EnemyData enemyData, int difficultyTier)
     {
         data = enemyData;
+
+        if (data.IgnoreDifficultyScaling)
+        {
+            scaledMaxHP = data.MaxHP;
+            damageMultiplier = 1f;
+        }
+        else
+        {
+            float hpMultiplier = 1f + (difficultyTier * 0.6f);
+
+            damageMultiplier = 1f + (difficultyTier * 0.35f);
+
+            scaledMaxHP = Mathf.RoundToInt(
+                data.MaxHP * hpMultiplier
+            );
+        }
+
         Setup();
     }
 
     protected virtual void Setup()
     {
-        currentHP = data.MaxHP;
+        currentHP = scaledMaxHP > 0
+                    ? scaledMaxHP
+                    : data.MaxHP;
         isBroken = false;
 
         runtimeWeaknesses = new List<ElementType>(data.Weaknesses);
@@ -146,7 +167,9 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         for (int i = 0; i < attack.HitCount; i++)
         {
             int finalDamage = Mathf.RoundToInt(
-                attack.BaseDamage * attackMultiplier
+                attack.BaseDamage *
+                attackMultiplier *
+                damageMultiplier
             );
 
             target.TakeDamage(finalDamage, attack.Element);
