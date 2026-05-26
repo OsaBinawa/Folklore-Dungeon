@@ -21,7 +21,7 @@ public class BuffSO : ScriptableObject
     [Header("Condition")]
     public bool stackable = true;
     public bool removeAble = true;
-
+    public bool displayable = true;
     public Sprite Icon;
     public int rarity;
     [TextArea(5,10)]

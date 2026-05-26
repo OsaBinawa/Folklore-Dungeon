@@ -138,6 +138,9 @@ public class MainUIManager : MonoBehaviour
 
         foreach (var buff in slots.OwnedBuffs)
         {
+            if (!buff.displayable)
+                continue;
+
             BuffCard entry = Instantiate(
                 buffPrefab,
                 buffContainer
