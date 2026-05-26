@@ -26,6 +26,7 @@ public class Slots : MonoBehaviour
 
         ownedBuffs.Add(buff);
         mainUIManager.RefreshBuffUI();
+        mainUIManager.RefreshStats(true);
     }
     public  int ApplyQuickread()
     {
