@@ -4,30 +4,49 @@ using TMPro;
 
 public class AnnouncerText : MonoBehaviour
 {
+    [SerializeField] private AudioClip anouncementSFX;
+    private SoundManager soundManager;
     private TMP_Text announcerText;
     private Tween textTween;
 
     private void Awake()
     {
+        soundManager = FindFirstObjectByType<SoundManager>();
         announcerText = GetComponent<TMP_Text>();
         announcerText.alpha = 0;
     }
 
     private void OnEnable()
     {
-        PlayerUnit.OnInsufficientSkillPoint += Showtext;
+        PlayerUnit.OnInsufficientSkillPoint += ShowText;
+        PlayerUnit.OnAttackNoTarget += ShowText;
+        PlayerUnit.OnPlayerBasicAttack += ShowText;
+        PlayerUnit.OnPlayerSkill += ShowText;
+        PlayerUnit.OnUltimateEnergyInsufficient += ShowText;
+        PlayerUnit.OnPlayerUltimate += ShowText;
+        PlayerUnit.OnPlayerHeal += ShowText;
+        PlayerUnit.OnPlayerUsedItem += ShowText;
     }
 
     private void OnDisable()
     {
-        PlayerUnit.OnInsufficientSkillPoint -= Showtext;
+        PlayerUnit.OnInsufficientSkillPoint -= ShowText;
+        PlayerUnit.OnAttackNoTarget -= ShowText;
+        PlayerUnit.OnPlayerBasicAttack -= ShowText;
+        PlayerUnit.OnPlayerSkill -= ShowText;
+        PlayerUnit.OnUltimateEnergyInsufficient -= ShowText;
+        PlayerUnit.OnPlayerUltimate -= ShowText;
+        PlayerUnit.OnPlayerHeal -= ShowText;
+        PlayerUnit.OnPlayerUsedItem -= ShowText;
     }
 
-    private void Showtext(string text)
+    private void ShowText(string text)
     {
         textTween?.Kill();
 
         announcerText.text = text;
+
+        soundManager.PlaySFX(anouncementSFX);
 
         Sequence seq = DOTween.Sequence();
 

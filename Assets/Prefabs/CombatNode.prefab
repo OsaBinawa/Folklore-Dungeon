@@ -792,6 +792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f15ac82fd9a664aa1bbf982d12977c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnnouncerText
+  anouncementSFX: {fileID: 8300000, guid: b35afef69d31243c5baef782217c93b1, type: 3}
 --- !u!1 &1022485426731557996
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,15 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private PlayerStats stats;
     [SerializeField] public WeaponSO EquippedWeapon;
     public static event Action OnPlayerDied, OnPlayerDamaged;
-    public static event Action<string> OnInsufficientSkillPoint;
+    public static event Action<string> 
+    OnInsufficientSkillPoint,
+    OnAttackNoTarget,
+    OnPlayerBasicAttack,
+    OnPlayerSkill,
+    OnUltimateEnergyInsufficient,
+    OnPlayerUltimate,
+    OnPlayerHeal,
+    OnPlayerUsedItem;
     //[SerializeField] private Equipment weapon;
     private BattleTargeting targeting;
     [SerializeField] private Equipment armor;
@@ -152,6 +160,7 @@ public class PlayerUnit : MonoBehaviour
         if (currentTarget == null)
         {
             Debug.LogWarning("No target");
+            OnAttackNoTarget?.Invoke("No target");
             return;
         }
         anim.SetTrigger("BasicAttack");
@@ -179,6 +188,7 @@ public class PlayerUnit : MonoBehaviour
         }
 
         Debug.Log("Player uses Basic Attack");
+        OnPlayerBasicAttack?.Invoke("Player is attacking " + currentTarget.name.Replace("(Clone)", ""));
         turnManager.NotifyPlayerActionComplete();
     }
 
@@ -229,10 +239,15 @@ public class PlayerUnit : MonoBehaviour
         if (currentSkillPoint > 1)
         {
             if (currentTarget == null || EquippedWeapon == null)
+            {
+                OnAttackNoTarget?.Invoke("No Target");
                 return;
+            }
+
             // if (currentSkillPoint >= 1)
             // { currentSkillPoint -= 2; }
             currentSkillPoint -=2;
+            OnPlayerSkill?.Invoke("Player used skill on " + currentTarget.name.Replace("(Clone)", ""));
             UpdateSkillPointUI();
             StartCoroutine(AttackRoutine(
                 EquippedWeapon.SkillAnimation,
@@ -255,10 +270,12 @@ public class PlayerUnit : MonoBehaviour
         if (currentEnergy < EquippedWeapon.UltimateEnergyCost)
         {
             Debug.Log("Not enough energy!");
+            OnUltimateEnergyInsufficient?.Invoke("Not enough energy");
             return;
         }
 
         currentEnergy -= EquippedWeapon.UltimateEnergyCost;
+        OnPlayerUltimate?.Invoke("Player performed ultimate");
 
         StartCoroutine(AttackRoutine(
             EquippedWeapon.UltimateAnimation,
@@ -409,6 +426,7 @@ public class PlayerUnit : MonoBehaviour
         if (item.Heal > 0)
         {
             stats.Heal(item.Heal);
+            OnPlayerHeal?.Invoke("Player used healing item");
         }
 
         // Check if already active → refresh duration
@@ -423,7 +441,7 @@ public class PlayerUnit : MonoBehaviour
         {
             activeConsumables.Add(new ActiveConsumable(item));
         }
-
+        OnPlayerUsedItem?.Invoke("Player used " + item.name);
         RecalculateConsumableStats();
     }
 
