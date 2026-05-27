@@ -12,6 +12,8 @@ public class TurnManager : MonoBehaviour
     public ActionUI UI;
     private Dictionary<object, float> avMap = new();
     private Coroutine playerTurnRoutine;
+    [SerializeField] private float stuckTimeout = 10f;
+    private float stateTimer;
     public IReadOnlyDictionary<object, float> AVMap => avMap;
     public Action OnTimelineUpdated;
 
@@ -27,6 +29,37 @@ public class TurnManager : MonoBehaviour
     {
         RegisterPlayer();
         StartCoroutine(TimelineLoop());
+        OnTimelineUpdated?.Invoke();
+    }
+    private void Update()
+    {
+        if (state == TurnState.EnemyTurn)
+        {
+            stateTimer += Time.deltaTime;
+
+            if (stateTimer >= stuckTimeout)
+            {
+                Debug.LogWarning($"Enemy turn stuck for {stuckTimeout} seconds. Recovering...");
+                ForceRecoverTurn();
+            }
+        }
+        else
+        {
+            stateTimer = 0f;
+        }
+    }
+
+    private void ForceRecoverTurn()
+    {
+        enemyActionFinished = true;
+
+        stateTimer = 0f;
+
+        state = TurnState.Timeline;
+
+        StopAllCoroutines();
+        StartCoroutine(TimelineLoop());
+
         OnTimelineUpdated?.Invoke();
     }
     private void RegisterPlayer()

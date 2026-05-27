@@ -23,4 +23,5 @@ MonoBehaviour:
     Chance: 1
   ultimate:
     AnimationString: 
-    EnergyRequired: 1000000
+    EnergyRequired: 9999999
+  IgnoreDifficultyScaling: 0
