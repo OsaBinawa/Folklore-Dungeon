@@ -3,15 +3,20 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class ActionUI : MonoBehaviour
 {
     [SerializeField] private GameObject root;
     [SerializeField] private TurnManager turnManager;
     [SerializeField] private TMP_Text turnOrderText;
+    [SerializeField] private TMP_Text currentTurnText;
     [SerializeField] private Slider playerTimer;
 
     [SerializeField] private MainUIManager mainUIManager;
+
+    private Tween blinkTween;
+
     private void Start()
     {
         mainUIManager = FindFirstObjectByType<MainUIManager>();
@@ -25,16 +30,20 @@ public class ActionUI : MonoBehaviour
         turnManager.OnTimelineUpdated += Refresh;
 
         Refresh(); 
+
+        BlinkText();
     }
 
     private void OnEnable()
     {
         turnManager.OnTimelineUpdated += Refresh;
+        CombatManager.OnResolveNode += StopBlink;
     }
 
     private void OnDisable()
     {
         turnManager.OnTimelineUpdated -= Refresh;
+        CombatManager.OnResolveNode -= StopBlink;
     }
 
     public void Show()
@@ -51,6 +60,8 @@ public class ActionUI : MonoBehaviour
     {
         if (turnManager != null)
             turnManager.OnTimelineUpdated -= Refresh;
+
+        StopBlink();
     }
     private void Refresh()
     {
@@ -62,7 +73,8 @@ public class ActionUI : MonoBehaviour
                      .OrderByDescending(x => x.Value))
         {
             sb.AppendLine(
-                $"{GetUnitName(entry.Key)} : {Mathf.FloorToInt(entry.Value)}"
+                // $"{GetUnitName(entry.Key)} : {Mathf.FloorToInt(entry.Value)}" \\ pake kalo butuh av
+                $"{GetUnitName(entry.Key)}"
             );
         }
 
@@ -98,5 +110,18 @@ public class ActionUI : MonoBehaviour
     public void ResetTimer()
     {
         playerTimer.value = playerTimer.maxValue;
+    }
+
+    private void BlinkText()
+    {
+        blinkTween?.Kill();
+        currentTurnText.DOFade(0.5f, 0.5f)
+            .SetLoops(-1, LoopType.Yoyo)
+            .SetEase(Ease.InOutSine);
+    }
+
+    private void StopBlink()
+    {
+        blinkTween?.Kill();
     }
 }

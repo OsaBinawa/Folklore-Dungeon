@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 131f084013bdf664c85f8f6fa7ae2748, type: 3}
-  m_Name: GenericTypo
+  m_Name: Easy - Miss
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   isUnique: 0
   maxHP: 100
   speed: 10
   baseDamage: 10
-  weaknesses: 01000000
+  weaknesses: 02000000
   attacks:
   - Name: BasicAttack
     AnimationString: Attack1

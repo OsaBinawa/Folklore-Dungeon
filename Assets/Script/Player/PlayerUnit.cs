@@ -6,13 +6,12 @@ using TMPro;
 //using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerUnit : MonoBehaviour
 {
     [SerializeField] private PlayerStats stats;
     [SerializeField] public WeaponSO EquippedWeapon;
-    public static event Action OnPlayerDied;
+    public static event Action OnPlayerDied, OnPlayerDamaged;
     //[SerializeField] private Equipment weapon;
     private BattleTargeting targeting;
     [SerializeField] private Equipment armor;
@@ -185,6 +184,7 @@ public class PlayerUnit : MonoBehaviour
     public void TakeDamage(int amount, ElementType element)
     {
         stats.TakesDamage(amount, weaponSlot);
+        OnPlayerDamaged?.Invoke();
 
         StartCoroutine(TakingDamageSpriteChange());
         Debug.Log("Player HP now: " + stats.CurrentHP);
