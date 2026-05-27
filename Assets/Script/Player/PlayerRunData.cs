@@ -54,7 +54,11 @@ public class PlayerRunData
     public void IncreaseMaxHP(int amount)
     {
         MaxHP += amount;
-        //CurrentHP += amount;
+
+        if (CurrentHP > MaxHP)
+        {
+            CurrentHP = MaxHP;
+        }
 
         OnHPChanged?.Invoke(CurrentHP, MaxHP);
     }

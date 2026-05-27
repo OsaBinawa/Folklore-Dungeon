@@ -153,7 +153,7 @@ public class PlayerUnit : MonoBehaviour
             Debug.LogWarning("No target");
             return;
         }
-
+        anim.SetTrigger("BasicAttack");
         currentTarget.TakeDamage(stats.FinalAttack, CurrentElement);
         ApplyAdjacentHit();
         if (currentSkillPoint < MaxSkillPoint)

@@ -105,6 +105,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
             return;
 
         ExecuteAttack(attacks[atkIndex], player);
+        OnActionFinished();
         Debug.Log("test");
     }
     public virtual void Act(PlayerUnit player)
@@ -157,8 +158,6 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         );
     }
 
-   
-
     protected void ExecuteAttack(AttackBase attack, PlayerUnit target)
     {
         if (attack == null || target == null)
@@ -204,7 +203,6 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
 
     public void OnActionFinished()
     {
-        
         turnManager.NotifyEnemyActionComplete();
     }
     protected virtual void OnTurnStart() { }
