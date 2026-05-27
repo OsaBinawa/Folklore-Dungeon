@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2853a82a98accc4e9151f281258d721, type: 3}
-  m_Name: MultiHit
-  m_EditorClassIdentifier: Assembly-CSharp::MultiHitEffect
-  hitCount: 6
-  damagePerHit: 20
+  m_Script: {fileID: 11500000, guid: bdfbb397094431140ac9ba18550f7d46, type: 3}
+  m_Name: DamageHigh
+  m_EditorClassIdentifier: Assembly-CSharp::DamageEffect
+  baseDamage: 40

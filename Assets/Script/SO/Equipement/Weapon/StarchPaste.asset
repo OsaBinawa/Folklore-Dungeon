@@ -20,8 +20,10 @@ MonoBehaviour:
   SkillTargetType: 3
   SkillEffects:
   - {fileID: 11400000, guid: a938a053b9f3869499d4824fc93ac70e, type: 2}
-  UltimateAnimation: {fileID: 0}
+  UltimateAnimation: {fileID: 7400000, guid: b1d6d16bda075c14cb2a400a3756804c, type: 2}
   UltimateTargetType: 3
   UltimateEffects:
   - {fileID: 11400000, guid: 872a59bab1211374691fc24dd6c06735, type: 2}
+  - {fileID: 11400000, guid: 247c00593d103bf4a9b2360ac2d1db6b, type: 2}
+  UltIcon: {fileID: -5874626945751053615, guid: 51e0dcd7f357b1749bc64e1f3f590a9e, type: 3}
   UltimateEnergyCost: 0
