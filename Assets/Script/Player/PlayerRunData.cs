@@ -10,6 +10,8 @@ public class PlayerRunData
 
     public int BaseAttack;
     public int BaseSpeed;
+    public int CurrentEnergy;
+    public int MaxEnergy = 100;
 
     public List<Equipment> EquippedItems = new();
 
@@ -71,6 +73,22 @@ public class PlayerRunData
     {
         BaseSpeed += amount;
     }
+    public void GainEnergy(int amount)
+    {
+        CurrentEnergy = Mathf.Clamp(
+            CurrentEnergy + amount,
+            0,
+            MaxEnergy
+        );
+    }
 
+    public void ConsumeEnergy(int amount)
+    {
+        CurrentEnergy = Mathf.Clamp(
+            CurrentEnergy - amount,
+            0,
+            MaxEnergy
+        );
+    }
 
 }

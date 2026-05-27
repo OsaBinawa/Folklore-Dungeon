@@ -24,7 +24,7 @@ public class PlayerUnit : MonoBehaviour
     //[SerializeField] private Equipment weapon;
     private BattleTargeting targeting;
     [SerializeField] private Equipment armor;
-
+    private PlayerRunData runData;
     [Header("Runtime")]
     [SerializeField] private int currentHP;
     [SerializeField] private EnemyUnit currentTarget;
@@ -84,15 +84,21 @@ public class PlayerUnit : MonoBehaviour
     }
     public void Initialize(PlayerRunData runData)
     {
+        this.runData = runData;
+
         stats.Initialize(runData);
-        //stats.RecalculateStats();
         stats.RecalculateStatBuffs(weaponSlot);
+
         foreach (var item in inventory.HeldConsumables)
         {
             UseConsumable(item);
             processedHeld.Add(item);
         }
+
         inventory.ClearHeldConsumables();
+
+        UpdateUltimateUI();
+
         Debug.Log("PlayerUnit initialized");
     }
 
@@ -267,14 +273,14 @@ public class PlayerUnit : MonoBehaviour
         if (currentTarget == null || EquippedWeapon == null)
             return;
 
-        if (currentEnergy < EquippedWeapon.UltimateEnergyCost)
+        if (runData.CurrentEnergy < EquippedWeapon.UltimateEnergyCost)
         {
             Debug.Log("Not enough energy!");
             OnUltimateEnergyInsufficient?.Invoke("Not enough energy");
             return;
         }
 
-        currentEnergy -= EquippedWeapon.UltimateEnergyCost;
+        runData.CurrentEnergy -= EquippedWeapon.UltimateEnergyCost;
         OnPlayerUltimate?.Invoke("Player performed ultimate");
 
         StartCoroutine(AttackRoutine(
@@ -305,7 +311,7 @@ public class PlayerUnit : MonoBehaviour
         }
 
         // Gain energy (optional)
-        currentEnergy = Mathf.Min(currentEnergy + 2, maxEnergy);
+        runData.CurrentEnergy = Mathf.Min(currentEnergy + 2, maxEnergy);
         UpdateUltimateUI();
         // End turn
         FindFirstObjectByType<TurnManager>().NotifyPlayerActionComplete();
@@ -483,12 +489,12 @@ public class PlayerUnit : MonoBehaviour
         {
             // Reverse fill
             ultimateFillImage.fillAmount =
-                1f - ((float)currentEnergy / maxEnergy);
+                1f - ((float)runData.CurrentEnergy / maxEnergy);
         }
 
         bool isReady =
             EquippedWeapon != null &&
-            currentEnergy >= EquippedWeapon.UltimateEnergyCost;
+            runData.CurrentEnergy >= EquippedWeapon.UltimateEnergyCost;
 
         // Play effect once
         if (isReady && !ultimateReadyTriggered)

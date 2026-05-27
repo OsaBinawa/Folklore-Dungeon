@@ -12,11 +12,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TMP_Text MoneyText;
     [SerializeField] private MainUIManager mainUIManager;
     public TMP_Text equippedWeaponText;
-
     [Header("Consumable UI")]
     [SerializeField] private Transform consumableContentParent;
     [SerializeField] private GameObject consumableButtonPrefab;
-
     [Header("Runtime")]
     [SerializeField] private Slots weaponSlot;
     [SerializeField] private List<WeaponSO> ownedWeapons = new();
@@ -27,7 +25,6 @@ public class Inventory : MonoBehaviour
     public IReadOnlyList<ItemSO> OwnedConsumables => ownedConsumables;
     public int money;
     public IReadOnlyList<WeaponSO> OwnedWeapons => ownedWeapons;
-
     private void Start()
     {
         BuildUI();
@@ -36,9 +33,7 @@ public class Inventory : MonoBehaviour
         mainUIManager = FindAnyObjectByType<MainUIManager>();
         if (ownedWeapons.Count > 0 && !weaponSlot.HasWeapon)
             weaponSlot.Equip(ownedWeapons[0]);
-            
     }
-
     private void Update()
     {
         moneyUpdateUI();
@@ -70,8 +65,6 @@ public class Inventory : MonoBehaviour
 
         BuildConsumableUI(); 
     }
-
-
     public void AddWeapon(WeaponSO weapon)
     {
         if (!ownedWeapons.Contains(weapon))
@@ -80,7 +73,6 @@ public class Inventory : MonoBehaviour
             BuildUI();
         }
     }
-
     public void BuildConsumableUI()
     {
         foreach (Transform child in consumableContentParent)
@@ -145,9 +137,11 @@ public class Inventory : MonoBehaviour
 
     public void BuildUI()
     {
-        /*foreach (Transform child in contentParent)
-            Destroy(child.gameObject);*/
-
+        
+        foreach (Transform child in contentParent)
+        {
+            Destroy(child.gameObject);
+        }
         foreach (var weapon in ownedWeapons)
         {
             GameObject btnObj = Instantiate(buttonPrefab, contentParent);
@@ -155,10 +149,13 @@ public class Inventory : MonoBehaviour
 
             TMP_Text label = btnObj.GetComponentInChildren<TMP_Text>();
             Image img = btnObj.GetComponentInChildren<Image>();
+
             if (label != null)
                 label.text = weapon.WeaponName;
 
-            img.sprite = weapon.icon;
+            if (img != null)
+                img.sprite = weapon.icon;
+
             WeaponSO localWeapon = weapon;
 
             button.onClick.AddListener(() =>
