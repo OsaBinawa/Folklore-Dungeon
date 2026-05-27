@@ -13,47 +13,7 @@ public class EliteTypoEnemy : EnemyUnit
 
     public override void Act(PlayerUnit player)
     {
-        // If already in untargetable mode
-        if (this.isUntargetable)
-        {
-            turnsRemaining--;
-
-            base.Act(player);
-
-            if (turnsRemaining <= 0)
-                ExitUntargetable();
-
-            return;
-        }
-        //EnterUntargetable();
-
-        anim.ResetTrigger("Skill");
-        anim.SetTrigger("Skill");
-    }
-
-    private void EnterUntargetable()
-    {
-        isUntargetable = true;
-        turnsRemaining = untargetableDuration;
-        bonusAttack = attackBuff;
-
-        Debug.Log($"{name} becomes untargetable and gains ATK");
-
-        if (sr != null)
-            sr.color = Color.gray;
-
-        SetTargeted(false);
-    }
-
-    private void ExitUntargetable()
-    {
-        isUntargetable = false;
-        bonusAttack = 0;
-
-        Debug.Log($"{name} returns to normal");
-
-        if (sr != null)
-            sr.color = Color.white;
+        
     }
 
     public override void TakeDamage(int damage, ElementType element)
@@ -77,8 +37,5 @@ public class EliteTypoEnemy : EnemyUnit
         }
     }
 
-    public bool _CanBeTargeted()
-    {
-        return !isUntargetable;
-    }
+    
 }
