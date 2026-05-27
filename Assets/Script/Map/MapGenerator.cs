@@ -38,8 +38,8 @@ public class MapRun
 
                 if (rowType == NodeType.Combat)
                 {
-                    
-                    type = PickRandomNode();
+
+                    type = PickRandomNode(depth);
                 }
                 else
                 {
@@ -177,16 +177,29 @@ public class MapRun
         }
     }
 
-
-
-    private NodeType PickRandomNode()
+    private NodeType PickRandomNode(int depth)
     {
         float roll = Random.value;
 
-        if (roll < 0.4f) return NodeType.Combat;     
-        else if (roll < 0.6f) return NodeType.Event; 
-        else if (roll < 0.8f) return NodeType.Reading; 
-        else if (roll < 0.9f) return NodeType.Shop;  
-        else return NodeType.Elite;                  
+        bool eliteUnlocked = depth > RestInterval;
+
+        if (roll < 0.4f)
+            return NodeType.Combat;
+
+        else if (roll < 0.6f)
+            return NodeType.Event;
+
+        else if (roll < 0.8f)
+            return NodeType.Reading;
+
+        else if (roll < 0.9f)
+            return NodeType.Shop;
+
+        else
+        {
+            if (eliteUnlocked)
+                return NodeType.Elite;
+            return NodeType.Combat;
+        }
     }
 }
