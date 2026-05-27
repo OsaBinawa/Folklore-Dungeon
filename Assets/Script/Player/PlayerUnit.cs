@@ -12,6 +12,7 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private PlayerStats stats;
     [SerializeField] public WeaponSO EquippedWeapon;
     public static event Action OnPlayerDied, OnPlayerDamaged;
+    public static event Action<string> OnInsufficientSkillPoint;
     //[SerializeField] private Equipment weapon;
     private BattleTargeting targeting;
     [SerializeField] private Equipment armor;
@@ -65,7 +66,7 @@ public class PlayerUnit : MonoBehaviour
             Initialize(RunManager.Instance.Player);
         }
         EquipWeapon(weaponSlot.EquippedWeapon);
-        currentSkillPoint = 5;
+        currentSkillPoint = 3;
         UpdateSkillPointUI();
         /*if (runManager == null)
         {
@@ -225,12 +226,13 @@ public class PlayerUnit : MonoBehaviour
 
     public void PerformSkill()
     {
-        if (currentSkillPoint > 0)
+        if (currentSkillPoint > 1)
         {
             if (currentTarget == null || EquippedWeapon == null)
                 return;
-            if (currentSkillPoint >= 1)
-            { currentSkillPoint -= 2; }
+            // if (currentSkillPoint >= 1)
+            // { currentSkillPoint -= 2; }
+            currentSkillPoint -=2;
             UpdateSkillPointUI();
             StartCoroutine(AttackRoutine(
                 EquippedWeapon.SkillAnimation,
@@ -241,6 +243,7 @@ public class PlayerUnit : MonoBehaviour
         else
         {
             Debug.Log("Dont Have Point");
+            OnInsufficientSkillPoint?.Invoke("Not enough Skill Point");
         }
     }
 
@@ -285,7 +288,7 @@ public class PlayerUnit : MonoBehaviour
         }
 
         // Gain energy (optional)
-        currentEnergy = Mathf.Min(currentEnergy + 20, maxEnergy);
+        currentEnergy = Mathf.Min(currentEnergy + 2, maxEnergy);
         UpdateUltimateUI();
         // End turn
         FindFirstObjectByType<TurnManager>().NotifyPlayerActionComplete();
