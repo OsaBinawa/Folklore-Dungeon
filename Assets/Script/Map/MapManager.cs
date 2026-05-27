@@ -58,7 +58,7 @@ public class MapManager : MonoBehaviour
         AutoCompleteStartNode();
         //InitializeMap();
         //DisplayDepth(0);
-
+        
 
     }
     private void DisplayAllDepths()
