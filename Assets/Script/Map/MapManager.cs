@@ -32,6 +32,8 @@ public class MapManager : MonoBehaviour
     [SerializeField] private GameObject ElitePrefabs;
     [SerializeField] private LineDrawer lineDrawer;
     [SerializeField] private Scrollbar scroll;
+    [SerializeField] private int minElite = 2;
+    [SerializeField] private int maxElite = 4;
 
     private int currentUnlockedDepth = 1;
 
@@ -52,7 +54,7 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
-        currentRun = new MapRun(maxDepth, restInterval, minWidth, maxWidth);
+        currentRun = new MapRun(maxDepth, restInterval, minWidth, maxWidth,minElite, maxElite);
         currentRun.Generate();
         DisplayAllDepths();
         AutoCompleteStartNode();

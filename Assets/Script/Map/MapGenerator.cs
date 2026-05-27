@@ -8,13 +8,18 @@ public class MapRun
     public int RestInterval = 4;
     public int MinWidth = 2;
     public int MaxWidth = 4;
+    public int MinEliteNodes = 1;
+    public int MaxEliteNodes = 3;
 
-    public MapRun(int maxDepth, int restInterval, int minWidth, int maxWidth)
+    private int currentEliteCount = 0;
+    public MapRun(int maxDepth, int restInterval,int minWidth, int maxWidth, int minEliteNodes, int maxEliteNodes)
     {
         MaxDepth = maxDepth;
         RestInterval = restInterval;
         MinWidth = minWidth;
         MaxWidth = maxWidth;
+        MinEliteNodes = minEliteNodes;
+        MaxEliteNodes = maxEliteNodes;
     }
     public int DifficultyTier { get; private set; } = 0;
     public void IncreaseDifficulty()
@@ -24,6 +29,7 @@ public class MapRun
     public void Generate()
     {
         DeptNodes.Clear();
+        currentEliteCount = 0;
 
         for (int depth = 0; depth <= MaxDepth; depth++)
         {
@@ -32,18 +38,33 @@ public class MapRun
             NodeType rowType = DetermineRowType(depth);
             int nodeCount = GetRowWidth(rowType);
 
+            bool rowBeforeRest =
+                depth + 1 <= MaxDepth &&
+                DetermineRowType(depth + 1) == NodeType.Rest;
+
+            int forcedCombatIndex = rowBeforeRest
+                ? Random.Range(0, nodeCount)
+                : -1;
+
             for (int i = 0; i < nodeCount; i++)
             {
                 NodeType type;
 
                 if (rowType == NodeType.Combat)
                 {
-
-                    type = PickRandomNode(depth);
+                    // Guarantee at least one combat node
+                    // before every rest row
+                    if (i == forcedCombatIndex)
+                    {
+                        type = NodeType.Combat;
+                    }
+                    else
+                    {
+                        type = PickRandomNode(depth);
+                    }
                 }
                 else
                 {
-                    
                     type = rowType;
                 }
 
@@ -51,13 +72,15 @@ public class MapRun
                 node.index = i;
 
                 nodesAtDepth.Add(node);
-                //Debug.Log($"Depth {depth}, Node {i}, Type {type}");
             }
 
             DeptNodes.Add(nodesAtDepth);
         }
 
-        
+        // Ensure minimum elite count
+        EnsureMinimumEliteNodes();
+
+        // Connect rows
         for (int d = 0; d < DeptNodes.Count - 1; d++)
         {
             ConnectRows(DeptNodes[d], DeptNodes[d + 1]);
@@ -65,8 +88,6 @@ public class MapRun
 
         Debug.Log("Map Generated");
     }
-
-  
     private NodeType DetermineRowType(int depth)
     {
         if (depth == 0)
@@ -177,28 +198,72 @@ public class MapRun
         }
     }
 
+    private void EnsureMinimumEliteNodes()
+    {
+        if (currentEliteCount >= MinEliteNodes)
+            return;
+
+        List<MapNode> validNodes = new List<MapNode>();
+
+        foreach (var row in DeptNodes)
+        {
+            foreach (var node in row)
+            {
+                bool valid =
+                    node.NodeType == NodeType.Combat &&
+                    node.Depth > RestInterval &&
+                    node.Depth < MaxDepth;
+
+                if (valid)
+                {
+                    validNodes.Add(node);
+                }
+            }
+        }
+
+        while (currentEliteCount < MinEliteNodes && validNodes.Count > 0)
+        {
+            int index = Random.Range(0, validNodes.Count);
+
+            validNodes[index].NodeType = NodeType.Elite;
+
+            validNodes.RemoveAt(index);
+
+            currentEliteCount++;
+        }
+    }
+
     private NodeType PickRandomNode(int depth)
     {
         float roll = Random.value;
-
         bool eliteUnlocked = depth > RestInterval;
-
-        if (roll < 0.4f)
+        bool canSpawnElite =
+            eliteUnlocked &&
+            currentEliteCount < MaxEliteNodes;
+        if (roll < 0.3f)
+        {
             return NodeType.Combat;
-
+        }
         else if (roll < 0.6f)
+        {
             return NodeType.Event;
-
+        }
         else if (roll < 0.8f)
+        {
             return NodeType.Reading;
-
+        }
         else if (roll < 0.9f)
+        {
             return NodeType.Shop;
-
+        }
         else
         {
-            if (eliteUnlocked)
+            if (canSpawnElite)
+            {
+                currentEliteCount++;
                 return NodeType.Elite;
+            }
+
             return NodeType.Combat;
         }
     }
