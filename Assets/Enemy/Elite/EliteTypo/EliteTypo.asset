@@ -21,6 +21,9 @@ MonoBehaviour:
   - Name: Basic
     AnimationString: Basic
     Chance: 0.5
+  - Name: Skill
+    AnimationString: Skill
+    Chance: 0.3
   ultimate:
     AnimationString: 
     EnergyRequired: 17628

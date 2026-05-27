@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 7919622103761667704}
   - component: {fileID: 1859324022518236802}
   - component: {fileID: 5048148330327182955}
-  - component: {fileID: 7809462455800196690}
+  - component: {fileID: 8367081222988349889}
   m_Layer: 5
   m_Name: EliteTypo
   m_TagString: Untagged
@@ -179,7 +179,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7809462455800196690
+--- !u!114 &8367081222988349889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,9 +188,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1780442981076582795}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b7a04f6890a67f498bf2ed1c698de5d, type: 3}
+  m_Script: {fileID: 11500000, guid: b87d5f809a1451840a2a02c0d8775db6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EliteTypoEnemy
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
   data: {fileID: 11400000, guid: 4bb78349d53458b4395264d6cfa14b69, type: 2}
   currentHP: 0
   currentToughness: 0
@@ -206,15 +206,15 @@ MonoBehaviour:
   targetIndicator: {fileID: 6368121916532404933}
   attacks:
   - Name: 
-    BaseDamage: 20
+    BaseDamage: 10
     Element: 0
     HitCount: 1
     Effects: []
-  untargetableDuration: 3
-  attackBuff: 10
-  counterChance: 0.3
-  isUntargetable: 0
-  turnsRemaining: 0
+  - Name: 
+    BaseDamage: 15
+    Element: 0
+    HitCount: 3
+    Effects: []
 --- !u!1 &2804815268754373960
 GameObject:
   m_ObjectHideFlags: 0
