@@ -4699,6 +4699,7 @@ MonoBehaviour:
   player: {fileID: 19510278876226992}
   enemies: []
   UI: {fileID: 8529759504667406154}
+  stuckTimeout: 10
   turnTime: 10
 --- !u!114 &6772721197835116512
 MonoBehaviour:

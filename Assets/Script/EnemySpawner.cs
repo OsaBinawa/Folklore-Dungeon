@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -9,12 +10,13 @@ public class EnemySpawner : MonoBehaviour
 
     public Transform enemyContainer;
     public EnemyUnit[] enemyPrefabs;
-
+    private MapManager mapManager;
     private TurnManager turnManager;
 
     void Start()
     {
         turnManager = FindFirstObjectByType<TurnManager>();
+        mapManager = FindFirstObjectByType<MapManager>();
         SpawnEnemies();
     }
 
@@ -29,10 +31,11 @@ public class EnemySpawner : MonoBehaviour
             EnemyUnit prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
 
             EnemyUnit enemy = Instantiate(prefab, enemyContainer);
+            enemy.Initialize(enemy.Data, mapManager.CurrentDifficultyTier);
             spawnedEnemies.Add(enemy);
         }
 
         turnManager.RegisterEnemies(spawnedEnemies);
     }
-
+    
 }

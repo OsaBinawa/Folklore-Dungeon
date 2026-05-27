@@ -16,6 +16,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private  int restInterval = 4;
     [SerializeField] private int minWidth = 2;
     [SerializeField] private int maxWidth = 4;
+    public int CurrentDifficultyTier => currentRun.DifficultyTier;
 
     [Header("Visual & Prefabs")]
     [SerializeField] private List<NodeSpriteEntry> NodeSprites;
