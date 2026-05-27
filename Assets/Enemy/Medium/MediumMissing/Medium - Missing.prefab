@@ -194,6 +194,8 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: d379ba46be4b8ec47bbfb41baa4b5e8b, type: 2}
   currentHP: 0
   currentToughness: 0
+  scaledMaxHP: 0
+  damageMultiplier: 1
   isBroken: 0
   maxEnergy: 100
   currentEnergy: 0
@@ -203,12 +205,12 @@ MonoBehaviour:
   HPbar: {fileID: 1739744042050353781}
   targetIndicator: {fileID: 7534419517214784352}
   attacks:
-  - Name: Basic
+  - Name: Basic Attack
     BaseDamage: 25
     Element: 0
     HitCount: 1
     Effects: []
-  - Name: Skill1
+  - Name: Skill
     BaseDamage: 25
     Element: 0
     HitCount: 1

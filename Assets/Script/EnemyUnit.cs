@@ -11,6 +11,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     [Header("Data")]
     [SerializeField] protected EnemyData data;
     public static event Action OnEnemyDied;
+    public static event Action<string> OnEnemyAct;
     
     [Header("Runtime")]
     [SerializeField] protected int currentHP;
@@ -107,6 +108,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
         ExecuteAttack(attacks[atkIndex], player);
         OnActionFinished();
         Debug.Log("test");
+        OnEnemyAct?.Invoke(data.name.Replace("(Clone)", "") + " performed " + attacks[atkIndex].Name);
     }
     public virtual void Act(PlayerUnit player)
     {

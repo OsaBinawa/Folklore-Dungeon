@@ -205,7 +205,7 @@ MonoBehaviour:
   HPbar: {fileID: 1739744042050353781}
   targetIndicator: {fileID: 2559905929787108367}
   attacks:
-  - Name: Basic
+  - Name: Basic Attack
     BaseDamage: 20
     Element: 0
     HitCount: 1
