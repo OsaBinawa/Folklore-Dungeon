@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 7919622103761667704}
   - component: {fileID: 1859324022518236802}
   - component: {fileID: 5048148330327182955}
-  - component: {fileID: 8510585726989865588}
+  - component: {fileID: 8182278665247564545}
   m_Layer: 5
   m_Name: EliteBroken
   m_TagString: Untagged
@@ -180,7 +180,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8510585726989865588
+--- !u!114 &8182278665247564545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,9 +189,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1780442981076582795}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5268bf266ca06854d947440e258d2e6d, type: 3}
+  m_Script: {fileID: 11500000, guid: e0fabac2960aec443a3ea10034975907, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EliteBroken
+  m_EditorClassIdentifier: Assembly-CSharp::BasicBrokenEnemy
   data: {fileID: 11400000, guid: 41bb66baa613f2f4ea3c5d031dc5b013, type: 2}
   currentHP: 0
   currentToughness: 0
@@ -214,8 +214,6 @@ MonoBehaviour:
   - {fileID: 2324768245746240809, guid: 9c6143f39961b8548b23b80fcbf816e6, type: 3}
   - {fileID: 689808902715890636, guid: 9c6143f39961b8548b23b80fcbf816e6, type: 3}
   turnCounter: -1
-  Vfx_Shield: {fileID: 6758834791354704584}
-  shieldChance: 0.5
 --- !u!1 &2003909404970173317
 GameObject:
   m_ObjectHideFlags: 0
