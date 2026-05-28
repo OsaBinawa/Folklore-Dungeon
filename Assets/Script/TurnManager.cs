@@ -16,7 +16,7 @@ public class TurnManager : MonoBehaviour
     private float stateTimer;
     public IReadOnlyDictionary<object, float> AVMap => avMap;
     public Action OnTimelineUpdated;
-    [SerializeField] private float turnTransitionDelay = 10f;
+    [SerializeField] private float turnTransitionDelay = 0.3f;
 
     public float turnTime = 5f;
     private enum TurnState
@@ -100,14 +100,15 @@ public class TurnManager : MonoBehaviour
     }
     public void NotifyPlayerActionComplete()
     {
-
-        StartCoroutine(ResumeTimelineAfterDelay());
+        UI.Hide();
+        StartCoroutine(EndCurrentTurn());
     }
-    private IEnumerator ResumeTimelineAfterDelay()
+    private IEnumerator EndCurrentTurn()
     {
+        state = TurnState.Timeline;
+
         yield return new WaitForSeconds(turnTransitionDelay);
 
-        state = TurnState.Timeline;
         OnTimelineUpdated?.Invoke();
 
         StartCoroutine(TimelineLoop());
@@ -127,7 +128,7 @@ public class TurnManager : MonoBehaviour
                 {
                     state = TurnState.PlayerTurn;
                     UI.Show();
-                    //StartPlayerTurnTimer();
+                    OnTimelineUpdated?.Invoke();
                     yield break;
                 }
                 else
@@ -135,14 +136,10 @@ public class TurnManager : MonoBehaviour
                     EnemyUnit enemy = next as EnemyUnit;
                     state = TurnState.EnemyTurn;
                     UI.Hide();
+                    OnTimelineUpdated?.Invoke();
                     yield return StartCoroutine(EnemyTurn(enemy));
-
-                    yield return new WaitForSeconds(turnTransitionDelay);
-
-                    state = TurnState.Timeline;
+                    yield break;
                 }
-
-                OnTimelineUpdated?.Invoke();
             }
 
             yield return null;
@@ -155,6 +152,8 @@ public class TurnManager : MonoBehaviour
         enemy.Act(player);
 
         yield return new WaitUntil(() => enemyActionFinished);
+
+        yield return StartCoroutine(EndCurrentTurn());
     }
 
     private void TickAV()
@@ -186,9 +185,6 @@ public class TurnManager : MonoBehaviour
     }
     public void NotifyEnemyActionComplete()
     {
-        /*state = TurnState.Timeline;
-        OnTimelineUpdated?.Invoke();
-        StartCoroutine(TimelineLoop());*/
         enemyActionFinished = true;
     }
     /*private void StartPlayerTurnTimer()

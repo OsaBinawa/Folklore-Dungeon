@@ -52,8 +52,6 @@ public class MapRun
 
                 if (rowType == NodeType.Combat)
                 {
-                    // Guarantee at least one combat node
-                    // before every rest row
                     if (i == forcedCombatIndex)
                     {
                         type = NodeType.Combat;
@@ -76,16 +74,11 @@ public class MapRun
 
             DeptNodes.Add(nodesAtDepth);
         }
-
-        // Ensure minimum elite count
         EnsureMinimumEliteNodes();
-
-        // Connect rows
         for (int d = 0; d < DeptNodes.Count - 1; d++)
         {
             ConnectRows(DeptNodes[d], DeptNodes[d + 1]);
         }
-
         Debug.Log("Map Generated");
     }
     private NodeType DetermineRowType(int depth)
