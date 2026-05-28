@@ -112,19 +112,6 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     }
     public virtual void Act(PlayerUnit player)
     {
-        if (!ultimateQueued && data.Ultimate != null)
-        {
-            if (currentEnergy >= data.Ultimate.EnergyRequired)
-                ultimateQueued = true;
-        }
-        if (ultimateQueued)
-        {
-            anim.SetTrigger(data.Ultimate.AnimationString);
-            currentEnergy = 0;
-            ultimateQueued = false;
-            Debug.Log("Ulti");
-            return;
-        }
         var action = ChooseAttack();
         Debug.Log("Animation String = [" + action.AnimationString + "]");
         Debug.Log(name + " chose: " + action.AnimationString);
