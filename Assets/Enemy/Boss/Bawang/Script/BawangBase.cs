@@ -1,7 +1,13 @@
+using System;
 using UnityEngine;
 
 public class BawangBase : EnemyUnit
 {
+    public static event Action<string> OnSiblingDefeated,
+    OnFusion,
+    OnHealing,
+    OnBuffExpired;
+
     [Header("Bawang Shared")]
     [SerializeField] protected BawangBase sibling;
     [SerializeField] protected GameObject fusionPrefab;
@@ -49,6 +55,8 @@ public class BawangBase : EnemyUnit
 
         Debug.Log(name + " defeated");
 
+        OnSiblingDefeated?.Invoke(name + " is defeated");
+
         SetTargeted(false);
 
         if (sr != null)
@@ -68,6 +76,8 @@ public class BawangBase : EnemyUnit
             sibling.fusionTriggered = true;
 
             Debug.Log("Fusion phase starts!");
+
+            OnFusion?.Invoke("Bawang Merah fused with Bawang Putih");
 
             Instantiate(
                 fusionPrefab,
@@ -105,6 +115,8 @@ public class BawangBase : EnemyUnit
                 attackMultiplier = 1f;
 
                 Debug.Log(name + " ATK buff expired");
+
+                OnBuffExpired?.Invoke("ATK buff expired");
             }
         }
 
@@ -117,6 +129,8 @@ public class BawangBase : EnemyUnit
                 speedMultiplier = 1f;
 
                 Debug.Log(name + " SPD buff expired");
+
+                OnBuffExpired?.Invoke("SPD buff expired");
             }
         }
     }
@@ -131,6 +145,7 @@ public class BawangBase : EnemyUnit
         HpBarUpdate();
 
         Debug.Log(name + " healed " + amount);
+        OnHealing?.Invoke("Bawang Merah is healing " + name);
     }
 
     public virtual void ApplyAttackBuff(float percent, int duration)

@@ -1,7 +1,13 @@
+using System;
 using UnityEngine;
 
 public class BawangPutih : BawangBase
 {
+    public static event Action<string> OnSelfBuff,
+    OnSlow,
+    OnCharging,
+    OnChargeAttack;
+
     [Header("Putih")]
     [SerializeField] private int chargeBonus = 30;
 
@@ -20,6 +26,8 @@ public class BawangPutih : BawangBase
         {
             Debug.Log(name + " buffs itself");
 
+            OnSelfBuff?.Invoke(name + " is raging and buffs it's own ATK and SPD");
+
             attackMultiplier = 1.5f;
             speedMultiplier = 1.5f;
         }
@@ -36,6 +44,8 @@ public class BawangPutih : BawangBase
         {
             Debug.Log(name + " slows player");
 
+            OnSlow?.Invoke(name + " inflicted slow to player");
+
             turnManager?.ModifyAV(player, 500f);
         }
     }
@@ -46,7 +56,10 @@ public class BawangPutih : BawangBase
         charged = true;
 
         Debug.Log(name + " is charging");
+
+        OnCharging?.Invoke(name + " is charging, will deal more damage on the next turn");
     }
+
     public void ApplyChargeBonus()
     {
         if (!charged)
@@ -62,6 +75,7 @@ public class BawangPutih : BawangBase
         charged = false;
 
         Debug.Log(name + " triggers charge bonus damage");
+        OnChargeAttack?.Invoke(name + " deal charged attack");
     }
     // Animation Event
     public void HeavyAttack()

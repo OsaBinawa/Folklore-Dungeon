@@ -30,6 +30,12 @@ public class AnnouncerText : MonoBehaviour
         BasicBrokenEnemy.OnShredProgress += ShowText;
         EliteMissEnemy.OnInflictSlow += ShowText;
         EliteTypoEnemy.OnCounterAttack += ShowText;
+        BawangBase.OnSiblingDefeated += ShowText;
+        BawangBase.OnFusion += ShowText;
+        BawangBase.OnHealing += ShowText;
+        BawangBase.OnBuffExpired += ShowText;
+        BawangMerah.OnBuffing += ShowText;
+        BawangMerah.OnSelfBuff += ShowText;
     }
 
     private void OnDisable()
@@ -46,6 +52,11 @@ public class AnnouncerText : MonoBehaviour
         BasicBrokenEnemy.OnShredProgress -= ShowText;
         EliteMissEnemy.OnInflictSlow -= ShowText;
         EliteTypoEnemy.OnCounterAttack -= ShowText;
+        BawangBase.OnFusion -= ShowText;
+        BawangBase.OnHealing -= ShowText;
+        BawangBase.OnBuffExpired -= ShowText;
+        BawangMerah.OnBuffing -= ShowText;
+        BawangMerah.OnSelfBuff -= ShowText;
     }
 
     private void ShowText(string text)

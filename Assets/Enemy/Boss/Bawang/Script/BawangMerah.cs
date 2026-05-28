@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class BawangMerah : BawangBase
 {
+    public static event Action<string> OnBuffing,
+    OnSelfBuff;
     [Header("Merah")]
     [SerializeField] private int rageDamage = 50;
     [Range(0.0f, 1f)]
@@ -30,6 +33,8 @@ public class BawangMerah : BawangBase
         if (sibling != null && sibling.IsDefeated)
         {
             turnCounter++;
+
+            OnSelfBuff?.Invoke(name + " is raging and will attack the player every 3 turn");
 
             if (turnCounter % 3 == 0)
             {
@@ -69,7 +74,9 @@ public class BawangMerah : BawangBase
             atkBuffDuration
         );
 
-        Debug.Log(name + " buffs sibling ATK");
+        Debug.Log(name + " buffs" + sibling.name + "'s ATK");
+
+        OnBuffing?.Invoke(name + " buffs" + sibling.name + "'s ATK");
     }
 
     // Animation Event
