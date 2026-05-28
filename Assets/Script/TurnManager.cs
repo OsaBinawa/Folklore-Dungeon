@@ -16,6 +16,7 @@ public class TurnManager : MonoBehaviour
     private float stateTimer;
     public IReadOnlyDictionary<object, float> AVMap => avMap;
     public Action OnTimelineUpdated;
+    [SerializeField] private float turnTransitionDelay = 10f;
 
     public float turnTime = 5f;
     private enum TurnState
@@ -99,12 +100,18 @@ public class TurnManager : MonoBehaviour
     }
     public void NotifyPlayerActionComplete()
     {
-       
+
+        StartCoroutine(ResumeTimelineAfterDelay());
+    }
+    private IEnumerator ResumeTimelineAfterDelay()
+    {
+        yield return new WaitForSeconds(turnTransitionDelay);
+
         state = TurnState.Timeline;
         OnTimelineUpdated?.Invoke();
+
         StartCoroutine(TimelineLoop());
     }
-
     private IEnumerator TimelineLoop()
     {
         while (state == TurnState.Timeline)
@@ -129,6 +136,9 @@ public class TurnManager : MonoBehaviour
                     state = TurnState.EnemyTurn;
                     UI.Hide();
                     yield return StartCoroutine(EnemyTurn(enemy));
+
+                    yield return new WaitForSeconds(turnTransitionDelay);
+
                     state = TurnState.Timeline;
                 }
 
@@ -140,9 +150,6 @@ public class TurnManager : MonoBehaviour
     }
     private IEnumerator EnemyTurn(EnemyUnit enemy)
     {
-        /*yield return null;
-        enemy.Act(player);
-        yield return new WaitForSeconds(0.2f);*/
         enemyActionFinished = false;
 
         enemy.Act(player);
