@@ -24,8 +24,7 @@ public class EliteBroken : BasicBrokenEnemy
         currentShield = Mathf.RoundToInt(data.MaxHP * 0.5f);
 
         Debug.Log($"{name} used Shield: {currentShield}");
-
-
+        ProgressState();
         anim.SetTrigger("Shield");
         if (Vfx_Shield != null) { Vfx_Shield.SetActive(true); }
 
