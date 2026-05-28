@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class BasicTypoEnemy : EnemyUnit
 {
+    public static event Action<string> OnUseShield;
     private int currentShield;
     [SerializeField] private GameObject Vfx_Shield;//VFX atau apapun lah
     [SerializeField] private float shieldChance = 0.5f;
@@ -10,7 +12,7 @@ public class BasicTypoEnemy : EnemyUnit
     {
         Debug.Log(name + " TypoEnemy Act");
 
-        if (Random.value <= shieldChance && currentShield <= 0)
+        if (UnityEngine.Random.value <= shieldChance && currentShield <= 0)
         {
             Debug.Log("Using Shield");
             UseShield();
@@ -28,7 +30,7 @@ public class BasicTypoEnemy : EnemyUnit
         currentShield = Mathf.RoundToInt(data.MaxHP * 0.5f);
 
         Debug.Log($"{name} used Shield: {currentShield}");
-
+        OnUseShield?.Invoke(data.name + " used shield");
         
         anim.SetTrigger("Shield");
         if (Vfx_Shield != null) {Vfx_Shield.SetActive(true);}

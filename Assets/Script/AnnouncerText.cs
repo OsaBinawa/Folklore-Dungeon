@@ -26,6 +26,8 @@ public class AnnouncerText : MonoBehaviour
         PlayerUnit.OnPlayerUltimate += ShowText;
         PlayerUnit.OnPlayerHeal += ShowText;
         PlayerUnit.OnPlayerUsedItem += ShowText;
+        EnemyUnit.OnEnemyAct += ShowText;
+        BasicBrokenEnemy.OnShredProgress += ShowText;
     }
 
     private void OnDisable()
@@ -38,6 +40,8 @@ public class AnnouncerText : MonoBehaviour
         PlayerUnit.OnPlayerUltimate -= ShowText;
         PlayerUnit.OnPlayerHeal -= ShowText;
         PlayerUnit.OnPlayerUsedItem -= ShowText;
+        EnemyUnit.OnEnemyAct -= ShowText;
+        BasicBrokenEnemy.OnShredProgress -= ShowText;
     }
 
     private void ShowText(string text)

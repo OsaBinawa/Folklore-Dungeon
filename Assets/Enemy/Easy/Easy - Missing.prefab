@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 5048148330327182955}
   - component: {fileID: 1375741737240208879}
   m_Layer: 5
-  m_Name: Easy - Miss
+  m_Name: Easy - Missing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
   HPbar: {fileID: 1739744042050353781}
   targetIndicator: {fileID: 7120803311380298212}
   attacks:
-  - Name: Basic
+  - Name: Basic Attack
     BaseDamage: 20
     Element: 0
     HitCount: 1

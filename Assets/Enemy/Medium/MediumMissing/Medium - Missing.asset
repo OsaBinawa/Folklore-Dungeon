@@ -18,7 +18,7 @@ MonoBehaviour:
   baseDamage: 15
   weaknesses: 02000000
   attacks:
-  - Name: BasicAttack
+  - Name: Basic Attack
     AnimationString: BasicAttack
     Chance: 0.5
   - Name: SlowAttack
@@ -27,3 +27,4 @@ MonoBehaviour:
   ultimate:
     AnimationString: 
     EnergyRequired: 2147483647
+  IgnoreDifficultyScaling: 0

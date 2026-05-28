@@ -4271,10 +4271,10 @@ MonoBehaviour:
   ContentRoot: {fileID: 1450023144}
   Root: {fileID: 2024605533}
   NodeViewContainer: {fileID: 1463919540}
-  maxDepth: 10
-  restInterval: 4
+  maxDepth: 13
+  restInterval: 6
   minWidth: 2
-  maxWidth: 4
+  maxWidth: 5
   NodeSprites:
   - Type: 1
     Sprite: {fileID: 1760424476953454677, guid: fecf1b3d3e7c90542b4b31b3e21a148b, type: 3}
@@ -4302,6 +4302,8 @@ MonoBehaviour:
   ElitePrefabs: {fileID: 945770643077263496, guid: 033ab5d3a3b08c84bb47b45bb882371b, type: 3}
   lineDrawer: {fileID: 2136833167}
   scroll: {fileID: 0}
+  minElite: 1
+  maxElite: 3
 --- !u!4 &1729609377
 Transform:
   m_ObjectHideFlags: 0

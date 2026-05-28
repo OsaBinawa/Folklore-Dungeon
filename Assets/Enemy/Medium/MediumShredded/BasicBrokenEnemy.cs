@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class BasicBrokenEnemy : EnemyUnit
 {
+    public static event Action<string> OnShredProgress;
     [Header("Broken Enemy")]
     [SerializeField] private int explosionDamage = 20;
     [SerializeField] private Sprite[] stages;
@@ -40,6 +42,9 @@ public class BasicBrokenEnemy : EnemyUnit
 
         int index = Mathf.Clamp(turnCounter, 0, stages.Length - 1);
         sr.sprite = stages[index];
+
+        OnShredProgress?.Invoke(data.name.Replace("(Clone)", "") + " on shredding progress " + (index + 1).ToString() + "/3");
+        Debug.Log(data.name.Replace("(Clone)", "") + " on shredding progress " + (index + 1).ToString() + "/3");
     }
 
     private void Explode()
@@ -50,6 +55,7 @@ public class BasicBrokenEnemy : EnemyUnit
         {
             Debug.Log($"{name} explodes for {explosionDamage}");
             player.TakeDamage(explosionDamage, ElementType.None);
+            OnShredProgress?.Invoke(data.name.Replace("(Clone)", "") + " exploding, dealing damage to player");
         }
 
         Die();
