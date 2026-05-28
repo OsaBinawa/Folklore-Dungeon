@@ -42,7 +42,6 @@ public class MalinKundangRightHand : MalinKundangHand
 
     public override void TakeDamage(int damage, ElementType element)
     {
-        // Apply bonus attack when hitting player (if needed later)
         base.TakeDamage(damage, element);
     }
 }
