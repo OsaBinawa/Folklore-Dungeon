@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 5048148330327182955}
   - component: {fileID: 8367081222988349889}
   m_Layer: 5
-  m_Name: EliteTypo
+  m_Name: Elite - Typo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,12 +205,12 @@ MonoBehaviour:
   HPbar: {fileID: 1739744042050353781}
   targetIndicator: {fileID: 6368121916532404933}
   attacks:
-  - Name: 
+  - Name: Basic attack
     BaseDamage: 10
     Element: 0
     HitCount: 1
     Effects: []
-  - Name: 
+  - Name: Skill (3x Hit)
     BaseDamage: 15
     Element: 0
     HitCount: 3

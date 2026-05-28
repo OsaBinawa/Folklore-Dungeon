@@ -4717,12 +4717,7 @@ MonoBehaviour:
   maxEnemies: 3
   enemyContainer: {fileID: 1729019562268867681}
   enemyPrefabs:
-  - {fileID: 2562358020629667031, guid: 896d003e62c3a364daeb25a53b7fd4dc, type: 3}
-  - {fileID: 4365528110497258432, guid: e880b0442b7527640b709988755d27a0, type: 3}
-  - {fileID: 549938180214361854, guid: a45bc1e648da10b4485f86fea1369010, type: 3}
-  - {fileID: 1375741737240208879, guid: 2a815f42055e42d4faf45f0e12541eb9, type: 3}
-  - {fileID: 989562648222479985, guid: 9025948099e244d4288df4eece51ca37, type: 3}
-  - {fileID: 8508428000786163284, guid: d5bc87f10f9c3d445bf6b3fea3f53e58, type: 3}
+  - {fileID: 3014976253548865600, guid: ada0bb56b56b4d245bf1970da1f7a83d, type: 3}
 --- !u!114 &1433572671359310071
 MonoBehaviour:
   m_ObjectHideFlags: 0

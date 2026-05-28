@@ -28,6 +28,8 @@ public class AnnouncerText : MonoBehaviour
         PlayerUnit.OnPlayerUsedItem += ShowText;
         EnemyUnit.OnEnemyAct += ShowText;
         BasicBrokenEnemy.OnShredProgress += ShowText;
+        EliteMissEnemy.OnInflictSlow += ShowText;
+        EliteTypoEnemy.OnCounterAttack += ShowText;
     }
 
     private void OnDisable()
@@ -42,6 +44,8 @@ public class AnnouncerText : MonoBehaviour
         PlayerUnit.OnPlayerUsedItem -= ShowText;
         EnemyUnit.OnEnemyAct -= ShowText;
         BasicBrokenEnemy.OnShredProgress -= ShowText;
+        EliteMissEnemy.OnInflictSlow -= ShowText;
+        EliteTypoEnemy.OnCounterAttack -= ShowText;
     }
 
     private void ShowText(string text)

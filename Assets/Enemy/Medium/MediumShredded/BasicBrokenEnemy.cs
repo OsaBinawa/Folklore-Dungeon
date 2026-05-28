@@ -43,7 +43,7 @@ public class BasicBrokenEnemy : EnemyUnit
         int index = Mathf.Clamp(turnCounter, 0, stages.Length - 1);
         sr.sprite = stages[index];
 
-        OnShredProgress?.Invoke(data.name.Replace("(Clone)", "") + " on shredding progress " + (index + 1).ToString() + "/3");
+        OnShredProgress?.Invoke(data.name.Replace("(Clone)", "") + " on shredding progress " + (index + 1).ToString() + "/" + stages.Length);
         Debug.Log(data.name.Replace("(Clone)", "") + " on shredding progress " + (index + 1).ToString() + "/3");
     }
 

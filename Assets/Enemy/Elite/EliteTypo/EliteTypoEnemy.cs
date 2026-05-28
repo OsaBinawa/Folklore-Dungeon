@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class EliteTypoEnemy : EnemyUnit
 {
+    public static event Action<string> OnCounterAttack;
     [Header("Typo Settings")]
     [SerializeField] private int untargetableDuration = 3;
     [SerializeField] private int attackBuff = 10;
@@ -25,9 +27,11 @@ public class EliteTypoEnemy : EnemyUnit
         base.TakeDamage(damage, element);
 
         // Counterattack chance
-        if (Random.value <= counterChance)
+        if (UnityEngine.Random.value <= counterChance)
         {
             Debug.Log($"{name} counterattacks!");
+
+            OnCounterAttack?.Invoke("Player attack countered!");
 
             PlayerUnit player = FindFirstObjectByType<PlayerUnit>();
             if (player != null)
@@ -36,6 +40,4 @@ public class EliteTypoEnemy : EnemyUnit
             }
         }
     }
-
-    
 }

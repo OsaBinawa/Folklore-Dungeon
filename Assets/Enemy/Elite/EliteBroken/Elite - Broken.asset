@@ -10,21 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 131f084013bdf664c85f8f6fa7ae2748, type: 3}
-  m_Name: EliteTypo
+  m_Name: Elite - Broken
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   isUnique: 0
-  maxHP: 200
-  speed: 15
+  maxHP: 100
+  speed: 20
   baseDamage: 25
-  weaknesses: 01000000
+  weaknesses: 03000000
   attacks:
-  - Name: Basic
-    AnimationString: Basic
-    Chance: 0.5
-  - Name: Skill
-    AnimationString: Skill
-    Chance: 0.3
+  - Name: attack1
+    AnimationString: Attack1
+    Chance: 1
   ultimate:
     AnimationString: 
-    EnergyRequired: 17628
+    EnergyRequired: 0
   IgnoreDifficultyScaling: 0

@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class EliteMissEnemy : EnemyUnit
 {
+    public static event Action<string> OnInflictSlow;
     [Header("Miss Settings")]
     [SerializeField] private float delayChance = 0.4f;
     [SerializeField] private float delayAmount = 25f;
@@ -16,12 +18,13 @@ public class EliteMissEnemy : EnemyUnit
 
         if (player == null) return;
 
-        if (Random.value <= delayChance)
+        if (UnityEngine.Random.value <= delayChance)
         {
             Debug.Log($"{name} applies delay!");
+
+            OnInflictSlow?.Invoke("Player slowed by " + data.name);
 
             turnManager?.ModifyAV(player, delayAmount);
         }
     }
-
 }
