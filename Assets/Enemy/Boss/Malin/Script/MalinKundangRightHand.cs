@@ -15,6 +15,12 @@ public class MalinKundangRightHand : MalinKundangHand
 
     public override void Act(PlayerUnit player)
     {
+        if (isDeadHand || IsBossStunned())
+        {
+            OnActionFinished();
+            return;
+        }
+            
         turnCounter++;
 
         // Buff every 3 turns

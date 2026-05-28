@@ -256,10 +256,13 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        PlayerUnit player = FindFirstObjectByType<PlayerUnit>();
-        SetTargeted(false);
-        if (this is EliteTypoEnemy typo && !typo.CanBeTargeted())
+        if (!CanBeTargeted())
             return;
+
+        PlayerUnit player = FindFirstObjectByType<PlayerUnit>();
+
+        SetTargeted(false);
+
         if (player != null)
             player.SetTarget(this);
     }

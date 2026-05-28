@@ -86,7 +86,7 @@ public class MalinKundangMain : EnemyUnit
         }
     }
 
-    public bool _CanBeTargeted()
+    public override bool CanBeTargeted()
     {
         if (permanentTargetable)
             return true;
@@ -114,5 +114,9 @@ public class MalinKundangMain : EnemyUnit
             player.TakeDamage(9999, ElementType.None);
 
         Die();
+    }
+    public bool IsStunned()
+    {
+        return stunTurns > 0;
     }
 }

@@ -14,10 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   isUnique: 0
   maxHP: 300
-  speed: 30
+  speed: 0
   baseDamage: 30
-  weaknesses: 
-  attacks: []
+  weaknesses: 01000000
+  attacks:
+  - Name: LeftHandAttack
+    AnimationString: LeftHandAttack
+    Chance: 0.5
+  - Name: RightHandAttack
+    AnimationString: RightHandAttack
+    Chance: 0.5
   ultimate:
     AnimationString: 
     EnergyRequired: 909090
+  IgnoreDifficultyScaling: 0

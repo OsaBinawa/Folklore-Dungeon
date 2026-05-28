@@ -3,7 +3,16 @@ using UnityEngine;
 public class MalinKundangLeftHand : MalinKundangHand
 {
     [SerializeField] private float counterChance = 0.3f;
+    public override void Act(PlayerUnit player)
+    {
+        if (isDeadHand || IsBossStunned())
+        {
+            OnActionFinished();
+            return;
+        }
 
+        base.Act(player);
+    }
     public override void TakeDamage(int damage, ElementType element)
     {
         base.TakeDamage(damage, element);

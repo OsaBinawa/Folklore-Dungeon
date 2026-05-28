@@ -814,7 +814,7 @@ MonoBehaviour:
   currentEnergy: 0
   energyRegenPerTurn: 10
   sr: {fileID: 2229173372144353643}
-  anim: {fileID: 0}
+  anim: {fileID: 4307397209052152505}
   HPbar: {fileID: 4343286266401239317}
   targetIndicator: {fileID: 8197234694164975901}
   attacks: []
@@ -1292,7 +1292,7 @@ MonoBehaviour:
   currentEnergy: 0
   energyRegenPerTurn: 10
   sr: {fileID: 7484817318860022265}
-  anim: {fileID: 0}
+  anim: {fileID: 4307397209052152505}
   HPbar: {fileID: 6487670881141304968}
   targetIndicator: {fileID: 4775773025920863577}
   attacks: []
