@@ -238,6 +238,10 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5386837938253595227, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: OutroMalin
+      objectReference: {fileID: 0}
     - target: {fileID: 5434701571601070576, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
       propertyPath: m_SortingLayer
       value: 0
