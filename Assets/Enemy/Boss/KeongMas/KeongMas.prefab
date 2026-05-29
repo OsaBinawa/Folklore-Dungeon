@@ -347,9 +347,11 @@ MonoBehaviour:
   - {fileID: 2562358020629667031, guid: 896d003e62c3a364daeb25a53b7fd4dc, type: 3}
   summonParent: {fileID: 0}
   summonCount: 3
-  shieldWeaknesses: 03000000
-  exposedWeaknesses: 02000000
+  shieldWeaknesses: 02000000
+  exposedWeaknesses: 01000000
+  weaknessText: {fileID: 5115831322997462769}
   shieldActive: 0
+  shield: {fileID: 5974493060675128514}
   stunDuration: 3
 --- !u!1 &2882672334716464548
 GameObject:
