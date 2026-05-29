@@ -105,12 +105,21 @@ public class PlayerUnit : MonoBehaviour
     private void Start()
     {
         //UpdateStats();
+        SyncDebugValues();
         //sr = GetComponent<SpriteRenderer>();
     }
     private void Update()
     {
         CheckHeldConsumables();
         SyncWeaponFromSlot();
+    }
+    private void SyncDebugValues()
+    {
+        if (runData == null)
+            return;
+
+        currentEnergy = runData.CurrentEnergy;
+        maxEnergy = runData.MaxEnergy;
     }
     private void CheckHeldConsumables()
     {
@@ -192,7 +201,7 @@ public class PlayerUnit : MonoBehaviour
                 }
             }
         }
-
+        runData.GainEnergy(10);
         Debug.Log("Player uses Basic Attack");
         OnPlayerBasicAttack?.Invoke("Player is attacking " + currentTarget.name.Replace("(Clone)", ""));
         turnManager.NotifyPlayerActionComplete();
@@ -280,7 +289,7 @@ public class PlayerUnit : MonoBehaviour
             return;
         }
 
-        runData.CurrentEnergy -= EquippedWeapon.UltimateEnergyCost;
+        runData.ConsumeEnergy(EquippedWeapon.UltimateEnergyCost);
         OnPlayerUltimate?.Invoke("Player performed ultimate");
 
         StartCoroutine(AttackRoutine(
@@ -311,7 +320,7 @@ public class PlayerUnit : MonoBehaviour
         }
 
         // Gain energy (optional)
-        runData.CurrentEnergy = Mathf.Min(currentEnergy + 2, maxEnergy);
+        runData.GainEnergy(20);
         UpdateUltimateUI();
         // End turn
         FindFirstObjectByType<TurnManager>().NotifyPlayerActionComplete();
@@ -489,7 +498,7 @@ public class PlayerUnit : MonoBehaviour
         {
             // Reverse fill
             ultimateFillImage.fillAmount =
-                1f - ((float)runData.CurrentEnergy / maxEnergy);
+                1f - ((float)runData.CurrentEnergy / runData.MaxEnergy);
         }
 
         bool isReady =
