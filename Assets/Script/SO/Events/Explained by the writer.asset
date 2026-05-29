@@ -17,7 +17,7 @@ MonoBehaviour:
   Dialogue:
   - Seorang penulis datang ke perpustakaan.
   - Ia adalah penulis dari buku yang pernah kamu baca.
-  - Kamu berencana menanyakan sesuatu mengenai salah satu bukunya.
+  - Penulis menawarkan satu buku yang telah kamu baca sebelumnya
   - Buku manakah yang ingin kamu tanyakan?
   Choices:
   - text: Pilih Buku
