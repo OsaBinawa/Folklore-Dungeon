@@ -120,15 +120,17 @@ public class TurnManager : MonoBehaviour
             TickAV();
 
             object next = GetNextReadyUnit();
+
             if (next != null)
             {
-                avMap[next] += GetBaseAV(next); // reset after turn
+                avMap[next] = GetBaseAV(next);
+
+                OnTimelineUpdated?.Invoke(); 
 
                 if (ReferenceEquals(next, player))
                 {
                     state = TurnState.PlayerTurn;
                     UI.Show();
-                    OnTimelineUpdated?.Invoke();
                     yield break;
                 }
                 else
@@ -136,7 +138,6 @@ public class TurnManager : MonoBehaviour
                     EnemyUnit enemy = next as EnemyUnit;
                     state = TurnState.EnemyTurn;
                     UI.Hide();
-                    OnTimelineUpdated?.Invoke();
                     yield return StartCoroutine(EnemyTurn(enemy));
                     yield break;
                 }
