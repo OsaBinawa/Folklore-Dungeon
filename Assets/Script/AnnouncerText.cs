@@ -36,6 +36,9 @@ public class AnnouncerText : MonoBehaviour
         BawangBase.OnBuffExpired += ShowText;
         BawangMerah.OnBuffing += ShowText;
         BawangMerah.OnSelfBuff += ShowText;
+        MalinKundangMain.OnTypeChanged += ShowText;
+        MalinKundangRightHand.OnPermanentBuff += ShowText;
+        MalinKundangRightHand.OnInflictSlow += ShowText;
     }
 
     private void OnDisable()
@@ -57,6 +60,9 @@ public class AnnouncerText : MonoBehaviour
         BawangBase.OnBuffExpired -= ShowText;
         BawangMerah.OnBuffing -= ShowText;
         BawangMerah.OnSelfBuff -= ShowText;
+        MalinKundangMain.OnTypeChanged -= ShowText;
+        MalinKundangRightHand.OnPermanentBuff -= ShowText;
+        MalinKundangRightHand.OnInflictSlow -= ShowText;
     }
 
     private void ShowText(string text)

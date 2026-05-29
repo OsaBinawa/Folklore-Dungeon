@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 131f084013bdf664c85f8f6fa7ae2748, type: 3}
-  m_Name: MalinRightHand
+  m_Name: Left Hand
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   isUnique: 0
   maxHP: 100
   speed: 30
   baseDamage: 30
-  weaknesses: 05000000
+  weaknesses: 04000000
   attacks:
-  - Name: RightHandAttack
-    AnimationString: RightHandAttack
+  - Name: LeftHandAttack
+    AnimationString: LeftHandAttack
     Chance: 1
   ultimate:
     AnimationString: 
-    EnergyRequired: 909090909
+    EnergyRequired: 999999
   IgnoreDifficultyScaling: 0
