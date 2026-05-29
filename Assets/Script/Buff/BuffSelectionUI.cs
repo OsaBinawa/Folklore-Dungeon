@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,13 +46,16 @@ public class BuffSelectionUI : MonoBehaviour
             Button btn = obj.GetComponentInChildren<Button>();
             TextMeshProUGUI text = obj.GetComponentInChildren<TextMeshProUGUI>();
             Image img = btn.GetComponentInChildren<Image>();
+            TextMeshProUGUI Title = obj.GetComponentsInChildren<TextMeshProUGUI>(true)
+                            .FirstOrDefault(t => t.CompareTag("Title"));
             //TextMeshProUGUI textDesc = obj.GetComponent<TextMeshProUGUI>();
-            
 
+            Title.text = buff.name;
             text.text = buff.Description;
             img.sprite = buff.Icon;
             btn.onClick.RemoveAllListeners();
             btn.onClick.AddListener(() => Select(buff, obj));
+
 
             activeChoices.Add(obj);
         }

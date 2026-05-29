@@ -136,6 +136,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3354147656590519985, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
+      propertyPath: m_text
+      value: Elite Node
+      objectReference: {fileID: 0}
     - target: {fileID: 4530041762330796859, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
