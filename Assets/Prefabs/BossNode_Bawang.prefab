@@ -134,7 +134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3033110584605641805, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3354147656590519985, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
       propertyPath: m_text
@@ -184,17 +184,13 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5386837938253595227, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: OutroBawang
-      objectReference: {fileID: 0}
     - target: {fileID: 5434701571601070576, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7299103530633939367, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7490469824904664804, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
       propertyPath: m_SortingLayer
@@ -215,6 +211,18 @@ PrefabInstance:
     - target: {fileID: 7523798859284584423, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7615850368258114432, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7615850368258114432, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 7615850368258114432, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: OutroBawang
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6772721197835116512, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
