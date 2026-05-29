@@ -7,10 +7,13 @@ public class NodeView : MonoBehaviour
     protected MapNode node;
     private Action<MapNode> onFinished;
     [SerializeField]private MainUIManager mainUIManager;
+    [SerializeField]private TutorialPanel panel;
     private void Awake()
     {
         mainUIManager = FindFirstObjectByType<MainUIManager>();
         mainUIManager.HideButton();
+        panel = FindFirstObjectByType<TutorialPanel>();
+        panel.TryShowNodeTutorial(node);
     }
     public void Initialize(MapNode node, Action<MapNode> onFinished)
     {

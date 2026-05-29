@@ -1,11 +1,13 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class TutorialPanel : MonoBehaviour
 {
-    public static TutorialPanel Instance;
-
+    //public static TutorialPanel Instance;
+    [SerializeField] private CanvasGroup _canvasGroup;
     [Header("Intro Tutorial")]
     [SerializeField] private GameObject mapIntroPopup;
+    [SerializeField] private GameObject invisibleCloseButton;
 
     [Header("Node Tutorials")]
     [SerializeField] private GameObject combatPopup;
@@ -13,21 +15,23 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField] private GameObject eventPopup;
     [SerializeField] private GameObject restPopup;
     [SerializeField] private GameObject shopPopup;
+
+    [Header("Tween")]
+    private Tween fadeTween;
+    private Tween blinkTween;
+
     private MapNode pendingNode;
 
     private void Awake()
     {
-        Instance = this;
+        //Instance = this;
     }
 
     private void Start()
     {
         ShowMapIntroIfNeeded();
+        invisibleCloseButton.SetActive(true);
     }
-
-    // =========================
-    // FIRST MAP INTRO
-    // =========================
     private void ShowMapIntroIfNeeded()
     {
         string key = "Tutorial_MapIntro";
@@ -35,32 +39,14 @@ public class TutorialPanel : MonoBehaviour
         if (PlayerPrefs.GetInt(key, 0) == 1)
             return;
 
-        ShowPopup(mapIntroPopup);
-
+        ShowPopup(mapIntroPopup, false);
         PlayerPrefs.SetInt(key, 1);
         PlayerPrefs.Save();
     }
-
-    // =========================
-    // NODE CLICK
-    // =========================
-    public void OnNodeClicked(MapNode node)
-    {
-        bool showingTutorial = TryShowNodeTutorial(node);
-
-        if (!showingTutorial)
-        {
-            EnterNode(node);
-        }
-    }
-
-    // =========================
-    // SHOW NODE TUTORIAL
-    // =========================
-    private bool TryShowNodeTutorial(MapNode node)
+    public bool TryShowNodeTutorial(MapNode node)
     {
         string key = $"Tutorial_{node.NodeType}";
-
+        invisibleCloseButton.SetActive(true);
         // already shown
         if (PlayerPrefs.GetInt(key, 0) == 1)
             return false;
@@ -79,36 +65,13 @@ public class TutorialPanel : MonoBehaviour
 
         return true;
     }
-
-    // =========================
-    // SHOW POPUP
-    // =========================
-    private void ShowPopup(GameObject popup)
+    private void ShowPopup(GameObject popup, bool pauseGame = true)
     {
         popup.SetActive(true);
 
-        Time.timeScale = 0f;
+        if (pauseGame)
+            Time.timeScale = 0f;
     }
-
-    // =========================
-    // CLOSE POPUP BUTTON
-    // =========================
-    public void CloseTutorial(GameObject popup)
-    {
-        popup.SetActive(false);
-
-        Time.timeScale = 1f;
-
-        if (pendingNode != null)
-        {
-            EnterNode(pendingNode);
-            pendingNode = null;
-        }
-    }
-
-    // =========================
-    // GET POPUP
-    // =========================
     private GameObject GetPopup(NodeType type)
     {
         switch (type)
@@ -133,20 +96,25 @@ public class TutorialPanel : MonoBehaviour
         }
     }
 
-    // =========================
-    // ENTER NODE
-    // =========================
-    private void EnterNode(MapNode node)
+    public void CloseAllPanels()
     {
-        Debug.Log($"Entering node: {node.NodeType}");
+        foreach (Transform child in transform)
+        {
+            fadeTween = _canvasGroup
+             .DOFade(0f, 0.25f)
+             .SetUpdate(true)
+             .OnComplete(() =>
+             {
+                 _canvasGroup.alpha = 1f;
+                 child.gameObject.SetActive(false);
+             });
+        }
 
-        // SceneManager.LoadScene(...)
-        // or your node logic
+        invisibleCloseButton.SetActive(false);
+
+        Time.timeScale = 1f;
     }
 
-    // =========================
-    // DEBUG RESET
-    // =========================
     [ContextMenu("Reset Tutorials")]
     public void ResetTutorials()
     {

@@ -54,7 +54,11 @@ public class BuffSelectionUI : MonoBehaviour
             text.text = buff.Description;
             img.sprite = buff.Icon;
             btn.onClick.RemoveAllListeners();
-            btn.onClick.AddListener(() => Select(buff, obj));
+            btn.onClick.AddListener(() =>
+            {
+                Debug.Log($"Clicked {buff.name}");
+                Select(buff, obj);
+            });
 
 
             activeChoices.Add(obj);
@@ -65,6 +69,8 @@ public class BuffSelectionUI : MonoBehaviour
 
     void Select(BuffSO buff, GameObject obj)
     {
+        Debug.Log("Select called");
+
         playerSlots.AddBuff(buff);
 
         activeChoices.Remove(obj);
@@ -72,14 +78,17 @@ public class BuffSelectionUI : MonoBehaviour
 
         picksRemaining--;
 
+        Debug.Log($"picksRemaining = {picksRemaining}");
+
         if (picksRemaining <= 0)
         {
+            Debug.Log("Resolving node");
+
             Clear();
             gameObject.SetActive(false);
             nodeView.ResolveNode();
         }
     }
-
 
     void Clear()
     {
