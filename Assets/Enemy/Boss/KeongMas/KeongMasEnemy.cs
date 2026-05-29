@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class KeongMasEnemy : EnemyUnit
 {
+    public static event Action<string> OnShieldBroken,
+    OnActivateShield,
+    OnEnemySummon;
     [Header("Summon Settings")]
     [SerializeField] private List<EnemyUnit> summonPool;
     [SerializeField] private GameObject summonParent;
@@ -11,9 +16,11 @@ public class KeongMasEnemy : EnemyUnit
     [Header("Weakness States")]
     [SerializeField] private List<ElementType> shieldWeaknesses;
     [SerializeField] private List<ElementType> exposedWeaknesses;
+    [SerializeField] private TMP_Text weaknessText;
 
     [Header("Shield")]
     [SerializeField] private bool shieldActive;
+    [SerializeField] private GameObject shield;
 
     [Header("Stun")]
     [SerializeField] private int stunDuration = 3;
@@ -76,6 +83,11 @@ public class KeongMasEnemy : EnemyUnit
     {
         shieldActive = true;
 
+        shield.SetActive(true);
+
+        weaknessText.text = "Missing";
+        OnActivateShield?.Invoke(name + "'s shield is activated, type changed to Missing. Beat the summons to break the shield");
+
         runtimeWeaknesses =
             new List<ElementType>(shieldWeaknesses);
     }
@@ -83,6 +95,10 @@ public class KeongMasEnemy : EnemyUnit
     private void BreakShield()
     {
         shieldActive = false;
+
+        shield.SetActive(false);
+
+        weaknessText.text = "Typo";
 
         stunned = true;
         stunTurnsRemaining = stunDuration;
@@ -93,6 +109,7 @@ public class KeongMasEnemy : EnemyUnit
         activeSummons.Clear();
 
         Debug.Log(name + " shield broken and stunned.");
+        OnShieldBroken?.Invoke(name + "'s shield is broken, type changed to Typo. Hit Him when he's stunned!");
     }
 
     private void SummonEnemies()
@@ -113,7 +130,7 @@ public class KeongMasEnemy : EnemyUnit
         for (int i = 0; i < summonCount; i++)
         {
             EnemyUnit prefab =
-                summonPool[Random.Range(0, summonPool.Count)];
+                summonPool[UnityEngine.Random.Range(0, summonPool.Count)];
 
             if (prefab == null)
                 continue;
@@ -133,6 +150,7 @@ public class KeongMasEnemy : EnemyUnit
         }
 
         Debug.Log(name + " summoned " + activeSummons.Count + " enemies.");
+        OnEnemySummon?.Invoke(name + " summoned " + activeSummons.Count + " enemies.");
     }
 
     private void HandleSummonDeath(EnemyUnit deadEnemy)

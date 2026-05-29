@@ -39,6 +39,9 @@ public class AnnouncerText : MonoBehaviour
         MalinKundangMain.OnTypeChanged += ShowText;
         MalinKundangRightHand.OnPermanentBuff += ShowText;
         MalinKundangRightHand.OnInflictSlow += ShowText;
+        KeongMasEnemy.OnShieldBroken += ShowText;
+        KeongMasEnemy.OnEnemySummon += ShowText;
+        KeongMasEnemy.OnActivateShield += ShowText;
     }
 
     private void OnDisable()
@@ -63,6 +66,9 @@ public class AnnouncerText : MonoBehaviour
         MalinKundangMain.OnTypeChanged -= ShowText;
         MalinKundangRightHand.OnPermanentBuff -= ShowText;
         MalinKundangRightHand.OnInflictSlow -= ShowText;
+        KeongMasEnemy.OnShieldBroken -= ShowText;
+        KeongMasEnemy.OnEnemySummon -= ShowText;
+        KeongMasEnemy.OnActivateShield -= ShowText;
     }
 
     private void ShowText(string text)
