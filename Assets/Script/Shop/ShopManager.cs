@@ -43,6 +43,7 @@ public class ShopManager : MonoBehaviour
     public ShopUICard slot2;
     [SerializeField] private Inventory inventory;
     [SerializeField] private Slots inventorySlots;
+    [SerializeField] private TMP_Text GoldUI;
     public List<Weapon> weapons;
     public List<Buff> buffs;
 
@@ -54,6 +55,7 @@ public class ShopManager : MonoBehaviour
     {
         inventory = FindFirstObjectByType<Inventory>();
         inventorySlots = FindFirstObjectByType<Slots>();
+        UpdateGoldUI();
         Show();
     }
 
@@ -163,6 +165,10 @@ public class ShopManager : MonoBehaviour
         return result;
     }
 
+    public void UpdateGoldUI()
+    {
+        GoldUI.text = inventory.money.ToString();
+    }
     private bool IsStackable(ShopItem item)
     {
         if (item.type == ShopItemType.Weapon)
@@ -188,7 +194,7 @@ public class ShopManager : MonoBehaviour
             inventory.AddWeapon(weapon.weapon);
 
             Debug.Log("Bought Weapon: " + weapon.weapon.name);
-
+            UpdateGoldUI();
             Destroy(obj); 
         }
         else
@@ -213,8 +219,8 @@ public class ShopManager : MonoBehaviour
                 inventory.money -= buff.price;
             }
             inventory.AddConsumable(buff.Item);
-            
 
+            UpdateGoldUI();
             Destroy(obj);
         }
         else
