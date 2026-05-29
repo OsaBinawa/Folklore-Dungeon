@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 406
       objectReference: {fileID: 0}
+    - target: {fileID: 889916392695108811, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 9187921947569935711, guid: 07e8c3d9160378be082e99d0748f4d79, type: 3}
     - target: {fileID: 931214626253237537, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
       propertyPath: m_Name
       value: IntroBawang

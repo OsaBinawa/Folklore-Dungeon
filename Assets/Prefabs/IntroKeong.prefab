@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 889916392695108811, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3856863360372192545, guid: 3cba2eee64a843c32a0e97efaa92f5ec, type: 3}
     - target: {fileID: 931214626253237537, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
       propertyPath: m_Name
       value: IntroKeong
