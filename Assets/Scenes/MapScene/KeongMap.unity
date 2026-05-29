@@ -4295,7 +4295,7 @@ MonoBehaviour:
   - Type: 0
     Sprite: {fileID: 4276005816120267034, guid: f5f8b6fab256ac04e9f1b3deca847dae, type: 3}
   NodeButtonPrefabs: {fileID: 450729833068546012, guid: e1193a6a35eed6a4282d4381728da236, type: 3}
-  CombatPrefab: {fileID: 945770643077263496, guid: 88d6ff2726b78114781c5db8d1e22ebe, type: 3}
+  CombatPrefab: {fileID: 4890608560139396760, guid: 7077e6793c842fb47809bec59fee0982, type: 3}
   EventPrefab: {fileID: 3770747648595979175, guid: 12a984449187ba4448302efdb0547263, type: 3}
   RestPrefab: {fileID: 519380458256889883, guid: 3273fc235b0e9874b9d477fb2596160b, type: 3}
   BossPrefab: {fileID: 4890608560139396760, guid: 7077e6793c842fb47809bec59fee0982, type: 3}

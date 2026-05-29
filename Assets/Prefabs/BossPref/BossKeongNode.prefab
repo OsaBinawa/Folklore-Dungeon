@@ -427,6 +427,7 @@ MonoBehaviour:
   root: {fileID: 46850406252352822}
   turnManager: {fileID: 4979452946627682446}
   turnOrderText: {fileID: 6437873603500313225}
+  currentTurnText: {fileID: 0}
   playerTimer: {fileID: 876232857355731275}
   mainUIManager: {fileID: 0}
 --- !u!1 &1005572134689408620
@@ -2344,6 +2345,8 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 69e555a14256bda4480abe088cc236f0, type: 2}
   currentHP: 0
   currentToughness: 0
+  scaledMaxHP: 0
+  damageMultiplier: 1
   isBroken: 0
   maxEnergy: 100
   currentEnergy: 0
@@ -4292,6 +4295,8 @@ MonoBehaviour:
   player: {fileID: 19510278876226992}
   enemies: []
   UI: {fileID: 8529759504667406154}
+  stuckTimeout: 10
+  turnTransitionDelay: 0.3
   turnTime: 10
 --- !u!114 &6772721197835116512
 MonoBehaviour:

@@ -332,6 +332,8 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 9baee20302219db4f8eb32d07770594f, type: 2}
   currentHP: 0
   currentToughness: 0
+  scaledMaxHP: 0
+  damageMultiplier: 1
   isBroken: 0
   maxEnergy: 100
   currentEnergy: 0
@@ -700,7 +702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8036091725448807533
 RectTransform:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     [SerializeField] protected EnemyData data;
     public static event Action OnEnemyDied;
     public static event Action<string> OnEnemyAct;
-    
+    public event Action<EnemyUnit> Died;
     [Header("Runtime")]
     [SerializeField] protected int currentHP;
     [SerializeField] protected int currentToughness;
@@ -232,6 +232,7 @@ public class EnemyUnit : MonoBehaviour, IPointerClickHandler
     protected virtual void Die()
     {
         OnEnemyDied?.Invoke();
+        Died?.Invoke(this);
         Destroy(gameObject);
     }
 

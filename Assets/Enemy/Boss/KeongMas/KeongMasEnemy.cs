@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class KeongMasEnemy : EnemyUnit
@@ -18,7 +18,7 @@ public class KeongMasEnemy : EnemyUnit
     [Header("Stun")]
     [SerializeField] private int stunDuration = 3;
 
-    private List<EnemyUnit> activeSummons = new();
+    private readonly List<EnemyUnit> activeSummons = new();
 
     private bool stunned;
     private int stunTurnsRemaining;
@@ -29,30 +29,25 @@ public class KeongMasEnemy : EnemyUnit
 
         shieldActive = false;
         stunned = false;
-    }
+        stunTurnsRemaining = 0;
 
+        runtimeWeaknesses = new List<ElementType>(exposedWeaknesses);
+    }
     public override void Act(PlayerUnit player)
     {
-        CleanupSummons();
-
         if (stunned)
         {
-            stunTurnsRemaining--;
+            Debug.Log(name + " is stunned");
 
-            Debug.Log(name + " stunned. Remaining turns: " + stunTurnsRemaining);
+            stunTurnsRemaining--;
 
             if (stunTurnsRemaining <= 0)
             {
                 stunned = false;
+
+                runtimeWeaknesses =
+                    new List<ElementType>(exposedWeaknesses);
             }
-
-            OnActionFinished();
-            return;
-        }
-
-        if (shieldActive && activeSummons.Count <= 0)
-        {
-            BreakShield();
 
             OnActionFinished();
             return;
@@ -77,6 +72,29 @@ public class KeongMasEnemy : EnemyUnit
         SummonEnemies();
     }
 
+    private void ActivateShield()
+    {
+        shieldActive = true;
+
+        runtimeWeaknesses =
+            new List<ElementType>(shieldWeaknesses);
+    }
+
+    private void BreakShield()
+    {
+        shieldActive = false;
+
+        stunned = true;
+        stunTurnsRemaining = stunDuration;
+
+        runtimeWeaknesses =
+            new List<ElementType>(exposedWeaknesses);
+
+        activeSummons.Clear();
+
+        Debug.Log(name + " shield broken and stunned.");
+    }
+
     private void SummonEnemies()
     {
         if (summonPool == null || summonPool.Count == 0)
@@ -87,21 +105,21 @@ public class KeongMasEnemy : EnemyUnit
 
         activeSummons.Clear();
 
+        Vector3 spawnPosition =
+            summonParent != null
+            ? summonParent.transform.position
+            : transform.position;
+
         for (int i = 0; i < summonCount; i++)
         {
-            EnemyUnit randomEnemy =
+            EnemyUnit prefab =
                 summonPool[Random.Range(0, summonPool.Count)];
 
-            if (randomEnemy == null)
+            if (prefab == null)
                 continue;
 
-            Vector3 spawnPosition =
-                summonParent != null
-                ? summonParent.transform.position
-                : transform.position;
-
             EnemyUnit summonedEnemy = Instantiate(
-                randomEnemy,
+                prefab,
                 spawnPosition,
                 Quaternion.identity,
                 summonParent != null
@@ -109,33 +127,27 @@ public class KeongMasEnemy : EnemyUnit
                     : null
             );
 
+            summonedEnemy.Died += HandleSummonDeath;
+
             activeSummons.Add(summonedEnemy);
         }
 
         Debug.Log(name + " summoned " + activeSummons.Count + " enemies.");
     }
 
-    private void ActivateShield()
+    private void HandleSummonDeath(EnemyUnit deadEnemy)
     {
-        shieldActive = true;
+        Debug.Log("SUMMON DIED: " + deadEnemy.name);
 
-        runtimeWeaknesses =
-            new List<ElementType>(shieldWeaknesses);
+        activeSummons.Remove(deadEnemy);
 
-        Debug.Log(name + " activated shield.");
-    }
+        Debug.Log("Remaining summons: " + activeSummons.Count);
 
-    private void BreakShield()
-    {
-        shieldActive = false;
-
-        runtimeWeaknesses =
-            new List<ElementType>(exposedWeaknesses);
-
-        stunned = true;
-        stunTurnsRemaining = stunDuration;
-
-        Debug.Log(name + " shield broken and stunned.");
+        if (shieldActive && activeSummons.Count == 0)
+        {
+            Debug.Log("ALL SUMMONS DEAD");
+            BreakShield();
+        }
     }
 
     public override void TakeDamage(int damage, ElementType element)
@@ -147,11 +159,6 @@ public class KeongMasEnemy : EnemyUnit
         }
 
         base.TakeDamage(damage, element);
-    }
-
-    private void CleanupSummons()
-    {
-        activeSummons.RemoveAll(enemy => enemy == null);
     }
 
     public override bool CanBeTargeted()
