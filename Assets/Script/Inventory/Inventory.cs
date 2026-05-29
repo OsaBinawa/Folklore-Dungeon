@@ -52,6 +52,7 @@ public class Inventory : MonoBehaviour
     {
         if (!ownedConsumables.Contains(item))
             ownedConsumables.Add(item);
+        BuildConsumableUI();
     }
     public void UseConsumableOutsideCombat(ItemSO item)
     {
