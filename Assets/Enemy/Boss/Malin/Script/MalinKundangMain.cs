@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using TMPro;
+using UnityEngine;
 
 public class MalinKundangMain : EnemyUnit
 {
+    public static event Action<string> OnTypeChanged;
     [Header("References")]
     [SerializeField] private MalinKundangHand leftHand;
     [SerializeField] private MalinKundangHand rightHand;
+    [SerializeField] private TMP_Text typeText;
 
     [Header("State")]
     private bool leftDead;
@@ -62,12 +66,16 @@ public class MalinKundangMain : EnemyUnit
         {
             leftDead = true;
             Debug.Log("Left hand destroyed → Typo type");
+            OnTypeChanged?.Invoke("Left hand destroyed, type changed to Typo");
+            typeText.text = "Typo";
             SetTypoType();
         }
         else
         {
             rightDead = true;
             Debug.Log("Right hand destroyed → Miss type");
+            OnTypeChanged?.Invoke("Left hand destroyed, type changed to Missing");
+            typeText.text = "Missing";
             SetMissType();
         }
 

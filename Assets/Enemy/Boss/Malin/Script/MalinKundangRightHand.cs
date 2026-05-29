@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class MalinKundangRightHand : MalinKundangHand
 {
+    public static event Action<string> OnPermanentBuff,
+    OnInflictSlow;
     [Header("Miss Settings")]
     [SerializeField] private float delayChance = 0.5f;
     [SerializeField] private float delayAmount = 500f;
@@ -28,6 +31,7 @@ public class MalinKundangRightHand : MalinKundangHand
         {
             bonusAttack += attackBuff;
             Debug.Log($"{name} gains permanent ATK!");
+            OnPermanentBuff?.Invoke(name + "'s ATK is permanently buffed");
         }
 
         base.Act(player);
@@ -39,9 +43,12 @@ public class MalinKundangRightHand : MalinKundangHand
 
         if (player == null) return;
 
-        if (Random.value <= delayChance)
+        if (UnityEngine.Random.value <= delayChance)
         {
             Debug.Log($"{name} applies slow!");
+
+            OnInflictSlow?.Invoke("Player slowed by " + name);
+
             turnManager?.ModifyAV(player, delayAmount);
         }
     }
