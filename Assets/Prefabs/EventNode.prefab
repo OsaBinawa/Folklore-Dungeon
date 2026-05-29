@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3497569839933178031
 RectTransform:
   m_ObjectHideFlags: 0
@@ -389,6 +389,7 @@ MonoBehaviour:
   choiceButtonPrefab: {fileID: 3988050826284907010, guid: bdb49811c38e54c49868e7bbd851190c, type: 3}
   slots: {fileID: 0}
   inventory: {fileID: 0}
+  Node: {fileID: 0}
   IncreaseHp: 0
   IncreaseAtk: 5
   IncreaseSpd: 0
