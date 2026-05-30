@@ -99,7 +99,7 @@ public class MalinKundangMain : EnemyUnit
         if (permanentTargetable)
             return true;
 
-        return leftDead || rightDead;
+        return leftDead && rightDead;
     }
 
     private void SetTypoType()

@@ -36,7 +36,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private int maxElite = 4;
 
     private int currentUnlockedDepth = 1;
-
+    public MapNode CurrentNode => currentNode;
     private GameObject GetPrefabForNode(NodeType type)
     {
         return type switch

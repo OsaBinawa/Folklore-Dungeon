@@ -9,6 +9,8 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField] private GameObject mapIntroPopup;
     [SerializeField] private GameObject invisibleCloseButton;
     [SerializeField] public GameObject Guide;
+    [SerializeField] private Transform popupContainer;
+    public MapManager mapManager;
 
     [Header("Node Tutorials")]
     [SerializeField] private GameObject combatPopup;
@@ -16,16 +18,17 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField] private GameObject eventPopup;
     [SerializeField] private GameObject restPopup;
     [SerializeField] private GameObject shopPopup;
+    
 
     [Header("Tween")]
     private Tween fadeTween;
     private Tween blinkTween;
-
+    private NodeView nodes;
     private MapNode pendingNode;
 
     private void Awake()
     {
-        //Instance = this;
+        mapManager = FindAnyObjectByType<MapManager>();
     }
 
     private void Start()
@@ -72,6 +75,7 @@ public class TutorialPanel : MonoBehaviour
         if (pauseGame)
             Time.timeScale = 0f;
     }
+    
     private GameObject GetPopup(NodeType type)
     {
         switch (type)
@@ -105,11 +109,8 @@ public class TutorialPanel : MonoBehaviour
             .SetUpdate(true)
             .OnComplete(() =>
             {
-                foreach (Transform child in transform)
+                foreach (Transform child in popupContainer)
                 {
-                    if (child.gameObject == Guide)
-                        continue;
-
                     child.gameObject.SetActive(false);
                 }
 
@@ -119,7 +120,32 @@ public class TutorialPanel : MonoBehaviour
                 Time.timeScale = 1f;
             });
     }
+    public bool TryShowNodeTutorial_NoSave(MapNode node)
+    {
+        if (node == null)
+        {
+            Debug.LogWarning("Node is null");
+            return false;
+        }
 
+        GameObject popup = GetPopup(node.NodeType);
+        if (popup == null)
+            return false;
+
+        invisibleCloseButton.SetActive(true);
+
+        ShowPopup(popup, true);
+
+        return true;
+    }
+    public void ShowTutorBtn()
+    {
+        Debug.Log("Button clicked");
+
+        Debug.Log("CurrentNode = " + mapManager?.CurrentNode);
+
+        TryShowNodeTutorial_NoSave(mapManager.CurrentNode);
+    }
     [ContextMenu("Reset Tutorials")]
     public void ResetTutorials()
     {
