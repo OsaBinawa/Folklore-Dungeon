@@ -92,7 +92,10 @@ public class MalinKundangMain : EnemyUnit
             finalPhaseTurns = 5;
         }
     }
-
+    public override bool CanBeTargeted()
+    {
+        return leftDead && rightDead;
+    }
     private void SetTypoType()
     {
         runtimeWeaknesses.Clear();

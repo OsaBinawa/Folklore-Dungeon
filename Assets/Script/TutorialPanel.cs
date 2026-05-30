@@ -18,6 +18,8 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField] private GameObject eventPopup;
     [SerializeField] private GameObject restPopup;
     [SerializeField] private GameObject shopPopup;
+    [SerializeField] private GameObject ElitePopup;
+    [SerializeField] private GameObject BossPopup;
     
 
     [Header("Tween")]
@@ -94,6 +96,12 @@ public class TutorialPanel : MonoBehaviour
 
             case NodeType.Shop:
                 return shopPopup;
+
+            case NodeType.Elite:
+                return combatPopup;
+
+            case NodeType.Boss:
+                return combatPopup;
 
             default:
                 return null;

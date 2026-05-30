@@ -24,4 +24,4 @@ MonoBehaviour:
   ultimate:
     AnimationString: 
     EnergyRequired: 2147483647
-  IgnoreDifficultyScaling: 0
+  IgnoreDifficultyScaling: 1
