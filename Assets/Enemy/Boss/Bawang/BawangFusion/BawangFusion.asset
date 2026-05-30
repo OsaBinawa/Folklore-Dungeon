@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BawangFusion
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   isUnique: 0
-  maxHP: 0
-  speed: 0
-  baseDamage: 0
+  maxHP: 350
+  speed: 10
+  baseDamage: 100
   weaknesses: 
   attacks:
   - Name: BuffAttack
