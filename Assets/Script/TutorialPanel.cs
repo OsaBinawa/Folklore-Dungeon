@@ -98,10 +98,10 @@ public class TutorialPanel : MonoBehaviour
                 return shopPopup;
 
             case NodeType.Elite:
-                return combatPopup;
+                return ElitePopup;
 
             case NodeType.Boss:
-                return combatPopup;
+                return BossPopup;
 
             default:
                 return null;
