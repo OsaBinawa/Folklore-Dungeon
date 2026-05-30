@@ -30,11 +30,10 @@ public class MalinKundangMain : EnemyUnit
 
     public override void Act(PlayerUnit player)
     {
-        // FINAL PHASE: no attacks, only countdown
         if (finalPhaseTurns >= 0)
         {
             Debug.Log($"{name} is preparing self-destruct... {finalPhaseTurns}");
-            OnExplodeCountdown?.Invoke(name + " is preparing self-destruct... "+ finalPhaseTurns + "/5");
+            OnExplodeCountdown?.Invoke(name + " is preparing self-destruct In "+ finalPhaseTurns + " Turn");
             finalPhaseTurns--;
 
             if (finalPhaseTurns <= 0)
