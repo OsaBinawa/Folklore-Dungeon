@@ -15,20 +15,20 @@ MonoBehaviour:
   Name: Explained by the writer
   Type: 0
   Dialogue:
-  - Seorang penulis datang ke perpustakaan.
-  - Ia adalah penulis dari buku yang pernah kamu baca.
-  - Penulis menawarkan satu buku yang telah kamu baca sebelumnya
-  - Buku manakah yang ingin kamu tanyakan?
+  - Seorang penulis datang ke perpustakaan. Ia adalah penulis dari buku yang pernah
+    kamu baca.
+  - Penulis menawarkan satu buku yang telah kamu baca sebelumnya. Buku manakah yang
+    ingin kamu pilih?
   Choices:
   - text: Pilih Buku
     buff: {fileID: 0}
     effect: 1
-    triggerIndex: 3
+    triggerIndex: 1
     resultDialogue: []
-  - text: Berubah pikiran
+  - text: Tolak tawarannya
     buff: {fileID: 0}
     effect: 0
-    triggerIndex: 3
+    triggerIndex: 1
     resultDialogue:
-    - Kamu berubah pikiran dan tidak jadi menanyakannya.
+    - Kamu menolak tawarannya dan melanjutkan pekerjaanmu.
   randomizeChoices: 0
