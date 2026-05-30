@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
+    public static event Action<bool> OnPlayerTurn, OnEnemyTurn;
     public const float BASE_AV_SCALE = 1000f;
     public const float DISPLAY_AV_SCALE = 100f;
     private bool enemyActionFinished;
@@ -130,6 +131,7 @@ public class TurnManager : MonoBehaviour
                 if (ReferenceEquals(next, player))
                 {
                     state = TurnState.PlayerTurn;
+                    OnPlayerTurn?.Invoke(true);
                     UI.Show();
                     yield break;
                 }
@@ -137,6 +139,7 @@ public class TurnManager : MonoBehaviour
                 {
                     EnemyUnit enemy = next as EnemyUnit;
                     state = TurnState.EnemyTurn;
+                    OnPlayerTurn?.Invoke(false);
                     UI.Hide();
                     yield return StartCoroutine(EnemyTurn(enemy));
                     yield break;

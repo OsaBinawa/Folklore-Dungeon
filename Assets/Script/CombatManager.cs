@@ -66,7 +66,7 @@ public class CombatManager : MonoBehaviour
             if (winPanel != null)
                 winPanel.SetActive(true);
 
-            int randomAmount = UnityEngine.Random.Range(10, 20);
+            int randomAmount = UnityEngine.Random.Range(50, 75);
             inventory.money += randomAmount;
 
             Debug.Log("You Get " + randomAmount + " money");

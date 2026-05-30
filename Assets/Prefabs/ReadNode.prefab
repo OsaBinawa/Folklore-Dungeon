@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NodeView
   mainUIManager: {fileID: 0}
+  panel: {fileID: 0}
 --- !u!114 &525149763608266513
 MonoBehaviour:
   m_ObjectHideFlags: 0
