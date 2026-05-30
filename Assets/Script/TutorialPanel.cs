@@ -8,6 +8,7 @@ public class TutorialPanel : MonoBehaviour
     [Header("Intro Tutorial")]
     [SerializeField] private GameObject mapIntroPopup;
     [SerializeField] private GameObject invisibleCloseButton;
+    [SerializeField] public GameObject Guide;
 
     [Header("Node Tutorials")]
     [SerializeField] private GameObject combatPopup;
@@ -47,19 +48,18 @@ public class TutorialPanel : MonoBehaviour
     {
         string key = $"Tutorial_{node.NodeType}";
         invisibleCloseButton.SetActive(true);
-        // already shown
+
         if (PlayerPrefs.GetInt(key, 0) == 1)
             return false;
 
         pendingNode = node;
 
         GameObject popup = GetPopup(node.NodeType);
-
         if (popup == null)
             return false;
 
-        ShowPopup(popup);
-
+        ShowPopup(popup, true);
+        Guide.SetActive(false);
         PlayerPrefs.SetInt(key, 1);
         PlayerPrefs.Save();
 

@@ -51,6 +51,7 @@ public class PlayerUnit : MonoBehaviour
     [Header("Ultimate UI")]
     [SerializeField] private Image ultimateFillImage;
     [SerializeField] private ParticleSystem ultimateReadyEffect;
+    [SerializeField] private GameObject UltimateEffect;
     private bool ultimateReadyTriggered = false;
 
     //private WeaponSO CurrentWeapon => weaponSlot.EquippedWeapon;
@@ -512,6 +513,8 @@ public class PlayerUnit : MonoBehaviour
 
             if (ultimateReadyEffect != null)
                 ultimateReadyEffect.Play();
+            if (UltimateEffect != null)
+                UltimateEffect.SetActive(true);
         }
 
         // Reset when no longer ready
@@ -521,6 +524,8 @@ public class PlayerUnit : MonoBehaviour
 
             if (ultimateReadyEffect != null)
                 ultimateReadyEffect.Stop();
+            if (UltimateEffect != null)
+                UltimateEffect.SetActive(false);
         }
     }
     private List<EnemyUnit> GetEnemyList()

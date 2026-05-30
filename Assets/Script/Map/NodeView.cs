@@ -13,18 +13,21 @@ public class NodeView : MonoBehaviour
         mainUIManager = FindFirstObjectByType<MainUIManager>();
         mainUIManager.HideButton();
         panel = FindFirstObjectByType<TutorialPanel>();
-        panel.TryShowNodeTutorial(node);
+        
+        
     }
     public void Initialize(MapNode node, Action<MapNode> onFinished)
     {
         this.node = node;
         this.onFinished = onFinished;
+        panel.TryShowNodeTutorial(node);
     }
     public void ResolveNode()   
     {
         onFinished?.Invoke(node);
         mainUIManager.ShowButton();
         mainUIManager.RefreshStats();
+        panel.Guide.SetActive(true);
         Destroy(gameObject);
 
     }

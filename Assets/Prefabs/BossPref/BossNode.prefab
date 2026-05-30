@@ -411,6 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NodeView
   mainUIManager: {fileID: 0}
+  panel: {fileID: 0}
 --- !u!114 &8529759504667406154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +427,7 @@ MonoBehaviour:
   root: {fileID: 46850406252352822}
   turnManager: {fileID: 4979452946627682446}
   turnOrderText: {fileID: 6437873603500313225}
+  currentTurnText: {fileID: 0}
   playerTimer: {fileID: 876232857355731275}
   mainUIManager: {fileID: 0}
 --- !u!1 &1005572134689408620
@@ -2081,6 +2083,8 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 69e555a14256bda4480abe088cc236f0, type: 2}
   currentHP: 0
   currentToughness: 0
+  scaledMaxHP: 0
+  damageMultiplier: 1
   isBroken: 0
   maxEnergy: 100
   currentEnergy: 0
@@ -3772,6 +3776,7 @@ MonoBehaviour:
   debugText: {fileID: 5655972396409485871}
   ultimateFillImage: {fileID: 4617815602595689941}
   ultimateReadyEffect: {fileID: 4937747378469759907}
+  UltimateEffect: {fileID: 3677076765900712082}
 --- !u!114 &8564633334046716996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4213,6 +4218,8 @@ MonoBehaviour:
   player: {fileID: 19510278876226992}
   enemies: []
   UI: {fileID: 8529759504667406154}
+  stuckTimeout: 10
+  turnTransitionDelay: 0.3
   turnTime: 10
 --- !u!114 &1433572671359310071
 MonoBehaviour:
@@ -4575,6 +4582,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc34f3a41593f6e54adb63fe67b8c818, type: 3}
+--- !u!1 &3677076765900712082 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5048811686151703342, guid: bc34f3a41593f6e54adb63fe67b8c818, type: 3}
+  m_PrefabInstance: {fileID: 8437320920891351996}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4711235342872123462 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3780430187911183354, guid: bc34f3a41593f6e54adb63fe67b8c818, type: 3}
