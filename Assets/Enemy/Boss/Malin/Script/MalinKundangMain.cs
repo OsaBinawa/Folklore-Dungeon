@@ -6,11 +6,13 @@ using UnityEngine;
 public class MalinKundangMain : EnemyUnit
 {
     public static event Action<string> OnTypeChanged;
+    public static event Action<string> OnExplodeCountdown;
 
     [Header("References")]
     [SerializeField] private MalinKundangHand leftHand;
     [SerializeField] private MalinKundangHand rightHand;
     [SerializeField] private TMP_Text typeText;
+
 
     [Header("State")]
     private bool leftDead;
@@ -32,7 +34,7 @@ public class MalinKundangMain : EnemyUnit
         if (finalPhaseTurns >= 0)
         {
             Debug.Log($"{name} is preparing self-destruct... {finalPhaseTurns}");
-
+            OnExplodeCountdown?.Invoke(name + " is preparing self-destruct... "+ finalPhaseTurns + "/5");
             finalPhaseTurns--;
 
             if (finalPhaseTurns <= 0)

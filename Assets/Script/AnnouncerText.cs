@@ -42,6 +42,7 @@ public class AnnouncerText : MonoBehaviour
         KeongMasEnemy.OnShieldBroken += ShowText;
         KeongMasEnemy.OnEnemySummon += ShowText;
         KeongMasEnemy.OnActivateShield += ShowText;
+        MalinKundangMain.OnExplodeCountdown += ShowText;
     }
 
     private void OnDisable()
@@ -69,6 +70,7 @@ public class AnnouncerText : MonoBehaviour
         KeongMasEnemy.OnShieldBroken -= ShowText;
         KeongMasEnemy.OnEnemySummon -= ShowText;
         KeongMasEnemy.OnActivateShield -= ShowText;
+        MalinKundangMain.OnExplodeCountdown -= ShowText;
     }
 
     private void ShowText(string text)
