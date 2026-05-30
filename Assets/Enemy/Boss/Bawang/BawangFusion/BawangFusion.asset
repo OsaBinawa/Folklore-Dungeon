@@ -24,13 +24,13 @@ MonoBehaviour:
   - Name: BuffSPD
     AnimationString: BuffSPD
     Chance: 0.5
-  - Name: Attack1
+  - Name: Basic Attack
     AnimationString: Attack1
     Chance: 0.5
-  - Name: Heavy
+  - Name: Heavy Attack
     AnimationString: Heavy
     Chance: 0.3
   ultimate:
     AnimationString: 
-    EnergyRequired: 0
+    EnergyRequired: 99999999
   IgnoreDifficultyScaling: 1

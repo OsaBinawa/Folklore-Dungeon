@@ -331,6 +331,8 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: a767dfa83777555458d059fcbde9bd7d, type: 2}
   currentHP: 0
   currentToughness: 0
+  scaledMaxHP: 0
+  damageMultiplier: 1
   isBroken: 0
   maxEnergy: 100
   currentEnergy: 0
@@ -340,20 +342,16 @@ MonoBehaviour:
   HPbar: {fileID: 1739744042050353781}
   targetIndicator: {fileID: 6368121916532404933}
   attacks:
-  - Name: 
-    BaseDamage: 12
-    Element: 0
-    HitCount: 1
-    Effects:
-    - Type: 2
-      Value: 20
-  - Name: 
+  - Name: Basic Attack
     BaseDamage: 20
     Element: 0
     HitCount: 1
-    Effects:
-    - Type: 2
-      Value: 20
+    Effects: []
+  - Name: HeavyAttack
+    BaseDamage: 40
+    Element: 0
+    HitCount: 1
+    Effects: []
   atkBuffPercent: 0.1
   atkBuffDuration: 3
   spdBuffPercent: 0.1
