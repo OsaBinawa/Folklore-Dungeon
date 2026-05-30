@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -122,6 +123,42 @@ public class MalinKundangMain : EnemyUnit
             player.TakeDamage(9999, ElementType.None);
 
         Die();
+    }
+    private bool IsAttackAllowed(EnemyAttack attack)
+    {
+        string anim = attack.AnimationString.ToLower();
+
+        // Example naming rules (adjust to your real animation names)
+        if (anim.Contains("left") && leftDead)
+            return false;
+
+        if (anim.Contains("right") && rightDead)
+            return false;
+
+        return true;
+    }
+    protected override EnemyAttack ChooseAttack()
+    {
+        var pool = data.Actions;
+
+        var valid = new List<EnemyAttack>();
+
+        foreach (var action in pool)
+        {
+            if (IsAttackAllowed(action))
+                valid.Add(action);
+        }
+
+        if (valid.Count == 0)
+            return pool[UnityEngine.Random.Range(0, pool.Count)];
+
+        foreach (var action in valid)
+        {
+            if (UnityEngine.Random.value <= action.Chance)
+                return action;
+        }
+
+        return valid[UnityEngine.Random.Range(0, valid.Count)];
     }
     public bool IsStunned()
     {

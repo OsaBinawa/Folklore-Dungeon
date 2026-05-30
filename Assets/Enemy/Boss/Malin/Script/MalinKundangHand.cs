@@ -20,8 +20,8 @@ public class MalinKundangHand : EnemyUnit
             boss.NotifyHandDead(this);
         currentHP = 0;
 
-        if (anim != null)
-            anim.SetTrigger("Dead");
+       /* if (anim != null)
+            anim.SetTrigger("Dead");*/
         HpBarUpdate();
     }
 

@@ -993,7 +993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 770.06, y: 24}
+  m_AnchoredPosition: {x: 760, y: -441}
   m_SizeDelta: {x: 345.12, y: 75.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &256589361
@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.20638609, a: 1}
+  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5999,6 +5999,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3719041747481934877, guid: bf9f83d100c826945916fb28d89176e5, type: 3}
+      propertyPath: popupContainer
+      value: 
+      objectReference: {fileID: 2026384869}
     - target: {fileID: 7208423481572370825, guid: bf9f83d100c826945916fb28d89176e5, type: 3}
       propertyPath: m_Name
       value: TutorialPanel
@@ -6028,6 +6032,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c059b5131f4974291a4bf46bbab95a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!224 &2026384869 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9027807409138793412, guid: bf9f83d100c826945916fb28d89176e5, type: 3}
+  m_PrefabInstance: {fileID: 2026384866}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2027461783
 GameObject:
   m_ObjectHideFlags: 0
