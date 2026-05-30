@@ -36,19 +36,7 @@ public class BasicTypoEnemy : EnemyUnit
         if (Vfx_Shield != null) {Vfx_Shield.SetActive(true);}
         
     }
-    public void BreakShield()
-    {
-        if (currentShield <= 0) return;
 
-        Debug.Log($"{name} shield was broken!");
-
-        currentShield = 0;
-
-        if (Vfx_Shield != null)
-        {
-            Vfx_Shield.SetActive(false);
-        }
-    }
     public override void TakeDamage(int damage, ElementType element)
     {
         if (currentShield > 0)
