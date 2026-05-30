@@ -6017,6 +6017,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2245601277204903337, guid: bf9f83d100c826945916fb28d89176e5, type: 3}
   m_PrefabInstance: {fileID: 2026384866}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2026384868 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3719041747481934877, guid: bf9f83d100c826945916fb28d89176e5, type: 3}
+  m_PrefabInstance: {fileID: 2026384866}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c059b5131f4974291a4bf46bbab95a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &2027461783
 GameObject:
   m_ObjectHideFlags: 0
@@ -6338,7 +6349,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2117330259}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2026384868}
+        m_TargetAssemblyTypeName: TutorialPanel, Assembly-CSharp
+        m_MethodName: ShowTutorBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2117330259
 MonoBehaviour:
   m_ObjectHideFlags: 0

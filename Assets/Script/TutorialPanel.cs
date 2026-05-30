@@ -140,11 +140,25 @@ public class TutorialPanel : MonoBehaviour
     }
     public void ShowTutorBtn()
     {
-        Debug.Log("Button clicked");
+        if (mapManager == null)
+        {
+            Debug.LogWarning("MapManager not found");
+            return;
+        }
 
-        Debug.Log("CurrentNode = " + mapManager?.CurrentNode);
+        if (mapManager.CurrentNode == null)
+        {
+            ShowMapGuide();
+            return;
+        }
 
         TryShowNodeTutorial_NoSave(mapManager.CurrentNode);
+    }
+    public void ShowMapGuide()
+    {
+        invisibleCloseButton.SetActive(true);
+
+        ShowPopup(mapIntroPopup, true);
     }
     [ContextMenu("Reset Tutorials")]
     public void ResetTutorials()
