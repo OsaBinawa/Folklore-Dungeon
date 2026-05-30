@@ -58,6 +58,11 @@ public class BasicTypoEnemy : EnemyUnit
             damage -= absorbed;
 
             Debug.Log($"Shield absorbed {absorbed}, remaining shield: {currentShield}");
+
+            if (currentShield <= 0)
+            {
+                BreakShield();
+            }
         }
 
         if (damage > 0)
