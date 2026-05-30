@@ -87,10 +87,19 @@ public class PlayerStats : MonoBehaviour
         FinalSpeed = Mathf.CeilToInt(
             baseSpeed * (1 + spdPercent / 100f)
         );
+        int oldMaxHP = runData.MaxHP;
+
         int boostedHP = Mathf.RoundToInt(
             baseHP * (1 + hpPercent / 100f)
         );
-        runData.IncreaseMaxHP(boostedHP - runData.MaxHP);
+
+        int deltaMaxHP = boostedHP - oldMaxHP;
+
+        if (deltaMaxHP != 0)
+        {
+            runData.IncreaseMaxHP(deltaMaxHP);
+            runData.Heal(deltaMaxHP); // <- this is the key line
+        }
     }
     public void TakesDamage(int amount, Slots slots)
     {
