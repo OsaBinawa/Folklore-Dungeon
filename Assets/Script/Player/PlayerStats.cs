@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -64,13 +64,16 @@ public class PlayerStats : MonoBehaviour
             Debug.LogError("OwnedBuffs list is NULL");
             return;
         }
+
         int baseAttack = FinalAttack;
         int baseSpeed = FinalSpeed;
-        int baseHP = MaxHP;
 
         float atkPercent = 0f;
         float spdPercent = 0f;
         float hpPercent = 0f;
+
+        Debug.Log("========== RECALCULATING BUFFS ==========");
+
         foreach (var buff in slots.OwnedBuffs)
         {
             if (buff == null)
@@ -79,7 +82,15 @@ public class PlayerStats : MonoBehaviour
             atkPercent += buff.atkPercent;
             spdPercent += buff.spdPercent;
             hpPercent += buff.hpPercent;
+
+            Debug.Log(
+                $"[Buff Applied] {buff.name} | " +
+                $"ATK: {buff.atkPercent}% | " +
+                $"SPD: {buff.spdPercent}% | " +
+                $"HP: {buff.hpPercent}%"
+            );
         }
+
         FinalAttack = Mathf.RoundToInt(
             baseAttack * (1 + atkPercent / 100f)
         );
@@ -87,19 +98,53 @@ public class PlayerStats : MonoBehaviour
         FinalSpeed = Mathf.CeilToInt(
             baseSpeed * (1 + spdPercent / 100f)
         );
+
+        // IMPORTANT:
+        // Always calculate HP from BaseMaxHP,
+        // never from current MaxHP.
+
+        int baseHP = runData.BaseMaxHP;
+
+        foreach (var eq in runData.EquippedItems)
+        {
+            baseHP += eq.HPBonus;
+        }
+
         int oldMaxHP = runData.MaxHP;
+        int oldCurrentHP = runData.CurrentHP;
 
         int boostedHP = Mathf.RoundToInt(
             baseHP * (1 + hpPercent / 100f)
         );
 
-        int deltaMaxHP = boostedHP - oldMaxHP;
+        float hpRatio = oldMaxHP > 0
+            ? (float)oldCurrentHP / oldMaxHP
+            : 1f;
 
-        if (deltaMaxHP != 0)
+        runData.SetMaxHP(boostedHP);
+
+        int hpAfterBuff = Mathf.RoundToInt(boostedHP * hpRatio);
+
+        if (hpAfterBuff > oldCurrentHP)
         {
-            runData.IncreaseMaxHP(deltaMaxHP);
-            runData.Heal(deltaMaxHP); // <- this is the key line
+            runData.Heal(hpAfterBuff - oldCurrentHP);
         }
+
+        Debug.Log(
+            $"[HP Buff Calculation] " +
+            $"BaseHP={baseHP} | " +
+            $"Buff={hpPercent}% | " +
+            $"FinalHP={boostedHP}"
+        );
+
+        Debug.Log(
+            $"[Final Stats] " +
+            $"ATK={FinalAttack} | " +
+            $"SPD={FinalSpeed} | " +
+            $"MaxHP={runData.MaxHP}"
+        );
+
+        Debug.Log("=========================================");
     }
     public void TakesDamage(int amount, Slots slots)
     {

@@ -5,11 +5,18 @@ using UnityEngine;
 public class PlayerRunData
 {
     public event Action<int, int> OnHPChanged;
+
     public int CurrentHP { get; private set; }
+
+    // Permanent HP before equipment/buffs
+    public int BaseMaxHP { get; private set; }
+
+    // Current calculated max HP
     public int MaxHP { get; private set; }
 
     public int BaseAttack;
     public int BaseSpeed;
+
     public int CurrentEnergy;
     public int MaxEnergy = 100;
 
@@ -17,6 +24,8 @@ public class PlayerRunData
 
     public PlayerRunData(int maxHp, int baseAttack, int baseSpeed)
     {
+        BaseMaxHP = maxHp;
+
         MaxHP = maxHp;
         CurrentHP = maxHp;
 
@@ -29,28 +38,52 @@ public class PlayerRunData
     public void TakesDamage(int amount)
     {
         CurrentHP -= amount;
+
         if (CurrentHP < 0)
             CurrentHP = 0;
+
         OnHPChanged?.Invoke(CurrentHP, MaxHP);
     }
 
     public void Heal(int amount)
     {
-        CurrentHP = System.Math.Min(MaxHP, CurrentHP + amount);
+        CurrentHP = Math.Min(MaxHP, CurrentHP + amount);
+
         OnHPChanged?.Invoke(CurrentHP, MaxHP);
     }
 
+    /// <summary>
+    /// Recalculate HP from base value + equipment.
+    /// Prevents HP from stacking every recalculation.
+    /// </summary>
     public void RecalculateMaxHP()
     {
-        int hp = MaxHP;
+        int hp = BaseMaxHP;
 
         foreach (var eq in EquippedItems)
+        {
             hp += eq.HPBonus;
+        }
 
         MaxHP = hp;
 
         if (CurrentHP > MaxHP)
+        {
             CurrentHP = MaxHP;
+        }
+
+        OnHPChanged?.Invoke(CurrentHP, MaxHP);
+    }
+
+    public void SetMaxHP(int newMaxHP)
+    {
+        MaxHP = newMaxHP;
+
+        if (CurrentHP > MaxHP)
+        {
+            CurrentHP = MaxHP;
+        }
+
         OnHPChanged?.Invoke(CurrentHP, MaxHP);
     }
     public void IncreaseMaxHP(int amount)
@@ -64,6 +97,7 @@ public class PlayerRunData
 
         OnHPChanged?.Invoke(CurrentHP, MaxHP);
     }
+
     public void IncreaseAttack(int amount)
     {
         BaseAttack += amount;
@@ -73,6 +107,7 @@ public class PlayerRunData
     {
         BaseSpeed += amount;
     }
+
     public void GainEnergy(int amount)
     {
         CurrentEnergy = Mathf.Clamp(
@@ -90,5 +125,4 @@ public class PlayerRunData
             MaxEnergy
         );
     }
-
 }
