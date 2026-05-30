@@ -62,6 +62,8 @@ public class MainUIManager : MonoBehaviour
 
     public void RefreshStats(bool firstTime = false)
     {
+        Debug.Log("RefreshStats CALLED");
+        Debug.Log($"RefreshStats reading ATK={playerStats.FinalAttack}");
         int currentAttack = playerStats.FinalAttack;
         int currentSpeed = playerStats.FinalSpeed;
         int currentHP = playerStats.CurrentHP;

@@ -28,9 +28,25 @@ public class PlayerStats : MonoBehaviour
         consumableAtkBonus = atk;
         consumableSpdBonus = spd;
 
-        RecalculateStats();
+        FinalAttack =
+            runData.BaseAttack +
+            consumableAtkBonus;
+
+        FinalSpeed =
+            runData.BaseSpeed +
+            consumableSpdBonus;
+
+        foreach (var eq in runData.EquippedItems)
+        {
+            FinalAttack += eq.ATKBonus;
+            FinalSpeed += eq.SpeedBonus;
+        }
+
+        Debug.Log(
+            $"Final Stats => ATK={FinalAttack} SPD={FinalSpeed}"
+        );
     }
-    
+
     public void Initialize(PlayerRunData data)
     {
         Debug.Log("PlayerStats initialized with runData: " + data);

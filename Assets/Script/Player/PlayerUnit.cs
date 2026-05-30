@@ -101,7 +101,7 @@ public class PlayerUnit : MonoBehaviour
         inventory.ClearHeldConsumables();
 
         UpdateUltimateUI();
-
+        mainUIManager.RefreshStats();
         Debug.Log("PlayerUnit initialized");
     }
 
@@ -139,6 +139,7 @@ public class PlayerUnit : MonoBehaviour
 
                 toRemove.Add(item); // mark for removal
             }
+
         }
 
         // remove after loop (important)
@@ -440,30 +441,44 @@ public class PlayerUnit : MonoBehaviour
 
     public void UseConsumable(ItemSO item)
     {
-        // Instant heal
+        // Heal instantly
         if (item.Heal > 0)
         {
             stats.Heal(item.Heal);
             OnPlayerHeal?.Invoke("Player used healing item");
         }
 
-        // Check if already active → refresh duration
-        ActiveConsumable existing = activeConsumables
-            .Find(c => c.source == item);
+        // Remove old instance if already active
+        activeConsumables.RemoveAll(c => c.source == item);
 
-        if (existing != null)
-        {
-            existing.remainingTurns = item.duration;
-        }
-        else
-        {
-            activeConsumables.Add(new ActiveConsumable(item));
-        }
-        OnPlayerUsedItem?.Invoke("Player used " + item.name);
-        RecalculateConsumableStats();
-        mainUIManager.RefreshStats();
+        // Add new buff
+        activeConsumables.Add(new ActiveConsumable(item));
+
+        OnPlayerUsedItem?.Invoke($"Player used {item.Name}");
+
+        UpdateConsumableStats();
+
+        if (mainUIManager != null)
+            mainUIManager.RefreshStats();
     }
 
+    private void UpdateConsumableStats()
+    {
+        int totalAtk = 0;
+        int totalSpd = 0;
+
+        foreach (var c in activeConsumables)
+        {
+            totalAtk += c.atkMod;
+            totalSpd += c.spdMod;
+        }
+
+        stats.SetConsumableBonus(totalAtk, totalSpd);
+
+        Debug.Log(
+            $"Consumables => ATK+{totalAtk} SPD+{totalSpd}"
+        );
+    }
     private void RecalculateConsumableStats()
     {
         int bonusAtk = 0;
@@ -475,11 +490,15 @@ public class PlayerUnit : MonoBehaviour
             bonusSpd += c.spdMod;
         }
 
-        stats.RecalculateStats();
-        stats.RecalculateStatBuffs(weaponSlot);
-
-        // Apply consumable bonus AFTER everything
+        // Store consumable bonuses
         stats.SetConsumableBonus(bonusAtk, bonusSpd);
+
+        // Rebuild everything
+        stats.RecalculateStats();
+
+        Debug.Log(
+            $"Consumable totals: ATK+{bonusAtk} SPD+{bonusSpd}"
+        );
     }
 
     public void TickConsumables()
@@ -494,7 +513,10 @@ public class PlayerUnit : MonoBehaviour
             }
         }
 
-        RecalculateConsumableStats();
+        UpdateConsumableStats();
+
+        if (mainUIManager != null)
+            mainUIManager.RefreshStats();
     }
     private void UpdateUltimateUI()
     {
