@@ -1355,7 +1355,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tutorial - Combat Node
+  m_text: Tutorial - Map System
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d1ba1170f0207bf987ffaceaa33ae3e, type: 2}
   m_sharedMaterial: {fileID: 2053381655087393980, guid: 3d1ba1170f0207bf987ffaceaa33ae3e, type: 2}

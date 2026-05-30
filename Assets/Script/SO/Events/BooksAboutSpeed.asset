@@ -23,7 +23,8 @@ MonoBehaviour:
     effect: 0
     triggerIndex: 0
     resultDialogue:
-    - Kamu mendapatkan quickread
+    - Kamu mendapatkan quickread! Sekarang kamu bisa mengambil 2 buff sekaligus di
+      reading node.
   - text: Tolak
     buff: {fileID: 0}
     effect: 0

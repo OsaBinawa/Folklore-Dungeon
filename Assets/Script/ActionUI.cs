@@ -38,12 +38,14 @@ public class ActionUI : MonoBehaviour
     {
         turnManager.OnTimelineUpdated += Refresh;
         CombatManager.OnResolveNode += StopBlink;
+        TurnManager.OnPlayerTurn += ChangeTurnText;
     }
 
     private void OnDisable()
     {
         turnManager.OnTimelineUpdated -= Refresh;
         CombatManager.OnResolveNode -= StopBlink;
+        TurnManager.OnPlayerTurn -= ChangeTurnText;
     }
 
     public void Show()
@@ -81,6 +83,20 @@ public class ActionUI : MonoBehaviour
         turnOrderText.text = sb.ToString();
     }
 
+    private void ChangeTurnText(bool playerTurn)
+    {
+        if (playerTurn)
+        {
+            currentTurnText.color = Color.black;
+            currentTurnText.text = "Current Turn: Player Turn";
+        }
+        else
+        {
+            currentTurnText.color = Color.red;
+            currentTurnText.text = "Current Turn: Enemy Turn";
+        }
+    }
+
     private string GetUnitName(object unit)
     {
         if (unit is PlayerUnit)
@@ -115,7 +131,7 @@ public class ActionUI : MonoBehaviour
     private void BlinkText()
     {
         blinkTween?.Kill();
-        currentTurnText.DOFade(0.5f, 0.5f)
+        currentTurnText.DOFade(0.5f, 1f)
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.InOutSine);
     }
