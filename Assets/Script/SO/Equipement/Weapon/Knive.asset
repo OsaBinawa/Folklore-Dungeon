@@ -24,5 +24,6 @@ MonoBehaviour:
   UltimateTargetType: 2
   UltimateEffects:
   - {fileID: 11400000, guid: a938a053b9f3869499d4824fc93ac70e, type: 2}
+  - {fileID: 11400000, guid: d170d824a881a4746b950319f961718f, type: 2}
   UltIcon: {fileID: 3467779928161760081, guid: 10c51559cf13a2c469efbfe89774fc63, type: 3}
   UltimateEnergyCost: 100

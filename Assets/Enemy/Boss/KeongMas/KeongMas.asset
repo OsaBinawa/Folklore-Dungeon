@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: KeongMas
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   isUnique: 0
-  maxHP: 120
+  maxHP: 700
   speed: 15
   baseDamage: 10
   weaknesses: 

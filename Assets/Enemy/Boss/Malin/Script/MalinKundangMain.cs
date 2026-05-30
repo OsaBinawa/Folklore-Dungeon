@@ -90,7 +90,7 @@ public class MalinKundangMain : EnemyUnit
         {
             Debug.Log("Both hands destroyed → FINAL SELF-DESTRUCT PHASE STARTED!");
 
-            finalPhaseTurns = 5;
+            finalPhaseTurns = 10;
         }
     }
     public override bool CanBeTargeted()

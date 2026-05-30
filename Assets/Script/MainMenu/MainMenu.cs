@@ -8,8 +8,11 @@ public class MainMenu : MonoBehaviour
     public List<GameObject> panels = new();
     public void ShowPanel(GameObject panelToShow)
     {
-        foreach (var panel in panels)
-            panel.SetActive(panel == panelToShow);
+        if (panels != null)
+        {
+            foreach (var panel in panels)
+                panel.SetActive(panel == panelToShow);
+        }   
     }
 
     private void Awake()

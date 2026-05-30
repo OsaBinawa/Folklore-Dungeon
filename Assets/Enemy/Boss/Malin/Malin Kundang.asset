@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Malin Kundang
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   isUnique: 0
-  maxHP: 1000
+  maxHP: 700
   speed: 0
   baseDamage: 50
   weaknesses: 01000000

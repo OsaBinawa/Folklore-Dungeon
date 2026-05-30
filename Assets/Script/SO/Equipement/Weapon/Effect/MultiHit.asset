@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MultiHit
   m_EditorClassIdentifier: Assembly-CSharp::MultiHitEffect
   hitCount: 6
-  damagePerHit: 20
+  damagePerHit: 40

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Left Hand
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   isUnique: 0
-  maxHP: 500
+  maxHP: 350
   speed: 30
   baseDamage: 50
-  weaknesses: 04000000
+  weaknesses: 01000000
   attacks:
   - Name: LeftHandAttack
     AnimationString: LeftHandAttack
