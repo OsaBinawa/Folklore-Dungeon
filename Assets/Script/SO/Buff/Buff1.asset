@@ -13,17 +13,19 @@ MonoBehaviour:
   m_Name: Buff1
   m_EditorClassIdentifier: Assembly-CSharp::BuffSO
   hpPercent: 0
-  atkPercent: 100000000
+  atkPercent: 250
   spdPercent: 0
   damageTakenPercent: 0
   atkBonusVsNonWeakPercent: 0
   counter: 1
   slowChance: 0
-  adjacentHit: 1
-  extraTurnOnKill: 1
+  adjacentHit: 0
+  extraTurnOnKill: 0
   quickRead: 0
   bonusVsNonWeak: 0
   stackable: 1
   removeAble: 1
+  displayable: 1
+  Icon: {fileID: 0}
   rarity: 1
   Description: 

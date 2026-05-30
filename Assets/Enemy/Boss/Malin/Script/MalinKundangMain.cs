@@ -6,6 +6,7 @@ using UnityEngine;
 public class MalinKundangMain : EnemyUnit
 {
     public static event Action<string> OnTypeChanged;
+
     [Header("References")]
     [SerializeField] private MalinKundangHand leftHand;
     [SerializeField] private MalinKundangHand rightHand;
@@ -16,28 +17,34 @@ public class MalinKundangMain : EnemyUnit
     private bool rightDead;
 
     private int stunTurns = 0;
-    private int selfDestructTimer = -1;
 
-    private bool permanentTargetable = false;
+    // NEW: final phase timer
+    private int finalPhaseTurns = -1;
 
     protected override void Setup()
     {
         base.Setup();
-
-        // Start untargetable
-        permanentTargetable = false;
     }
 
     public override void Act(PlayerUnit player)
     {
-        // Not targetable yet → do nothing
-        if (!CanBeTargeted())
+        // FINAL PHASE: no attacks, only countdown
+        if (finalPhaseTurns >= 0)
         {
+            Debug.Log($"{name} is preparing self-destruct... {finalPhaseTurns}");
+
+            finalPhaseTurns--;
+
+            if (finalPhaseTurns <= 0)
+            {
+                SelfDestruct(player);
+            }
+
             OnActionFinished();
             return;
         }
 
-        // Stunned phase
+        // STUN
         if (stunTurns > 0)
         {
             stunTurns--;
@@ -46,19 +53,8 @@ public class MalinKundangMain : EnemyUnit
             return;
         }
 
-        // Normal attack
-        base.Act(player);
-
-        // Self destruct countdown
-        if (permanentTargetable)
-        {
-            selfDestructTimer--;
-
-            if (selfDestructTimer <= 0)
-            {
-                SelfDestruct(player);
-            }
-        }
+        // NORMAL ATTACK
+        //base.Act(player);
     }
 
     public void NotifyHandDead(MalinKundangHand hand)
@@ -66,41 +62,35 @@ public class MalinKundangMain : EnemyUnit
         if (hand.IsLeft)
         {
             leftDead = true;
+
             Debug.Log("Left hand destroyed → Typo type");
             OnTypeChanged?.Invoke("Left hand destroyed, type changed to Typo");
+
             typeText.text = "Typo";
             SetTypoType();
         }
         else
         {
             rightDead = true;
-            Debug.Log("Right hand destroyed → Miss type");
-            OnTypeChanged?.Invoke("Left hand destroyed, type changed to Missing");
+
+            Debug.Log("Right hand destroyed → Missing type");
+            OnTypeChanged?.Invoke("Right hand destroyed, type changed to Missing");
+
             typeText.text = "Missing";
             SetMissType();
         }
 
-        // Become targetable temporarily
-        stunTurns = 3;
+        // optional stun on hand break
+        if (stunTurns <= 0)
+            stunTurns = 2;
 
-        // Both hands dead → final phase
+        // NEW RULE: both hands dead → start final phase
         if (leftDead && rightDead)
         {
-            permanentTargetable = true;
-            runtimeWeaknesses.Clear();
+            Debug.Log("Both hands destroyed → FINAL SELF-DESTRUCT PHASE STARTED!");
 
-            selfDestructTimer = 10;
-
-            Debug.Log("Final phase started!");
+            finalPhaseTurns = 5;
         }
-    }
-
-    public override bool CanBeTargeted()
-    {
-        if (permanentTargetable)
-            return true;
-
-        return leftDead && rightDead;
     }
 
     private void SetTypoType()
@@ -124,42 +114,7 @@ public class MalinKundangMain : EnemyUnit
 
         Die();
     }
-    private bool IsAttackAllowed(EnemyAttack attack)
-    {
-        string anim = attack.AnimationString.ToLower();
 
-        // Example naming rules (adjust to your real animation names)
-        if (anim.Contains("left") && leftDead)
-            return false;
-
-        if (anim.Contains("right") && rightDead)
-            return false;
-
-        return true;
-    }
-    protected override EnemyAttack ChooseAttack()
-    {
-        var pool = data.Actions;
-
-        var valid = new List<EnemyAttack>();
-
-        foreach (var action in pool)
-        {
-            if (IsAttackAllowed(action))
-                valid.Add(action);
-        }
-
-        if (valid.Count == 0)
-            return pool[UnityEngine.Random.Range(0, pool.Count)];
-
-        foreach (var action in valid)
-        {
-            if (UnityEngine.Random.value <= action.Chance)
-                return action;
-        }
-
-        return valid[UnityEngine.Random.Range(0, valid.Count)];
-    }
     public bool IsStunned()
     {
         return stunTurns > 0;

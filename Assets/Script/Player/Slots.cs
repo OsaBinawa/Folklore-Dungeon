@@ -51,6 +51,7 @@ public class Slots : MonoBehaviour
         if (ownedBuffs.Contains(buff))
             ownedBuffs.Remove(buff);
         mainUIManager.RefreshStats();
+        mainUIManager.RefreshBuffUI();
     }
     public void autoEquip(WeaponSO weap)
     {
