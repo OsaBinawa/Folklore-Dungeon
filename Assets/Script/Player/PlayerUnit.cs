@@ -36,6 +36,7 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] private Slots weaponSlot;
     [SerializeField] private Inventory inventory;
     [SerializeField] private Animator anim;
+    [SerializeField] private MainUIManager mainUIManager;
     [SerializeField] private int currentSkillPoint;
     [SerializeField] private int MaxSkillPoint = 5;
     [SerializeField] private int currentEnergy = 0;
@@ -64,7 +65,8 @@ public class PlayerUnit : MonoBehaviour
     {
         if (stats == null)
             stats = FindFirstObjectByType<PlayerStats>();
-
+        if (mainUIManager==null)
+            mainUIManager =FindAnyObjectByType<MainUIManager>();
         if (weaponSlot == null)
             weaponSlot = FindFirstObjectByType<Slots>();
         if (inventory == null)
@@ -459,6 +461,7 @@ public class PlayerUnit : MonoBehaviour
         }
         OnPlayerUsedItem?.Invoke("Player used " + item.name);
         RecalculateConsumableStats();
+        mainUIManager.RefreshStats();
     }
 
     private void RecalculateConsumableStats()
