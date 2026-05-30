@@ -29,6 +29,7 @@ public class NodeView : MonoBehaviour
         mainUIManager.ShowButton();
         mainUIManager.RefreshStats();
         panel.Guide.SetActive(true);
+        panel.ClearNode();
         Destroy(gameObject);
 
     }

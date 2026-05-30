@@ -154,6 +154,11 @@ public class TutorialPanel : MonoBehaviour
 
         TryShowNodeTutorial_NoSave(mapManager.CurrentNode);
     }
+    public void ClearNode()
+    {
+        mapManager.ClearCurrentNode();
+    }
+
     public void ShowMapGuide()
     {
         invisibleCloseButton.SetActive(true);

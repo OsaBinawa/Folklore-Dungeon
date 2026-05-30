@@ -218,7 +218,10 @@ public class MapManager : MonoBehaviour
                 next.Button.interactable = true;
         }
     }
-
+    public void ClearCurrentNode()
+    {
+        currentNode = null;
+    }
     public void InitializeMap()
     {
         foreach (var depth in currentRun.DeptNodes)
