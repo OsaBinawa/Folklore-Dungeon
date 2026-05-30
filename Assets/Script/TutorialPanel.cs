@@ -98,21 +98,26 @@ public class TutorialPanel : MonoBehaviour
 
     public void CloseAllPanels()
     {
-        foreach (Transform child in transform)
-        {
-            fadeTween = _canvasGroup
-             .DOFade(0f, 0.25f)
-             .SetUpdate(true)
-             .OnComplete(() =>
-             {
-                 _canvasGroup.alpha = 1f;
-                 child.gameObject.SetActive(false);
-             });
-        }
+        fadeTween?.Kill();
 
-        invisibleCloseButton.SetActive(false);
+        fadeTween = _canvasGroup
+            .DOFade(0f, 0.25f)
+            .SetUpdate(true)
+            .OnComplete(() =>
+            {
+                foreach (Transform child in transform)
+                {
+                    if (child.gameObject == Guide)
+                        continue;
 
-        Time.timeScale = 1f;
+                    child.gameObject.SetActive(false);
+                }
+
+                _canvasGroup.alpha = 1f;
+                invisibleCloseButton.SetActive(false);
+
+                Time.timeScale = 1f;
+            });
     }
 
     [ContextMenu("Reset Tutorials")]
