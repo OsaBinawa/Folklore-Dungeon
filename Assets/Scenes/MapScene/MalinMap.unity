@@ -2014,9 +2014,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: IntroMalin
       objectReference: {fileID: 0}
-    - target: {fileID: 931214626253237537, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 4309282989209742069, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -332
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309282989209742069, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -448
       objectReference: {fileID: 0}
     - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
       propertyPath: m_Pivot.x
@@ -2044,11 +2048,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1875
+      value: 1517.26
       objectReference: {fileID: 0}
     - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1293
+      value: 1046.3
       objectReference: {fileID: 0}
     - target: {fileID: 6199482511531091793, guid: 1addbee524068495bb4c7e05a97f9f3e, type: 3}
       propertyPath: m_LocalPosition.x
