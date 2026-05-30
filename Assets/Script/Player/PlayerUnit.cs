@@ -223,7 +223,8 @@ public class PlayerUnit : MonoBehaviour
         {
             if (buff.counter && currentTarget != null)
             {
-                currentTarget.TakeDamage(stats.FinalAttack, CurrentElement);
+                currentTarget.TakeDamage(Mathf.RoundToInt(stats.FinalAttack * 0.8f),CurrentElement);
+                            
             }
         }
 
