@@ -3447,8 +3447,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   BGM_source: {fileID: 1397388409}
   SFX_source: {fileID: 1397388412}
-  bgmSlider: {fileID: 1864812394}
-  sfxSlider: {fileID: 1957672447}
 --- !u!4 &1397388411
 Transform:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   isUnique: 0
   maxHP: 100
   speed: 10
-  baseDamage: 15
+  baseDamage: 0
   weaknesses: 03000000
   attacks:
   - Name: UpdateVisual
@@ -24,3 +24,4 @@ MonoBehaviour:
   ultimate:
     AnimationString: 
     EnergyRequired: 999999999
+  IgnoreDifficultyScaling: 0

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    private const string BGM_VOLUME_KEY = "BGMVolume";
+    private const string SFX_VOLUME_KEY = "SFXVolume";
     [SerializeField] private AudioClip mainMenuBGM;
     public List<GameObject> panels = new();
     public AudioMixer mixer;
@@ -19,6 +21,8 @@ public class MainMenu : MonoBehaviour
         value = Mathf.Max(value, 0.0001f);
 
         mixer.SetFloat("BGMVolume", Mathf.Log10(value) * 20f);
+        PlayerPrefs.SetFloat(BGM_VOLUME_KEY, BGM_Slider.value);
+        PlayerPrefs.Save();
     }
     public void UpdateSFXVolume()
     {
@@ -28,6 +32,8 @@ public class MainMenu : MonoBehaviour
         value = Mathf.Max(value, 0.0001f);
 
         mixer.SetFloat("SFXVolume", Mathf.Log10(value) * 20f);
+        PlayerPrefs.SetFloat(SFX_VOLUME_KEY, SFX_Slider.value);
+        PlayerPrefs.Save();
     }
 
     public void ShowPanel(GameObject panelToShow)
@@ -47,6 +53,14 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         SoundManager.Instance.PlayBGM(mainMenuBGM);
+        float bgmVolume = PlayerPrefs.GetFloat(BGM_VOLUME_KEY, 1f);
+        float sfxVolume = PlayerPrefs.GetFloat(SFX_VOLUME_KEY, 1f);
+
+        BGM_Slider.value = bgmVolume;
+        SFX_Slider.value = sfxVolume;
+
+        UpdateMusicVolume();
+        UpdateSFXVolume();
     }
 
     public void OnApplicationQuit()
