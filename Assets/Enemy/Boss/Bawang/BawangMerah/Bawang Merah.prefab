@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 5048148330327182955}
   - component: {fileID: 1967476374864278651}
   m_Layer: 5
-  m_Name: BawangMrh
+  m_Name: Bawang Merah
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

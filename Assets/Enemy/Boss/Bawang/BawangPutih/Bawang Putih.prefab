@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 5048148330327182955}
   - component: {fileID: -6286235213617577048}
   m_Layer: 5
-  m_Name: BawangPth
+  m_Name: Bawang Putih
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
   HPbar: {fileID: 1739744042050353781}
   targetIndicator: {fileID: 6368121916532404933}
   attacks:
-  - Name: Apa kek
+  - Name: Basic Attack
     BaseDamage: 10
     Element: 0
     HitCount: 1
