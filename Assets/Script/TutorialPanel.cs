@@ -180,4 +180,29 @@ public class TutorialPanel : MonoBehaviour
 
         Debug.Log("Tutorials Reset");
     }
+    [ContextMenu("Print PlayerPrefs Location")]
+    public void PrintLocation()
+    {
+        Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
+        Debug.Log("Temporary Cache Path: " + Application.temporaryCachePath);
+
+#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
+        Debug.Log("Windows PlayerPrefs are stored in Registry:");
+        Debug.Log(@"HKEY_CURRENT_USER\Software\Unity\UnityEditor\YourCompanyName\YourProductName");
+#endif
+
+#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
+        Debug.Log("macOS PlayerPrefs stored in plist:");
+        Debug.Log("~/Library/Preferences/unity.YourCompanyName.YourProductName.plist");
+#endif
+
+#if UNITY_ANDROID
+        Debug.Log("Android PlayerPrefs stored in:");
+        Debug.Log("/data/data/<package_name>/shared_prefs/");
+#endif
+
+#if UNITY_IOS
+        Debug.Log("iOS PlayerPrefs stored in NSUserDefaults (system managed)");
+#endif
+    }
 }
