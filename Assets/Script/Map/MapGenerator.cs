@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MapRun
 {
-    public List<List<MapNode>> DeptNodes = new List<List<MapNode>>();
+    public List<List<MapNode>> DepthNodes = new List<List<MapNode>>();
     public int MaxDepth = 10;
     public int RestInterval = 4;
     public int MinWidth = 2;
@@ -28,7 +28,7 @@ public class MapRun
     }
     public void Generate()
     {
-        DeptNodes.Clear();
+        DepthNodes.Clear();
         currentEliteCount = 0;
 
         for (int depth = 0; depth <= MaxDepth; depth++)
@@ -72,12 +72,12 @@ public class MapRun
                 nodesAtDepth.Add(node);
             }
 
-            DeptNodes.Add(nodesAtDepth);
+            DepthNodes.Add(nodesAtDepth);
         }
         EnsureMinimumEliteNodes();
-        for (int d = 0; d < DeptNodes.Count - 1; d++)
+        for (int d = 0; d < DepthNodes.Count - 1; d++)
         {
-            ConnectRows(DeptNodes[d], DeptNodes[d + 1]);
+            ConnectRows(DepthNodes[d], DepthNodes[d + 1]);
         }
         Debug.Log("Map Generated");
     }
@@ -198,7 +198,7 @@ public class MapRun
 
         List<MapNode> validNodes = new List<MapNode>();
 
-        foreach (var row in DeptNodes)
+        foreach (var row in DepthNodes)
         {
             foreach (var node in row)
             {

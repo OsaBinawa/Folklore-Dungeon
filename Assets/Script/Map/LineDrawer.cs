@@ -15,9 +15,9 @@ public class LineDrawer : MonoBehaviour
     {
         ClearLines();
 
-        for (int depthIndex = 0; depthIndex < run.DeptNodes.Count; depthIndex++)
+        for (int depthIndex = 0; depthIndex < run.DepthNodes.Count; depthIndex++)
         {
-            var depth = run.DeptNodes[depthIndex];
+            var depth = run.DepthNodes[depthIndex];
 
             foreach (var node in depth)
             {
@@ -25,9 +25,9 @@ public class LineDrawer : MonoBehaviour
                     continue;
 
           
-                if (node.Depth == 0 && run.DeptNodes.Count > 1)
+                if (node.Depth == 0 && run.DepthNodes.Count > 1)
                 {
-                    foreach (var next in run.DeptNodes[1])
+                    foreach (var next in run.DepthNodes[1])
                     {
                         if (next.Button == null)
                             continue;

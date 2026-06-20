@@ -68,9 +68,9 @@ public class MapManager : MonoBehaviour
         foreach (Transform t in MapContainer)
             Destroy(t.gameObject);
 
-        for (int depth = 0; depth < currentRun.DeptNodes.Count; depth++)
+        for (int depth = 0; depth < currentRun.DepthNodes.Count; depth++)
         {
-            List<MapNode> nodes = currentRun.DeptNodes[depth];
+            List<MapNode> nodes = currentRun.DepthNodes[depth];
 
             float spacingX = 200f;
             float startX = -((nodes.Count - 1) * spacingX) / 2f;
@@ -112,7 +112,7 @@ public class MapManager : MonoBehaviour
 
     private void AutoCompleteStartNode()
     {
-        var startNode = currentRun.DeptNodes[0][0];
+        var startNode = currentRun.DepthNodes[0][0];
 
         startNode.Completed = true;
 
@@ -120,9 +120,9 @@ public class MapManager : MonoBehaviour
             startNode.Button.interactable = false;
 
         
-        if (currentRun.DeptNodes.Count > 1)
+        if (currentRun.DepthNodes.Count > 1)
         {
-            foreach (var node in currentRun.DeptNodes[1])
+            foreach (var node in currentRun.DepthNodes[1])
             {
                 if (node.Button != null)
                     node.Button.interactable = true;
@@ -161,7 +161,7 @@ public class MapManager : MonoBehaviour
         Root.gameObject.SetActive(true);
 
         
-        foreach (var depth in currentRun.DeptNodes)
+        foreach (var depth in currentRun.DepthNodes)
         {
             foreach (var n in depth)
             {
@@ -184,9 +184,9 @@ public class MapManager : MonoBehaviour
 
     private void UpdateButtonLocks()
     {
-        for (int depth = 0; depth < currentRun.DeptNodes.Count; depth++)
+        for (int depth = 0; depth < currentRun.DepthNodes.Count; depth++)
         {
-            foreach (var node in currentRun.DeptNodes[depth])
+            foreach (var node in currentRun.DepthNodes[depth])
             {
                 if (node.Button == null)
                     continue;
@@ -202,7 +202,7 @@ public class MapManager : MonoBehaviour
     public void UpdateNodeInteractivity(MapNode currentNode)
     {
         
-        foreach (var depth in currentRun.DeptNodes)
+        foreach (var depth in currentRun.DepthNodes)
         {
             foreach (var node in depth)
             {
@@ -224,7 +224,7 @@ public class MapManager : MonoBehaviour
     }
     public void InitializeMap()
     {
-        foreach (var depth in currentRun.DeptNodes)
+        foreach (var depth in currentRun.DepthNodes)
         {
             foreach (var node in depth)
             {
@@ -232,7 +232,7 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        var startNode = currentRun.DeptNodes[0][0];
+        var startNode = currentRun.DepthNodes[0][0];
         startNode.Button.interactable = true;
     }
 
@@ -242,7 +242,7 @@ public class MapManager : MonoBehaviour
         RectTransform viewport = content.parent.GetComponent<RectTransform>();
         //content.anchoredPosition -= new Vector2(0, 5000f);
         float depthSpacing = 150f;
-        float totalHeight = currentRun.DeptNodes.Count * depthSpacing;
+        float totalHeight = currentRun.DepthNodes.Count * depthSpacing;
 
         float minHeight = viewport.rect.height + -10f;
 
@@ -267,7 +267,7 @@ public class MapManager : MonoBehaviour
 
         int nextDepth = currentNode.Depth + 1;
 
-        foreach (var node in currentRun.DeptNodes[nextDepth])
+        foreach (var node in currentRun.DepthNodes[nextDepth])
         {
             node.Button.interactable = true;
         }
